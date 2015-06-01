@@ -18,6 +18,9 @@ set :fonts_dir, 'fonts'
 # Activate the syntax highlighter
 activate :syntax
 
+# Livereload in dev mode
+activate :livereload
+
 # Github pages require relative links
 activate :relative_assets
 set :relative_links, true
@@ -27,6 +30,6 @@ configure :build do
   activate :minify_css
   activate :minify_javascript
   # activate :relative_assets
-  # activate :asset_hash
+  activate :asset_hash
   # activate :gzip
 end
