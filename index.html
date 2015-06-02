@@ -3,200 +3,434 @@
   <head>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="javascripts/all.js" type="text/javascript"></script>
+    <link href="stylesheets/screen-7ed87047.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print-4aab3372.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all-91a601f2.js" type="text/javascript"></script>
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["shell"]);
         });
       </script>
   </head>
 
   <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" />
+      </span>
+    </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.png" />
-        <div class="search">
-          <input type="text" class="search" id="input-search">
+      <img src="images/logo-fcab2703.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
         </div>
-        <div class="search-info"></div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://github.com/gocd/api-docs'>Edit this guide on GitHub</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        
+          <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the GoCD API! You can use our API to access GoCD API endpoints, which can get information about the server&rsquo;s configuration and build history. In addition it can be used to update configuration and execute builds.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>We currently provide language bindings in Shell! You can view code examples on the right-hand side of the page.</p>
 
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>All APIs SHOULD be accessed from <code class="prettyprint">https://go-server-url:8154/go/api</code>. All data SHOULD be sent and recieved as JSON, specifically <code class="prettyprint">application/vnd.go.cd.v1+json</code>. You may access the APIs over plain text, but for security reasons we suggest that you use SSL.</p>
 
-<h1 id="authentication">Authentication</h1>
+<h2 id="current-version">Current Version</h2>
+
+<p>By default, all requests receive <strong>Version 1</strong> of the API. It is recommended to explicitly request this version via the <code class="prettyprint">Accept</code> header.</p>
+
+<p><code class="prettyprint">Accept: application/vnd.go.cd.v1+json</code></p>
+
+<p>If you specify an unsupported, Accept header, GoCD will respond with the current default JSON representation of the resource.</p>
+
+<aside class="notice">
+  <strong>Important:</strong> The default version of the API may change in the future. If you care about the stability of the API, make sure that you are requesting a specific version in the <code>Accept</code> header as shown in the example above.
+</aside>
+
+          <h1 id="authentication">Authentication</h1>
+
+<p>All APIs require you to authenticate yourself using your username and password. A cookie will also be returned as a result of the first authentication call. You may use this cookie for any further authentication attempts. If authentication fails, Go may return status codes <code class="prettyprint">401</code>, <code class="prettyprint">403</code> or <code class="prettyprint">404</code>.</p>
+
+<h2 id="basic-authentication">Basic authentication</h2>
 
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</pre>
-<pre class="highlight shell"><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
+<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+<span class="gp">$ </span>curl  -u <span class="s2">"username:password"</span> <span class="se">\</span>
+      -H <span class="s2">"Accept: application/vnd.go.cd.v1+json"</span> <span class="se">\</span>
+         <span class="s2">"https://ci.example.com:8154/go/api/agents"</span>
+</code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace the <code class="prettyprint">username</code> and <code class="prettyprint">password</code> with the username and password that you use to access the go server. The above command returns the following response:</p>
 </blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<p><aside class="notice">
-You must replace <code class="prettyprint">meowmeowmeow</code> with your personal API key.
-</aside></p>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</pre>
-<pre class="highlight shell">curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com:8154/go/api/agents"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.go.cd/documentation/user/current/api/v1/agents.html"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="s2">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></pre>
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>To use Basic Authentication with the GitHub API, simply send the username and password associated with the account.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h2 id="cookie/session-authentication">Cookie/Session Authentication</h2>
 
-<p><code class="prettyprint">GET http://example.com/kittens</code></p>
+<p>Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if go is authenticating against an external source like LDAP.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -b <span class="s2">"JSESSIONID=15kvus1kdrec46vk2a6jmtmo"</span> <span class="se">\</span>
+     -H <span class="s2">"Accept: application/vnd.go.cd.v1+json"</span> <span class="se">\</span>
+     <span class="s2">"https://ci.example.com:8154/go/api"</span>
+</code></pre>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<blockquote>
+<p>The above command returns the following response</p>
+</blockquote>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com:8154/go/api/agents"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.go.cd/documentation/user/current/api/v1/agents.html"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+          <h1 id="agents">Agents</h1>
+
+<p>The agents api allows users with administrator role to manage agents.</p>
+
+<h2 id="the-agent-object">The Agent Object</h2>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
+<th>Attribute</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>uuid</td>
+<td>String</td>
+<td>The identifier of this agent.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>agent_name</td>
+<td>String</td>
+<td>The hostname of the agent.</td>
+</tr>
+<tr>
+<td>ip_address</td>
+<td>String</td>
+<td>The IP address of the agent.</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>Boolean</td>
+<td>Whether the agent is enabled or not.</td>
+</tr>
+<tr>
+<td>sandbox</td>
+<td>String</td>
+<td>The path where the agent will perform its builds.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>The status of the agent. Can be one of <code class="prettyprint">Pending</code>, <code class="prettyprint">LostContact</code>, <code class="prettyprint">Missing</code>, <code class="prettyprint">Building</code>, <code class="prettyprint">Cancelled</code>, <code class="prettyprint">Idle</code>, <code class="prettyprint">Disabled</code>.</td>
+</tr>
+<tr>
+<td>os</td>
+<td>String</td>
+<td>The operating system as reported by the agent.</td>
+</tr>
+<tr>
+<td>free_space</td>
+<td>Integer</td>
+<td>The amount of free space in bytes.</td>
+</tr>
+<tr>
+<td>resources</td>
+<td>Array</td>
+<td>The set of resources that this agent is tagged with.</td>
+</tr>
+<tr>
+<td>environments</td>
+<td>Array</td>
+<td>The set of environments that this agent belongs to.</td>
 </tr>
 </tbody></table>
 
-<p><aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside></p>
+<h2 id="get-all-agents">Get all Agents</h2>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre>
-<pre class="highlight shell">curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"https://ci.example.com:8154/go/api/agents"</span> <span class="se">\</span>
+     -u <span class="s2">"username:password"</span> <span class="se">\</span>
+     -H <span class="s2">"Accept: application/vnd.go.cd.v1+json"</span>
+</code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.go.cd/documentation/user/current/api/v1/agents.html"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.go.cd/documentation/user/current/api/v1/agents.html"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"agent_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent01.example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">84983328768</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></pre>
+</span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
-
-<p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
+<p>Lists all available agents, these are agents that are present in the <code class="prettyprint">&lt;agents/&gt;</code> tag inside <code class="prettyprint">cruise-config.xml</code> and also agents that are in <code class="prettyprint">Pending</code> state awaiting registration.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">GET https://ci.example.com/api/agents</code></p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<h3 id="returns">Returns</h3>
+
+<p>An array of <a href="#the-agent-object">agent objects</a>.</p>
+
+<h2 id="get-one-agent">Get one Agent</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"https://ci.example.com:8154/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span> <span class="se">\</span>
+     -u <span class="s2">"username:password"</span> <span class="se">\</span>
+     -H <span class="s2">"Accept: application/vnd.go.cd.v1+json"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.go.cd/documentation/user/current/api/v1/agents.html"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"agent_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ketanpkr.corporate.thoughtworks.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">85890146304</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Gets an agent by its unique identifier (uuid)</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://ci.example.com/api/agents/:uuid</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>An <a href="#the-agent-object">agent object</a>.</p>
+
+<h2 id="update-an-agent">Update an Agent</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"https://ci.example.com:8154/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span> <span class="se">\</span>
+     -u <span class="s2">"username:password"</span> <span class="se">\</span>
+     -H <span class="s2">"Accept: application/vnd.go.cd.v1+json"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -X PUT <span class="se">\</span>
+     -d <span class="s2">"{
+          "</span>hostname<span class="s2">": "</span>agent02.example.com<span class="s2">"
+        }"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.go.cd/documentation/user/current/api/v1/agents.html"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"agent_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent02.example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">84834283520</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="s2">"linux"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Update some attributes of an agent.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT https://ci.example.com/api/agents/:uuid</code></p>
+
+<p>Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Attribute</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the cat to retrieve</td>
+<td>hostname</td>
+<td>String</td>
+<td>The new hostname.</td>
+</tr>
+<tr>
+<td>resources</td>
+<td>String &#124; Array</td>
+<td>A comma separated strings of resources, or an array of string resources.</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>Boolean</td>
+<td>Whether an agent should be enabled.</td>
 </tr>
 </tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>The updated <a href="#the-agent-object">agent object</a>.</p>
+
+<h2 id="delete-an-agent">Delete an Agent</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"https://ci.example.com:8154/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span> <span class="se">\</span>
+     -u <span class="s2">"username:password"</span> <span class="se">\</span>
+     -H <span class="s2">"Accept: application/vnd.go.cd.v1+json"</span> <span class="se">\</span>
+     -X DELETE
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deleted 1 agent(s)."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Deletes an agent.</p>
+
+<aside class="notice">
+You must first <a href='#update-an-agent'>disable an agent</a> before deleting it.
+</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://ci.example.com/api/agents/:uuid</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>A message confirmation if the agent was disabled.</p>
 
           <h1 id="errors">Errors</h1>
 
-<p><aside class="notice">This error section is stored in a separate file in <code class="prettyprint">includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the <code class="prettyprint">includes</code> folder and add them to the top of your <code class="prettyprint">index.md</code>&rsquo;s frontmatter. Files are included in the order listed.</aside></p>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>Go CD uses the following HTTP status codes to indicate errors.</p>
 
 <table><thead>
 <tr>
@@ -210,19 +444,19 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Unauthorized &ndash; Your username or password is incorrect</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Forbidden &ndash; The resource requested is hidden for administrators only</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>Not Found &ndash; The specified resource could not be found</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>Method Not Allowed &ndash; You tried to access a resource with an invalid method</td>
 </tr>
 <tr>
 <td>406</td>
@@ -230,15 +464,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
+<td>Gone &ndash; The resource requested has been removed from our servers</td>
 </tr>
 <tr>
 <td>500</td>
@@ -252,10 +478,8 @@ Remember — a happy kitten is an authenticated kitten!
 
       </div>
       <div class="dark-box">
-          <div id="lang-selector">
+          <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
