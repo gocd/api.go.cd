@@ -7,5 +7,9 @@
 }
 
 blockquote + .highlight {
-  padding-top: 0
+  padding-top: 0;
+}
+
+.tocify-wrapper > img {
+    margin: 10px;
 }
