@@ -1,0 +1,10 @@
+<% unless object.name.blank? -%>
+## <%= object.name %>
+<% end -%>
+
+
+|Attribute             |Type                   |Description                  |
+|----------------------|-----------------------|-----------------------------|
+<% object.properties.each do |property| -%>
+| <%= property.name %> | <%= describe_property_type(property) %> | <%= describe_property(property) %>  |
+<% end -%>

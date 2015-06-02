@@ -1,0 +1,36 @@
+## Delete an Agent
+
+```shell
+$ curl "https://ci.example.com:8154/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da" \
+     -u "username:password" \
+     -H "Accept: application/vnd.go.cd.v1+json" \
+     -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "message": "Deleted 1 agent(s)."
+}
+```
+
+Deletes an agent.
+
+<aside class="notice">
+You must first <a href='#update-an-agent'>disable an agent</a> before deleting it.
+</aside>
+
+
+### HTTP Request
+
+`DELETE https://ci.example.com/api/agents/:uuid`
+
+### Returns
+
+A message confirmation if the agent was disabled.

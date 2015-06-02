@@ -1,3 +1,7 @@
+require File.expand_path('../lib/helpers', __FILE__)
+helpers RenderAllSubTopics
+helpers DescribeObjectHelper
+
 # Markdown
 set :markdown_engine, :redcarpet
 set :markdown,

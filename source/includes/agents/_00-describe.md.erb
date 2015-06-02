@@ -1,0 +1,14 @@
+<%=
+describe_object 'The Agent Object' do
+  uuid          'String',     'The identifier of this agent'
+  agent_name    'String',     'The hostname of the agent'
+  ip_address    'String',     'The IP address of the agent'
+  enabled       'Boolean',    'Whether the agent is enabled or not'
+  sandbox       'String',     'The path where the agent will perform its builds.'
+  status        'String',     'The status of the agent', one_of: %w(Pending LostContact Missing Building Cancelled Idle Disabled)
+  os            'String',     'The operating system as reported by the agent'
+  free_space    'Integer',    'The amount of free space in bytes'
+  resources     'Array',      'The set of resources that this agent is tagged with'
+  environments  'Array',      'The set of environments that this agent belongs to'
+end
+%>

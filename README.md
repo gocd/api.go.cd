@@ -35,4 +35,4 @@ $ ./bin/rake publish
 
 ## Special thanks
 
-* [slate](https://github.com/tripit/)
+* [slate](https://github.com/tripit/slate)

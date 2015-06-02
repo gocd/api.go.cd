@@ -1,0 +1,11 @@
+.highlight.http + .highlight.json {
+  padding-top: 0;
+}
+
+.highlight + blockquote {
+  padding-top: 0;
+}
+
+blockquote + .highlight {
+  padding-top: 0
+}
