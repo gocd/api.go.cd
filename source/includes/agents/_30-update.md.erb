@@ -57,7 +57,7 @@ Atleast one of the following properties must be specified, not specifying the pr
   describe_object(nil) do
     hostname  'String',            'The new hostname'
     resources ['String', 'Array'], 'A comma separated strings of resources, or an array of string resources'
-    enabled   'Boolean',           'Whether an agent should be enabled'
+    enabled   'Boolean',           'Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents.'
   end
  %>
 
