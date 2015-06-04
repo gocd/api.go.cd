@@ -1,14 +1,14 @@
 ## Update an Agent
 
 ```shell
-$ curl "https://ci.example.com:8154/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da" \
-     -u "username:password" \
-     -H "Accept: application/vnd.go.cd.v1+json" \
-     -H "Content-Type: application/json" \
-     -X PATCH \
-     -d "{
-          "hostname": "agent02.example.com"
-        }"
+$ curl 'https://ci.example.com:8154/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
+      -X PATCH \
+      -d '{
+            "hostname": "agent02.example.com"
+          }'
 ```
 
 > The above command returns JSON structured like this:

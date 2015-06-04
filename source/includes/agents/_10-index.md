@@ -1,9 +1,9 @@
 ## Get all Agents
 
 ```shell
-$ curl "https://ci.example.com:8154/go/api/agents" \
-     -u "username:password" \
-     -H "Accept: application/vnd.go.cd.v1+json"
+$ curl 'https://ci.example.com:8154/go/api/agents' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
 ```
 
 > The above command returns JSON structured like this:
