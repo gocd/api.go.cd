@@ -38,12 +38,12 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
           }
         },
         "uuid": "adb9540a-b954-4571-9d9b-2f330739d4da",
-        "agent_name": "agent01.example.com",
+        "hostname": "agent01.example.com",
         "ip_address": "10.12.20.47",
         "enabled": true,
         "sandbox": "/Users/ketanpadegaonkar/projects/gocd/gocd/agent",
         "status": "Idle",
-        "os": "Mac OS X",
+        "operating_system": "Mac OS X",
         "free_space": 84983328768,
         "resources": ["java", "linux", "firefox"],
         "environments": ["perf", "UAT"]
