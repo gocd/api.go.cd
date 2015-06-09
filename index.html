@@ -152,7 +152,7 @@
 <td>The identifier of this agent.</td>
 </tr>
 <tr>
-<td>agent_name</td>
+<td>hostname</td>
 <td>String</td>
 <td>The hostname of the agent.</td>
 </tr>
@@ -177,7 +177,7 @@
 <td>The status of the agent. Can be one of <code class="prettyprint">Pending</code>, <code class="prettyprint">LostContact</code>, <code class="prettyprint">Missing</code>, <code class="prettyprint">Building</code>, <code class="prettyprint">Cancelled</code>, <code class="prettyprint">Idle</code>, <code class="prettyprint">Disabled</code>.</td>
 </tr>
 <tr>
-<td>os</td>
+<td>operating_system</td>
 <td>String</td>
 <td>The operating system as reported by the agent.</td>
 </tr>
@@ -237,12 +237,12 @@
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"agent_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent01.example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent01.example.com"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"operating_system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">84983328768</span><span class="p">,</span><span class="w">
         </span><span class="s2">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
         </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">]</span><span class="w">
@@ -290,12 +290,12 @@
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"agent_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ketanpkr.corporate.thoughtworks.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ketanpkr.corporate.thoughtworks.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"operating_system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">85890146304</span><span class="p">,</span><span class="w">
   </span><span class="s2">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
   </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">]</span><span class="w">
@@ -345,12 +345,12 @@
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"agent_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent02.example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent02.example.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"operating_system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">84834283520</span><span class="p">,</span><span class="w">
   </span><span class="s2">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="s2">"linux"</span><span class="p">],</span><span class="w">
   </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
