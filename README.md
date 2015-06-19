@@ -1,6 +1,8 @@
 # Go CD API Documentation
 
-Checkout the live documentation at http://www.go.cd/documentation/api
+[![Build Status](https://snap-ci.com/ketan/api.go.cd/branch/master/build_image)](https://snap-ci.com/ketan/api.go.cd/branch/master)
+
+Checkout the live documentation at http://api.go.cd
 
 # Contributing to the API Documentation
 
