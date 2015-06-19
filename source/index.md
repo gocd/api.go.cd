@@ -5,7 +5,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href='https://github.com/gocd/api-docs'>Edit this guide on GitHub</a>
+  - <a href='https://github.com/gocd/api.go.cd'>Edit this guide on GitHub</a>
 
 includes:
   - 010-introduction
