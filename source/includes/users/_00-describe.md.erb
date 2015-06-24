@@ -1,0 +1,10 @@
+<%=
+describe_object 'The User Object' do
+  login_name        'String',     "The user's login name"
+  display_name      'String',     "The user's display name"
+  enabled           'Boolean',    "Boolean indicating if the user is enabled (can login in)"
+  email             'String',     "The user's email address"
+  email_me          'Boolean',    "Boolean indicating if the user has signed up for email notifications"
+  checkin_aliases   'Array',      "A list of SCM checkin aliases to map users to SCM commits"
+end
+%>

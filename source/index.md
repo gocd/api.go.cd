@@ -11,6 +11,7 @@ includes:
   - 010-introduction
   - 020-authentication
   - 030-agents
+  - 040-users
   - errors
 
 search: true

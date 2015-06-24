@@ -1,0 +1,68 @@
+## Update a user
+
+```shell
+$ curl 'https://ci.example.com/go/api/users/jdoe' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
+      -X PATCH \
+      -d '{
+            "email": "jdoe@example.com",
+            "email_me": true,
+            "checkin_aliases": ["jdoe", "johndoe"]
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "http://api.go.cd/#users"
+    },
+    "self": {
+      "href": "https://ci.example.com/go/api/users/jdoe"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/users/:login_name"
+    }
+  },
+  "login_name": "jdoe",
+  "display_name": "jdoe",
+  "enabled": false,
+  "email": "jdoe@example.com",
+  "email_me": true,
+  "checkin_aliases": [
+    "jdoe",
+    "johndoe"
+  ]
+}
+```
+
+Update some attributes of a user.
+
+### HTTP Request
+
+`PATCH https://ci.example.com/go/api/users/:login_name`
+
+Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.
+
+###
+<%=
+  describe_object nil do
+    enabled           'Boolean',    "Boolean indicating if the user is enabled (can login in)"
+    email             'String',     "The user's email address"
+    email_me          'Boolean',    "Boolean indicating if the user should be signed up for email notifications"
+    checkin_aliases   'Array',      "A list of SCM checkin aliases to map users to SCM commits"
+  end
+ %>
+
+### Returns
+
+The updated [user object](#the-user-object).
