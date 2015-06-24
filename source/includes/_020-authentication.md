@@ -28,7 +28,7 @@ Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-201
       "href": "https://ci.example.com:8154/go/api/agents"
     },
     "doc": {
-      "href": "http://www.go.cd/documentation/user/current/api/v1/agents.html"
+      "href": "http://api.go.cd/#agents"
     }
   },
   "_embedded": {
@@ -64,7 +64,7 @@ Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-201
       "href": "https://ci.example.com:8154/go/api/agents"
     },
     "doc": {
-      "href": "http://www.go.cd/documentation/user/current/api/v1/agents.html"
+      "href": "http://api.go.cd/#agents"
     }
   },
   "_embedded": {
