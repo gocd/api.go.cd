@@ -1,7 +1,7 @@
 ## Get all Agents
 
 ```shell
-$ curl 'https://ci.example.com:8154/go/api/agents' \
+$ curl 'https://ci.example.com/go/api/agents' \
       -u 'username:password' \
       -H 'Accept: application/vnd.go.cd.v1+json'
 ```
@@ -20,7 +20,7 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
       "href": "https://ci.example.com/go/api/agents"
     },
     "doc": {
-      "href": "http://www.go.cd/documentation/user/current/api/v1/agents.html"
+      "href": "http://api.go.cd/#agents"
     }
   },
   "_embedded": {
@@ -31,7 +31,7 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
             "href": "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"
           },
           "doc": {
-            "href": "http://www.go.cd/documentation/user/current/api/v1/agents.html"
+            "href": "http://api.go.cd/#agents"
           },
           "find": {
             "href": "https://ci.example.com/go/api/agents/:uuid"
