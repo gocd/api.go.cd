@@ -8,7 +8,7 @@ All APIs require you to authenticate yourself using your username and password. 
 
 ```shell
 # With shell, you can just pass the correct header with each request
-$ curl "https://ci.example.com:8154/go/api/agents" \
+$ curl "https://ci.example.com/go/api/agents" \
       -u "username:password" \
       -H "Accept: application/vnd.go.cd.v1+json" \
 ```
@@ -25,7 +25,7 @@ Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-201
 {
   "_links": {
     "self": {
-      "href": "https://ci.example.com:8154/go/api/agents"
+      "href": "https://ci.example.com/go/api/agents"
     },
     "doc": {
       "href": "http://api.go.cd/#agents"
@@ -44,7 +44,7 @@ To use Basic Authentication with the GitHub API, simply send the username and pa
 Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if go is authenticating against an external source like LDAP.
 
 ```shell
-$ curl "https://ci.example.com:8154/go/api"
+$ curl "https://ci.example.com/go/api"
       -b "JSESSIONID=15kvus1kdrec46vk2a6jmtmo" \
       -H "Accept: application/vnd.go.cd.v1+json"
 ```
@@ -61,7 +61,7 @@ Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-201
 {
   "_links": {
     "self": {
-      "href": "https://ci.example.com:8154/go/api/agents"
+      "href": "https://ci.example.com/go/api/agents"
     },
     "doc": {
       "href": "http://api.go.cd/#agents"

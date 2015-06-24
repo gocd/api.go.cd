@@ -1,7 +1,7 @@
 ## Get all Agents
 
 ```shell
-$ curl 'https://ci.example.com:8154/go/api/agents' \
+$ curl 'https://ci.example.com/go/api/agents' \
       -u 'username:password' \
       -H 'Accept: application/vnd.go.cd.v1+json'
 ```
