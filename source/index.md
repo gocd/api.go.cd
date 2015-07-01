@@ -13,6 +13,7 @@ includes:
   - 030-agents
   - 040-users
   - 050-materials
+  - 060-backups
   - errors
 
 search: true
