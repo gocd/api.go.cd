@@ -432,49 +432,20 @@ You must first <a href='#update-an-agent'>disable an agent</a> before deleting i
 
 <p>Go CD uses the following HTTP status codes to indicate errors.</p>
 
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your username or password is incorrect</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The resource requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified resource could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a resource with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The resource requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
-</tr>
-</tbody></table>
+<p>Error Code | Meaning
+                                   &ndash;                                                                                                      &ndash; &ndash; &ndash; &ndash; | &ndash; &ndash; &ndash; -
+400        | Bad Request           &ndash; The request could not be understood. The client SHOULD NOT repeat the request without modifications.
+401        | Unauthorized          &ndash; Your username or password is incorrect or you are not authorized to perform this action.
+403        | Forbidden             &ndash; The resource requested is hidden for administrators only.
+404        | Not Found             &ndash; The specified resource could not be found.
+405        | Method Not Allowed    &ndash; You tried to access a resource with an invalid method.
+406        | Not Acceptable        &ndash; You requested a format that isn&rsquo;t json.
+409        | Conflict              &ndash; The request could not be completed due to a conflict with the current state of the resource.
+410        | Gone                  &ndash; The resource requested has been removed from our servers.
+422        | Unprocessible Entity  &ndash; The server understood the request, but the request is semantically erroneous.
+500        | Internal Server Error &ndash; We had a problem with our server. Try again later.
+501        | Not implemented       &ndash; The server does not support the functionality required to fulfill the request.
+503        | Service Unavailable   &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</p>
 
       </div>
       <div class="dark-box">
