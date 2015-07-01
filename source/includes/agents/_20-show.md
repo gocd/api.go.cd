@@ -43,7 +43,7 @@ Gets an agent by its unique identifier (uuid)
 
 ### HTTP Request
 
-`GET https://ci.example.com/api/agents/:uuid`
+`GET https://ci.example.com/go/api/agents/:uuid`
 
 ### Returns
 

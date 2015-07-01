@@ -57,7 +57,7 @@ Lists all available agents, these are agents that are present in the `<agents/>`
 
 ### HTTP Request
 
-`GET https://ci.example.com/api/agents`
+`GET https://ci.example.com/go/api/agents`
 
 ### Returns
 
