@@ -1,0 +1,8 @@
+<%=
+describe_object 'The Artifact Object' do
+  name              'String',     'The basename of the file/folder'
+  url               'String',     'The URL to the artifact'
+  type              'String',     'The type of the artifact', one_of: %w(file folder)
+  files             'Array',      'If the artifact is of type `folder` then this property will contain files/folders inside this folder'
+end
+%>

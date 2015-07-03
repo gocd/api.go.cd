@@ -15,6 +15,7 @@ includes:
   - 050-materials
   - 060-backups
   - 070-pipeline-groups
+  - 080-artifacts
   - errors
 
 search: true
