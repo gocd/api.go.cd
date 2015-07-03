@@ -1,0 +1,36 @@
+## Delete a user
+
+```shell
+$ curl 'https://ci.example.com/go/api/users/jdoe' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "message": "User 'jdoe' was deleted successfully."
+}
+```
+
+Deletes a user.
+
+<aside class="notice">
+You must first <a href='#update-a-user'>disable a user</a> before deleting it.
+</aside>
+
+
+### HTTP Request
+
+`DELETE https://ci.example.com/go/api/users/:login_name`
+
+### Returns
+
+A message confirmation if the user was deleted.
