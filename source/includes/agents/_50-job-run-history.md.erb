@@ -50,11 +50,11 @@ Lists the jobs that have executed on an agent.
 
 ### HTTP Request
 
-`GET https://ci.example.com/go/api/agents/:uuid/job_run_history`
+`GET /go/api/agents/:uuid/job_run_history`
 
 **With pagination**
 
-`GET https://ci.example.com/go/api/agents/:uuid/job_run_history[/:offset]`
+`GET /go/api/agents/:uuid/job_run_history[/:offset]`
 
 <aside class="notice">
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.

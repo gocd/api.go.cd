@@ -41,7 +41,7 @@ Gets a user by its login name
 
 ### HTTP Request
 
-`GET https://ci.example.com/go/api/user/:login_name`
+`GET /go/api/user/:login_name`
 
 ### Returns
 

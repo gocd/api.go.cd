@@ -42,7 +42,7 @@ This API is built primarily to support rendering of value stream mapping. As suc
 
 ### HTTP Request
 
-`GET https://ci.example.com/go/api/config/pipeline_groups`
+`GET /go/api/config/pipeline_groups`
 
 ### Returns
 

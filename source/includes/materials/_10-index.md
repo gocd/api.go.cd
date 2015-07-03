@@ -26,7 +26,7 @@ Lists all available materials, these are materials that are present in the in `c
 
 ### HTTP Request
 
-`GET https://ci.example.com/go/api/config/materials`
+`GET /go/api/config/materials`
 
 ### Returns
 

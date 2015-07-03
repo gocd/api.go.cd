@@ -36,7 +36,7 @@ Lists all available artifacts in a job.
 
 ### HTTP Request
 
-`GET https://ci.example.com/go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.json`
+`GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.json`
 
 ### Returns
 

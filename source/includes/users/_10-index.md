@@ -56,7 +56,7 @@ Lists all available users.
 
 ### HTTP Request
 
-`GET https://ci.example.com/go/api/users`
+`GET /go/api/users`
 
 ### Returns
 
