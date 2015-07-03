@@ -1,0 +1,53 @@
+## Notify Git materials
+
+```shell
+$ curl 'https://ci.example.com/go/api/material/notify/git' \
+      -u 'username:password' \
+      -X POST \
+      -d 'url=git-repository-url'
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: text/plain; charset=UTF-8
+```
+
+```plain
+The material is now scheduled for an update. Please check relevant pipeline(s) for status.
+```
+
+<%= partial 'includes/shared/material_notify_header' %>
+
+### HTTP Request
+
+`POST https://ci.example.com/go/api/material/notify/git`
+
+
+The following post parameters must be specified.
+
+###
+<%=
+  describe_object(nil) do
+    repository_url  'String',            'The git repository url as defined in `cruise-config.xml`'
+  end
+ %>
+
+### Returns
+
+A text confirmation.
+
+### Notification script
+
+To notify Go via a Git post commit hook, you may use the following post commit hook in your git repository.
+
+The post commit hook is located at `/path/to/repository.git/hooks/post-receive`.
+
+```bash
+#!/bin/sh
+
+curl https://ci.example.com/go/api/material/notify/svn \
+    -d "repository_url=git://git.example.com/git/funky-widgets.git" \
+    -u username:password
+```

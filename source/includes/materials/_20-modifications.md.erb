@@ -1,0 +1,50 @@
+## Get material modifications
+
+```shell
+$ curl 'https://ci.example.com/go/api/materials/03c8d2a131154436b6ef2d621c6f773837481aaea8c5c1bb9c0cb9b5bc64a2f1/modifications' \
+      -u 'username:password'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "modifications": [
+    {
+      "email_address": null,
+      "id": 7225,
+      "modified_time": 1435728005000,
+      "user_name": "Pick E Reader <pick.e.reader@example.com>",
+      "comment": "my hola mundo changes",
+      "revision": "a788f1876e2e1f6e5a1e91006e75cd1d467a0edb"
+    }
+  ],
+  "pagination": {
+    "offset": 0,
+    "total": 1070,
+    "page_size": 10
+  }
+}
+```
+
+Gets an agent by its unique identifier (uuid)
+
+### HTTP Request
+
+`GET https://ci.example.com/go/api/materials/:fingerprint/modifications`
+
+
+**With pagination**
+
+`GET https://ci.example.com/go/api/materials/:fingerprint/modifications[/:offset]`
+
+<%= partial 'includes/shared/pagination_offset' %>
+
+### Returns
+
+A list of modification objects.

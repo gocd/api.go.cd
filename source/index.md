@@ -12,6 +12,7 @@ includes:
   - 020-authentication
   - 030-agents
   - 040-users
+  - 050-materials
   - errors
 
 search: true
