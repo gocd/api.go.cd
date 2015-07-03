@@ -24,6 +24,11 @@ activate :syntax
 
 # Livereload in dev mode
 activate :livereload
+activate :autoprefixer do |config|
+  config.browsers = ['last 2 version', 'Firefox ESR']
+  config.cascade  = false
+  config.inline   = true
+end
 
 # Github pages require relative links
 activate :relative_assets
