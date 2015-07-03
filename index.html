@@ -256,7 +256,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/agents</code></p>
+<p><code class="prettyprint">GET /go/api/agents</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -306,7 +306,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/agents/:uuid</code></p>
+<p><code class="prettyprint">GET /go/api/agents/:uuid</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -361,7 +361,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PATCH https://ci.example.com/go/api/agents/:uuid</code></p>
+<p><code class="prettyprint">PATCH /go/api/agents/:uuid</code></p>
 
 <p>Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.</p>
 
@@ -422,7 +422,7 @@ You must first <a href='#update-an-agent'>disable an agent</a> before deleting i
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE https://ci.example.com/go/api/agents/:uuid</code></p>
+<p><code class="prettyprint">DELETE /go/api/agents/:uuid</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -479,11 +479,11 @@ You must first <a href='#update-an-agent'>disable an agent</a> before deleting i
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/agents/:uuid/job_run_history</code></p>
+<p><code class="prettyprint">GET /go/api/agents/:uuid/job_run_history</code></p>
 
 <p><strong>With pagination</strong></p>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/agents/:uuid/job_run_history[/:offset]</code></p>
+<p><code class="prettyprint">GET /go/api/agents/:uuid/job_run_history[/:offset]</code></p>
 
 <aside class="notice">
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
@@ -595,7 +595,7 @@ You must first <a href='#update-an-agent'>disable an agent</a> before deleting i
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/users</code></p>
+<p><code class="prettyprint">GET /go/api/users</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -643,7 +643,7 @@ You must first <a href='#update-an-agent'>disable an agent</a> before deleting i
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/user/:login_name</code></p>
+<p><code class="prettyprint">GET /go/api/user/:login_name</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -699,7 +699,7 @@ You must first <a href='#update-an-agent'>disable an agent</a> before deleting i
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PATCH https://ci.example.com/go/api/users/:login_name</code></p>
+<p><code class="prettyprint">PATCH /go/api/users/:login_name</code></p>
 
 <p>Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.</p>
 
@@ -765,7 +765,7 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE https://ci.example.com/go/api/users/:login_name</code></p>
+<p><code class="prettyprint">DELETE /go/api/users/:login_name</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -828,7 +828,7 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/config/materials</code></p>
+<p><code class="prettyprint">GET /go/api/config/materials</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -871,11 +871,11 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/materials/:fingerprint/modifications</code></p>
+<p><code class="prettyprint">GET /go/api/materials/:fingerprint/modifications</code></p>
 
 <p><strong>With pagination</strong></p>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/materials/:fingerprint/modifications[/:offset]</code></p>
+<p><code class="prettyprint">GET /go/api/materials/:fingerprint/modifications[/:offset]</code></p>
 
 <aside class="notice">
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
@@ -912,7 +912,7 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://ci.example.com/go/api/material/notify/svn</code></p>
+<p><code class="prettyprint">POST /go/api/material/notify/svn</code></p>
 
 <p>The following post parameters must be specified.</p>
 
@@ -978,7 +978,7 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://ci.example.com/go/api/material/notify/git</code></p>
+<p><code class="prettyprint">POST /go/api/material/notify/git</code></p>
 
 <p>The following post parameters must be specified.</p>
 
@@ -1099,7 +1099,7 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://ci.example.com/go/api/backups</code></p>
+<p><code class="prettyprint">POST /go/api/backups</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -1152,7 +1152,7 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/api/config/pipeline_groups</code></p>
+<p><code class="prettyprint">GET /go/api/config/pipeline_groups</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -1230,7 +1230,7 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.json</code></p>
+<p><code class="prettyprint">GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.json</code></p>
 
 <h3 id="returns">Returns</h3>
 
@@ -1250,7 +1250,7 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
+<p><code class="prettyprint">GET /go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
 
 <aside class="notice">
   The <code>path_to_file</code> can be a nested file for e.g. <code>dist/foobar-widgets-1.2.0.jar</code>
@@ -1274,7 +1274,7 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_directory.zip</code></p>
+<p><code class="prettyprint">GET /go/files/PipelineName/541/StageName/1/JobName/*path_to_directory.zip</code></p>
 
 <aside class="notice">
   The <code>path_to_directory</code> can be a nested directory for e.g. <code>target/dist.zip</code>
@@ -1317,7 +1317,7 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
+<p><code class="prettyprint">POST /go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
 
 <p>The following form parameter must be specified</p>
 
@@ -1360,7 +1360,7 @@ File logs/operations.log was appended successfully
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PUT https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
+<p><code class="prettyprint">PUT /go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
 
 <h3 id="returns">Returns</h3>
 
