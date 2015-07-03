@@ -1,7 +1,7 @@
 ## Get all materials
 
 ```shell
-$ curl 'https://ci.exampe.com/go/api/config/materials' \
+$ curl 'https://ci.example.com/go/api/config/materials' \
       -u 'username:password'
 ```
 

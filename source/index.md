@@ -14,6 +14,7 @@ includes:
   - 040-users
   - 050-materials
   - 060-backups
+  - 070-pipeline-groups
   - errors
 
 search: true
