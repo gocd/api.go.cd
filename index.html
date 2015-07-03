@@ -1158,6 +1158,214 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <p>A list of pipeline groups, pipelines in each group, stages and materials in each pipeline.</p>
 
+          <h1 id="artifacts">Artifacts</h1>
+
+<p>The artifacts API allows users to query and create artifacts of a job.</p>
+
+<h2 id="the-artifact-object">The Artifact Object</h2>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The basename of the file/folder.</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>The URL to the artifact.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>The type of the artifact. Can be one of <code class="prettyprint">file</code>, <code class="prettyprint">folder</code>.</td>
+</tr>
+<tr>
+<td>files</td>
+<td>Array</td>
+<td>If the artifact is of type <code class="prettyprint">folder</code> then this property will contain files/folders inside this folder.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-artifacts">Get all Artifacts</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName.json'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cruise-output"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/cruise-output"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"folder"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"console.log"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/cruise-output/console.log"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"md5.checksum"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/cruise-output/md5.checksum"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Lists all available artifacts in a job.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://ci.example.com/go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.json</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>An array of <a href="#the-artifact-object">artifact objects</a>.</p>
+
+<h2 id="get-artifact-file">Get Artifact File</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/to/file'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the contents of the file you requested</p>
+</blockquote>
+
+<p>Gets an artifact file by its path.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
+
+<aside class="notice">
+  The <code>path_to_file</code> can be a nested file for e.g. <code>dist/foobar-widgets-1.2.0.jar</code>
+</aside>
+
+<h3 id="returns">Returns</h3>
+
+<p>An the contents of the requested file.</p>
+
+<h2 id="get-artifact-directory">Get Artifact Directory</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/to/directory.zip'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the contents of the directory you requested as a compressed zip file.</p>
+</blockquote>
+
+<p>Gets an artifact directory by its path.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_directory.zip</code></p>
+
+<aside class="notice">
+  The <code>path_to_directory</code> can be a nested directory for e.g. <code>target/dist.zip</code>
+</aside>
+
+<aside class="warning">
+  Since it may take an undetermined amount of time to compress a directory, the server <em>may</em> return a <code>202 Accepted</code> code to indicate that it is compressing the requested directory.
+  <br/><br/>
+  Users are expected to poll the url every few seconds to check if the directory is available.
+</aside>
+
+<h3 id="returns">Returns</h3>
+
+<p>One of -</p>
+
+<ul>
+<li>A status code <code class="prettyprint">202 Accepted</code> to acknowledge your request to compress the contents of the requested directory.</li>
+<li>The requested directory contents in the form of a zip file.</li>
+</ul>
+
+<h2 id="create-artifact">Create Artifact</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/pkg/foobar-widgets-1.2.3.jar'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+      -X POST <span class="se">\</span>
+      -F <span class="s1">'file=@target/dist/foobar-widgets-1.2.3.jar'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command uploads the file <code class="prettyprint">target/dist/foobar-widgets-1.2.3.jar</code> to the specified job at the remote path <code class="prettyprint">pkg/foobar-widgets-1.2.3.jar</code> and returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
+
+File pkg/foobar-widgets-1.2.3.jar was created successfully
+</code></pre>
+
+<p>Uploads a local file as an artifact.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
+
+<p>The following form parameter must be specified</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file</td>
+<td>String</td>
+<td>The contents file to be uploaded as <code class="prettyprint">multipart/form-data</code>.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>An acknowledgement that the file was created.</p>
+
+<h2 id="append-to-artifact">Append to Artifact</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/logs/operations.log'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+      -T logs/production.log
+</code></pre>
+
+<blockquote>
+<p>The above command appends the file <code class="prettyprint">logs/production.log</code> to the specified job at the remote path <code class="prettyprint">logs/operations.log</code> and returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
+
+File logs/operations.log was appended successfully
+</code></pre>
+
+<p>Appends a local file to an existing artifact.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>An acknowledgement that the file was appended to.</p>
+
           <h1 id="errors">Errors</h1>
 
 <p>Go CD uses the following HTTP status codes to indicate errors.</p>
