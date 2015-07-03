@@ -3,7 +3,7 @@
 Go CD uses the following HTTP status codes to indicate errors.
 
 Error Code | Meaning
-                                   --                                                                                                      -- -- -- -- | -- -- -- -
+-----------|--------
 400        | Bad Request           -- The request could not be understood. The client SHOULD NOT repeat the request without modifications.
 401        | Unauthorized          -- Your username or password is incorrect or you are not authorized to perform this action.
 403        | Forbidden             -- The resource requested is hidden for administrators only.
