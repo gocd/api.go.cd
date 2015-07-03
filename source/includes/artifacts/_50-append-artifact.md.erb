@@ -1,0 +1,26 @@
+## Append to Artifact
+
+```shell
+$ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/logs/operations.log' \
+      -u 'username:password'
+      -T logs/production.log
+```
+
+> The above command appends the file `logs/production.log` to the specified job at the remote path `logs/operations.log` and returns the following response:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=UTF-8
+
+File logs/operations.log was appended successfully
+```
+
+Appends a local file to an existing artifact.
+
+### HTTP Request
+
+`PUT https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file`
+
+### Returns
+
+An acknowledgement that the file was appended to.

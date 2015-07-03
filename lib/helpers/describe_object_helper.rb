@@ -1,9 +1,11 @@
 module DescribeObjectHelper
   class ObjectDescription
-    attr_reader :name, :properties
+    # `__name`, because the object can have a property called `name`
+    # which causes problems because of the method_missing
+    attr_reader :__name, :properties
     def initialize(name)
-      @name       = name
-      @properties = []
+      @__name = name
+      @properties  = []
     end
 
     def method_missing(method, *args)

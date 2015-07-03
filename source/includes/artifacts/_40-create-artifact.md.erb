@@ -1,0 +1,35 @@
+## Create Artifact
+
+```shell
+$ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/pkg/foobar-widgets-1.2.3.jar' \
+      -u 'username:password'
+      -X POST \
+      -F 'file=@target/dist/foobar-widgets-1.2.3.jar'
+```
+
+> The above command uploads the file `target/dist/foobar-widgets-1.2.3.jar` to the specified job at the remote path `pkg/foobar-widgets-1.2.3.jar` and returns the following response:
+
+```http
+HTTP/1.1 201 Created
+Content-Type: text/plain; charset=UTF-8
+
+File pkg/foobar-widgets-1.2.3.jar was created successfully
+```
+
+Uploads a local file as an artifact.
+
+### HTTP Request
+
+`POST https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/*path_to_file`
+
+The following form parameter must be specified
+
+<%=
+  describe_object(nil) do
+    file  'String',            'The contents file to be uploaded as `multipart/form-data`'
+  end
+ %>
+
+### Returns
+
+An acknowledgement that the file was created.
