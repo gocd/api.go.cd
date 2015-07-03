@@ -803,7 +803,7 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 
 <h2 id="get-all-materials">Get all materials</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.exampe.com/go/api/config/materials'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/materials'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span>
 </code></pre>
 
@@ -1104,6 +1104,59 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 <h3 id="returns">Returns</h3>
 
 <p>A new <a href="#the-backup-object">backup object</a>.</p>
+
+          <h1 id="pipeline-groups">Pipeline Groups</h1>
+
+<p>The pipeline groups allows users to list pipeline groups along with the pipelines, stages and materials for each pipeline.</p>
+
+<h2 id="config-listing-api">Config listing API</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/pipeline_groups'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d05446cd52a998fe3afd840fc2c46b7c7e421051f0209c7f619c95bedc28b88"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This API is built primarily to support rendering of value stream mapping. As such the information rendered in the configuration is kept to a minimum.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://ci.example.com/go/api/config/pipeline_groups</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>A list of pipeline groups, pipelines in each group, stages and materials in each pipeline.</p>
 
           <h1 id="errors">Errors</h1>
 
