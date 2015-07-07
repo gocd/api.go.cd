@@ -11,7 +11,7 @@ Gets an artifact file by its path.
 
 ### HTTP Request
 
-`GET /go/files/PipelineName/541/StageName/1/JobName/*path_to_file`
+`GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_file`
 
 <aside class="notice">
   The <code>path_to_file</code> can be a nested file for e.g. <code>dist/foobar-widgets-1.2.0.jar</code>

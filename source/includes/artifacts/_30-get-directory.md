@@ -11,7 +11,7 @@ Gets an artifact directory by its path.
 
 ### HTTP Request
 
-`GET /go/files/PipelineName/541/StageName/1/JobName/*path_to_directory.zip`
+`GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_directory.zip`
 
 <aside class="notice">
   The <code>path_to_directory</code> can be a nested directory for e.g. <code>target/dist.zip</code>
