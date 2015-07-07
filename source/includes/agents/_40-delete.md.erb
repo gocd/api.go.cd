@@ -23,7 +23,8 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
 Deletes an agent.
 
 <aside class="notice">
-You must first <a href='#update-an-agent'>disable an agent</a> before deleting it.
+You must first <a href='#update-an-agent'>disable an agent</a> and ensure that its
+<a href='#get-one-agent'>status</a> is not <code>Building</code>, before attempting to deleting it.
 </aside>
 
 
