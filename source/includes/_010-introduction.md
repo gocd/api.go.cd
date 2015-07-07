@@ -6,7 +6,7 @@ We currently provide language bindings in Shell! You can view code examples on t
 
 All APIs SHOULD be accessed from `https://go-server-url:8154/go/api`. All data SHOULD be sent and recieved as JSON, specifically `application/vnd.go.cd.v1+json`. You may access the APIs over plain text, but for security reasons we suggest that you use SSL.
 
-## Current Version
+## Current version
 
 By default, all requests receive **Version 1** of the API. It is recommended to explicitly request this version via the `Accept` header.
 

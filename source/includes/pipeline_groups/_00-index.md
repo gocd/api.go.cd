@@ -1,4 +1,4 @@
-## Config listing API
+## Config listing
 
 ```shell
 $ curl 'https://ci.example.com/go/api/config/pipeline_groups' \

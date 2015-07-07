@@ -1,4 +1,4 @@
-## Get all Artifacts
+## Get all artifacts
 
 ```shell
 $ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName.json' \

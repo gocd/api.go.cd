@@ -1,4 +1,4 @@
-## Get all Agents
+## Get all agents
 
 ```shell
 $ curl 'https://ci.example.com/go/api/agents' \

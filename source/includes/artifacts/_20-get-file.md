@@ -1,4 +1,4 @@
-## Get Artifact File
+## Get artifact file
 
 ```shell
 $ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/to/file' \
