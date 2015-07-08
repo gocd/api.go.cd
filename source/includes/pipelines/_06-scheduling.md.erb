@@ -1,0 +1,36 @@
+## Scheduling pipelines
+
+```shell
+
+$ curl 'http://ci.example.com/go/api/pipelines/pipeline1/schedule' \
+       -u 'username:password'
+       -X POST
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: text/html; charset=utf-8
+Request to schedule pipeline pipeline1 accepted
+```
+
+Scheduling allows user to trigger a specific pipeline.
+
+### HTTP Request
+
+`POST /go/pipelines/:pipeline_name/schedule`
+
+You may optionally submit specific materials information in order to schedule the pipeline with the specified set of materials.
+
+Post Data                                                                     | Desciption
+------------------------------------------------------------------------------|--------------
+no parameter                                                                  | Triggers a new instance of the specified pipeline with the latest revision of all materials.
+`materials[svn_material]=3456`                                                | Triggers a new instance of the specified pipeline with revision `3456` of the material whose `materialName` attribute is `svn_version`.
+`materials[repo-name:pkg-name]=gcc-4.4.7-3.el6.x86_64`                        | Triggers a new instance of the specified pipeline with revision `gcc-4.4.7-3.el6.x86_64` of the rpm package material.
+`materials[svn_material]=3456&materials[upstream_foo]=upstream_foo/2/dist/1`  | Triggers a new instance of the specified pipeline by specifying multiple materials.
+
+
+### Returns
+
+A text confirmation.
