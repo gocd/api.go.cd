@@ -1812,22 +1812,11 @@ File logs/operations.log was appended successfully
 </code></pre>
 
 <blockquote>
-<p>The above command returns CSV structure like this:</p>
+<p>The above command returns CSV structure like this (indented for readability):</p>
 </blockquote>
 
-<pre class="highlight shell"><code>    cruise_agent,                           myLocalAgent,
-    cruise_job_duration,                    0,
-    cruise_job_id,                          5,    
-    cruise_job_result,                      Passed
-    cruise_pipeline_counter,                1
-    cruise_pipeline_label,                  1
-    cruise_stage_counter,                   1    
-    cruise_timestamp_01_scheduled,          2015-07-06T18:20:55+05:30,
-    cruise_timestamp_02_assigned,           2015-07-06T18:20:55+05:30,
-    cruise_timestamp_03_preparing,          2015-07-06T18:20:55+05:30,
-    cruise_timestamp_04_building,           2015-07-06T18:20:55+05:30,
-    cruise_timestamp_05_completing,         2015-07-06T18:20:55+05:30,
-    cruise_timestamp_06_completed           2015-07-06T18:20:55+05:30
+<pre class="highlight plaintext"><code>cruise_agent,   cruise_timestamp_01_scheduled,  cruise_timestamp_02_assigned
+INpoojar.local, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
 </code></pre>
 
 <p>Lists all job properties.</p>
