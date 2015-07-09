@@ -1803,7 +1803,7 @@ File logs/operations.log was appended successfully
 
           <h1 id="properties">Properties</h1>
 
-<p>The properties API allows managing of job properties</p>
+<p>The properties API allows managing of job properties.</p>
 
 <h2 id="get-all-job-properties">Get all job properties</h2>
 
@@ -1830,24 +1830,24 @@ File logs/operations.log was appended successfully
     cruise_timestamp_06_completed           2015-07-06T18:20:55+05:30
 </code></pre>
 
-<p>Lists all job properties</p>
+<p>Lists all job properties.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/properties/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name</code></p>
 
 <aside class="notice">
-  <strong>Note:</strong> 
-  You can use keyword &lsquo;latest&rsquo; as a pipeline counter or a stage counter.</p>
+  <strong>Note:</strong>
+  You can use keyword &lsquo;latest&rsquo; as a pipeline counter or a stage counter.
 </aside>
 
 <h3 id="returns">Returns</h3>
 
-<p>CSV list containing property names and their corresponding value. </p>
+<p>CSV list containing property names and their corresponding value.</p>
 
 <h2 id="get-one-property">Get one property</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'http://ci.example.com/go/properties/PipelineName/541/StageName/1/JobName'</span>/cruise_agent <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'http://ci.example.com/go/properties/PipelineName/541/StageName/1/JobName/cruise_agent'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span>
 </code></pre>
 
@@ -1855,7 +1855,7 @@ File logs/operations.log was appended successfully
 <p>The above command returns CSV structure like this:</p>
 </blockquote>
 
-<p>Gets a property by its name</p>
+<p>Gets a property by its name.</p>
 
 <pre class="highlight shell"><code>cruise_agent
 myLocalAgent
@@ -1866,8 +1866,8 @@ myLocalAgent
 <p><code class="prettyprint">GET /go/properties/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/:property_name</code></p>
 
 <aside class="notice">
-  <strong>Note:</strong> 
-  You can use keyword &lsquo;latest&rsquo; as a pipeline counter or a stage counter.</p>
+  <strong>Note:</strong>
+  You can use keyword &lsquo;latest&rsquo; as a pipeline counter or a stage counter.
 </aside>
 
 <h3 id="returns">Returns</h3>
@@ -1893,16 +1893,16 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /go/properties/search?pipelineName=[PipelineName]&amp;stageName=[StageName]&amp;jobName=[JobName]&amp;limitPipeline=[PipelineCounter]&amp;limitCount=[Number]</code></p>
+<p><code class="prettyprint">GET /go/properties/search?pipelineName=:pipeline_name&amp;stageName=:stage_name&amp;jobName=:job_name&amp;limitPipeline=:pipeline_counter&amp;limitCount=:number</code></p>
 
 <aside class="notice">
-  <strong>Note:</strong> 
-  <code>limitPipeline</code> and <code>limitCount</code> are optional parameters. The default value of limitPipeline is latest pipeline instance and limitCount is 100.
+  <strong>Note:</strong>
+  <code>limitPipeline</code> and <code>limitCount</code> are optional parameters. The default value of <code>limitPipeline</code> is latest pipeline instance&rsquo;s counter. The default value of <code>limitCount</code> is <code>100</code>.
 </aside>
 
 <h3 id="returns">Returns</h3>
 
-<p>Job properties as CSV </p>
+<p>Job properties as CSV.</p>
 
           <h1 id="errors">Errors</h1>
 
