@@ -50,7 +50,8 @@ REPOS="$1"
 REV="$2"
 UUID=$(svnlook uuid $1)
 
-curl https://ci.example.com/go/api/material/notify/svn \
-    -d "uuid=$UUID" \
-    -u admin:password
+curl 'https://ci.example.com/go/api/material/notify/svn' \
+    -u 'username:password' \
+    -X POST \
+    -d "uuid=$UUID"
 ```

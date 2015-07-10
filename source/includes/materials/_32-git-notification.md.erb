@@ -46,7 +46,8 @@ The post commit hook is located at `/path/to/repository.git/hooks/post-receive`.
 ```bash
 #!/bin/sh
 
-curl https://ci.example.com/go/api/material/notify/svn \
-    -d "repository_url=git://git.example.com/git/funky-widgets.git" \
-    -u username:password
+curl 'https://ci.example.com/go/api/material/notify/svn' \
+    -u 'username:password' \
+    -X POST \
+    -d "repository_url=git://git.example.com/git/funky-widgets.git"
 ```
