@@ -1,0 +1,72 @@
+## Get job history
+
+```shell
+$ curl 'https://ci.example.com/go/api/jobs/mypipeline/defaultStage/job1/history' \
+      -u 'username:password'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "jobs": [
+    {
+      "agent_uuid": null,
+      "name": "job1",
+      "job_state_transitions": [],
+      "scheduled_date": 1436519914378,
+      "original_job_id": null,
+      "pipeline_counter": 5,
+      "rerun": false,
+      "pipeline_name": "mypipeline",
+      "result": "Unknown",
+      "state": "Scheduled",
+      "id": 6,
+      "stage_counter": "1",
+      "stage_name": "defaultStage"
+    },
+    {
+      "agent_uuid": "278fb0b6-d3b8-47e1-9443-67f26bfb5c15",
+      "name": "job1",
+      "job_state_transitions": [],
+      "scheduled_date": 1436519733253,
+      "original_job_id": null,
+      "pipeline_counter": 4,
+      "rerun": false,
+      "pipeline_name": "mypipeline",
+      "result": "Passed",
+      "state": "Completed",
+      "id": 4,
+      "stage_counter": "1",
+      "stage_name": "defaultStage"
+    }
+  ],
+  "pagination": {
+    "offset": 0,
+    "total": 2,
+    "page_size": 10
+  }
+}
+```
+
+The job history allows users to list job instances of specified job. Supports pagination using offset which tells the API how many instances to skip.
+
+### HTTP Request
+
+`GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history`
+
+**With pagination**
+
+`GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history[/:offset]`
+
+<aside class="notice">
+  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
+</aside>
+### Returns
+
+An array of jobs instances.

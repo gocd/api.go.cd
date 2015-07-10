@@ -18,6 +18,7 @@ includes:
   - 080-artifacts
   - 090-pipelines
   - 0300-stages
+  - 0400-jobs
   - 0100-properties
   - 0200-configuration
   - errors
