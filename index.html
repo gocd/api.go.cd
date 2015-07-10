@@ -1893,6 +1893,406 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Job properties as CSV.</p>
 
+          <h1 id="configuration">Configuration</h1>
+
+<p>The configuration API allows users with administration role to view and manage configuration.</p>
+
+<h2 id="list-all-modifications">List all modifications</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/revisions'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> 
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"893d30ab646489d882f2350b10f47d0e"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commitSHA"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d2f9091145e2e4b3b22d938c4819610467ae20c1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"goEdition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OpenSource"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436253610465</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"goVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a2285d3304a51508c88e5479e327553c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commitSHA"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f27b48594645c9f15f55bb56d0100dd60e4cbacc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"goEdition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OpenSource"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436253595701</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"schemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"goVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+ </span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Lists the config repository modifications.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /go/api/config/revisions</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>An array of repository modifications.</p>
+
+<h2 id="get-repository-modification-diff">Get repository modification diff</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/diff/d2f9091145e2e4b3b22d938c4819610467ae20c1/f27b48594645c9f15f55bb56d0100dd60e4cbacc'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> 
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight diff"><code><span class="gu">@@ -29,7 +29,7 @@
+</span>           &lt;job name="up42_job"&gt;
+             &lt;tasks&gt;
+               &lt;exec command="sleep"&gt;
+<span class="gd">-                &lt;arg&gt;40000&lt;/arg&gt;
+</span><span class="gi">+                &lt;arg&gt;100&lt;/arg&gt;
+</span>                 &lt;runif status="passed" /&gt;
+               &lt;/exec&gt;
+             &lt;/tasks&gt;
+</code></pre>
+
+<p>Gets the diff between two config repository modifications.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /go/api/config/:from_commit_sha/:to_commit_sha</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>The diff between two config repo modifications.</p>
+
+<h2 id="get-configuration">Get configuration</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/5059cf548db9ea2d1b9192b45529ccf0.xml'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> 
+</code></pre>
+
+<blockquote>
+<p>The above command returns the contents of the config file</p>
+</blockquote>
+
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;cruise</span> 
+    <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> 
+    <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">"cruise-config.xsd"</span> 
+    <span class="na">schemaVersion=</span><span class="s">"75"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;server</span> <span class="na">serverId=</span><span class="s">"9C0C0282-A554-457D-A0F8-9CF8A754B4AB"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;security&gt;</span>
+      <span class="nt">&lt;passwordFile</span> <span class="na">path=</span><span class="s">"/etc/go/password.properties"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/security&gt;</span>
+  <span class="nt">&lt;/server&gt;</span>
+  <span class="nt">&lt;pipelines</span> <span class="na">group=</span><span class="s">"defaultGroup"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/cruise&gt;</span>
+</code></pre>
+
+<p>Gets the configuration with the specified version.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /go/api/admin/config/:commit_sha.xml</code></p>
+
+<p><strong>Other convenience APIs</strong></p>
+
+<p><code class="prettyprint">GET /go/api/admin/config/config.xml</code></p>
+
+<p>or</p>
+
+<p><code class="prettyprint">GET /go/api/admin/config/current.xml</code></p>
+
+<aside class="notice">
+  <strong>Note:</strong> <code>config.xml</code> or <code>current.xml</code> allows retrieval of current configuration without passing in the commit sha value.
+</aside>
+
+<h3 id="returns">Returns</h3>
+
+<p>The contents of the configuration file with the specified revision. </p>
+
+<h2 id="create-pipeline">Create pipeline</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/tab/admin/pipelines/mypipeline.json'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -d <span class="s1">'url=http://svnrepo.com/mysvn/trunk'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/html; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"isValid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"messageId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline successfully created."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Creates a pipeline. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /go/tab/admin/pipelines/:pipeline_name.json</code></p>
+
+<p>Creating pipeline supports following parameters.</p>
+
+<h3 id="general-parameters">General parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pipelineGroup</td>
+<td>defaultGroup</td>
+<td>No</td>
+<td>The name of the Pipeline Group to add the new pipeline to. The pipeline group will be created if it does not already exist.</td>
+</tr>
+<tr>
+<td>builder</td>
+<td>ant</td>
+<td>No</td>
+<td>Can be one of <code class="prettyprint">ant</code>, <code class="prettyprint">nant</code>, <code class="prettyprint">rake</code> or <code class="prettyprint">exec</code>.</td>
+</tr>
+<tr>
+<td>buildfile</td>
+<td>build.xml</td>
+<td>No</td>
+<td>Not allowed for exec</td>
+</tr>
+<tr>
+<td>target</td>
+<td>all</td>
+<td>No</td>
+<td>Not allowed for exec</td>
+</tr>
+<tr>
+<td>command</td>
+<td>unittest.sh  arg1 arg2</td>
+<td>No</td>
+<td>Required for exec</td>
+</tr>
+<tr>
+<td>source</td>
+<td>pkg</td>
+<td>No</td>
+<td>no default value</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>installer</td>
+<td>No</td>
+<td>no default value</td>
+</tr>
+</tbody></table>
+
+<h3 id="subversion">Subversion</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>svn</td>
+<td>No</td>
+<td>Default value is <code class="prettyprint">svn</code></td>
+</tr>
+<tr>
+<td>url</td>
+<td>http://svnrepo.com/mysvn/trunk</td>
+<td>Yes</td>
+<td>The URL of the Subversion repository</td>
+</tr>
+<tr>
+<td>username</td>
+<td>checkout_username</td>
+<td>No</td>
+<td>The SVN username</td>
+</tr>
+<tr>
+<td>password</td>
+<td>checkout_password</td>
+<td>No</td>
+<td>The SVN password</td>
+</tr>
+</tbody></table>
+
+<h3 id="mercurial">Mercurial</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>hg</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>http://hgrepo.com/hg/my_project</td>
+<td>Yes</td>
+<td>The URL of the repository</td>
+</tr>
+</tbody></table>
+
+<h3 id="git">Git</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>git</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>git://github.com/foo/bar.git</td>
+<td>Yes</td>
+<td>The URL of the repository</td>
+</tr>
+</tbody></table>
+
+<h3 id="perforce">Perforce</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>p4</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>p4server.foo.com:1666</td>
+<td>Yes</td>
+<td>The P4PORT of the repository</td>
+</tr>
+<tr>
+<td>username</td>
+<td>checkout_username</td>
+<td>No</td>
+<td>The P4USER to connect to the repository</td>
+</tr>
+<tr>
+<td>password</td>
+<td>checkout_password</td>
+<td>No</td>
+<td>The P4PASSWD to connect to the repository</td>
+</tr>
+<tr>
+<td>useTickets</td>
+<td>true or false</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td>view</td>
+<td>//depot/&hellip; //something/&hellip;</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+</tbody></table>
+
+<h3 id="team-foundation-server">Team Foundation Server</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>tfs</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>http://tfs.host.com:8080/tfs/DefaultCollection</td>
+<td>Yes</td>
+<td>The url of your TFS collection</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>COMPANYNAME</td>
+<td>No</td>
+<td>Domain name that the given user belong to</td>
+</tr>
+<tr>
+<td>username</td>
+<td>tfsuser</td>
+<td>Yes</td>
+<td>Username used to connect to the collection</td>
+</tr>
+<tr>
+<td>password</td>
+<td>tfspassword</td>
+<td>No</td>
+<td>Password for the given user name</td>
+</tr>
+<tr>
+<td>projectPath</td>
+<td>$/MyProject</td>
+<td>Yes</td>
+<td>Project path in the given collection</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>A text confirmation. </p>
+
           <h1 id="errors">Errors</h1>
 
 <p>Go CD uses the following HTTP status codes to indicate errors.</p>
