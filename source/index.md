@@ -18,6 +18,7 @@ includes:
   - 080-artifacts
   - 090-pipelines
   - 0100-properties
+  - 0200-configuration
   - errors
 
 search: true
