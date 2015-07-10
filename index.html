@@ -2025,6 +2025,119 @@ File logs/operations.log was appended successfully
 
 <p>An array of stage instances.</p>
 
+          <h1 id="jobs">Jobs</h1>
+
+<p>The jobs API allows users to view job information.</p>
+
+<h2 id="get-scheduled-jobs">Get scheduled jobs</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/jobs/scheduled.xml'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns XML structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight xml"><code><span class="nt">&lt;scheduledJobs&gt;</span>
+  <span class="nt">&lt;job</span> <span class="na">name=</span><span class="s">"job1"</span> <span class="na">id=</span><span class="s">"6"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job1"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;buildLocator&gt;</span>mypipeline/5/defaultStage/1/job1<span class="nt">&lt;/buildLocator&gt;</span>
+  <span class="nt">&lt;/job&gt;</span>
+  <span class="nt">&lt;job</span> <span class="na">name=</span><span class="s">"job2"</span> <span class="na">id=</span><span class="s">"7"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job2"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;buildLocator&gt;</span>mypipeline/5/defaultStage/1/job2<span class="nt">&lt;/buildLocator&gt;</span>
+  <span class="nt">&lt;/job&gt;</span>
+<span class="nt">&lt;/scheduledJobs&gt;</span>
+</code></pre>
+
+<p>Lists all the current job instances which are scheduled but not yet assigned to any agent.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /go/api/jobs/scheduled.xml</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>An array of scheduled job instances.</p>
+
+<h2 id="get-job-history">Get job history</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/jobs/mypipeline/defaultStage/job1/history'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"agent_uuid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"job_state_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436519914378</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_job_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipeline_counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rerun"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypipeline"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"agent_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"278fb0b6-d3b8-47e1-9443-67f26bfb5c15"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"job_state_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436519733253</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"original_job_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipeline_counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rerun"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypipeline"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"page_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The job history allows users to list job instances of specified job. Supports pagination using offset which tells the API how many instances to skip.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history</code></p>
+
+<p><strong>With pagination</strong></p>
+
+<p><code class="prettyprint">GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history[/:offset]</code></p>
+
+<aside class="notice">
+  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
+</aside>
+
+<h3 id="returns">Returns</h3>
+
+<p>An array of jobs instances.</p>
+
           <h1 id="properties">Properties</h1>
 
 <p>The properties API allows managing of job properties.</p>
