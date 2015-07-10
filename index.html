@@ -947,9 +947,10 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 <span class="nv">REV</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
 <span class="nv">UUID</span><span class="o">=</span><span class="k">$(</span>svnlook uuid <span class="nv">$1</span><span class="k">)</span>
 
-curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
-    -d <span class="s2">"uuid=</span><span class="nv">$UUID</span><span class="s2">"</span> <span class="se">\</span>
-    -u admin:password
+curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span> <span class="se">\</span>
+    -u <span class="s1">'username:password'</span> <span class="se">\</span>
+    -X POST <span class="se">\</span>
+    -d <span class="s2">"uuid=</span><span class="nv">$UUID</span><span class="s2">"</span>
 </code></pre>
 
 <h2 id="notify-git-materials">Notify git materials</h2>
@@ -1009,9 +1010,10 @@ curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
 
 <pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
 
-curl https://ci.example.com/go/api/material/notify/svn <span class="se">\</span>
-    -d <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span> <span class="se">\</span>
-    -u username:password
+curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span> <span class="se">\</span>
+    -u <span class="s1">'username:password'</span> <span class="se">\</span>
+    -X POST <span class="se">\</span>
+    -d <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
 </code></pre>
 
           <h1 id="backups">Backups</h1>
@@ -1653,8 +1655,8 @@ File logs/operations.log was appended successfully
 <h2 id="pause-a-pipeline">Pause a pipeline</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines/pipeline1/pause'</span> <span class="se">\</span>
-      -X POST <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
       -d <span class="s1">'pauseCause=take some rest'</span>
 </code></pre>
 
@@ -1694,10 +1696,9 @@ File logs/operations.log was appended successfully
 
 <h2 id="unpause-a-pipeline">Unpause a pipeline</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines/pipeline1/pause'</span> <span class="se">\</span>
-      -X POST <span class="se">\</span>
-      -u <span class="s1">'username:password'</span> <span class="se">\</span>
-
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines/pipeline1/unpause'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span>
+      -X POST
 </code></pre>
 
 <blockquote>
