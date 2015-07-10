@@ -17,6 +17,7 @@ includes:
   - 070-pipeline-groups
   - 080-artifacts
   - 090-pipelines
+  - 0300-stages
   - 0100-properties
   - 0200-configuration
   - errors
