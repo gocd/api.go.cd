@@ -2153,7 +2153,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <pre class="highlight plaintext"><code>cruise_agent,   cruise_timestamp_01_scheduled,  cruise_timestamp_02_assigned
-INpoojar.local, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
+myLocalAgent, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
 </code></pre>
 
 <p>Lists all job properties.</p>
@@ -2229,6 +2229,47 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <h3 id="returns">Returns</h3>
 
 <p>Job properties as CSV.</p>
+
+<h2 id="create-property">Create property</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'http://ci.example.com/go/properties/PipelineName/541/StageName/1/JobName/PropertyName'</span> <span class="se">\</span>
+        -u <span class="s1">'username:password'</span> <span class="se">\</span>
+        -X POST <span class="se">\</span>
+        -d <span class="s1">'value=PropertyValue'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command defines a property &lsquo;PropertyName&rsquo; for &lsquo;PipelineName/541/StageName/1/JobName&rsquo; and returns the following response:</p>
+</blockquote>
+
+<pre class="highlight shell"><code>Property <span class="s1">'PropertyName'</span> created with value <span class="s1">'PropertyValue'</span>
+</code></pre>
+
+<p>Defines a property on a specific job instance.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /go/properties/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/:property_name</code></p>
+
+<p>The following post parameter must be specified :</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>The value of property.</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<p>An acknowledgement that the property was created.</p>
 
           <h1 id="configuration">Configuration</h1>
 
