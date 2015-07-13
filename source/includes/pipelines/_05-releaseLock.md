@@ -16,7 +16,7 @@ pipeline lock released for pipeline1
 ```
 
 
-The releasing a pipeline lock  allows user to release a lock on a pipeline so that you can start up a new instance without having to wait for the earlier instance to finish.
+Release a lock on a pipeline so that you can start up a new instance without having to wait for the earlier instance to finish.
 <aside class="notice">
  A pipeline lock can only be released when a pipeline is locked, AND there is no running instance of the pipeline.
 </aside>
