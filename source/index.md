@@ -21,6 +21,7 @@ includes:
   - 0400-jobs
   - 0100-properties
   - 0200-configuration
+  - 0500-feeds
   - errors
 
 search: true
