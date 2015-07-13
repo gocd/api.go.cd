@@ -17,11 +17,11 @@ includes:
   - 070-pipeline-groups
   - 080-artifacts
   - 090-pipelines
-  - 0300-stages
-  - 0400-jobs
-  - 0100-properties
-  - 0200-configuration
-  - 0500-feeds
+  - 100-stages
+  - 110-jobs
+  - 120-properties
+  - 130-configuration
+  - 140-feeds
   - errors
 
 search: true
