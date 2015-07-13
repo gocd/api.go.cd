@@ -9,7 +9,7 @@ $ curl 'http://ci.example.com/go/properties/PipelineName/541/StageName/1/JobName
 
 ```csv
 cruise_agent,   cruise_timestamp_01_scheduled,  cruise_timestamp_02_assigned
-INpoojar.local, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
+myLocalAgent, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
 ```
 
 Lists all job properties.
