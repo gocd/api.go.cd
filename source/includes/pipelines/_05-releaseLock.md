@@ -23,7 +23,7 @@ The releasing a pipeline lock  allows user to release a lock on a pipeline so th
 
 ### HTTP Request
 
-`GET /go/pipelines/:pipeline_name/releaseLock`
+`POST /go/api/pipelines/:pipeline_name/releaseLock`
 
 ### Returns
 

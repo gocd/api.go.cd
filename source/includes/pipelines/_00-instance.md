@@ -78,7 +78,7 @@ Gets pipeline instance object.
 
 ### HTTP Request
 
-`GET /go/pipelines/:pipeline_name/instance/:pipeline_counter`
+`GET /go/api/pipelines/:pipeline_name/instance/:pipeline_counter`
 
 ### Returns
 

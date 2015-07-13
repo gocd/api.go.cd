@@ -25,7 +25,7 @@ The pipeline status allows users to check if the pipeline is paused, locked and 
 
 ### HTTP Request
 
-`GET /go/pipelines/:pipeline_name/status`
+`GET /go/api/pipelines/:pipeline_name/status`
 
 ### Returns
 
