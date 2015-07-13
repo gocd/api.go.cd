@@ -147,11 +147,11 @@ The pipeline history allows users to list pipeline instances. Supports paginatio
 
 ### HTTP Request
 
-`GET /go/pipelines/:pipeline_name/history`
+`GET /go/api/pipelines/:pipeline_name/history`
 
 **With pagination**
 
-`GET /go/pipelines/:pipeline_name/history[/:offset]`
+`GET /go/api/pipelines/:pipeline_name/history[/:offset]`
 
 <aside class="notice">
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of pipeline instances to be skipped.
