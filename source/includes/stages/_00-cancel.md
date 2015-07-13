@@ -20,7 +20,7 @@ Cancel an active stage of a specified stage.
 
 ### HTTP Request
 
-`GET /go/api/stages/:pipeline_name/:stage_name/cancel`
+`POST /go/api/stages/:pipeline_name/:stage_name/cancel`
 
 ### Returns
 
