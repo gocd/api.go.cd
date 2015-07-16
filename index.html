@@ -1041,8 +1041,8 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 </tr>
 <tr>
 <td>user</td>
-<td>String</td>
-<td>The <a href="#the-user-object">user</a> that performed this backup.</td>
+<td>Object</td>
+<td>The user that performed this backup.</td>
 </tr>
 </tbody></table>
 
@@ -1076,20 +1076,13 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.go.cd/#users"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/admin"</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/username"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/:login_name"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"login_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email_me"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"checkin_aliases"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-    </span><span class="p">]</span><span class="w">
+    </span><span class="nt">"login_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
