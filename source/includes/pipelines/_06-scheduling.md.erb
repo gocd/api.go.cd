@@ -21,7 +21,7 @@ Scheduling allows user to trigger a specific pipeline.
 
 `POST /go/pipelines/:pipeline_name/schedule`
 
-You may optionally submit specific materials information in order to schedule the pipeline with the specified set of materials.
+You may optionally submit specific materials information and environment variables in order to schedule the pipeline with the specified set of materials and parameterize it with the specified environment variables.
 
 Post Data                                                                     | Desciption
 ------------------------------------------------------------------------------|--------------
@@ -29,6 +29,9 @@ no parameter                                                                  | 
 `materials[svn_material]=3456`                                                | Triggers a new instance of the specified pipeline with revision `3456` of the material whose `materialName` attribute is `svn_version`.
 `materials[repo-name:pkg-name]=gcc-4.4.7-3.el6.x86_64`                        | Triggers a new instance of the specified pipeline with revision `gcc-4.4.7-3.el6.x86_64` of the rpm package material.
 `materials[svn_material]=3456&materials[upstream_foo]=upstream_foo/2/dist/1`  | Triggers a new instance of the specified pipeline by specifying multiple materials.
+`variables[ENV_VAR_1]=value1`                                                 | Triggers a new instance of the specified pipeline with a parameterized environment variable. Pipeline-level environment variable `ENV_VAR_1` will be set to `value1`.
+`materials[svn_material]=3456&variables[ENV_VAR_1]=value1&variables[ENV_VAR_2]=value2` | Triggers a new instance of the specified pipeline with revision `3456` of the material and two parameterized environment variables, `ENV_VAR_1` and `ENV_VAR_2`.
+`secure_variables[PASSWORD]=new_password`                                     | Triggers a new instance of the specified pipeline with a parameterized secure environment variable. Pipeline-level secure environment variable `PASSWORD` will be set to `new_password`.
 
 
 ### Returns
