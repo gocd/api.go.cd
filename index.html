@@ -1765,7 +1765,7 @@ File logs/operations.log was appended successfully
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/schedule</code></p>
 
-<p>You may optionally submit specific materials information in order to schedule the pipeline with the specified set of materials.</p>
+<p>You may optionally submit specific materials information and environment variables in order to schedule the pipeline with the specified set of materials and parameterize it with the specified environment variables.</p>
 
 <table><thead>
 <tr>
@@ -1788,6 +1788,18 @@ File logs/operations.log was appended successfully
 <tr>
 <td><code class="prettyprint">materials[svn_material]=3456&amp;materials[upstream_foo]=upstream_foo/2/dist/1</code></td>
 <td>Triggers a new instance of the specified pipeline by specifying multiple materials.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">variables[ENV_VAR_1]=value1</code></td>
+<td>Triggers a new instance of the specified pipeline with a parameterized environment variable. Pipeline-level environment variable <code class="prettyprint">ENV_VAR_1</code> will be set to <code class="prettyprint">value1</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">materials[svn_material]=3456&amp;variables[ENV_VAR_1]=value1&amp;variables[ENV_VAR_2]=value2</code></td>
+<td>Triggers a new instance of the specified pipeline with revision <code class="prettyprint">3456</code> of the material and two parameterized environment variables, <code class="prettyprint">ENV_VAR_1</code> and <code class="prettyprint">ENV_VAR_2</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">secure_variables[PASSWORD]=new_password</code></td>
+<td>Triggers a new instance of the specified pipeline with a parameterized secure environment variable. Pipeline-level secure environment variable <code class="prettyprint">PASSWORD</code> will be set to <code class="prettyprint">new_password</code>.</td>
 </tr>
 </tbody></table>
 
