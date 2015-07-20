@@ -1,5 +1,5 @@
 <%=
-describe_object 'The backup object' do
+describe_object 'The backup object', since: '15.2.0' do
   time              'DateTime',   'The time of the backup'
   path              'String',     'The filesystem location of the backup'
   user              'Object',     'The user that performed this backup'

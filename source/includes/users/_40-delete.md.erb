@@ -23,8 +23,17 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
 Deletes a user.
 
 <aside class="notice">
-You must first <a href='#update-a-user'>disable a user</a> before deleting it.
+  You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 </aside>
+
+
+<%=
+available_since('15.2.0') do
+  in_version '15.1.0', url: 'http://www.go.cd/documentation/user/15.1.0/api/users_api.html'
+  in_version '14.4.0', url: 'http://www.go.cd/documentation/user/14.4.0/api/users_api.html'
+  in_version '14.3.0', url: 'http://www.go.cd/documentation/user/14.3.0/api/users_api.html'
+end
+%>
 
 
 ### HTTP Request

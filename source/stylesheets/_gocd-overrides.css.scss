@@ -13,3 +13,11 @@ blockquote + .highlight {
 .tocify-wrapper > img {
     margin: 10px;
 }
+
+
+[data-popover]{
+  padding-left: 10px;
+  &:before {
+    @extend %icon-info-sign;
+  }
+}

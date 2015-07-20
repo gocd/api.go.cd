@@ -1,0 +1,11 @@
+<% unless object.__name.blank? -%>
+## <%= object.__name %>
+<% end -%>
+
+<%= available_since(object.__options[:since]) %>
+
+|Attribute             |Type                   |Description                  |
+|----------------------|-----------------------|-----------------------------|
+<% object.properties.each do |property| -%>
+| <%= property.name %> | <%= describe_property_type(property) %> | <%= describe_property(property) %>  |
+<% end -%>

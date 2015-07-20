@@ -23,10 +23,17 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
 Deletes an agent.
 
 <aside class="notice">
-You must first <a href='#update-an-agent'>disable an agent</a> and ensure that its
-<a href='#get-one-agent'>status</a> is not <code>Building</code>, before attempting to deleting it.
+  You must first <a href='#update-an-agent'>disable an agent</a> and ensure that its
+  <a href='#get-one-agent'>status</a> is not <code>Building</code>, before attempting to deleting it.
 </aside>
 
+<%=
+available_since('15.2.0') do
+  in_version '15.1.0', url: 'http://www.go.cd/documentation/user/15.1.0/api/agent_api.html'
+  in_version '14.4.0', url: 'http://www.go.cd/documentation/user/14.4.0/api/agent_api.html'
+  in_version '14.3.0', url: 'http://www.go.cd/documentation/user/14.3.0/api/agent_api.html'
+end
+%>
 
 ### HTTP Request
 
