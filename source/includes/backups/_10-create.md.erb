@@ -1,0 +1,65 @@
+## Create a backup
+
+```shell
+$ curl 'https://ci.example.com/go/api/backups' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X POST
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "http://api.go.cd/#backups"
+    }
+  },
+  "time": "2015-07-01T14:21:46.593+05:30",
+  "path": "/var/lib/go-server/serverBackups/backup_20150701-142146",
+  "user": {
+    "_links": {
+      "doc": {
+        "href": "http://api.go.cd/#users"
+      },
+      "self": {
+        "href": "https://ci.example.com/go/api/users/username"
+      },
+      "find": {
+        "href": "https://ci.example.com/go/api/users/:login_name"
+      }
+    },
+    "login_name": "username"
+  }
+}
+```
+
+Create a server backup.
+
+<aside class="warning">
+  The server may be unavailable during the time that the backup is being taken.
+</aside>
+
+
+<%=
+available_since('15.2.0') do
+  in_version '15.1.0', url: 'http://www.go.cd/documentation/user/15.1.0/api/backup_api.html'
+  in_version '14.4.0', url: 'http://www.go.cd/documentation/user/14.4.0/api/backup_api.html'
+  in_version '14.3.0', url: 'http://www.go.cd/documentation/user/14.3.0/api/backup_api.html'
+end
+%>
+
+
+### HTTP Request
+
+`POST /go/api/backups`
+
+### Returns
+
+A new [backup object](#the-backup-object).

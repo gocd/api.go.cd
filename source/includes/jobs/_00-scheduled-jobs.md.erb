@@ -1,0 +1,38 @@
+## Get scheduled jobs
+
+```shell
+$ curl 'https://ci.example.com/go/api/jobs/scheduled.xml' \
+      -u 'username:password'
+```
+
+> The above command returns XML structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/xml; charset=utf-8
+```
+
+```xml
+<scheduledJobs>
+  <job name="job1" id="6">
+    <link rel="self" href="https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job1"/>
+    <buildLocator>mypipeline/5/defaultStage/1/job1</buildLocator>
+  </job>
+  <job name="job2" id="7">
+    <link rel="self" href="https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job2"/>
+    <buildLocator>mypipeline/5/defaultStage/1/job2</buildLocator>
+  </job>
+</scheduledJobs>
+```
+
+Lists all the current job instances which are scheduled but not yet assigned to any agent.
+
+<%= available_since('14.3.0') %>
+
+### HTTP Request
+
+`GET /go/api/jobs/scheduled.xml`
+
+### Returns
+
+An array of scheduled job instances.

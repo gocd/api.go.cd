@@ -2,9 +2,10 @@ module DescribeObjectHelper
   class ObjectDescription
     # `__name`, because the object can have a property called `name`
     # which causes problems because of the method_missing
-    attr_reader :__name, :properties
-    def initialize(name)
+    attr_reader :__name, :__options, :properties
+    def initialize(name, options={})
       @__name = name
+      @__options = options
       @properties  = []
     end
 
@@ -35,24 +36,23 @@ module DescribeObjectHelper
 
   end
 
-  def describe_object(name, &block)
-    object = ObjectDescription.new(name)
+  def describe_object(name, options={}, &block)
+    object = ObjectDescription.new(name, options)
     object.instance_eval(&block)
 
-    erb = ERB.new(File.read(object.template_file), nil, '-')
-    erb.result(binding)
+    partial('partials/describe_object.md.erb', locals: {object: object})
   end
 
   def describe_property(property)
-      original_description = property.description.gsub(/\.$/, '') #remove any trailing period.
+    original_description = property.description.gsub(/\.$/, '') #remove any trailing period.
 
-      if property.options[:one_of]
-        original_description.gsub!(/\.$/, '')
-        original_description << ". Can be one of " << property.options[:one_of].collect{|enum| "`#{enum}`" }.join(', ')
-      end
+    if property.options[:one_of]
+      original_description.gsub!(/\.$/, '')
+      original_description << ". Can be one of " << property.options[:one_of].collect{|enum| "`#{enum}`" }.join(', ')
+    end
 
-      # append a trailing period
-      original_description << '.'
+    # append a trailing period
+    original_description << '.'
   end
 
   def describe_property_type(property)
