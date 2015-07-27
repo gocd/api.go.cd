@@ -139,6 +139,9 @@
 
 <h2 id="the-agent-object">The agent object</h2>
 
+<h3>Available since v15.2.0.
+</h3>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -254,6 +257,19 @@
 
 <p>Lists all available agents, these are agents that are present in the <code class="prettyprint">&lt;agents/&gt;</code> tag inside <code class="prettyprint">cruise-config.xml</code> and also agents that are in <code class="prettyprint">Pending</code> state awaiting registration.</p>
 
+<h3>Available since v15.2.0.
+    <span
+      data-popover
+      data-title='Looking for older versions of this API?'
+      data-content='&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;15.1.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.4.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.3.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+'
+    ></span>
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/agents</code></p>
@@ -303,6 +319,9 @@
 </span></code></pre>
 
 <p>Gets an agent by its unique identifier (uuid)</p>
+
+<h3>Available since v15.2.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -358,6 +377,19 @@
 </span></code></pre>
 
 <p>Update some attributes of an agent.</p>
+
+<h3>Available since v15.2.0.
+    <span
+      data-popover
+      data-title='Looking for older versions of this API?'
+      data-content='&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;15.1.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.4.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.3.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+'
+    ></span>
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -417,9 +449,22 @@
 <p>Deletes an agent.</p>
 
 <aside class="notice">
-You must first <a href='#update-an-agent'>disable an agent</a> and ensure that its
-<a href='#get-one-agent'>status</a> is not <code>Building</code>, before attempting to deleting it.
+  You must first <a href='#update-an-agent'>disable an agent</a> and ensure that its
+  <a href='#get-one-agent'>status</a> is not <code>Building</code>, before attempting to deleting it.
 </aside>
+
+<h3>Available since v15.2.0.
+    <span
+      data-popover
+      data-title='Looking for older versions of this API?'
+      data-content='&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;15.1.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.4.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.3.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+'
+    ></span>
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -478,6 +523,9 @@ You must first <a href='#update-an-agent'>disable an agent</a> and ensure that i
 
 <p>Lists the jobs that have executed on an agent.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/agents/:uuid/job_run_history</code></p>
@@ -499,6 +547,9 @@ You must first <a href='#update-an-agent'>disable an agent</a> and ensure that i
 <p>The users API allows users with administrator role to manage users.</p>
 
 <h2 id="the-user-object">The user object</h2>
+
+<h3>Available since v15.2.0.
+</h3>
 
 <table><thead>
 <tr>
@@ -594,6 +645,9 @@ You must first <a href='#update-an-agent'>disable an agent</a> and ensure that i
 
 <p>Lists all available users.</p>
 
+<h3>Available since v15.2.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/users</code></p>
@@ -641,6 +695,9 @@ You must first <a href='#update-an-agent'>disable an agent</a> and ensure that i
 </span></code></pre>
 
 <p>Gets a user by its login name</p>
+
+<h3>Available since v15.2.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -697,6 +754,9 @@ You must first <a href='#update-an-agent'>disable an agent</a> and ensure that i
 </span></code></pre>
 
 <p>Update some attributes of a user.</p>
+
+<h3>Available since v15.2.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -761,8 +821,21 @@ You must first <a href='#update-an-agent'>disable an agent</a> and ensure that i
 <p>Deletes a user.</p>
 
 <aside class="notice">
-You must first <a href='#update-a-user'>disable a user</a> before deleting it.
+  You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 </aside>
+
+<h3>Available since v15.2.0.
+    <span
+      data-popover
+      data-title='Looking for older versions of this API?'
+      data-content='&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;15.1.0&#x2F;api&#x2F;users_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.4.0&#x2F;api&#x2F;users_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.3.0&#x2F;api&#x2F;users_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+'
+    ></span>
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -777,6 +850,9 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 <p>The materials API allows users to query and notify materials in the Go configuration.</p>
 
 <h2 id="the-material-object">The material object</h2>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <table><thead>
 <tr>
@@ -827,6 +903,9 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 
 <p>Lists all available materials, these are materials that are present in the in <code class="prettyprint">cruise-config.xml</code>.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/config/materials</code></p>
@@ -870,6 +949,9 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 
 <p>Gets an agent by its unique identifier (uuid)</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/materials/:fingerprint/modifications</code></p>
@@ -910,6 +992,9 @@ You must first <a href='#update-a-user'>disable a user</a> before deleting it.
 <aside class="notice">
     When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
 </aside>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -978,6 +1063,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
     When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
 </aside>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST /go/api/material/notify/git</code></p>
@@ -1021,6 +1109,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 <p>The backups API allows users with administrator role to manage go server backups.</p>
 
 <h2 id="the-backup-object">The backup object</h2>
+
+<h3>Available since v15.2.0.
+</h3>
 
 <table><thead>
 <tr>
@@ -1093,6 +1184,19 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
   The server may be unavailable during the time that the backup is being taken.
 </aside>
 
+<h3>Available since v15.2.0.
+    <span
+      data-popover
+      data-title='Looking for older versions of this API?'
+      data-content='&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;15.1.0&#x2F;api&#x2F;backup_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.4.0&#x2F;api&#x2F;backup_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.go.cd&#x2F;documentation&#x2F;user&#x2F;14.3.0&#x2F;api&#x2F;backup_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+'
+    ></span>
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST /go/api/backups</code></p>
@@ -1146,6 +1250,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 
 <p>This API is built primarily to support rendering of value stream mapping. As such the information rendered in the configuration is kept to a minimum.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/config/pipeline_groups</code></p>
@@ -1159,6 +1266,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 <p>The artifacts API allows users to query and create artifacts of a job.</p>
 
 <h2 id="the-artifact-object">The artifact object</h2>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <table><thead>
 <tr>
@@ -1224,6 +1334,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 
 <p>Lists all available artifacts in a job.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.json</code></p>
@@ -1243,6 +1356,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 </blockquote>
 
 <p>Gets an artifact file by its path.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -1267,6 +1383,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 </blockquote>
 
 <p>Gets an artifact directory by its path.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -1311,6 +1430,9 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 
 <p>Uploads a local file as an artifact.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_file</code></p>
@@ -1353,6 +1475,9 @@ File logs/operations.log was appended successfully
 </code></pre>
 
 <p>Appends a local file to an existing artifact.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -1442,6 +1567,9 @@ File logs/operations.log was appended successfully
 </span></code></pre>
 
 <p>Gets pipeline instance object.</p>
+
+<h3>Available since v15.1.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -1597,6 +1725,9 @@ File logs/operations.log was appended successfully
 
 <p>The pipeline history allows users to list pipeline instances. Supports pagination using offset which tells the API how many instances to skip.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/history</code></p>
@@ -1637,6 +1768,9 @@ File logs/operations.log was appended successfully
 
 <p>The pipeline status allows users to check if the pipeline is paused, locked and schedulable.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/status</code></p>
@@ -1662,6 +1796,9 @@ File logs/operations.log was appended successfully
 </code></pre>
 
 <p>Pause the specified pipeline.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -1704,6 +1841,9 @@ File logs/operations.log was appended successfully
 
 <p>Unpause the specified pipeline.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/unpause</code></p>
@@ -1734,6 +1874,9 @@ File logs/operations.log was appended successfully
  A pipeline lock can only be released when a pipeline is locked, AND there is no running instance of the pipeline.
 </aside></p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/releaseLock</code></p>
@@ -1760,6 +1903,9 @@ File logs/operations.log was appended successfully
 </code></pre>
 
 <p>Scheduling allows user to trigger a specific pipeline.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -1830,6 +1976,9 @@ File logs/operations.log was appended successfully
 </code></pre>
 
 <p>Cancel an active stage of a specified stage.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -1918,6 +2067,9 @@ File logs/operations.log was appended successfully
 </span></code></pre>
 
 <p>Gets stage instance object.</p>
+
+<h3>Available since v15.1.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2014,6 +2166,9 @@ File logs/operations.log was appended successfully
 
 <p>The stage history allows users to list stage instances of specified stage. Supports pagination using offset which tells the API how many instances to skip.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:stage_name/history</code></p>
@@ -2061,6 +2216,9 @@ File logs/operations.log was appended successfully
 </code></pre>
 
 <p>Lists all the current job instances which are scheduled but not yet assigned to any agent.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2127,6 +2285,9 @@ File logs/operations.log was appended successfully
 
 <p>The job history allows users to list job instances of specified job. Supports pagination using offset which tells the API how many instances to skip.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history</code></p>
@@ -2163,6 +2324,9 @@ myLocalAgent, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
 
 <p>Lists all job properties.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/properties/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name</code></p>
@@ -2191,6 +2355,9 @@ myLocalAgent, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
 <pre class="highlight shell"><code>cruise_agent
 myLocalAgent
 </code></pre>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2222,6 +2389,9 @@ myLocalAgent,0,13,Passed,8,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07T10:17:37+05:30,2015-07-07T10:17:45+05:30,2015-07-07T10:17:55+05:30,2015-07-07T10:17:56+05:30,2015-07-07T10:17:56+05:30,2015-07-07T10:17:56+05:30
 </code></pre>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/properties/search?pipelineName=:pipeline_name&amp;stageName=:stage_name&amp;jobName=:job_name&amp;limitPipeline=:pipeline_counter&amp;limitCount=:number</code></p>
@@ -2249,6 +2419,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code>Property <span class="s1">'PropertyName'</span> created with value <span class="s1">'PropertyValue'</span>
 </code></pre>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <p>Defines a property on a specific job instance.</p>
 
@@ -2283,7 +2456,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <h2 id="list-all-modifications">List all modifications</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/revisions'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span> 
+      -u <span class="s1">'username:password'</span>
 </code></pre>
 
 <blockquote>
@@ -2318,6 +2491,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Lists the config repository modifications.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/config/revisions</code></p>
@@ -2329,7 +2505,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <h2 id="get-repository-modification-diff">Get repository modification diff</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/diff/d2f9091145e2e4b3b22d938c4819610467ae20c1/f27b48594645c9f15f55bb56d0100dd60e4cbacc'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span> 
+      -u <span class="s1">'username:password'</span>
 </code></pre>
 
 <blockquote>
@@ -2353,6 +2529,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Gets the diff between two config repository modifications.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/config/:from_commit_sha/:to_commit_sha</code></p>
@@ -2364,7 +2543,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <h2 id="get-configuration">Get configuration</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/5059cf548db9ea2d1b9192b45529ccf0.xml'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span> 
+      -u <span class="s1">'username:password'</span>
 </code></pre>
 
 <blockquote>
@@ -2372,9 +2551,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="nt">&lt;cruise</span> 
-    <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> 
-    <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">"cruise-config.xsd"</span> 
+<span class="nt">&lt;cruise</span>
+    <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+    <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">"cruise-config.xsd"</span>
     <span class="na">schemaVersion=</span><span class="s">"75"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;server</span> <span class="na">serverId=</span><span class="s">"9C0C0282-A554-457D-A0F8-9CF8A754B4AB"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;security&gt;</span>
@@ -2386,6 +2565,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </code></pre>
 
 <p>Gets the configuration with the specified version.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2405,7 +2587,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <h3 id="returns">Returns</h3>
 
-<p>The contents of the configuration file with the specified revision. </p>
+<p>The contents of the configuration file with the specified revision.</p>
 
 <h2 id="create-pipeline">Create pipeline</h2>
 
@@ -2430,7 +2612,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Creates a pipeline. </p>
+<p>Creates a pipeline.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2674,7 +2859,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <h3 id="returns">Returns</h3>
 
-<p>A text confirmation. </p>
+<p>A text confirmation.</p>
 
           <h1 id="feeds">Feeds</h1>
 
@@ -2702,6 +2887,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </code></pre>
 
 <p>Lists all pipelines.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2776,6 +2964,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Gets feed of all stages for the specified pipeline with links to the pipeline and stage details.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/stages.xml</code></p>
@@ -2824,6 +3015,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Gets XML representation of pipeline.</p>
 
+<h3>Available since v14.3.0.
+</h3>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/:pipeline_id.xml</code></p>
@@ -2861,6 +3055,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </code></pre>
 
 <p>Gets XML representation of stage.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2920,6 +3117,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </code></pre>
 
 <p>Gets XML representation of job.</p>
+
+<h3>Available since v14.3.0.
+</h3>
 
 <h3 id="http-request">HTTP Request</h3>
 
