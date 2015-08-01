@@ -21,3 +21,10 @@ blockquote + .highlight {
     @extend %icon-info-sign;
   }
 }
+
+
+.version-switcher {
+  padding: 0 15px 0 15px;
+  color: #fff;
+  width: 100%;
+}
