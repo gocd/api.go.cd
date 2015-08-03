@@ -25,6 +25,8 @@ blockquote + .highlight {
 
 .version-switcher {
   padding: 0 15px 0 15px;
-  color: #fff;
   width: 100%;
+  span {
+    color: #fff;
+  }
 }
