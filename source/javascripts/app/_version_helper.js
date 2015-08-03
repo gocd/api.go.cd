@@ -26,12 +26,11 @@ $(function() {
       var isCurrentlyDisplayed = (elem.type === 'latest' && currentUrlContains('/current/')) || currentUrlContains("/" + elem.version + "/")
 
       var optionElem = $('<option>').attr({
-        label: optionText,
         value: elem.version,
         selected: isCurrentlyDisplayed,
         'data-url': elem.location,
         'data-oldsite': elem.old_site
-      });
+      }).text(optionText);
 
       versionSwitcher.append(optionElem);
     });
