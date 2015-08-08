@@ -37,7 +37,7 @@ Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-201
 }
 ```
 
-To use Basic Authentication with the GitHub API, simply send the username and password associated with the account.
+To use Basic Authentication with the Go API, simply send the username and password associated with the account.
 
 ## Cookie/Session authentication
 
