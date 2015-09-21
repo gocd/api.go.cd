@@ -22,6 +22,7 @@ includes:
   - 120-properties
   - 130-configuration
   - 140-feeds
+  - 150-dashboard
   - errors
 
 search: true
