@@ -37,7 +37,7 @@ set :relative_links, true
 
 # Build Configuration
 configure :build do
-  set :build_dir, "build/15.3.0"
+  set :build_dir, "build/15.2.0"
 
   activate :minify_css
   activate :minify_javascript
