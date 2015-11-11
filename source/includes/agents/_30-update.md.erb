@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: application/vnd.go.cd.v2+json' \
       -H 'Content-Type: application/json' \
       -X PATCH \
       -d '{
@@ -15,7 +15,7 @@ $ curl 'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4d
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
 ```
 
 ```json
@@ -64,6 +64,7 @@ Atleast one of the following properties must be specified, not specifying the pr
   describe_object(nil) do
     hostname  'String',            'The new hostname'
     resources ['String', 'Array'], 'A comma separated strings of resources, or an array of string resources'
+    environments ['String', 'Array'], 'A comma separated strings of environments, or an array of string environments'
     enabled   'Boolean',           'Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents.'
   end
  %>
