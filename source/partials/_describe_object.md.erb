@@ -4,8 +4,10 @@
 
 <%= available_since(object.__options[:since]) %>
 
+<p class='attributes-table-follows'></p>
+
 |Attribute             |Type                   |Description                  |
 |----------------------|-----------------------|-----------------------------|
 <% object.properties.each do |property| -%>
-| <%= property.name %> | <%= describe_property_type(property) %> | <%= describe_property(property) %>  |
+| `<%= property.name %>` | <%= describe_property_type(property) %> | <%= describe_property(property) %>  |
 <% end -%>

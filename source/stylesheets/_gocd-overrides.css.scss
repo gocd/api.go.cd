@@ -30,3 +30,11 @@ blockquote + .highlight {
     color: #fff;
   }
 }
+
+.attributes-table-follows {
+  + table tbody tr {
+    code {
+      word-break: normal;
+    }
+  }
+}
