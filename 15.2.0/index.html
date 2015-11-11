@@ -145,6 +145,8 @@
 <h3>Available since v15.2.0.
 </h3>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -153,52 +155,52 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>uuid</td>
+<td><code class="prettyprint">uuid</code></td>
 <td>String</td>
 <td>The identifier of this agent.</td>
 </tr>
 <tr>
-<td>hostname</td>
+<td><code class="prettyprint">hostname</code></td>
 <td>String</td>
 <td>The hostname of the agent.</td>
 </tr>
 <tr>
-<td>ip_address</td>
+<td><code class="prettyprint">ip_address</code></td>
 <td>String</td>
 <td>The IP address of the agent.</td>
 </tr>
 <tr>
-<td>enabled</td>
+<td><code class="prettyprint">enabled</code></td>
 <td>Boolean</td>
 <td>Whether the agent is enabled or not.</td>
 </tr>
 <tr>
-<td>sandbox</td>
+<td><code class="prettyprint">sandbox</code></td>
 <td>String</td>
 <td>The path where the agent will perform its builds.</td>
 </tr>
 <tr>
-<td>status</td>
+<td><code class="prettyprint">status</code></td>
 <td>String</td>
 <td>The status of the agent. Can be one of <code class="prettyprint">Pending</code>, <code class="prettyprint">LostContact</code>, <code class="prettyprint">Missing</code>, <code class="prettyprint">Building</code>, <code class="prettyprint">Cancelled</code>, <code class="prettyprint">Idle</code>, <code class="prettyprint">Disabled</code>.</td>
 </tr>
 <tr>
-<td>operating_system</td>
+<td><code class="prettyprint">operating_system</code></td>
 <td>String</td>
 <td>The operating system as reported by the agent.</td>
 </tr>
 <tr>
-<td>free_space</td>
+<td><code class="prettyprint">free_space</code></td>
 <td>Integer</td>
 <td>The amount of free space in bytes.</td>
 </tr>
 <tr>
-<td>resources</td>
+<td><code class="prettyprint">resources</code></td>
 <td>Array</td>
 <td>The set of resources that this agent is tagged with.</td>
 </tr>
 <tr>
-<td>environments</td>
+<td><code class="prettyprint">environments</code></td>
 <td>Array</td>
 <td>The set of environments that this agent belongs to.</td>
 </tr>
@@ -400,6 +402,8 @@
 
 <p>Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.</p>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -408,17 +412,17 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>hostname</td>
+<td><code class="prettyprint">hostname</code></td>
 <td>String</td>
 <td>The new hostname.</td>
 </tr>
 <tr>
-<td>resources</td>
-<td>String &#124; Array</td>
+<td><code class="prettyprint">resources</code></td>
+<td><code class="prettyprint">String</code> &#124; <code class="prettyprint">Array</code></td>
 <td>A comma separated strings of resources, or an array of string resources.</td>
 </tr>
 <tr>
-<td>enabled</td>
+<td><code class="prettyprint">enabled</code></td>
 <td>Boolean</td>
 <td>Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents.</td>
 </tr>
@@ -554,6 +558,8 @@
 <h3>Available since v15.2.0.
 </h3>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -562,32 +568,32 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>login_name</td>
+<td><code class="prettyprint">login_name</code></td>
 <td>String</td>
 <td>The user&rsquo;s login name.</td>
 </tr>
 <tr>
-<td>display_name</td>
+<td><code class="prettyprint">display_name</code></td>
 <td>String</td>
 <td>The user&rsquo;s display name.</td>
 </tr>
 <tr>
-<td>enabled</td>
+<td><code class="prettyprint">enabled</code></td>
 <td>Boolean</td>
 <td>Boolean indicating if the user is enabled (can login in).</td>
 </tr>
 <tr>
-<td>email</td>
+<td><code class="prettyprint">email</code></td>
 <td>String</td>
 <td>The user&rsquo;s email address.</td>
 </tr>
 <tr>
-<td>email_me</td>
+<td><code class="prettyprint">email_me</code></td>
 <td>Boolean</td>
 <td>Boolean indicating if the user has signed up for email notifications.</td>
 </tr>
 <tr>
-<td>checkin_aliases</td>
+<td><code class="prettyprint">checkin_aliases</code></td>
 <td>Array</td>
 <td>A list of SCM checkin aliases to map users to SCM commits.</td>
 </tr>
@@ -767,6 +773,8 @@
 
 <p>Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.</p>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -775,22 +783,22 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>enabled</td>
+<td><code class="prettyprint">enabled</code></td>
 <td>Boolean</td>
 <td>Boolean indicating if the user is enabled (can login in).</td>
 </tr>
 <tr>
-<td>email</td>
+<td><code class="prettyprint">email</code></td>
 <td>String</td>
 <td>The user&rsquo;s email address.</td>
 </tr>
 <tr>
-<td>email_me</td>
+<td><code class="prettyprint">email_me</code></td>
 <td>Boolean</td>
 <td>Boolean indicating if the user should be signed up for email notifications.</td>
 </tr>
 <tr>
-<td>checkin_aliases</td>
+<td><code class="prettyprint">checkin_aliases</code></td>
 <td>Array</td>
 <td>A list of SCM checkin aliases to map users to SCM commits.</td>
 </tr>
@@ -857,6 +865,8 @@
 <h3>Available since v14.3.0.
 </h3>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -865,17 +875,17 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>description</td>
+<td><code class="prettyprint">description</code></td>
 <td>String</td>
 <td>The description of the material.</td>
 </tr>
 <tr>
-<td>fingerprint</td>
+<td><code class="prettyprint">fingerprint</code></td>
 <td>String</td>
 <td>The fingerprint of the material.</td>
 </tr>
 <tr>
-<td>type</td>
+<td><code class="prettyprint">type</code></td>
 <td>String</td>
 <td>The type of a material. Can be one of <code class="prettyprint">Git</code>, <code class="prettyprint">Mercurial</code>, <code class="prettyprint">Perforce</code>, <code class="prettyprint">Subversion</code>, <code class="prettyprint">Tfs</code>, <code class="prettyprint">Pipeline</code>, <code class="prettyprint">SCM</code>.</td>
 </tr>
@@ -1005,6 +1015,8 @@
 
 <p>The following post parameters must be specified.</p>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1013,7 +1025,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>uuid</td>
+<td><code class="prettyprint">uuid</code></td>
 <td>String</td>
 <td>The subversion repository UUID.</td>
 </tr>
@@ -1075,6 +1087,8 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 
 <p>The following post parameters must be specified.</p>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1083,7 +1097,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>repository_url</td>
+<td><code class="prettyprint">repository_url</code></td>
 <td>String</td>
 <td>The git repository url as defined in <code class="prettyprint">cruise-config.xml</code>.</td>
 </tr>
@@ -1116,6 +1130,8 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 <h3>Available since v15.2.0.
 </h3>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1124,17 +1140,17 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>time</td>
+<td><code class="prettyprint">time</code></td>
 <td>DateTime</td>
 <td>The time of the backup.</td>
 </tr>
 <tr>
-<td>path</td>
+<td><code class="prettyprint">path</code></td>
 <td>String</td>
 <td>The filesystem location of the backup.</td>
 </tr>
 <tr>
-<td>user</td>
+<td><code class="prettyprint">user</code></td>
 <td>Object</td>
 <td>The user that performed this backup.</td>
 </tr>
@@ -1273,6 +1289,8 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 <h3>Available since v14.3.0.
 </h3>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1281,22 +1299,22 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td><code class="prettyprint">name</code></td>
 <td>String</td>
 <td>The basename of the file/folder.</td>
 </tr>
 <tr>
-<td>url</td>
+<td><code class="prettyprint">url</code></td>
 <td>String</td>
 <td>The URL to the artifact.</td>
 </tr>
 <tr>
-<td>type</td>
+<td><code class="prettyprint">type</code></td>
 <td>String</td>
 <td>The type of the artifact. Can be one of <code class="prettyprint">file</code>, <code class="prettyprint">folder</code>.</td>
 </tr>
 <tr>
-<td>files</td>
+<td><code class="prettyprint">files</code></td>
 <td>Array</td>
 <td>If the artifact is of type <code class="prettyprint">folder</code> then this property will contain files/folders inside this folder.</td>
 </tr>
@@ -1442,6 +1460,8 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 
 <p>The following form parameter must be specified</p>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1450,7 +1470,7 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 </tr>
 </thead><tbody>
 <tr>
-<td>file</td>
+<td><code class="prettyprint">file</code></td>
 <td>String</td>
 <td>The contents file to be uploaded as <code class="prettyprint">multipart/form-data</code>.</td>
 </tr>
@@ -1809,6 +1829,8 @@ File logs/operations.log was appended successfully
 
 <p>The following post parameters must be specified.</p>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -1817,7 +1839,7 @@ File logs/operations.log was appended successfully
 </tr>
 </thead><tbody>
 <tr>
-<td>pauseCause</td>
+<td><code class="prettyprint">pauseCause</code></td>
 <td>String</td>
 <td>Reason for pausing the pipeline.</td>
 </tr>
@@ -2434,6 +2456,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>The following post parameter must be specified :</p>
 
+<p class='attributes-table-follows'></p>
+
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -2442,7 +2466,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </thead><tbody>
 <tr>
-<td>value</td>
+<td><code class="prettyprint">value</code></td>
 <td>String</td>
 <td>The value of property.</td>
 </tr>
