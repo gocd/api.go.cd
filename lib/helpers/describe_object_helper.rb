@@ -59,7 +59,7 @@ module DescribeObjectHelper
     type = property.type
 
     if type.is_a?(Array)
-      type.join(" &#124; ")
+      type.collect {|t| "`#{t}`" }.join(" &#124; ")
     else
       type
     end
