@@ -1,0 +1,110 @@
+## Get stage instance
+
+```shell
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/2/myStage/2' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/stages/myPipeline/2/myStage/2"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#get-stage-instance"
+    }
+  },
+  "name": "myStage",
+  "result": "Passed",
+  "counter": 2,
+  "stage_type": "success",
+  "rerun_of": {
+    "_links": {
+      "self": {
+        "href": "https://ci.example.com/go/api/stages/myPipeline/2/myStage/1"
+      },
+      "doc": {
+        "href": "http://api.go.cd/#get-stage-instance"
+      }
+    },
+    "name"   : "myStage",
+    "counter": 1
+  },
+  "triggered_by": {
+    "_links": {
+      "doc": {
+        "href": "http://api.go.cd/#users"
+      },
+      "self": {
+        "href": "https://ci.example.com/go/api/users/admin"
+      },
+      "find": {
+        "href": "https://ci.example.com/go/api/users/:login_name"
+      }
+    },
+    "login_name": "admin"
+  },
+  "pipeline": {
+    "_links": {
+      "doc": {
+        "href": "http://api.go.cd/#pipelines"
+      }
+    },
+    "name": "myPipeline",
+    "counter": 2,
+    "label": "2"
+  },
+  "_embedded": {
+    "jobs": [
+      {
+        "_links": {
+          "doc": {
+            "href": "http://api.go.cd/#jobs"
+          }
+        },
+        "name": "job1",
+        "scheduled_at": "2015-07-31T12:30:54.352Z",
+        "result": "Passed",
+        "state": "Completed"
+      },
+      {
+        "_links": {
+          "doc": {
+            "href": "http://api.go.cd/#jobs"
+          }
+        },
+        "name": "job2",
+        "scheduled_at": "2015-07-31T12:30:01.395Z",
+        "result": "Passed",
+        "state": "Completed"
+      }
+    ]
+  }
+}
+```
+
+Gets stage instance object.
+
+<%=
+available_since('15.3.0') do
+  in_version '15.2.0', url: 'http://api.go.cd/15.2.0/#get-stage-instance'
+  in_version '15.1.0', url: 'http://www.go.cd/documentation/user/15.1.0/api/stages_api.html#stage-instance'
+end
+%>
+
+### HTTP Request
+
+`GET /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter`
+
+### Returns
+
+A stage instance object.

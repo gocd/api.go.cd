@@ -1,0 +1,12 @@
+<%=
+describe_object 'The stage object', since: '15.3.0' do
+  name              'String',            'The name of the stage'
+  result            'String',            'The result of the specific stage run', one_of: %w(Passed Failed Cancelled Unknown)
+  counter           'String',            'The run number of the specified stage'
+  stage_type        'String',            'The type of the stage trigger.Can be Manual or on success'
+  rerun_of          'Object',            'The stage which was a re-run.'
+  triggered_by      'String/Object',     'The cause of the stage run. Can be User object if triggered manually by User or changes'
+  pipeline          'Object',            'The [pipeline](#pipelines) to which specified stage belongs to'
+  jobs              'Array',             'The set of [jobs](#jobs) in the specified stage'
+end
+%>
