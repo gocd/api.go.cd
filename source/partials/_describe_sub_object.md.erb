@@ -1,13 +1,15 @@
-<% unless object.__name.blank? -%>
-## <%= object.__name %>
+<% unless object.__options[:html_id].blank? %>
+<a id='<%= object.__options[:html_id]%>'></a>
+<% else raise object.__name %>
 <% end -%>
 
-<%= available_since(object.__options[:since]) %>
-
+<% unless object.__name.blank? -%>
+### <%= object.__name %>
+<% end -%>
 
 <% if !object.__options[:json].nil? %>
 ```json
-<%=  object.__options[:json] %>
+<%= JSON.pretty_generate(object.__options[:json]) %>
 ```
 <% end %>
 

@@ -2,11 +2,11 @@ module DescribeObjectHelper
   class ObjectDescription
     # `__name`, because the object can have a property called `name`
     # which causes problems because of the method_missing
-    attr_reader :__name, :__options, :properties
+    attr_reader :__name, :__options, :__properties
     def initialize(name, options={})
       @__name = name
       @__options = options
-      @properties  = []
+      @__properties  = []
     end
 
     def method_missing(method, *args)
@@ -17,7 +17,15 @@ module DescribeObjectHelper
       type        = args.first
       description = args.last
 
-      @properties << PropertyDescription.new(name, type, description, options)
+      __add_property(name, type, description, options)
+    end
+
+    def __add_property(name, type, description, options={})
+      @__properties << PropertyDescription.new(name, type, description, options)
+    end
+
+    def timeout(type, description, options={})
+      __add_property('timeout', type, description, options)
     end
 
     def template_file
@@ -33,7 +41,6 @@ module DescribeObjectHelper
       @description = description
       @options     = options
     end
-
   end
 
   def describe_object(name, options={}, &block)
@@ -41,6 +48,13 @@ module DescribeObjectHelper
     object.instance_eval(&block)
 
     partial('partials/describe_object.md.erb', locals: {object: object})
+  end
+
+  def describe_sub_object(name, options={}, &block)
+    object = ObjectDescription.new(name, options)
+    object.instance_eval(&block)
+
+    partial('partials/describe_sub_object.md.erb', locals: {object: object})
   end
 
   def describe_property(property)

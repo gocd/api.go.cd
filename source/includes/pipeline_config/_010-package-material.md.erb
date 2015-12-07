@@ -1,0 +1,18 @@
+<%
+json = {
+  materials: [
+    {
+      type: 'package',
+      attributes: {
+        ref: 'e289f497-057b-46bc-bb69-8043454f5c1b'
+      }
+    }
+  ]
+}
+
+%>
+<%=
+describe_sub_object 'The package material attributes', json: json, html_id: 'pipeline-config-package-material' do
+  ref 'String', 'The unique package repository id.'
+end
+%>

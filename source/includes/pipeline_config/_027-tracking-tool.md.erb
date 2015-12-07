@@ -1,0 +1,50 @@
+<%
+json = {
+  tracking_tool: {
+    type: 'generic',
+    attributes: {
+      link: 'https://github.com/gocd/api.go.cd/issues/${ID}',
+      regex: '##(d+)'
+    }
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The tracking tool object', json: json, html_id: 'pipeline-config-tracking-tool-object' do
+  type                    'String', 'The type of the tracking tool.', one_of: %w(mingle generic)
+  attributes              'Object', 'The attributes of the tracking tool. See attributes for [generic](#pipeline-config-tracking-tool-generic) and [mingle](#pipeline-config-tracking-tool-mingle) tracking tools.'
+end
+%>
+
+<%
+json = {
+  attributes: {
+    link: 'https://github.com/gocd/api.go.cd/issues/${ID}',
+    regex: '##(d+)'
+  }
+}
+%>
+<%=
+describe_sub_object 'The generic tracking tool object', json: json, html_id: 'pipeline-config-tracking-tool-generic' do
+  link                    'String', 'In generic tracking tool, the URI to your tracking tool.'
+  regex                   'String', 'In generic tracking tool, the regular expression to identify card or bug numbers from your checkin comments.'
+end
+%>
+
+<%
+json = {
+  attributes: {
+    base_url: 'https://mingle.example.com',
+    project_identifier: 'foobar_widgets',
+    mql_grouping_conditions: "status > 'In Dev'"
+  }
+}
+%>
+<%=
+describe_sub_object 'The mingle tracking tool object', json: json, html_id: 'pipeline-config-tracking-tool-mingle' do
+  base_url                'String', 'The base URL of the Mingle server.'
+  project_identifier      'String', "The project identfier can be found under the mingle project's **Project admin** tab in the section titled **Basic Information**."
+  mql_grouping_conditions 'String', "The MQL string that determines the 'passing criteria' for cards displayed."
+end
+%>

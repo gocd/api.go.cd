@@ -1,0 +1,30 @@
+<%
+json = {
+  tasks: [
+    {
+      type: 'fetch',
+      attributes: {
+        run_if: ['passed'],
+        pipeline: 'upstream',
+        stage: 'upstream_stage',
+        job: 'upstream_job',
+        is_source_a_file: false,
+        source: 'result',
+        destination: 'test'
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The fetch task attributes', json: json, html_id: 'pipeline-config-fetch-task' do
+  run_if           'Array',   'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
+  pipeline         'String',  'The name of direct upstream pipeline or ancestor pipeline of one of the upstream pipelines on which the pipeline of the job depends on. '
+  stage            'String',  'The name of the stage to fetch artifacts from.'
+  job              'String',  'The name of the job to fetch artifacts from.'
+  source           'String',  'The path of the artifact directory or file of a specific job, relative to the sandbox directory. If the directory or file does not exist, the job is failed.'
+  is_source_a_file 'Boolean', 'Whether source is a file or directory.'
+  destination      'String',  'The path of the directory where the artifact is fetched to.'
+  on_cancel        'Object',  'The [task](#pipeline-config-task) specifies a task to execute when a stage is cancelled.'
+end
+%>

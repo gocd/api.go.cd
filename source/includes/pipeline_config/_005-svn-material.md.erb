@@ -1,0 +1,33 @@
+<%
+json = {
+  materials: [
+    {
+      type: 'svn',
+      attributes: {
+        name: 'svn',
+        url: 'svn://svn.example.com/myProject/trunk',
+        username: 'admin',
+        encrypted_password: 'aSdiFgRRZ6A=',
+        destination: 'myProject',
+        filter: nil,
+        auto_update: true,
+        check_externals: true,
+      }
+    }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The subversion material attributes', json: json, html_id: 'pipeline-config-svn-material' do
+  name                'String',  'The name of this material.'
+  url                 'String',  'The URL of the subversion repository.'
+  username            'String',  'The user account for the remote repository.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+  destination         'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  filter              'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  check_externals     'Boolean', 'Whether the changes o the externals will trigger the pipeline automatically or not.'
+end
+%>

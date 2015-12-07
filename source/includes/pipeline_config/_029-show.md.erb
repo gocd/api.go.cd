@@ -1,0 +1,139 @@
+## Get pipeline config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
+      -u 'username:password' \
+      -H 'If-Match' -i \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/pipelines/my_pipeline"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#pipeline_config"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/pipelines/:name"
+    }
+  },
+  "label_template": "${COUNT}",
+  "enable_pipeline_locking": false,
+  "name": "my_pipeline",
+  "template": null,
+  "params": [],
+  "environment_variables": [],
+  "materials": [
+    {
+      "type": "git",
+      "attributes": {
+        "url": "git@github.com:example/sample_repo.git",
+        "destination": "code",
+        "filter": {
+            "ignore": [
+                    "**/*.*",
+                    "**/*.html"
+            ]
+        },
+        "name": "git",
+        "auto_update": true,
+        "branch": "master",
+        "submodule_folder": null
+      }
+    }
+  ],
+  "stages": [
+    {
+      "name": "my_stage",
+      "fetch_materials": true,
+      "clean_working_directory": false,
+      "never_cleanup_artifacts": false,
+      "approval": {
+        "type": "success",
+        "authorization": {
+          "roles": [],
+          "users": []
+        }
+      },
+      "environment_variables": [],
+      "jobs": [
+        {
+          "name": "my_job",
+          "run_instance_count": null,
+          "timeout": 0,
+          "environment_variables": [],
+          "resources": [
+                "Linux",
+                "Java"
+          ],
+          "tasks": [
+            {
+              "type": "exec",
+              "attributes": {
+                "run_if": [
+                  "passed"
+                ],
+                "on_cancel": {
+                  "type": "exec",
+                  "attributes": {
+                    "command": "ls",
+                    "working_directory": null
+                  }
+                },
+                "command": "sleep",
+                "arguments": [
+                  "10"
+                ],
+                "working_directory": null
+              }
+            }
+         ],
+          "tabs": [
+            {
+              "name": "cobertura",
+              "path": "target/site/cobertura/*.xml"
+            }
+          ],
+          "artifacts": [
+            {
+              "source": "target",
+              "destination": "result",
+              "type": "build"
+            },
+            {
+              "source": "test",
+              "destination": "res1",
+              "type": "test"
+            }
+          ],
+          "properties": null
+        }
+      ]
+    }
+  ],
+  "tracking_tool": null,
+  "timer": null
+}
+```
+
+Gets pipeline config for specified pipeline name.
+
+<%= available_since('15.3.0') %>
+
+### HTTP Request
+
+`GET /go/api/admin/pipelines/:pipeline_name`
+
+### Returns
+
+The [pipeline config object](#the-pipeline-config-object).

@@ -1,0 +1,28 @@
+<%
+json = {
+  jobs: [
+    {
+      name: 'my_job',
+      run_instance_count: nil,
+      timeout: 0,
+      environment_variables: [],
+      resources: %w(Linux Java),
+      tasks: []
+    }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The job object', json: json, html_id: 'pipeline-config-jobs' do
+  name                  'String',        'The name of the job.'
+  run_instance_count    'Number/String', 'The number of jobs to run. If set to `null` (default), one job will be created. If set to the literal string `all`, the job will be run on all agents. If set to a positive integer, the specified number of jobs will be created.', one_of: %w(null Integer all)
+  timeout               'Number',        'The time period(in minute) after which the job will be terminated by go if it has not generated any output.'
+  environment_variables 'Array',         'The list of [environment variables](#pipeline-config-environment-variables) defined here are set on the agents and can be used within your tasks.'
+  resources             'Array',         'The list of (String) resources that specifies the resource which the job requires to build.'
+  tasks                 'Array',         'The list of [tasks](#pipeline-config-task) that will run as part of the job.'
+  tabs                  'Array',         'The list of [tabs](#the-tab-object) which let you add custom tabs within the job details page.'
+  artifacts             'Array',         'The list of [artifacts](#the-pipeline-config-artifact-object) specifies what files the agent will publish to the server.'
+  properties            'Array',         'The list of [properties](#the-property-object) of the build from XML files or artifacts created during your build.'
+end
+%>

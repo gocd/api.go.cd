@@ -1,0 +1,25 @@
+<%
+json = {
+  materials: [
+    {
+      type: 'hg',
+      attributes: {
+        name: 'api-docs',
+        url: 'http://username:password@hg.example.com/hg/api.go.cd',
+        destination: 'api-docs',
+        filter: nil,
+        auto_update: true
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The mercurial material attributes', json: json, html_id: 'pipeline-config-hg-material' do
+  name        'String',  'The name of this material.'
+  url         'String',  'The URL of the mercurial repository.'
+  destination 'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  filter      'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  auto_update 'Boolean', 'Whether to poll for new changes or not.'
+end
+%>

@@ -1,0 +1,26 @@
+<%
+json = {
+  tasks: [
+    {
+      type: 'nant',
+      attributes: {
+        run_if: ['passed'],
+        working_directory: 'script/build/123',
+        build_file: nil,
+        target: nil,
+        nant_path: nil
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The nant task attributes', json: json, html_id: 'pipeline-config-nant-task' do
+  run_if            'Array',  'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
+  build_file        'String', 'The path to NAnt build file.'
+  target            'String', 'The NAnt target(s) to run.'
+  nant_path         'String', 'This is the directory where the `nant.exe` executable is located. By default Go will look for `nant.exe` in the `PATH`.'
+  working_directory 'String', 'The directory in which NAnt is invoked.'
+  on_cancel         'Object', 'The [task](#pipeline-config-task) specifies a task to execute when a stage is cancelled.'
+end
+%>

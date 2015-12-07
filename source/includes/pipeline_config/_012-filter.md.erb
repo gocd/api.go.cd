@@ -1,0 +1,12 @@
+<%
+json = {
+  filter: {
+    ignore: %w(README.md docs/**.html)
+  }
+}
+%>
+<%=
+describe_sub_object 'The filter object', json: json, html_id: 'pipeline-config-filter-object' do
+  ignore               'String',         'The pattern for the files to be ignored.'
+end
+%>

@@ -1,0 +1,34 @@
+<%
+json = {
+  materials: [
+    {
+      type: 'tfs',
+      attributes: {
+        name: 'tfs',
+        url: 'http://tfs.exampe.com:8000/tfs',
+        project_path: '$/',
+        domain: 'corporate/domain',
+        username: 'admin',
+        encrypted_password: 'aSdiFgRRZ6A=',
+        destination: 'tfs_destination',
+        auto_update: true,
+        filter: nil,
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The tfs material attributes', json: json, html_id: 'pipeline-config-tfs-material' do
+  name                'String',  'The name of this material.'
+  url                 'String',  'The URL for the Collection on the TFS Server.'
+  project_path        'String',  'The project path within the TFS collection.'
+  domain              'String',  'The domain name for TFS authentication credentials.'
+  username            'String',  'The username of the account to access the TFS collection'
+  password            'String',  'The password of the account to access the TFS collection.'
+  encrypted_password  'String',  'The encrypted password of the account to access the TFS collection.'
+  destination         'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  filter              'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+end
+%>

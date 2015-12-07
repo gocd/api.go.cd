@@ -1,0 +1,32 @@
+<%
+json = {
+  materials: [
+    {
+      type: 'git',
+      attributes: {
+        name: 'api-docs',
+        url: 'https://github.com/gocd/api.go.cd',
+        branch: 'master',
+        destination: 'api.go.cd',
+        auto_update: true,
+        filter: {
+          ignore: %w(**/*.xml **/*.html)
+        },
+        submodule_folder: nil
+      }
+    }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The git material attributes', json: json, html_id: 'pipeline-config-git-material' do
+  name             'String',  'The name of this material.'
+  url              'String',  'The URL of the git repository.'
+  branch           'String',  'The git branch to build.'
+  destination      'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  auto_update      'Boolean', 'Whether to poll for new changes or not.'
+  filter           'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  submodule_folder 'String',  'The git submodule in the git repository.'
+end
+%>

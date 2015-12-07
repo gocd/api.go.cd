@@ -1,0 +1,25 @@
+<%
+json = {
+  tasks: [
+    {
+      type: 'rake',
+      attributes: {
+        run_if: ['passed'],
+        working_directory: 'sample-project',
+        build_file: nil,
+        target: nil
+      }
+    }
+  ]
+}
+
+%>
+<%=
+describe_sub_object 'The rake task attributes', json: json, html_id: 'pipeline-config-rake-task' do
+  run_if            'Array',  'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
+  build_file        'String', 'The path to rake file. If not specified, the path defaults to `rakefile`'
+  target            'String', 'The rake target(s) to run. If not specified, rake runs the `default` target in the file specified by `build_file`.'
+  working_directory 'String', 'The directory from which rake is invoked.'
+  on_cancel         'Object', 'The [task](#pipeline-config-task) specifies a task to execute when a stage is cancelled.'
+end
+%>

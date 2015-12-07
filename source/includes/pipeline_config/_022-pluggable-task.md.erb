@@ -1,0 +1,28 @@
+<%
+json = {
+  tasks: [
+    {
+      type: 'pluggable_task',
+      attributes: {
+        configuration: [
+          { key: 'ConverterType', value: 'jsunit' }
+        ],
+        run_if: ['passed'],
+        plugin_configuration: {
+          id: 'xunit.converter.task.plugin',
+          version: '1'
+        },
+        on_cancel: nil
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The pluggable task object', json: json, html_id: 'pipeline-config-pluggable-task' do
+  run_if               'Array',  'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
+  plugin_configuration 'Object', 'The plugin configuration contains `id` of the plugin and `version` number.'
+  configuration        'Array',  'A list of `key`-`value` pairs which defines the plugin configuration.'
+  on_cancel            'Object', 'The [task](#pipeline-config-task) specifies a task to execute when a stage is cancelled.'
+end
+%>

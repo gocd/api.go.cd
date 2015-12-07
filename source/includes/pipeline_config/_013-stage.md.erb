@@ -1,0 +1,32 @@
+<%
+json = {
+  stages: [
+    {
+      name: 'my_stage',
+      fetch_materials: true,
+      clean_working_directory: false,
+      never_cleanup_artifacts: false,
+      approval: {
+        type: 'success',
+        authorization: {
+          roles: [],
+          users: []
+        }
+      },
+      environment_variables: [],
+      jobs: []
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The stage object', json: json, html_id: 'pipeline-config-stage-object' do
+  name                    'String',  'The name of the stage.'
+  fetch_materials         'Boolean', 'Whether to perform material update/checkout.'
+  clean_working_directory 'Boolean', 'Whether to delete the working directory every time.'
+  never_cleanup_artifacts 'Boolean', 'Never cleanup artifacts for this stage, if purging artifacts is configured at the Server Level.'
+  approval                'Object',  'The [approval](#pipeline-config-approval-object) specifies how stage should be triggered.',one_of: %w(manual success)
+  environment_variables   'Array',   'The list of of [environment variables](#pipeline-config-environment-variables) defined here are set on the agents and can be used within your stage.'
+  jobs                    'Array',   'The list of [jobs](#pipeline-config-jobs).'
+end
+%>

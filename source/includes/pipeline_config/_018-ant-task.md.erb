@@ -1,0 +1,24 @@
+<%
+json = {
+  tasks: [
+    {
+      type: 'ant',
+      attributes: {
+        run_if: ['passed'],
+        working_directory: 'script/build',
+        build_file: nil,
+        target: nil
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The ant task attributes', json: json, html_id: 'pipeline-config-ant-task' do
+  run_if            'Array',  'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
+  build_file        'String', 'The path to Ant build file.'
+  target            'String', 'The Ant target(s) to run.'
+  working_directory 'String', 'The directory in which Ant is invoked.'
+  on_cancel         'Object', 'The [task](#pipeline-config-task) specifies a task to execute when a stage is cancelled.'
+end
+%>
