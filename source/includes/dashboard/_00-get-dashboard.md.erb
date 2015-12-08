@@ -52,6 +52,9 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
                   "href": "https://ci.example.com/go/api/pipelines/first/schedule"
                 },
                 "trigger_with_options": {
+                  "href": "https://ci.example.com/go/api/pipelines/first/schedule"
+                },
+                "pause": {
                   "href": "https://ci.example.com/go/api/pipelines/first/pause"
                 },
                 "unpause": {
@@ -60,8 +63,11 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
               },
               "name": "first",
               "locked": true,
-              "paused_by": null,
-              "pause_reason": null,
+              "pause_info": {
+                "paused": false,
+                "paused_by": null,
+                "pause_reason": null
+              },
               "_embedded": {
                 "instances": [
                   {
