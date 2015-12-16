@@ -51,7 +51,7 @@ Lists the jobs that have executed on an agent.
 
 <%= available_since('14.3.0') %>
 
-### HTTP Request
+<p class='http-request-heading'>HTTP Request</p>
 
 `GET /go/api/agents/:uuid/job_run_history`
 
@@ -62,6 +62,6 @@ Lists the jobs that have executed on an agent.
 <aside class="notice">
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
 </aside>
-### Returns
+<p class='http-request-return-description'>Returns</p>
 
 An array of job objects along with the job transitions.

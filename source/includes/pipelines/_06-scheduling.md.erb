@@ -19,7 +19,7 @@ Scheduling allows user to trigger a specific pipeline.
 
 <%= available_since('14.3.0') %>
 
-### HTTP Request
+<p class='http-request-heading'>HTTP Request</p>
 
 `POST /go/api/pipelines/:pipeline_name/schedule`
 
@@ -36,6 +36,6 @@ no parameter                                                                  | 
 `secure_variables[PASSWORD]=new_password`                                     | Triggers a new instance of the specified pipeline with a parameterized secure environment variable. Pipeline-level secure environment variable `PASSWORD` will be set to `new_password`.
 
 
-### Returns
+<p class='http-request-return-description'>Returns</p>
 
 A text confirmation.

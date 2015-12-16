@@ -18,18 +18,17 @@ Pause the specified pipeline.
 
 <%= available_since('14.3.0') %>
 
-### HTTP Request
+<p class='http-request-heading'>HTTP Request</p>
 
 `POST /go/api/pipelines/:pipeline_name/pause`
 
 The following post parameters must be specified.
 
-###
 <%=
-    describe_object(nil) do
-      pauseCause  'String',            'Reason for pausing the pipeline.'
-    end
+  describe_object(nil) do
+    pauseCause  'String',            'Reason for pausing the pipeline.'
+  end
 %>
-### Returns
+<p class='http-request-return-description'>Returns</p>
 
 Nothing.
