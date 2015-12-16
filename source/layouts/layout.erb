@@ -31,6 +31,10 @@ under the License.
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
 
+    <% if development? %>
+      <%= javascript_include_tag  "development.js" %>
+    <% end %>
+
     <% if language_tabs %>
       <script>
         $(function() {

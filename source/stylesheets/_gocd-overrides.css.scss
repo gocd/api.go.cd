@@ -38,6 +38,15 @@ blockquote + .highlight {
     }
   }
 }
+.tocify-subheader {
+  .tocify-subheader {
+    .tocify-item > a {
+      // we don't display the 3rd level item, but the scrolling generates the links via `history.pushState`. See `_toc.js` for this
+      display: none;
+    }
+  }
+}
+
 .available-since {
   @extend %header-font;
   font-size: 14px;
@@ -51,4 +60,9 @@ blockquote + .highlight {
   @include text-shadow($main-embossed-text-shadow);
 
   @extend %left-col;
+}
+.content {
+  &>h3 {
+    clear: both;
+  }
 }
