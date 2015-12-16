@@ -1,15 +1,7 @@
-//= require ../lib/_jquery.webui-popover
-
 $(function() {
-  $('[data-popover]').webuiPopover({
-    trigger: 'hover',
-    animation: 'fade',
-    width: 300,
-  });
-
   var currentUrlContains = function(needle){
     return window.location.href.indexOf(needle) >= 0;
-  }
+  };
 
   // this URL is not available at development time, but it's available on production.
   // If you change this JS, make sure it does not break switching on old pages.
@@ -23,7 +15,7 @@ $(function() {
         optionText += ' (' + elem.type + ')';
       }
 
-      var isCurrentlyDisplayed = (elem.type === 'latest' && currentUrlContains('/current/')) || currentUrlContains("/" + elem.version + "/")
+      var isCurrentlyDisplayed = (elem.type === 'latest' && currentUrlContains('/current/')) || currentUrlContains("/" + elem.version + "/");
 
       var optionElem = $('<option>').attr({
         value: elem.version,
@@ -37,13 +29,13 @@ $(function() {
 
     versionSwitcher.on('change', function(e) {
       var currentPosition = window.location.hash;
-      var selectedElem = $(e.target).find(":selected")
+      var selectedElem = $(e.target).find(":selected");
       var location = selectedElem.attr('data-url');
       var oldSite = selectedElem.attr('data-oldsite');
       if (!oldSite) {
-        location = location + currentPosition
+        location = location + currentPosition;
       }
       window.location.href = location;
-    })
+    });
   });
-})
+});
