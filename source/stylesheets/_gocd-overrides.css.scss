@@ -38,6 +38,7 @@ blockquote + .highlight {
     }
   }
 }
+
 .tocify-subheader {
   .tocify-subheader {
     .tocify-item > a {
@@ -47,7 +48,7 @@ blockquote + .highlight {
   }
 }
 
-.available-since {
+.available-since, .http-request-heading, .http-request-return-description {
   @extend %header-font;
   font-size: 14px;
   margin-top: 2.5em;
@@ -61,6 +62,7 @@ blockquote + .highlight {
 
   @extend %left-col;
 }
+
 .content {
   &>h3 {
     clear: both;

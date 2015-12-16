@@ -20,7 +20,7 @@ Uploads a local file as an artifact.
 
 <%= available_since('14.3.0') %>
 
-### HTTP Request
+<p class='http-request-heading'>HTTP Request</p>
 
 `POST /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_file`
 
@@ -32,6 +32,6 @@ The following form parameter must be specified
   end
  %>
 
-### Returns
+<p class='http-request-return-description'>Returns</p>
 
 An acknowledgement that the file was created.

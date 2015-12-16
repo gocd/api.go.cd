@@ -88,7 +88,7 @@ The stage history allows users to list stage instances of specified stage. Suppo
 
 <%= available_since('14.3.0') %>
 
-### HTTP Request
+<p class='http-request-heading'>HTTP Request</p>
 
 `GET /go/api/stages/:pipeline_name/:stage_name/history`
 
@@ -99,6 +99,6 @@ The stage history allows users to list stage instances of specified stage. Suppo
 <aside class="notice">
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of stages to be skipped.
 </aside>
-### Returns
+<p class='http-request-return-description'>Returns</p>
 
 An array of stage instances.
