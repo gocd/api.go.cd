@@ -3382,6 +3382,2098 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>An array of pipelines on Dashboard.</p>
 
+          <h1 id="pipeline-config">Pipeline Config</h1>
+
+<p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
+
+<h2 id="the-pipeline-config-object">The pipeline config object</h2>
+
+<p class='available-since'>
+  Available since v15.3.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">label_template</code></td>
+<td>String</td>
+<td>The label template to customise the pipeline instance label. Both of material names and <code class="prettyprint">${COUNT}</code> are available in the <code class="prettyprint">label_template</code>. If not specified, <code class="prettyprint">label_template</code> defaults to <code class="prettyprint">${COUNT}</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">enable_pipeline_locking</code></td>
+<td>Boolean</td>
+<td>Whether pipeline is locked to run single instance or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">template</code></td>
+<td>String</td>
+<td>The name of the template used by pipeline. You MUST specify atleast one stage in <code class="prettyprint">stages</code>, or <code class="prettyprint">template</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">parameters</code></td>
+<td>Array</td>
+<td>The list of <a href="#pipeline-config-parameters">parameters</a> to be used for substitution in a pipeline or pipeline template.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">environment_variables</code></td>
+<td>Array</td>
+<td>The list of <a href="#pipeline-config-environment-variables">environment variables</a> that will be passed to all tasks (commands) that are part of this pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">materials</code></td>
+<td>Array</td>
+<td>The list of <a href="#pipeline-config-material-object">materials</a> to be used by pipeline. You MUST specify atleast one material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stages</code></td>
+<td>Array</td>
+<td>The list of <a href="#pipeline-config-stage-object">stages</a>. You MUST specify atleast one stage in <code class="prettyprint">stages</code>, or <code class="prettyprint">template</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">tracking_tool</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-tracking-tool-object">tracking tool</a> can be used to specify links to an issue tracker.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">timer</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-timer-object">timer</a> specifies cron-like schedule to build pipeline.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-parameters'></a></p>
+
+<h3 id="the-pipeline-parameter-object">The pipeline parameter object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VERSION"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.2.0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the parameter.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">value</code></td>
+<td>String</td>
+<td>The value of the parameter.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-environment-variables'></a></p>
+
+<h3 id="the-environment-variable-object">The environment variable object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USERNAME"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASSWORD"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"encrypted_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f3rrs9uhn63hd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SSH_PASSPHRASE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p@ssw0rd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the environment variable.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">value</code></td>
+<td>String</td>
+<td>The value of the environment variable. You MUST specify one of <code class="prettyprint">value</code> or <code class="prettyprint">encrypted_value</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_value</code></td>
+<td>String</td>
+<td>The encrypted value of the environment variable. You MUST specify one of <code class="prettyprint">value</code> or <code class="prettyprint">encrypted_value</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">secure</code></td>
+<td>Boolean</td>
+<td>Whether environment variable is secure or not. When set to <code class="prettyprint">true</code>, encrypts the <code class="prettyprint">value</code> if one is specified.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-material-object'></a></p>
+
+<h3 id="the-pipeline-material-object">The pipeline material object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of a material. Can be one of <code class="prettyprint">git</code>, <code class="prettyprint">svn</code>, <code class="prettyprint">hg</code>, <code class="prettyprint">p4</code>, <code class="prettyprint">tfs</code>, <code class="prettyprint">dependency</code>, <code class="prettyprint">package</code>, <code class="prettyprint">plugin</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">attributes</code></td>
+<td>Object</td>
+<td>The <a href="#the-git-material-attributes">attributes</a> for each material type.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-git-material'></a></p>
+
+<h3 id="the-git-material-attributes">The git material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api.go.cd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"ignore"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"**/*.xml"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"**/*.html"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of this material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>The URL of the git repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">branch</code></td>
+<td>String</td>
+<td>The git branch to build.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filter</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">submodule_folder</code></td>
+<td>String</td>
+<td>The git submodule in the git repository.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-svn-material'></a></p>
+
+<h3 id="the-subversion-material-attributes">The subversion material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"svn"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"svn"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"svn://svn.example.com/myProject/trunk"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myProject"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"check_externals"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of this material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>The URL of the subversion repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filter</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">check_externals</code></td>
+<td>Boolean</td>
+<td>Whether the changes o the externals will trigger the pipeline automatically or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-hg-material'></a></p>
+
+<h3 id="the-mercurial-material-attributes">The mercurial material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://username:password@hg.example.com/hg/api.go.cd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of this material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>The URL of the mercurial repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filter</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-p4-material'></a></p>
+
+<h3 id="the-perforce-material-attributes">The perforce material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p4"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p4.example.com:8080"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"use_tickets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_view"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of this material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">port</code></td>
+<td>String</td>
+<td>Perforce server connection to use (<code class="prettyprint">[transport:]host:port</code>).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">use_tickets</code></td>
+<td>Boolean</td>
+<td>Whether to work with the Perforce tickets or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">view</code></td>
+<td>String</td>
+<td>The Perforce view.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The username to be used.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filter</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-tfs-material'></a></p>
+
+<h3 id="the-tfs-material-attributes">The tfs material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tfs"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tfs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://tfs.exampe.com:8000/tfs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"project_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$/"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"corporate/domain"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tfs_destination"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of this material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>The URL for the Collection on the TFS Server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">project_path</code></td>
+<td>String</td>
+<td>The project path within the TFS collection.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">domain</code></td>
+<td>String</td>
+<td>The domain name for TFS authentication credentials.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The username of the account to access the TFS collection.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password of the account to access the TFS collection.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password of the account to access the TFS collection.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filter</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-dependency-material'></a></p>
+
+<h3 id="the-dependency-material-attributes">The dependency material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of this material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipeline</code></td>
+<td>String</td>
+<td>The name of a pipeline that this pipeline depends on.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stage</code></td>
+<td>String</td>
+<td>The name of a stage which will trigger this pipeline once it is successful.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-package-material'></a></p>
+
+<h3 id="the-package-material-attributes">The package material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e289f497-057b-46bc-bb69-8043454f5c1b"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ref</code></td>
+<td>String</td>
+<td>The unique package repository id.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-plugin-material'></a></p>
+
+<h3 id="the-plugin-material-attributes">The plugin material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plugin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5e3612f7-6aa1-4d75-a9b7-6aeb52d98012"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ref</code></td>
+<td>String</td>
+<td>The unique svn plugin repository id.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filter</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-filter-object'></a></p>
+
+<h3 id="the-filter-object">The filter object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ignore"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"README.md"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"docs/**.html"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ignore</code></td>
+<td>String</td>
+<td>The pattern for the files to be ignored.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-stage-object'></a></p>
+
+<h3 id="the-stage-object">The stage object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_stage"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the stage.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">fetch_materials</code></td>
+<td>Boolean</td>
+<td>Whether to perform material update/checkout.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">clean_working_directory</code></td>
+<td>Boolean</td>
+<td>Whether to delete the working directory every time.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">never_cleanup_artifacts</code></td>
+<td>Boolean</td>
+<td>Never cleanup artifacts for this stage, if purging artifacts is configured at the Server Level.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">approval</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-approval-object">approval</a> specifies how stage should be triggered. Can be one of <code class="prettyprint">manual</code>, <code class="prettyprint">success</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">environment_variables</code></td>
+<td>Array</td>
+<td>The list of of <a href="#pipeline-config-environment-variables">environment variables</a> defined here are set on the agents and can be used within your stage.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">jobs</code></td>
+<td>Array</td>
+<td>The list of <a href="#pipeline-config-jobs">jobs</a>.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-approval-object'></a></p>
+
+<h3 id="the-approval-object">The approval object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the approval on which stage will trigger. Can be one of <code class="prettyprint">success</code>, <code class="prettyprint">manual</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">authorization</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-approval-authorization">authorization</a> under an approval with a <code class="prettyprint">manual</code> or <code class="prettyprint">success</code> type to specify who can approve this stage.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-approval-authorization'></a></p>
+
+<h3 id="the-authorization-object">The authorization object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">users</code></td>
+<td>Array</td>
+<td>The list of users authorized to operate (run) on this stage.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">roles</code></td>
+<td>Array</td>
+<td>The list of roles authorized to operate (run) on this stage.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-jobs'></a></p>
+
+<h3 id="the-job-object">The job object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_job"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Linux"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Java"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the job.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">run_instance_count</code></td>
+<td>Number/String</td>
+<td>The number of jobs to run. If set to <code class="prettyprint">null</code> (default), one job will be created. If set to the literal string <code class="prettyprint">all</code>, the job will be run on all agents. If set to a positive integer, the specified number of jobs will be created. Can be one of <code class="prettyprint">null</code>, <code class="prettyprint">Integer</code>, <code class="prettyprint">all</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">timeout</code></td>
+<td>Number</td>
+<td>The time period(in minute) after which the job will be terminated by go if it has not generated any output.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">environment_variables</code></td>
+<td>Array</td>
+<td>The list of <a href="#pipeline-config-environment-variables">environment variables</a> defined here are set on the agents and can be used within your tasks.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">resources</code></td>
+<td>Array</td>
+<td>The list of (String) resources that specifies the resource which the job requires to build.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">tasks</code></td>
+<td>Array</td>
+<td>The list of <a href="#pipeline-config-task">tasks</a> that will run as part of the job.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">tabs</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-tab-object">tabs</a> which let you add custom tabs within the job details page.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">artifacts</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-pipeline-config-artifact-object">artifacts</a> specifies what files the agent will publish to the server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">properties</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-property-object">properties</a> of the build from XML files or artifacts created during your build.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-task'></a></p>
+
+<h3 id="the-task-object">The task object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of a task. Can be one of <code class="prettyprint">exec</code>, <code class="prettyprint">ant</code>, <code class="prettyprint">nant</code>, <code class="prettyprint">rake</code>, <code class="prettyprint">fetch</code>, <code class="prettyprint">pluggable_task</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">attributes</code></td>
+<td>Object</td>
+<td>The <a href="#the-exec-task-attributes">attributes</a> for each task type.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-exec-task'></a></p>
+
+<h3 id="the-exec-task-attributes">The exec task attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"passed"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"make"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"-j3"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"docs"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"instal"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">run_if</code></td>
+<td>Array</td>
+<td>The <code class="prettyprint">run_if</code> condition specifies when a task should be allowed to run. Can be one of <code class="prettyprint">passed</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">any</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">command</code></td>
+<td>String</td>
+<td>The name of the executable. If the executable is not on <code class="prettyprint">PATH</code>, you may also specify the full path.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">arguments</code></td>
+<td>Array</td>
+<td>The list of arguments to be passed to the executable.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">working_directory</code></td>
+<td>String</td>
+<td>The directory in which the executable is to be executed.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">on_cancel</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-task">task</a> specifies a task to execute when a stage is cancelled.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-ant-task'></a></p>
+
+<h3 id="the-ant-task-attributes">The ant task attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ant"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"passed"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"script/build"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"build_file"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">run_if</code></td>
+<td>Array</td>
+<td>The <code class="prettyprint">run_if</code> condition specifies when a task should be allowed to run. Can be one of <code class="prettyprint">passed</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">any</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">build_file</code></td>
+<td>String</td>
+<td>The path to Ant build file.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">target</code></td>
+<td>String</td>
+<td>The Ant target(s) to run.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">working_directory</code></td>
+<td>String</td>
+<td>The directory in which Ant is invoked.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">on_cancel</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-task">task</a> specifies a task to execute when a stage is cancelled.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-nant-task'></a></p>
+
+<h3 id="the-nant-task-attributes">The nant task attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nant"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"passed"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"script/build/123"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"build_file"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"nant_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">run_if</code></td>
+<td>Array</td>
+<td>The <code class="prettyprint">run_if</code> condition specifies when a task should be allowed to run. Can be one of <code class="prettyprint">passed</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">any</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">build_file</code></td>
+<td>String</td>
+<td>The path to NAnt build file.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">target</code></td>
+<td>String</td>
+<td>The NAnt target(s) to run.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">nant_path</code></td>
+<td>String</td>
+<td>This is the directory where the <code class="prettyprint">nant.exe</code> executable is located. By default Go will look for <code class="prettyprint">nant.exe</code> in the <code class="prettyprint">PATH</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">working_directory</code></td>
+<td>String</td>
+<td>The directory in which NAnt is invoked.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">on_cancel</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-task">task</a> specifies a task to execute when a stage is cancelled.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-rake-task'></a></p>
+
+<h3 id="the-rake-task-attributes">The rake task attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rake"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"passed"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample-project"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"build_file"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">run_if</code></td>
+<td>Array</td>
+<td>The <code class="prettyprint">run_if</code> condition specifies when a task should be allowed to run. Can be one of <code class="prettyprint">passed</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">any</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">build_file</code></td>
+<td>String</td>
+<td>The path to rake file. If not specified, the path defaults to <code class="prettyprint">rakefile</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">target</code></td>
+<td>String</td>
+<td>The rake target(s) to run. If not specified, rake runs the <code class="prettyprint">default</code> target in the file specified by <code class="prettyprint">build_file</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">working_directory</code></td>
+<td>String</td>
+<td>The directory from which rake is invoked.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">on_cancel</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-task">task</a> specifies a task to execute when a stage is cancelled.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-fetch-task'></a></p>
+
+<h3 id="the-fetch-task-attributes">The fetch task attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"passed"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_job"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"is_source_a_file"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">run_if</code></td>
+<td>Array</td>
+<td>The <code class="prettyprint">run_if</code> condition specifies when a task should be allowed to run. Can be one of <code class="prettyprint">passed</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">any</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipeline</code></td>
+<td>String</td>
+<td>The name of direct upstream pipeline or ancestor pipeline of one of the upstream pipelines on which the pipeline of the job depends on. .</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stage</code></td>
+<td>String</td>
+<td>The name of the stage to fetch artifacts from.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">job</code></td>
+<td>String</td>
+<td>The name of the job to fetch artifacts from.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">source</code></td>
+<td>String</td>
+<td>The path of the artifact directory or file of a specific job, relative to the sandbox directory. If the directory or file does not exist, the job is failed.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">is_source_a_file</code></td>
+<td>Boolean</td>
+<td>Whether source is a file or directory.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The path of the directory where the artifact is fetched to.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">on_cancel</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-task">task</a> specifies a task to execute when a stage is cancelled.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-pluggable-task'></a></p>
+
+<h3 id="the-pluggable-task-object">The pluggable task object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pluggable_task"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConverterType"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jsunit"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"passed"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"plugin_configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xunit.converter.task.plugin"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"on_cancel"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">run_if</code></td>
+<td>Array</td>
+<td>The <code class="prettyprint">run_if</code> condition specifies when a task should be allowed to run. Can be one of <code class="prettyprint">passed</code>, <code class="prettyprint">failed</code>, <code class="prettyprint">any</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">plugin_configuration</code></td>
+<td>Object</td>
+<td>The plugin configuration contains <code class="prettyprint">id</code> of the plugin and <code class="prettyprint">version</code> number.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">configuration</code></td>
+<td>Array</td>
+<td>A list of <code class="prettyprint">key</code>-<code class="prettyprint">value</code> pairs which defines the plugin configuration.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">on_cancel</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-task">task</a> specifies a task to execute when a stage is cancelled.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-job-tab'></a></p>
+
+<h3 id="the-tab-object">The tab object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cobertura"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target/site/cobertura/index.html"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the tab which will appear in the Job detail page.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">path</code></td>
+<td>String</td>
+<td>The relative path of a file in the server artifact destination directory of the job that will be render in the tab.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-job-artifact'></a></p>
+
+<h3 id="the-pipeline-config-artifact-object">The pipeline config artifact object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"res1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the artifact. Can be one of <code class="prettyprint">test</code>, <code class="prettyprint">build</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">source</code></td>
+<td>String</td>
+<td>The file or folder to publish to the server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The destination is relative to the artifacts folder of the current job instance on the server side. If it is not specified, the artifact will be stored in the root of the artifacts directory.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-job-property'></a></p>
+
+<h3 id="the-property-object">The property object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coverage.class"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target/emma/coverage.xml"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"xpath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"substring-before(//report/data/all/coverage[starts-with(@type,'class')]/@value, '%')"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the property.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">source</code></td>
+<td>String</td>
+<td>The relative path to the XML file containing the data that you want to use to create the property.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">xpath</code></td>
+<td>String</td>
+<td>The xpath that will be used to create property.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-timer-object'></a></p>
+
+<h3 id="the-timer-object">The timer object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"timer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"spec"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 0 22 ? * MON-FRI"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"only_on_changes"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">spec</code></td>
+<td>String</td>
+<td>The cron-like schedule to build the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">only_on_changes</code></td>
+<td>Boolean</td>
+<td>Run only if the pipeline hasn&rsquo;t previously run with the latest material(s).</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-tracking-tool-object'></a></p>
+
+<h3 id="the-tracking-tool-object">The tracking tool object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"generic"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd/issues/${ID}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"regex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"##(d+)"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the tracking tool. Can be one of <code class="prettyprint">mingle</code>, <code class="prettyprint">generic</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">attributes</code></td>
+<td>Object</td>
+<td>The attributes of the tracking tool. See attributes for <a href="#pipeline-config-tracking-tool-generic">generic</a> and <a href="#pipeline-config-tracking-tool-mingle">mingle</a> tracking tools.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-tracking-tool-generic'></a></p>
+
+<h3 id="the-generic-tracking-tool-object">The generic tracking tool object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd/issues/${ID}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"regex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"##(d+)"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">link</code></td>
+<td>String</td>
+<td>In generic tracking tool, the URI to your tracking tool.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">regex</code></td>
+<td>String</td>
+<td>In generic tracking tool, the regular expression to identify card or bug numbers from your checkin comments.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-tracking-tool-mingle'></a></p>
+
+<h3 id="the-mingle-tracking-tool-object">The mingle tracking tool object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mingle.example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"project_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar_widgets"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mql_grouping_conditions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"status &gt; 'In Dev'"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">base_url</code></td>
+<td>String</td>
+<td>The base URL of the Mingle server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">project_identifier</code></td>
+<td>String</td>
+<td>The project identfier can be found under the mingle project&rsquo;s <strong>Project admin</strong> tab in the section titled <strong>Basic Information</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">mql_grouping_conditions</code></td>
+<td>String</td>
+<td>The MQL string that determines the &lsquo;passing criteria&rsquo; for cards displayed.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-pipeline-config">Get pipeline config</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'If-Match'</span> -i <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/my_pipeline"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.go.cd/#pipeline_config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"label_template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enable_pipeline_locking"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:example/sample_repo.git"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"ignore"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"**/*.*"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"**/*.html"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_stage"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_job"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Linux"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Java"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="s2">"passed"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"on_cancel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sleep"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="s2">"10"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cobertura"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target/site/cobertura/*.xml"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"res1"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Gets pipeline config for specified pipeline name.</p>
+
+<p class='available-since'>
+  Available since v15.3.0.
+</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /go/api/admin/pipelines/:pipeline_name</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>The <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
+
+<h2 id="edit-pipeline-config">Edit pipeline config</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
+      -X PUT -d <span class="s1">'{
+                    "label_template": "${COUNT}",
+                    "enable_pipeline_locking": true,
+                    "name": "my_pipeline",
+                    "template": null,
+                    "materials": [
+                      {
+                        "type": "git",
+                        "attributes": {
+                          "url": "git@github.com:sample_repo/example.git",
+                          "destination": "destination1",
+                          "filter": null,
+                          "name": null,
+                          "auto_update": true,
+                          "branch": "master",
+                          "submodule_folder": null
+                        }
+                      }
+                    ],
+                    "stages": [
+                      {
+                        "name": "defaultStage",
+                        "fetch_materials": true,
+                        "clean_working_directory": false,
+                        "never_cleanup_artifacts": false,
+                        "approval": {
+                          "type": "success",
+                          "authorization": {
+                            "roles": [],
+                            "users": []
+                          }
+                        },
+                        "environment_variables": [],
+                        "jobs": [
+                          {
+                            "name": "defaultJob",
+                            "run_instance_count": null,
+                            "timeout": 0,
+                            "environment_variables": [],
+                            "resources": [],
+                            "tasks": [
+                              {
+                                "type": "exec",
+                                "attributes": {
+                                  "run_if": [
+                                    "passed"
+                                  ],
+                                  "command": "ls",
+                                  "working_directory": null
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/my_pipeline"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.go.cd/#pipeline_config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"label_template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enable_pipeline_locking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="s2">"passed"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Update pipeline config for specified pipeline name.
+<aside class="notice">
+  <strong>Note:</strong> <code>If-Match</code> accepts the latest ETag value which corresponds to the current representation of the pipeline config resource.
+</aside></p>
+
+<p class='available-since'>
+  Available since v15.3.0.
+</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT /go/api/admin/pipelines/:pipeline_name</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>The updated <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
+
+<h2 id="create-a-pipeline">Create a pipeline</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -X POST -d <span class="s1">'{ "group": "first",
+                    "pipeline": {
+                    "label_template": "${COUNT}",
+                    "enable_pipeline_locking": true,
+                    "name": "new_pipeline",
+                    "template": null,
+                    "materials": [
+                      {
+                        "type": "git",
+                        "attributes": {
+                          "url": "git@github.com:sample_repo/example.git",
+                          "destination": "dest",
+                          "filter": null,
+                          "name": null,
+                          "auto_update": true,
+                          "branch": "master",
+                          "submodule_folder": null
+                        }
+                      }
+                    ],
+                    "stages": [
+                      {
+                        "name": "defaultStage",
+                        "fetch_materials": true,
+                        "clean_working_directory": false,
+                        "never_cleanup_artifacts": false,
+                        "approval": {
+                          "type": "success",
+                          "authorization": {
+                            "roles": [],
+                            "users": []
+                          }
+                        },
+                        "environment_variables": [],
+                        "jobs": [
+                          {
+                            "name": "defaultJob",
+                            "run_instance_count": null,
+                            "timeout": 0,
+                            "environment_variables": [],
+                            "resources": [],
+                            "tasks": [
+                              {
+                                "type": "exec",
+                                "attributes": {
+                                  "run_if": [
+                                    "passed"
+                                  ],
+                                  "command": "ls",
+                                  "working_directory": null
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                }
+              }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/new_pipeline"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.go.cd/#pipeline_config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"label_template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enable_pipeline_locking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"never"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="s2">"passed"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Create a pipeline.</p>
+
+<p class='available-since'>
+  Available since v15.3.0.
+</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /go/api/admin/pipelines</code></p>
+
+<h3 id="returns">Returns</h3>
+
+<p>A new <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
+
           <h1 id="errors">Errors</h1>
 
 <p>Go CD uses the following HTTP status codes to indicate errors.</p>
