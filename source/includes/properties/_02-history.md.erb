@@ -17,7 +17,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <%= available_since('14.3.0') %>
 
-### HTTP Request
+<p class='http-request-heading'>HTTP Request</p>
 
 `GET /go/properties/search?pipelineName=:pipeline_name&stageName=:stage_name&jobName=:job_name&limitPipeline=:pipeline_counter&limitCount=:number`
 
@@ -26,6 +26,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   <code>limitPipeline</code> and <code>limitCount</code> are optional parameters. The default value of <code>limitPipeline</code> is latest pipeline instance's counter. The default value of <code>limitCount</code> is <code>100</code>.
 </aside>
 
-### Returns
+<p class='http-request-return-description'>Returns</p>
 
 Job properties as CSV.

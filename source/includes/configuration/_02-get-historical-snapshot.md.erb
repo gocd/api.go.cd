@@ -26,7 +26,7 @@ Gets the configuration with the specified version.
 
 <%= available_since('14.3.0') %>
 
-### HTTP Request
+<p class='http-request-heading'>HTTP Request</p>
 
 `GET /go/api/admin/config/:commit_sha.xml`
 
@@ -42,6 +42,6 @@ Gets the configuration with the specified version.
   <strong>Note:</strong> <code>config.xml</code> or <code>current.xml</code> allows retrieval of current configuration without passing in the commit sha value.
 </aside>
 
-### Returns
+<p class='http-request-return-description'>Returns</p>
 
 The contents of the configuration file with the specified revision.
