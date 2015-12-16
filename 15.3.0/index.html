@@ -282,11 +282,11 @@
     ></span>
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/agents</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of <a href="#the-agent-object">agent objects</a>.</p>
 
@@ -336,11 +336,11 @@
   Available since v15.2.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/agents/:uuid</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An <a href="#the-agent-object">agent object</a>.</p>
 
@@ -405,7 +405,7 @@
     ></span>
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">PATCH /go/api/agents/:uuid</code></p>
 
@@ -442,7 +442,7 @@
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>The updated <a href="#the-agent-object">agent object</a>.</p>
 
@@ -488,11 +488,11 @@
     ></span>
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">DELETE /go/api/agents/:uuid</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A message confirmation if the agent was deleted.</p>
 
@@ -549,7 +549,7 @@
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/agents/:uuid/job_run_history</code></p>
 
@@ -561,7 +561,7 @@
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of job objects along with the job transitions.</p>
 
@@ -675,11 +675,11 @@
   Available since v15.2.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/users</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of <a href="#the-user-object">user objects</a>.</p>
 
@@ -727,11 +727,11 @@
   Available since v15.2.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/users/:login_name</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A <a href="#the-user-object">user object</a>.</p>
 
@@ -787,7 +787,7 @@
   Available since v15.2.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">PATCH /go/api/users/:login_name</code></p>
 
@@ -824,7 +824,7 @@
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>The updated <a href="#the-user-object">user object</a>.</p>
 
@@ -869,11 +869,11 @@
     ></span>
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">DELETE /go/api/users/:login_name</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A message confirmation if the user was deleted.</p>
 
@@ -942,11 +942,11 @@
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/config/materials</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of <a href="#the-material-object">material objects</a>.</p>
 
@@ -989,7 +989,7 @@
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/materials/:fingerprint/modifications</code></p>
 
@@ -1001,7 +1001,7 @@
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A list of modification objects.</p>
 
@@ -1034,7 +1034,7 @@
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/material/notify/svn</code></p>
 
@@ -1056,7 +1056,7 @@
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A text confirmation.</p>
 
@@ -1107,7 +1107,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/material/notify/git</code></p>
 
@@ -1129,7 +1129,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A text confirmation.</p>
 
@@ -1244,11 +1244,11 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
     ></span>
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/backups</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A new <a href="#the-backup-object">backup object</a>.</p>
 
@@ -1301,11 +1301,11 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/config/pipeline_groups</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A list of pipeline groups, pipelines in each group, stages and materials in each pipeline.</p>
 
@@ -1389,11 +1389,11 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.json</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of <a href="#the-artifact-object">artifact objects</a>.</p>
 
@@ -1413,7 +1413,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_file</code></p>
 
@@ -1421,7 +1421,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
   The <code>path_to_file</code> can be a nested file for e.g. <code>dist/foobar-widgets-1.2.0.jar</code>
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An the contents of the requested file.</p>
 
@@ -1441,7 +1441,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_directory.zip</code></p>
 
@@ -1455,7 +1455,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
   Users are expected to poll the url every few seconds to check if the directory is available.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>One of -</p>
 
@@ -1488,7 +1488,7 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_file</code></p>
 
@@ -1510,7 +1510,7 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An acknowledgement that the file was created.</p>
 
@@ -1537,11 +1537,11 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">PUT /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_file</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An acknowledgement that the file was appended to.</p>
 
@@ -1630,11 +1630,11 @@ File logs/operations.log was appended successfully
   Available since v15.1.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/instance/:pipeline_counter</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A pipeline instance object.</p>
 
@@ -1788,7 +1788,7 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/history</code></p>
 
@@ -1800,7 +1800,7 @@ File logs/operations.log was appended successfully
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of pipeline instances to be skipped.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of pipeline instances.</p>
 
@@ -1832,11 +1832,11 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/status</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>JSON containing information about pipeline state.</p>
 
@@ -1862,7 +1862,7 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/pause</code></p>
 
@@ -1884,7 +1884,7 @@ File logs/operations.log was appended successfully
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>Nothing.</p>
 
@@ -1909,11 +1909,11 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/unpause</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>Nothing.</p>
 
@@ -1943,11 +1943,11 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/releaseLock</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A text confirmation.</p>
 
@@ -1974,7 +1974,7 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/schedule</code></p>
 
@@ -2016,7 +2016,7 @@ File logs/operations.log was appended successfully
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A text confirmation.</p>
 
@@ -2048,11 +2048,11 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/stages/:pipeline_name/:stage_name/cancel</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A text confirmation.</p>
 
@@ -2140,11 +2140,11 @@ File logs/operations.log was appended successfully
   Available since v15.1.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:stage_name/instance/:pipeline_counter/:stage_counter</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A stage instance object.</p>
 
@@ -2239,7 +2239,7 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:stage_name/history</code></p>
 
@@ -2251,7 +2251,7 @@ File logs/operations.log was appended successfully
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of stages to be skipped.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of stage instances.</p>
 
@@ -2291,11 +2291,11 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/jobs/scheduled.xml</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of scheduled job instances.</p>
 
@@ -2360,7 +2360,7 @@ File logs/operations.log was appended successfully
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history</code></p>
 
@@ -2372,7 +2372,7 @@ File logs/operations.log was appended successfully
   <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of jobs instances.</p>
 
@@ -2400,7 +2400,7 @@ myLocalAgent, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/properties/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name</code></p>
 
@@ -2409,7 +2409,7 @@ myLocalAgent, 2015-07-09T11:59:08+05:30,      2015-07-09T11:59:16+05:30
   You can use keyword &lsquo;latest&rsquo; as a pipeline counter or a stage counter.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>CSV list containing property names and their corresponding value.</p>
 
@@ -2433,7 +2433,7 @@ myLocalAgent
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/properties/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/:property_name</code></p>
 
@@ -2442,7 +2442,7 @@ myLocalAgent
   You can use keyword &lsquo;latest&rsquo; as a pipeline counter or a stage counter.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>Property name and its value.</p>
 
@@ -2467,7 +2467,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/properties/search?pipelineName=:pipeline_name&amp;stageName=:stage_name&amp;jobName=:job_name&amp;limitPipeline=:pipeline_counter&amp;limitCount=:number</code></p>
 
@@ -2476,7 +2476,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   <code>limitPipeline</code> and <code>limitCount</code> are optional parameters. The default value of <code>limitPipeline</code> is latest pipeline instance&rsquo;s counter. The default value of <code>limitCount</code> is <code>100</code>.
 </aside>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>Job properties as CSV.</p>
 
@@ -2501,7 +2501,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Defines a property on a specific job instance.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/properties/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/:property_name</code></p>
 
@@ -2523,7 +2523,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An acknowledgement that the property was created.</p>
 
@@ -2573,11 +2573,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/config/revisions</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of repository modifications.</p>
 
@@ -2612,11 +2612,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/config/diff/:from_commit_sha/:to_commit_sha</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>The diff between two config repo modifications.</p>
 
@@ -2655,7 +2655,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/admin/config/config.xml</code></p>
 
@@ -2667,7 +2667,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p><code class="prettyprint">GET /go/api/admin/config/:md5.xml</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>The contents of the configuration file.</p>
 
@@ -2700,7 +2700,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/tab/admin/pipelines/:pipeline_name.json</code></p>
 
@@ -2940,7 +2940,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A text confirmation.</p>
 
@@ -2975,11 +2975,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/pipelines.xml</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of pipelines.</p>
 
@@ -3052,11 +3052,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/stages.xml</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of feed of stages.</p>
 
@@ -3104,11 +3104,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/:pipeline_id.xml</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A pipeline object.</p>
 
@@ -3146,7 +3146,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/stages/:stage_id.xml</code></p>
 
@@ -3158,7 +3158,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p><code class="prettyprint">GET /go/pipelines/:pipeline:name/:pipeline_label/:stage_name/:stage_counter.xml</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A stage object.</p>
 
@@ -3209,11 +3209,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v14.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/jobs/:job_id.xml</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A job object.</p>
 
@@ -3374,11 +3374,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v15.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/dashboard</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>An array of pipelines on Dashboard.</p>
 
@@ -5133,11 +5133,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v15.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/admin/pipelines/:pipeline_name</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>The <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
 
@@ -5300,11 +5300,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v15.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">PUT /go/api/admin/pipelines/:pipeline_name</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>The updated <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
 
@@ -5466,11 +5466,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   Available since v15.3.0.
 </p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/admin/pipelines</code></p>
 
-<h3 id="returns">Returns</h3>
+<p class='http-request-return-description'>Returns</p>
 
 <p>A new <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
 
