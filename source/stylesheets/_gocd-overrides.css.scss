@@ -38,3 +38,17 @@ blockquote + .highlight {
     }
   }
 }
+.available-since {
+  @extend %header-font;
+  font-size: 14px;
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+
+  margin-right: $examples-width;
+  padding: 0 $main-padding;
+  box-sizing: border-box;
+  display: block;
+  @include text-shadow($main-embossed-text-shadow);
+
+  @extend %left-col;
+}

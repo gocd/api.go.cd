@@ -1,5 +1,6 @@
 <% if since.version %>
-<h3>Available since v<%= since.version %>.
+<p class='available-since'>
+  Available since v<%= since.version %>.
   <% if since.old_versions.any? -%>
     <span
       data-popover
@@ -7,5 +8,5 @@
       data-content='<%= h render_partial('partials/old_versions.md.erb', locals: {since: since}) %>'
     ></span>
   <% end -%>
-</h3>
+</p>
 <% end %>
