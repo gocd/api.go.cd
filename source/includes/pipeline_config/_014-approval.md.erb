@@ -1,0 +1,33 @@
+<%
+json = {
+  approval: {
+    type: 'success',
+    authorization: {
+      roles: [],
+      users: []
+    }
+  }
+}
+%>
+<%=
+describe_sub_object 'The approval object', json: json, html_id: 'pipeline-config-approval-object' do
+  type          'String', 'The type of the approval on which stage will trigger.', one_of: %w(success manual)
+  authorization 'Object', 'The [authorization](#pipeline-config-approval-authorization) under an approval with a `manual` or `success` type to specify who can approve this stage.'
+end
+%>
+
+<%
+json = {
+  authorization: {
+    roles: [],
+    users: []
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The authorization object', json: json, html_id: 'pipeline-config-approval-authorization' do
+  users 'Array', 'The list of users authorized to operate (run) on this stage.'
+  roles 'Array', 'The list of roles authorized to operate (run) on this stage.'
+end
+%>

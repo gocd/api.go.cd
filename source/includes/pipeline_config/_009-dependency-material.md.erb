@@ -1,0 +1,23 @@
+<%
+json = {
+  materials: [
+    {
+      type: 'dependency',
+      attributes: {
+        name: 'dependency',
+        pipeline: 'upstream',
+        stage: 'upstream_stage',
+        auto_update: true
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The dependency material attributes', json: json, html_id: 'pipeline-config-dependency-material' do
+  name        'String',  'The name of this material.'
+  pipeline    'String',  'The name of a pipeline that this pipeline depends on.'
+  stage       'String',  'The name of a stage which will trigger this pipeline once it is successful.'
+  auto_update 'Boolean', 'Whether to poll for new changes or not.'
+end
+%>

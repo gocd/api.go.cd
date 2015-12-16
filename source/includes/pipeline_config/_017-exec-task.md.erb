@@ -1,0 +1,25 @@
+<%
+json = {
+  tasks: [
+    {
+      type: 'exec',
+      attributes: {
+        run_if: ['passed'],
+        command: 'make',
+        arguments: %w(-j3 docs instal),
+        working_directory: nil
+      }
+    }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The exec task attributes', json: json, html_id: 'pipeline-config-exec-task' do
+  run_if            'Array',  'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
+  command           'String', 'The name of the executable. If the executable is not on `PATH`, you may also specify the full path.'
+  arguments         'Array',  'The list of arguments to be passed to the executable.'
+  working_directory 'String', 'The directory in which the executable is to be executed.'
+  on_cancel         'Object', 'The [task](#pipeline-config-task) specifies a task to execute when a stage is cancelled.'
+end
+%>

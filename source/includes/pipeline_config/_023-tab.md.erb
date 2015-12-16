@@ -1,0 +1,13 @@
+<%
+json = {
+  tabs: [
+    { name: 'cobertura', path: 'target/site/cobertura/index.html'}
+  ]
+}
+%>
+<%=
+describe_sub_object 'The tab object', json: json, html_id: 'pipeline-config-job-tab' do
+  name 'String', 'The name of the tab which will appear in the Job detail page.'
+  path 'String', 'The relative path of a file in the server artifact destination directory of the job that will be render in the tab.'
+end
+%>

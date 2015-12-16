@@ -1,0 +1,14 @@
+<%
+json = {
+  timer: {
+    spec: '0 0 22 ? * MON-FRI',
+    only_on_changes: true
+  }
+}
+%>
+<%=
+describe_sub_object 'The timer object', json: json, html_id: 'pipeline-config-timer-object' do
+  spec            'String',  'The cron-like schedule to build the pipeline.'
+  only_on_changes 'Boolean', "Run only if the pipeline hasn't previously run with the latest material(s)."
+end
+%>

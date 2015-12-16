@@ -1,0 +1,14 @@
+<%
+json = {
+  parameters: [
+    { name: 'VERSION', value: '15.2.0' }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The pipeline parameter object', json: json, html_id: 'pipeline-config-parameters' do
+  name    'String', 'The name of the parameter.'
+  value   'String', 'The value of the parameter.'
+end
+%>

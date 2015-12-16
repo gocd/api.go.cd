@@ -1,0 +1,6 @@
+<%=
+describe_sub_object 'The task object', html_id: 'pipeline-config-task' do
+  type       'String', 'The type of a task.', one_of: %w(exec ant nant rake fetch pluggable_task)
+  attributes 'Object', 'The [attributes](#the-exec-task-attributes) for each task type.'
+end
+%>

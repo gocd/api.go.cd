@@ -23,6 +23,7 @@ includes:
   - 130-configuration
   - 140-feeds
   - 150-dashboard
+  - 160-pipeline-config
   - errors
 
 search: true

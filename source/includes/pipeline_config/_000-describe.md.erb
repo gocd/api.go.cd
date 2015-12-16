@@ -1,0 +1,14 @@
+<%=
+describe_object 'The pipeline config object', since: '15.3.0' do
+  label_template            'String',  'The label template to customise the pipeline instance label. Both of material names and `${COUNT}` are available in the `label_template`. If not specified, `label_template` defaults to `${COUNT}`.'
+  enable_pipeline_locking   'Boolean', 'Whether pipeline is locked to run single instance or not.'
+  name                      'String',  'The name of the pipeline.'
+  template                  'String',  'The name of the template used by pipeline. You MUST specify atleast one stage in `stages`, or `template`.'
+  parameters                'Array',   'The list of [parameters](#pipeline-config-parameters) to be used for substitution in a pipeline or pipeline template.'
+  environment_variables     'Array',   'The list of [environment variables](#pipeline-config-environment-variables) that will be passed to all tasks (commands) that are part of this pipeline.'
+  materials                 'Array',   'The list of [materials](#pipeline-config-material-object) to be used by pipeline. You MUST specify atleast one material.'
+  stages                    'Array',   'The list of [stages](#pipeline-config-stage-object). You MUST specify atleast one stage in `stages`, or `template`.'
+  tracking_tool             'Object',  'The [tracking tool](#pipeline-config-tracking-tool-object) can be used to specify links to an issue tracker.'
+  timer                     'Object',  'The [timer](#pipeline-config-timer-object) specifies cron-like schedule to build pipeline.'
+end
+%>

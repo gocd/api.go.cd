@@ -1,0 +1,34 @@
+<%
+json = {
+  materials: [
+    {
+      type: 'p4',
+      attributes: {
+        name: 'api-docs',
+        port: 'p4.example.com:8080',
+        use_tickets: true,
+        view: 'sample_view',
+        username: 'admin',
+        encrypted_password: 'aSdiFgRRZ6A=',
+        destination: 'api-docs',
+        filter: nil,
+        auto_update: true,
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The perforce material attributes', json: json, html_id: 'pipeline-config-p4-material' do
+  name                'String',  'The name of this material.'
+  port                'String',  'Perforce server connection to use (`[transport:]host:port`).'
+  use_tickets         'Boolean', 'Whether to work with the Perforce tickets or not.'
+  view                'String',  'The Perforce view.'
+  username            'String',  'The username to be used.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+  destination         'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  filter              'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+end
+%>

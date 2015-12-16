@@ -1,0 +1,165 @@
+## Edit pipeline config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'If-Match: "e064ca0fe5d8a39602e19666454b8d77"' \
+      -X PUT -d '{
+                    "label_template": "${COUNT}",
+                    "enable_pipeline_locking": true,
+                    "name": "my_pipeline",
+                    "template": null,
+                    "materials": [
+                      {
+                        "type": "git",
+                        "attributes": {
+                          "url": "git@github.com:sample_repo/example.git",
+                          "destination": "destination1",
+                          "filter": null,
+                          "name": null,
+                          "auto_update": true,
+                          "branch": "master",
+                          "submodule_folder": null
+                        }
+                      }
+                    ],
+                    "stages": [
+                      {
+                        "name": "defaultStage",
+                        "fetch_materials": true,
+                        "clean_working_directory": false,
+                        "never_cleanup_artifacts": false,
+                        "approval": {
+                          "type": "success",
+                          "authorization": {
+                            "roles": [],
+                            "users": []
+                          }
+                        },
+                        "environment_variables": [],
+                        "jobs": [
+                          {
+                            "name": "defaultJob",
+                            "run_instance_count": null,
+                            "timeout": 0,
+                            "environment_variables": [],
+                            "resources": [],
+                            "tasks": [
+                              {
+                                "type": "exec",
+                                "attributes": {
+                                  "run_if": [
+                                    "passed"
+                                  ],
+                                  "command": "ls",
+                                  "working_directory": null
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/pipelines/my_pipeline"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#pipeline_config"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/pipelines/:name"
+    }
+  },
+  "label_template": "${COUNT}",
+  "enable_pipeline_locking": true,
+  "name": "my_pipeline",
+  "template": null,
+  "params": [],
+  "environment_variables": [],
+  "materials": [
+    {
+      "type": "git",
+      "attributes": {
+        "url": "git@github.com:sample_repo/example.git",
+        "destination": "destination1",
+        "filter": null,
+        "name": null,
+        "auto_update": true,
+        "branch": "master",
+        "submodule_folder": null
+      }
+    }
+  ],
+  "stages": [
+    {
+      "name": "defaultStage",
+      "fetch_materials": true,
+      "clean_working_directory": false,
+      "never_cleanup_artifacts": false,
+      "approval": {
+        "type": "success",
+        "authorization": {
+          "roles": [],
+          "users": []
+        }
+      },
+      "environment_variables": [],
+      "jobs": [
+        {
+          "name": "defaultJob",
+          "run_instance_count": null,
+          "timeout": 0,
+          "environment_variables": [],
+          "resources": [],
+          "tasks": [
+            {
+              "type": "exec",
+              "attributes": {
+                "run_if": [
+                  "passed"
+                ],
+                "command": "ls",
+                "working_directory": null
+              }
+            }
+          ],
+          "tabs": [],
+          "artifacts": [],
+          "properties": null
+        }
+      ]
+    }
+  ],
+  "tracking_tool": null,
+  "timer": null
+}
+```
+
+Update pipeline config for specified pipeline name.
+<aside class="notice">
+  <strong>Note:</strong> <code>If-Match</code> accepts the latest ETag value which corresponds to the current representation of the pipeline config resource.
+</aside>
+
+<%= available_since('15.3.0') %>
+
+### HTTP Request
+
+`PUT /go/api/admin/pipelines/:pipeline_name`
+
+### Returns
+
+The updated [pipeline config object](#the-pipeline-config-object).

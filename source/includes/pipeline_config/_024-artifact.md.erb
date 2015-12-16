@@ -1,0 +1,15 @@
+<%
+json = {
+  artifacts: [
+    { source: 'target', destination: 'result', type: 'build' },
+    { source: 'test',   destination: 'res1',   type: 'test' }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The pipeline config artifact object', json: json, html_id: 'pipeline-config-job-artifact' do
+  type        'String', 'The type of the artifact.', one_of: %w(test build)
+  source      'String', 'The file or folder to publish to the server.'
+  destination 'String', 'The destination is relative to the artifacts folder of the current job instance on the server side. If it is not specified, the artifact will be stored in the root of the artifacts directory.'
+end
+%>
