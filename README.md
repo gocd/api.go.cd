@@ -32,10 +32,22 @@ $ ./bin/rake publish
 
 ### Releasing a new version of the API
 
-First bump the version in `config.rb`
+In this example we'll be releasing version 15.3.0 and setting up master so any new changes from this point go to 16.1.0.
+
+Create a branch for your existing version that you will be releasing
 
 ```
-$ vim config.rb                  # Change version in `build_dir`
+git checkout -b 15.3.0
+git push upstream 15.3.0
+```
+
+Create a new pipeline for this branch on snap-ci.com so any new changes to the 15.3.0 branch are pushed to the correct directory on `gh-pages` branch.
+
+Now bump the version in `config.rb` on the master branch.
+
+```
+$ git checkout master
+$ vim config.rb                  # Bump version in `build_dir` to `16.1.0`, master is now effectively 16.1.0 (the next release)
 $ git add config.rb
 $ git commit -m 'Bump version'
 $ git push
@@ -48,7 +60,8 @@ $ git fetch --all
 $ git checkout gh-pages
 $ git merge upstream/gh-pages
 $ vim versions.json             # edit file and add a new version, set its "type" to "latest", remove the "type" attribute on older version.
-$ git add versions.json
+$ ln -sf 15.3.0 current        # current is now a symlink to 15.3.0
+$ git add versions.json current
 $ git commit -m 'Add new version to dropdown'
 $ git push
 ```
