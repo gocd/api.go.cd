@@ -2613,13 +2613,18 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <h2 id="get-configuration">Get configuration</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/5059cf548db9ea2d1b9192b45529ccf0.xml'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config.xml'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns the contents of the config file</p>
 </blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">X-CRUISE-CONFIG-MD5</span><span class="p">:</span> <span class="s">c21b6c9f1b24a816cddf457548a987a9</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/xml</span>
+</code></pre>
 
 <pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="nt">&lt;cruise</span>
@@ -2635,7 +2640,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <span class="nt">&lt;/cruise&gt;</span>
 </code></pre>
 
-<p>Gets the configuration with the specified version.</p>
+<p>Gets the current configuration file.</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -2643,23 +2648,19 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/admin/config/:commit_sha.xml</code></p>
+<p><code class="prettyprint">GET /go/api/admin/config/config.xml</code></p>
 
 <p><strong>Other convenience APIs</strong></p>
 
-<p><code class="prettyprint">GET /go/api/admin/config/config.xml</code></p>
+<p><code class="prettyprint">GET /go/api/admin/config/current.xml</code></p>
 
 <p>or</p>
 
-<p><code class="prettyprint">GET /go/api/admin/config/current.xml</code></p>
-
-<aside class="notice">
-  <strong>Note:</strong> <code>config.xml</code> or <code>current.xml</code> allows retrieval of current configuration without passing in the commit sha value.
-</aside>
+<p><code class="prettyprint">GET /go/api/admin/config/:md5.xml</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>The contents of the configuration file with the specified revision.</p>
+<p>The contents of the configuration file.</p>
 
 <h2 id="create-pipeline">Create pipeline</h2>
 
