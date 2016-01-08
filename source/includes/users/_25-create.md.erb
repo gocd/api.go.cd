@@ -1,0 +1,68 @@
+## Create a user
+
+```shell
+$ curl 'https://ci.example.com/go/api/users' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
+      -X POST \
+      -d '{
+            "email": "jdoe@example.com",
+            "login_name": "jdoe"
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "http://api.go.cd/#users"
+    },
+    "self": {
+      "href": "https://ci.example.com/go/api/users/jdoe"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/users/:login_name"
+    }
+  },
+  "login_name": "jdoe",
+  "display_name": "jdoe",
+  "enabled": true,
+  "email": null,
+  "email_me": false,
+  "checkin_aliases": [
+
+  ]
+}
+```
+
+Creates a user
+
+<%= available_since('15.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/users`
+
+The following properties may be specified:
+
+<%=
+  describe_object nil do
+    login_name        'String',     "The user's login name.", mandatory: true
+    enabled           'Boolean',    "Boolean indicating if the user is enabled (can login in)"
+    email             'String',     "The user's email address"
+    email_me          'Boolean',    "Boolean indicating if the user should be signed up for email notifications"
+    checkin_aliases   'Array',      "A list of SCM checkin aliases to map users to SCM commits"
+  end
+%>
+
+<p class='http-request-return-description'>Returns</p>
+
+A [user object](#the-user-object).

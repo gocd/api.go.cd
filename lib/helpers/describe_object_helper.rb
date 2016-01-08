@@ -62,10 +62,16 @@ module DescribeObjectHelper
 
     if property.options[:one_of]
       original_description.gsub!(/\.$/, '')
-      original_description << ". Can be one of " << property.options[:one_of].collect{|enum| "`#{enum}`" }.join(', ')
+      original_description << ". Can be one of " << property.options[:one_of].collect{|enum| "`#{enum}`" }.join(', ') << '.'
+    end
+
+    if property.options[:mandatory]
+      original_description.gsub!(/\.$/, '')
+      original_description << '. This attribute MUST be specified.'
     end
 
     # append a trailing period
+    original_description.gsub!(/\.$/, '')
     original_description << '.'
   end
 
