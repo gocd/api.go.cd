@@ -176,19 +176,9 @@
 <td>The IP address of the agent.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">enabled</code></td>
-<td>Boolean</td>
-<td>Whether the agent is enabled or not.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">sandbox</code></td>
 <td>String</td>
 <td>The path where the agent will perform its builds.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">status</code></td>
-<td>String</td>
-<td>The status of the agent. Can be one of <code class="prettyprint">Pending</code>, <code class="prettyprint">LostContact</code>, <code class="prettyprint">Missing</code>, <code class="prettyprint">Building</code>, <code class="prettyprint">Cancelled</code>, <code class="prettyprint">Idle</code>, <code class="prettyprint">Disabled</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">operating_system</code></td>
@@ -199,6 +189,21 @@
 <td><code class="prettyprint">free_space</code></td>
 <td>Integer</td>
 <td>The amount of free space in bytes.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">agent_config_state</code></td>
+<td>String</td>
+<td>Whether an agent is enabled or not. Can be one of <code class="prettyprint">Pending</code>, <code class="prettyprint">Enabled</code>, <code class="prettyprint">Disabled</code>. <strong>Since v15.3.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">agent_state</code></td>
+<td>String</td>
+<td>The state an agent is in. Can be one of <code class="prettyprint">Idle</code>, <code class="prettyprint">Building</code>, <code class="prettyprint">LostContact</code>, <code class="prettyprint">Missing</code>, <code class="prettyprint">Building</code>, <code class="prettyprint">Unknown</code>. <strong>Since v15.3.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">build_state</code></td>
+<td>String</td>
+<td>If the agent is running a build, the state of the build on the agent. Can be one of <code class="prettyprint">Idle</code>, <code class="prettyprint">Building</code>, <code class="prettyprint">Cancelled</code>, <code class="prettyprint">Unknown</code>. <strong>Since v15.3.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">resources</code></td>
@@ -253,11 +258,12 @@
         </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent01.example.com"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"operating_system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">84983328768</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agent_config_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enabled"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"agent_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
         </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -320,11 +326,12 @@
   </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ketanpkr.corporate.thoughtworks.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"operating_system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">85890146304</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"agent_config_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"agent_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
   </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -379,11 +386,12 @@
   </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agent02.example.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.12.20.47"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sandbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/ketanpadegaonkar/projects/gocd/gocd/agent"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"operating_system"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mac OS X"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">84834283520</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"agent_config_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"agent_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="s2">"linux"</span><span class="p">],</span><span class="w">
   </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -436,9 +444,9 @@
 <td>A comma separated strings of environments, or an array of string environments.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">enabled</code></td>
-<td>Boolean</td>
-<td>Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents.</td>
+<td><code class="prettyprint">agent_config_state</code></td>
+<td>String</td>
+<td>Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents. Can be one of <code class="prettyprint">Enabled</code>, <code class="prettyprint">Disabled</code>.</td>
 </tr>
 </tbody></table>
 
