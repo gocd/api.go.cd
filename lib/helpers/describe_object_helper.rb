@@ -70,6 +70,11 @@ module DescribeObjectHelper
       original_description << '. This attribute MUST be specified.'
     end
 
+    if property.options[:since]
+      original_description.gsub!(/\.$/, '')
+      original_description << ". **Since v#{property.options[:since]}**."
+    end
+
     # append a trailing period
     original_description.gsub!(/\.$/, '')
     original_description << '.'
