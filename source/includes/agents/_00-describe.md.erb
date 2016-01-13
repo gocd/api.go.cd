@@ -1,14 +1,15 @@
 <%=
 describe_object 'The agent object', since: '15.2.0' do
-  uuid              'String',     'The identifier of this agent'
-  hostname          'String',     'The hostname of the agent'
-  ip_address        'String',     'The IP address of the agent'
-  enabled           'Boolean',    'Whether the agent is enabled or not'
-  sandbox           'String',     'The path where the agent will perform its builds.'
-  status            'String',     'The status of the agent', one_of: %w(Pending LostContact Missing Building Cancelled Idle Disabled)
-  operating_system  'String',     'The operating system as reported by the agent'
-  free_space        'Integer',    'The amount of free space in bytes'
-  resources         'Array',      'The set of resources that this agent is tagged with'
-  environments      'Array',      'The set of environments that this agent belongs to'
+  uuid               'String',  'The identifier of this agent'
+  hostname           'String',  'The hostname of the agent'
+  ip_address         'String',  'The IP address of the agent'
+  sandbox            'String',  'The path where the agent will perform its builds.'
+  operating_system   'String',  'The operating system as reported by the agent'
+  free_space         'Integer', 'The amount of free space in bytes'
+  agent_config_state 'String',  'Whether an agent is enabled or not', one_of: %w(Pending Enabled Disabled), since: '15.3.0'
+  agent_state        'String',  'The state an agent is in.', one_of: %w(Idle Building LostContact Missing Building Unknown), since: '15.3.0'
+  build_state        'String',  'If the agent is running a build, the state of the build on the agent.', one_of: %w(Idle Building Cancelled Unknown), since: '15.3.0'
+  resources          'Array',   'The set of resources that this agent is tagged with'
+  environments       'Array',   'The set of environments that this agent belongs to'
 end
 %>
