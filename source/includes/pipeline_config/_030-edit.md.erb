@@ -4,6 +4,7 @@
 $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
       -u 'username:password' \
       -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
       -H 'If-Match: "e064ca0fe5d8a39602e19666454b8d77"' \
       -X PUT -d '{
                     "label_template": "${COUNT}",
