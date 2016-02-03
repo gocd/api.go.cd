@@ -12,6 +12,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "e064ca0fe5d8a39602e19666454b8d77"
 ```
 
 ```json
@@ -127,6 +128,13 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
 ```
 
 Gets pipeline config for specified pipeline name.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-pipeline-config'>edit pipeline config</a>
+  documentation for more details.
+</aside>
 
 <%= available_since('15.3.0') %>
 
