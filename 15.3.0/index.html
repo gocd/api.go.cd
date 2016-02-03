@@ -5118,6 +5118,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -5233,6 +5234,13 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Gets pipeline config for specified pipeline name.</p>
 
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-pipeline-config'>edit pipeline config</a>
+  documentation for more details.
+</aside>
+
 <p class='available-since'>
   Available since v15.3.0.
 </p>
@@ -5251,63 +5259,64 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
       -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
-      -X PUT -d <span class="s1">'{
-                    "label_template": "${COUNT}",
-                    "enable_pipeline_locking": true,
-                    "name": "my_pipeline",
-                    "template": null,
-                    "materials": [
+      -X PUT <span class="se">\</span>
+      -d <span class="s1">'{
+            "label_template": "${COUNT}",
+            "enable_pipeline_locking": true,
+            "name": "my_pipeline",
+            "template": null,
+            "materials": [
+              {
+                "type": "git",
+                "attributes": {
+                  "url": "git@github.com:sample_repo/example.git",
+                  "destination": "destination1",
+                  "filter": null,
+                  "name": null,
+                  "auto_update": true,
+                  "branch": "master",
+                  "submodule_folder": null
+                }
+              }
+            ],
+            "stages": [
+              {
+                "name": "defaultStage",
+                "fetch_materials": true,
+                "clean_working_directory": false,
+                "never_cleanup_artifacts": false,
+                "approval": {
+                  "type": "success",
+                  "authorization": {
+                    "roles": [],
+                    "users": []
+                  }
+                },
+                "environment_variables": [],
+                "jobs": [
+                  {
+                    "name": "defaultJob",
+                    "run_instance_count": null,
+                    "timeout": 0,
+                    "environment_variables": [],
+                    "resources": [],
+                    "tasks": [
                       {
-                        "type": "git",
+                        "type": "exec",
                         "attributes": {
-                          "url": "git@github.com:sample_repo/example.git",
-                          "destination": "destination1",
-                          "filter": null,
-                          "name": null,
-                          "auto_update": true,
-                          "branch": "master",
-                          "submodule_folder": null
+                          "run_if": [
+                            "passed"
+                          ],
+                          "command": "ls",
+                          "working_directory": null
                         }
                       }
-                    ],
-                    "stages": [
-                      {
-                        "name": "defaultStage",
-                        "fetch_materials": true,
-                        "clean_working_directory": false,
-                        "never_cleanup_artifacts": false,
-                        "approval": {
-                          "type": "success",
-                          "authorization": {
-                            "roles": [],
-                            "users": []
-                          }
-                        },
-                        "environment_variables": [],
-                        "jobs": [
-                          {
-                            "name": "defaultJob",
-                            "run_instance_count": null,
-                            "timeout": 0,
-                            "environment_variables": [],
-                            "resources": [],
-                            "tasks": [
-                              {
-                                "type": "exec",
-                                "attributes": {
-                                  "run_if": [
-                                    "passed"
-                                  ],
-                                  "command": "ls",
-                                  "working_directory": null
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      }
                     ]
-                }'</span>
+                  }
+                ]
+              }
+            ]
+          }'</span>
 </code></pre>
 
 <blockquote>
@@ -5316,6 +5325,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -5395,10 +5405,19 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Update pipeline config for specified pipeline name.
+<p>Update pipeline config for specified pipeline name.</p>
+
 <aside class="notice">
-  <strong>Note:</strong> <code>If-Match</code> accepts the latest ETag value which corresponds to the current representation of the pipeline config resource.
-</aside></p>
+  <strong>Note:</strong>
+  The update pipeline API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  pipeline config resource.
+  <br/><br/>
+  This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
+  `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the pipeline config, leading to a
+  conflict.
+</aside>
 
 <p class='available-since'>
   Available since v15.3.0.
