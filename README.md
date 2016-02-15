@@ -50,7 +50,7 @@ $ git checkout master
 $ vim config.rb                  # Bump version in `build_dir` to `16.1.0`, master is now effectively 16.1.0 (the next release)
 $ git add config.rb
 $ git commit -m 'Bump version'
-$ git push
+$ git push upstream master
 ```
 
 Now wait for site to publish via CI (takes a minute), or publish it yourself `./bin/rake publish`. Once the new version is published
