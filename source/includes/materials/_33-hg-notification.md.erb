@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/material/notify/hg' \
       -u 'username:password' \
       -X POST \
-      -d "repository_url=ssh://hg.example.com/hg/funky-widgets"
+      -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
 ```
 
 > The above command returns the following response:
@@ -30,7 +30,7 @@ The following post parameters must be specified.
 
 <%=
   describe_object(nil) do
-    repository_url  'String',            'The git repository url as defined in `cruise-config.xml`'
+    repository_url  'String',            'The Mercurial repository URL as defined in `cruise-config.xml`'
   end
  %>
 
@@ -49,5 +49,5 @@ The hook goes into the `hgrc` file, located at `/path/to/hg/repository/.hg/hgrc`
 changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
     -u 'username:password' \
     -X POST \
-    -d "repository_url=ssh://hg.example.com/hg/funky-widgets"
+    -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
 ```
