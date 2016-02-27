@@ -1,0 +1,53 @@
+## Notify Mercurial materials
+
+```shell
+$ curl 'https://ci.example.com/go/api/material/notify/hg' \
+      -u 'username:password' \
+      -X POST \
+      -d "repository_url=ssh://hg.example.com/hg/funky-widgets"
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: text/plain; charset=UTF-8
+```
+
+```plain
+The material is now scheduled for an update. Please check relevant pipeline(s) for status.
+```
+
+<%= partial 'includes/shared/material_notify_header' %>
+
+<%= available_since('14.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/material/notify/hg`
+
+The following post parameters must be specified.
+
+<%=
+  describe_object(nil) do
+    repository_url  'String',            'The git repository url as defined in `cruise-config.xml`'
+  end
+ %>
+
+<p class='http-request-return-description'>Returns</p>
+
+A text confirmation.
+
+### Notification script
+
+To notify Go via a Mercurial changegroup hook, you may use the following in your Mercurial repository.
+
+The hook goes into the `hgrc` file, located at `/path/to/hg/repository/.hg/hgrc`.
+
+```
+[hooks]
+changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
+    -u 'username:password' \
+    -X POST \
+    -d "repository_url=ssh://hg.example.com/hg/funky-widgets"
+```
