@@ -3,7 +3,8 @@
 ```shell
 
 $ curl 'http://ci.example.com/go/api/pipelines/pipeline1/schedule' \
-       -u 'username:password'
+       -u 'username:password' \
+       -H 'Accept: application/vnd.go.cd.v1+text' \
        -X POST
 ```
 
