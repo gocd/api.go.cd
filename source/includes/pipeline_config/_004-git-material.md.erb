@@ -12,7 +12,8 @@ json = {
         filter: {
           ignore: %w(**/*.xml **/*.html)
         },
-        submodule_folder: nil
+        submodule_folder: nil,
+        shallow_clone: true
       }
     }
   ]
@@ -28,5 +29,6 @@ describe_sub_object 'The git material attributes', json: json, html_id: 'pipelin
   auto_update      'Boolean', 'Whether to poll for new changes or not.'
   filter           'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
   submodule_folder 'String',  'The git submodule in the git repository.'
+  shallow_clone    'Boolean', 'Clone with -n (--depth) option if set to true', since: '16.3.0'
 end
 %>
