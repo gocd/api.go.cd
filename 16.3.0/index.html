@@ -2028,6 +2028,7 @@ File logs/operations.log was appended successfully
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines/pipeline1/pause'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+text'</span> <span class="se">\</span>
       -X POST <span class="se">\</span>
       -d <span class="s1">'pauseCause=take some rest'</span>
 </code></pre>
@@ -2075,7 +2076,8 @@ File logs/operations.log was appended successfully
 <h2 id="unpause-a-pipeline">Unpause a pipeline</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines/pipeline1/unpause'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+text'</span> <span class="se">\</span>
       -X POST
 </code></pre>
 
@@ -2105,7 +2107,8 @@ File logs/operations.log was appended successfully
 
 <pre class="highlight shell"><code>
 <span class="gp">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/releaseLock'</span> <span class="se">\</span>
-       -u <span class="s1">'username:password'</span>
+       -u <span class="s1">'username:password'</span> <span class="se">\</span>
+       -H <span class="s1">'Accept: application/vnd.go.cd.v1+text'</span> <span class="se">\</span>
        -X POST
 </code></pre>
 
@@ -2139,7 +2142,8 @@ File logs/operations.log was appended successfully
 
 <pre class="highlight shell"><code>
 <span class="gp">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/schedule'</span> <span class="se">\</span>
-       -u <span class="s1">'username:password'</span>
+       -u <span class="s1">'username:password'</span> <span class="se">\</span>
+       -H <span class="s1">'Accept: application/vnd.go.cd.v1+text'</span> <span class="se">\</span>
        -X POST
 </code></pre>
 
@@ -2212,6 +2216,7 @@ File logs/operations.log was appended successfully
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myStages/cancel'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+text'</span> <span class="se">\</span>
       -X POST
 </code></pre>
 
