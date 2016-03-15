@@ -3,7 +3,7 @@ json = {
   tracking_tool: {
     type: 'generic',
     attributes: {
-      link: 'https://github.com/gocd/api.go.cd/issues/${ID}',
+      url_pattern: 'https://github.com/gocd/api.go.cd/issues/${ID}',
       regex: '##(d+)'
     }
   }
@@ -20,14 +20,14 @@ end
 <%
 json = {
   attributes: {
-    link: 'https://github.com/gocd/api.go.cd/issues/${ID}',
+    url_pattern: 'https://github.com/gocd/api.go.cd/issues/${ID}',
     regex: '##(d+)'
   }
 }
 %>
 <%=
 describe_sub_object 'The generic tracking tool object', json: json, html_id: 'pipeline-config-tracking-tool-generic' do
-  link                    'String', 'In generic tracking tool, the URI to your tracking tool.'
+  url_pattern                    'String', 'In generic tracking tool, the URI to your tracking tool.'
   regex                   'String', 'In generic tracking tool, the regular expression to identify card or bug numbers from your checkin comments.'
 end
 %>
