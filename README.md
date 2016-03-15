@@ -68,7 +68,7 @@ $ git push
 
 ## Need help?
 
-* Just submit a issue to the [github repository](https://github.com/gocd/api-docs) if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes.
+* Just submit a issue to the [github repository](https://github.com/gocd/api.go.cd) if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes.
 
 
 ## Special thanks
