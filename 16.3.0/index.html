@@ -1331,6 +1331,74 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
     -d <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
 </code></pre>
 
+<h2 id="notify-mercurial-materials">Notify Mercurial materials</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/material/notify/hg'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -d <span class="s2">"repository_url=ssh://hg.example.com//hg/repos/funky-widgets"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
+</code></pre>
+
+<pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
+</code></pre>
+
+<p>APIs that notify Go Server when a commit has been made in Version Control and Go needs to trigger relevant pipelines.</p>
+
+<aside class="notice">
+    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+</aside>
+
+<p class='available-since'>
+  Available since v14.3.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/material/notify/hg</code></p>
+
+<p>The following post parameters must be specified.</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">repository_url</code></td>
+<td>String</td>
+<td>The Mercurial repository URL as defined in <code class="prettyprint">cruise-config.xml</code>.</td>
+</tr>
+</tbody></table>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A text confirmation.</p>
+
+<h3 id="notification-script">Notification script</h3>
+
+<p>To notify Go via a Mercurial changegroup hook, you may use the following in your Mercurial repository.</p>
+
+<p>The hook goes into the <code class="prettyprint">hgrc</code> file, located at <code class="prettyprint">/path/to/hg/repository/.hg/hgrc</code>.</p>
+
+<pre class="highlight plaintext"><code>[hooks]
+changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
+    -u 'username:password' \
+    -X POST \
+    -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
+</code></pre>
+
           <h1 id="backups">Backups</h1>
 
 <p>The backups API allows users with administrator role to manage go server backups.</p>
