@@ -3,6 +3,7 @@
 ```shell
 $ curl 'http://ci.example.com/go/properties/PipelineName/541/StageName/1/JobName/PropertyName' \
         -u 'username:password' \
+        -H 'Confirm: true' \
         -X POST \
         -d 'value=PropertyValue'
 ```
