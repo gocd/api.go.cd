@@ -2933,6 +2933,279 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>The contents of the configuration file.</p>
 
+<h2 id="create-pipeline">Create pipeline</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/tab/admin/pipelines/mypipeline.json'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -d <span class="s1">'url=http://svnrepo.com/mysvn/trunk'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/html; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"isValid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"messageId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline successfully created."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Creates a pipeline.</p>
+
+<p class='available-since'>
+  Available since v14.3.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/tab/admin/pipelines/:pipeline_name.json</code></p>
+
+<p>Creating pipeline supports following parameters.</p>
+
+<h3 id="general-parameters">General parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pipelineGroup</td>
+<td>defaultGroup</td>
+<td>No</td>
+<td>The name of the Pipeline Group to add the new pipeline to. The pipeline group will be created if it does not already exist.</td>
+</tr>
+<tr>
+<td>builder</td>
+<td>ant</td>
+<td>No</td>
+<td>Can be one of <code class="prettyprint">ant</code>, <code class="prettyprint">nant</code>, <code class="prettyprint">rake</code> or <code class="prettyprint">exec</code>.</td>
+</tr>
+<tr>
+<td>buildfile</td>
+<td>build.xml</td>
+<td>No</td>
+<td>Not allowed for exec</td>
+</tr>
+<tr>
+<td>target</td>
+<td>all</td>
+<td>No</td>
+<td>Not allowed for exec</td>
+</tr>
+<tr>
+<td>command</td>
+<td>unittest.sh  arg1 arg2</td>
+<td>No</td>
+<td>Required for exec</td>
+</tr>
+<tr>
+<td>source</td>
+<td>pkg</td>
+<td>No</td>
+<td>no default value</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>installer</td>
+<td>No</td>
+<td>no default value</td>
+</tr>
+</tbody></table>
+
+<h3 id="subversion">Subversion</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>svn</td>
+<td>No</td>
+<td>Default value is <code class="prettyprint">svn</code></td>
+</tr>
+<tr>
+<td>url</td>
+<td>http://svnrepo.com/mysvn/trunk</td>
+<td>Yes</td>
+<td>The URL of the Subversion repository</td>
+</tr>
+<tr>
+<td>username</td>
+<td>checkout_username</td>
+<td>No</td>
+<td>The SVN username</td>
+</tr>
+<tr>
+<td>password</td>
+<td>checkout_password</td>
+<td>No</td>
+<td>The SVN password</td>
+</tr>
+</tbody></table>
+
+<h3 id="mercurial">Mercurial</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>hg</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>http://hgrepo.com/hg/my_project</td>
+<td>Yes</td>
+<td>The URL of the repository</td>
+</tr>
+</tbody></table>
+
+<h3 id="git">Git</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>git</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>git://github.com/foo/bar.git</td>
+<td>Yes</td>
+<td>The URL of the repository</td>
+</tr>
+</tbody></table>
+
+<h3 id="perforce">Perforce</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>p4</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>p4server.foo.com:1666</td>
+<td>Yes</td>
+<td>The P4PORT of the repository</td>
+</tr>
+<tr>
+<td>username</td>
+<td>checkout_username</td>
+<td>No</td>
+<td>The P4USER to connect to the repository</td>
+</tr>
+<tr>
+<td>password</td>
+<td>checkout_password</td>
+<td>No</td>
+<td>The P4PASSWD to connect to the repository</td>
+</tr>
+<tr>
+<td>useTickets</td>
+<td>true or false</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td>view</td>
+<td>//depot/&hellip; //something/&hellip;</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+</tbody></table>
+
+<h3 id="team-foundation-server">Team Foundation Server</h3>
+
+<table><thead>
+<tr>
+<th>Parameter name</th>
+<th>Example value</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scm</td>
+<td>tfs</td>
+<td>Yes</td>
+<td>-</td>
+</tr>
+<tr>
+<td>url</td>
+<td>http://tfs.host.com:8080/tfs/DefaultCollection</td>
+<td>Yes</td>
+<td>The url of your TFS collection</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>COMPANYNAME</td>
+<td>No</td>
+<td>Domain name that the given user belong to</td>
+</tr>
+<tr>
+<td>username</td>
+<td>tfsuser</td>
+<td>Yes</td>
+<td>Username used to connect to the collection</td>
+</tr>
+<tr>
+<td>password</td>
+<td>tfspassword</td>
+<td>No</td>
+<td>Password for the given user name</td>
+</tr>
+<tr>
+<td>projectPath</td>
+<td>$/MyProject</td>
+<td>Yes</td>
+<td>Project path in the given collection</td>
+</tr>
+</tbody></table>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A text confirmation.</p>
+
           <h1 id="feeds">Feeds</h1>
 
 <p>The feed API allows users to view feed information.</p>
@@ -4895,7 +5168,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"generic"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd/issues/${ID}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd/issues/${ID}"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"regex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"##(d+)"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -4929,7 +5202,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd/issues/${ID}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd/issues/${ID}"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"regex"</span><span class="p">:</span><span class="w"> </span><span class="s2">"##(d+)"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4945,7 +5218,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">url_pattern</code></td>
+<td><code class="prettyprint">link</code></td>
 <td>String</td>
 <td>In generic tracking tool, the URI to your tracking tool.</td>
 </tr>
