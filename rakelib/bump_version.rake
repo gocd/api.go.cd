@@ -43,13 +43,13 @@ task :bump_version do
       end
     end
 
-    next_version = {
+    next_version_data = {
       version: next_version,
       location: "https://api.go.cd/#{next_version}/",
       type: "next"
     }
 
-    versions.unshift(next_version)
+    versions.unshift(next_version_data)
 
     open('versions.json', 'w') {|f| f.puts(JSON.pretty_generate(versions))}
 
