@@ -37,7 +37,7 @@ set :relative_links, true
 
 # Build Configuration
 configure :build do
-  set :build_dir, "build/16.4.0"
+  set :build_dir, "build/#{GOCD_VERSION}"
 
   activate :minify_css
   activate :minify_javascript
