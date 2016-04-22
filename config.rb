@@ -1,4 +1,5 @@
-require File.expand_path('../lib/helpers', __FILE__)
+require_relative "lib/version"
+require_relative "lib/helpers"
 helpers RenderAllSubTopics
 helpers DescribeObjectHelper
 helpers AvailableSinceHelper
