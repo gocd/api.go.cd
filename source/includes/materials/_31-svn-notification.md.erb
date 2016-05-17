@@ -55,6 +55,7 @@ UUID=$(svnlook uuid $1)
 
 curl 'https://ci.example.com/go/api/material/notify/svn' \
     -u 'username:password' \
+    -H 'Confirm: true' \
     -X POST \
     -d "uuid=$UUID"
 ```
