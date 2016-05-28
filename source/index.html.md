@@ -26,6 +26,7 @@ includes:
   - 150-dashboard
   - 160-pipeline-config
   - 170-version
+  - 171-environment-config
   - errors
 
 search: true

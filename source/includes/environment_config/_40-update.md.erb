@@ -1,0 +1,85 @@
+## Update an environment
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/environments/new_environment' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
+      -H 'If-Match: "26b227605daf6f2d7768c8edaf61b861"' \
+      -X PUT \
+      -d '{
+        "name" : "new_environment",
+        pipelines : [ { "name" : "pipeline1" } ]
+      }'
+
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/environments/new_environment"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#environment_config"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/environments/:environment_name"
+    }
+  },
+  "name": "new_environment",
+  "pipelines": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/pipeline1"
+        },
+        "doc": {
+          "href": "http://api.go.cd/#pipeline_config"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+        }
+      },
+      "name": "up42"
+    }
+  ],
+  "agents": [
+
+  ],
+  "environment_variables": [
+
+  ]
+}
+
+```
+
+Update some attributes of an environment.
+
+<%= available_since('16.6.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PATCH /go/api/admin/environments/environment_name`
+
+Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.
+
+<%=
+  describe_object nil do
+    name                      'String',  'The environment config name'
+  pipelines                 'Array',   'The list of pipeline names that belongs to the specified environment'
+  agents                    'Array',   'The list of agent uuids that belongs to the specified environment'
+  environment_variables     'Array',   'The list of [environment variables](#environment-config-environment-variables) that will be passed to all tasks (commands) that are part of this environment.'
+  end
+ %>
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [environment config object](#the-environment-config-object).

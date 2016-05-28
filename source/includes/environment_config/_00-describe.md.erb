@@ -1,0 +1,8 @@
+<%=
+describe_object 'The environment config object', since: '16.6.0' do
+  name                      'String',  'The environment config name'
+  pipelines                 'Array',   'The list of pipeline names that belongs to the specified environment'
+  agents                    'Array',   'The list of agent uuids that belongs to the specified environment'
+  environment_variables     'Array',   'The list of [environment variables](#environment-config-environment-variables) that will be passed to all tasks (commands) that are part of this environment.'
+end
+%>

@@ -1,0 +1,109 @@
+## Get environment config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/environments/my_environment' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -i
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Date: Sat, 28 May 2016 11:17:39 GMT
+Set-Cookie: JSESSIONID=1dt916ur7ycxsbx63nkz1lh8;Path=/go;Expires=Sat, 11-Jun-2016 11:17:39 GMT
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-UA-Compatible: chrome=1
+X-Controller-Action: api_v1/admin/environments#show
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 2ba62881-9778-4422-9947-c5d9c100f821
+X-Runtime: 0.166000
+Vary: Accept-Encoding, User-Agent
+ETag: "4167e3ec81fdac0fb29d854b36ceb981"
+Transfer-Encoding: chunked
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/environments/my_environment"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#environment_config"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/environments/:environment_name"
+    }
+  },
+  "name": "my_environment",
+  "pipelines": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/up42"
+        },
+        "doc": {
+          "href": "http://api.go.cd/#pipeline_config"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+        }
+      },
+      "name": "up42"
+    }
+  ],
+  "agents": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"
+        },
+        "doc": {
+          "href": "http://api.go.cd/#agents"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/agents/:uuid"
+        }
+      },
+      "uuid": "12345678-e2f6-4c78-123456789012"
+    }
+  ],
+  "environment_variables": [
+    {
+      "secure": false,
+      "name": "username",
+      "value": "admin"
+    },
+    {
+      "secure": true,
+      "name": "password",
+      "encrypted_value": "LSd1TI0eLa+DjytHjj0qjA=="
+    }
+  ]
+}
+```
+
+Gets environment config for specified environment name.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-environment-config'>edit environment config</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('16.6.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/environments/:environment_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [environment config object](#the-environment-config-object).

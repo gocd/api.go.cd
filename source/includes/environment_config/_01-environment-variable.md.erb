@@ -1,0 +1,18 @@
+<%
+json = {
+  environment_variables:   [
+    { name: 'USERNAME', value: 'admin', secure: false },
+    { name: 'PASSWORD', encrypted_value: '1f3rrs9uhn63hd', secure: true },
+    { name: 'SSH_PASSPHRASE', value: 'p@ssw0rd', secure: true }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The environment variable object', json: json, html_id: 'environment-config-environment-variables' do
+  name            'String',  'The name of the environment variable.'
+  value           'String',  'The value of the environment variable. You MUST specify one of `value` or `encrypted_value`.'
+  encrypted_value 'String',  'The encrypted value of the environment variable. You MUST specify one of `value` or `encrypted_value`.'
+  secure          'Boolean', 'Whether environment variable is secure or not. When set to `true`, encrypts the `value` if one is specified.'
+end
+%>
