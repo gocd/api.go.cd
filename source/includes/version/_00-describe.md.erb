@@ -1,0 +1,9 @@
+<%=
+describe_object 'The version object', since: '16.6.0' do
+  version            'String',       'The GoCD server version'
+  build_number       'Integer',      'The GoCD server build number'
+  git_sha            'String',       'The git SHA from which this server version was built'
+  full_version       'String',       'The GoCD server full version'
+  commit_url         'String',       'TThe GitHub url to the `git_sha`'
+end
+%>
