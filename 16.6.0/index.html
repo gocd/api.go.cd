@@ -5494,6 +5494,97 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>A new <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
 
+          <h1 id="version">Version</h1>
+
+<p>The Version API allows users to get the GoCD server version details.</p>
+
+<h2 id="the-version-object">The version object</h2>
+
+<p class='available-since'>
+  Available since v16.6.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">version</code></td>
+<td>String</td>
+<td>The GoCD server version.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">build_number</code></td>
+<td>Integer</td>
+<td>The GoCD server build number.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">git_sha</code></td>
+<td>String</td>
+<td>The git SHA from which this server version was built.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">full_version</code></td>
+<td>String</td>
+<td>The GoCD server full version.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">commit_url</code></td>
+<td>String</td>
+<td>TThe GitHub url to the <code class="prettyprint">git_sha</code>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-version">Get version</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/version'</span> <span class="se">\</span>
+    -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://build.go.cd/go/api/version"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.go.cd/#version"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16.6.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"build_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3348"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"git_sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a7a5717cbd60c30006314fb8dd529796c93adaf0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"full_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16.6.0 (3348-a7a5717cbd60c30006314fb8dd529796c93adaf0)"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"commit_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/gocd/commits/a7a5717cbd60c30006314fb8dd529796c93adaf0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Gets the current gocd server details</p>
+
+<p class='available-since'>
+  Available since v16.6.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/version</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The <a href="#the-version-object">version object</a>.</p>
+
           <h1 id="errors">Errors</h1>
 
 <p>Go CD uses the following HTTP status codes to indicate errors.</p>
