@@ -24,6 +24,7 @@ includes:
   - 140-feeds
   - 150-dashboard
   - 160-pipeline-config
+  - 170-version
   - errors
 
 search: true

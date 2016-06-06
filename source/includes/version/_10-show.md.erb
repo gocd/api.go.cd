@@ -1,0 +1,43 @@
+## Get version
+
+```shell
+$ curl 'https://ci.example.com/go/api/version' \
+    -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://build.go.cd/go/api/version"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#version"
+    }
+  },
+  "version": "16.6.0",
+  "build_number": "3348",
+  "git_sha": "a7a5717cbd60c30006314fb8dd529796c93adaf0",
+  "full_version": "16.6.0 (3348-a7a5717cbd60c30006314fb8dd529796c93adaf0)",
+  "commit_url": "https://github.com/gocd/gocd/commits/a7a5717cbd60c30006314fb8dd529796c93adaf0"
+}
+```
+
+Gets the current gocd server details
+
+<%= available_since('16.6.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/version`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [version object](#the-version-object).
