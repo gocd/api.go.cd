@@ -1,0 +1,16 @@
+# Configuration Repository
+
+This endpoint allows you to clone and fetch a copy of the configuration repository.
+
+<aside class='notice'>
+  <strong>Note:</strong> Only git clone/fetch operations are allowed. Git push operations
+  are NOT allowed.
+</aside>
+
+## Clone the configuration repository
+
+```shell
+git clone 'https://username:password@ci.example.com/go/api/config-repository.git'
+```
+
+<%= available_since('16.6.0') %>
