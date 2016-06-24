@@ -21,6 +21,7 @@ includes:
   - 110-jobs
   - 120-properties
   - 130-configuration
+  - 135-config-repository
   - 140-feeds
   - 150-dashboard
   - 160-pipeline-config
@@ -31,4 +32,3 @@ search: true
 current_api_version: application/vnd.go.cd.v1+json
 
 ---
-
