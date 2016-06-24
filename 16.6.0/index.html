@@ -2933,6 +2933,23 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>The contents of the configuration file.</p>
 
+          <h1 id="configuration-repository">Configuration Repository</h1>
+
+<p>This endpoint allows you to clone and fetch a copy of the configuration repository.</p>
+
+<aside class='notice'>
+  <strong>Note:</strong> Only git clone/fetch operations are allowed. Git push operations
+  are NOT allowed.
+</aside>
+
+<h2 id="clone-the-configuration-repository">Clone the configuration repository</h2>
+<pre class="highlight shell"><code>git clone <span class="s1">'https://username:password@ci.example.com/go/api/config-repository.git'</span>
+</code></pre>
+
+<p class='available-since'>
+  Available since v16.6.0.
+</p>
+
           <h1 id="feeds">Feeds</h1>
 
 <p>The feed API allows users to view feed information.</p>
