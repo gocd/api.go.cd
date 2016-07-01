@@ -1,0 +1,33 @@
+## Delete an environment
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/environments/my_environment' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "message": "Environment 'my_environment' was deleted successfully."
+}
+```
+
+Deletes an environment.
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/admin/environments/:environment_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the environment was deleted.

@@ -1,0 +1,95 @@
+## Get environment config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/environments/my_environment' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "4167e3ec81fdac0fb29d854b36ceb981"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/environments/my_environment"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#environment-config"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/environments/:environment_name"
+    }
+  },
+  "name": "my_environment",
+  "pipelines": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/up42"
+        },
+        "doc": {
+          "href": "http://api.go.cd/#pipeline-config"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+        }
+      },
+      "name": "up42"
+    }
+  ],
+  "agents": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"
+        },
+        "doc": {
+          "href": "http://api.go.cd/#agents"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/agents/:uuid"
+        }
+      },
+      "uuid": "12345678-e2f6-4c78-123456789012"
+    }
+  ],
+  "environment_variables": [
+    {
+      "secure": false,
+      "name": "username",
+      "value": "admin"
+    },
+    {
+      "secure": true,
+      "name": "password",
+      "encrypted_value": "LSd1TI0eLa+DjytHjj0qjA=="
+    }
+  ]
+}
+```
+
+Gets environment config for specified environment name.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-environment-config'>edit environment config</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/environments/:environment_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [environment config object](#the-environment-config-object).

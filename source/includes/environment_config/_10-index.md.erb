@@ -1,0 +1,102 @@
+## Get all environments
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/environments' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "3924a894cf0e5bef02abe9de0df3bb84"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/environments"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#environment-config"
+    }
+  },
+  "_embedded": {
+    "environments": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/environments/foobar"
+          },
+          "doc": {
+            "href": "http://api.go.cd/#environment-config"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/environments/:environment_name"
+          }
+        },
+        "name": "foobar",
+        "pipelines": [
+          {
+            "_links": {
+              "self": {
+                "href": "https://ci.example.com/go/api/admin/pipelines/up42"
+              },
+              "doc": {
+                "href": "http://api.go.cd/#pipeline-config"
+              },
+              "find": {
+                "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+              }
+            },
+            "name": "up42"
+          }
+        ],
+        "agents": [
+          {
+            "_links": {
+              "self": {
+                "href": "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"
+              },
+              "doc": {
+                "href": "http://api.go.cd/#agents"
+              },
+              "find": {
+                "href": "https://ci.example.com/go/api/agents/:uuid"
+              }
+            },
+            "uuid": "12345678-e2f6-4c78-123456789012"
+          }
+        ],
+        "environment_variables": [
+          {
+            "secure": false,
+            "name": "username",
+            "value": "admin"
+          },
+          {
+            "secure": true,
+            "name": "password",
+            "encrypted_value": "LSd1TI0eLa+DjytHjj0qjA=="
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Lists all available environments.
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/environments`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [environment config objects](#the-environment-config-object).
