@@ -4,28 +4,14 @@
 $ curl 'https://ci.example.com/go/api/admin/environments' \
       -u 'username:password' \
       -H 'Accept: application/vnd.go.cd.v1+json' \
-      -i
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Date: Sat, 28 May 2016 08:26:43 GMT
-Set-Cookie: JSESSIONID=1dcspjja6ilub1h56ywa18vhw5;Path=/go;Expires=Sat, 11-Jun-2016 08:26:44 GMT
-Expires: Thu, 01 Jan 1970 00:00:00 GMT
-X-Frame-Options: SAMEORIGIN
-X-XSS-Protection: 1; mode=block
-X-Content-Type-Options: nosniff
-X-UA-Compatible: chrome=1
-X-Controller-Action: api_v1/admin/environments#index
 Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
-Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 8a7de54c-44ec-4d2f-8df7-acf4ecd05269
-X-Runtime: 0.547000
-Vary: Accept-Encoding, User-Agent
 ETag: "3924a894cf0e5bef02abe9de0df3bb84"
-Transfer-Encoding: chunked
 ```
 
 ```json
@@ -35,7 +21,7 @@ Transfer-Encoding: chunked
       "href": "https://ci.example.com/go/api/admin/environments"
     },
     "doc": {
-      "href": "http://api.go.cd/#environment_config"
+      "href": "http://api.go.cd/#environment-config"
     }
   },
   "_embedded": {
@@ -46,7 +32,7 @@ Transfer-Encoding: chunked
             "href": "https://ci.example.com/go/api/admin/environments/foobar"
           },
           "doc": {
-            "href": "http://api.go.cd/#environment_config"
+            "href": "http://api.go.cd/#environment-config"
           },
           "find": {
             "href": "https://ci.example.com/go/api/admin/environments/:environment_name"
@@ -60,7 +46,7 @@ Transfer-Encoding: chunked
                 "href": "https://ci.example.com/go/api/admin/pipelines/up42"
               },
               "doc": {
-                "href": "http://api.go.cd/#pipeline_config"
+                "href": "http://api.go.cd/#pipeline-config"
               },
               "find": {
                 "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
@@ -105,7 +91,7 @@ Transfer-Encoding: chunked
 
 Lists all available environments.
 
-<%= available_since('16.6.0') %>
+<%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 

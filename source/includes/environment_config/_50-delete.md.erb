@@ -1,7 +1,7 @@
 ## Delete an environment
 
 ```shell
-$ curl 'http://localhost:8153/go/api/admin/environments/my_environment' \
+$ curl 'https://ci.example.com/go/api/admin/environments/my_environment' \
       -u 'username:password' \
       -H 'Accept: application/vnd.go.cd.v1+json' \
       -X DELETE
@@ -22,7 +22,7 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
 
 Deletes an environment.
 
-<%= available_since('16.6.0') %>
+<%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 

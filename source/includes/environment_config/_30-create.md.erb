@@ -1,7 +1,7 @@
 ## Create an environment
 
 ```shell
-$ curl 'https://ci.example.com/go/api/admin/environments/' \
+$ curl 'https://ci.example.com/go/api/admin/environments' \
       -u 'username:password' \
       -H 'Accept: application/vnd.go.cd.v1+json' \
       -H 'Content-Type: application/json' \
@@ -41,7 +41,7 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
       "href": "https://ci.example.com/go/api/admin/environments/new_environment"
     },
     "doc": {
-      "href": "http://api.go.cd/#environment_config"
+      "href": "http://api.go.cd/#environment-config"
     },
     "find": {
       "href": "https://ci.example.com/go/api/admin/environments/:environment_name"
@@ -55,7 +55,7 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
           "href": "https://ci.example.com/go/api/admin/pipelines/up42"
         },
         "doc": {
-          "href": "http://api.go.cd/#pipeline_config"
+          "href": "http://api.go.cd/#pipeline-config"
         },
         "find": {
           "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
@@ -97,11 +97,11 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
 
 Creates an environment
 
-<%= available_since('16.6.0') %>
+<%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`POST /go/api/admin/environments/`
+`POST /go/api/admin/environments`
 
 The following properties may be specified:
 
