@@ -1,0 +1,45 @@
+## Bulk delete agents
+
+```shell
+curl 'https://ci.example.com/go/api/agents' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v2+json' \
+      -H 'Content-Type: application/json' \
+      -X DELETE \
+      -d '{
+            "uuids": [
+              "adb9540a-b954-4571-9d9b-2f330739d4da",
+              "adb528b2-b954-1234-9d9b-b27ag4h568e1"
+            ]
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
+```
+
+```json
+{
+  "message": "Deleted 2 agent(s)."
+}
+```
+
+Deletes a list of agents.
+
+<aside class="notice">
+  You must first <a href='#bulk-update-agents'>disable the agents</a> and ensure that their
+  <a href='#get-all-agents'>status</a> is not <code>Building</code>, before attempting to deleting them.
+</aside>
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/agents`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the agents were deleted.
