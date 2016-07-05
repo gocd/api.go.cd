@@ -584,6 +584,248 @@
 
 <p>A message confirmation if the agent was deleted.</p>
 
+<h2 id="bulk-update-agents">Bulk update agents</h2>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -X PATCH <span class="se">\</span>
+      -d <span class="s1">'{
+            "uuids": [
+              "adb9540a-b954-4571-9d9b-2f330739d4da",
+              "adb528b2-b954-1234-9d9b-b27ag4h568e1"
+            ],
+            "operations": {
+              "environments": {
+                "add": ["Dev", "Test"],
+                "remove": ["Production"]
+              },
+              "resources": {
+                "add": ["Linux", "Firefox"],
+                "remove": ["Chrome"]
+              }
+            },
+            "agent_config_state" : "enabled"
+          }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated agent(s) with uuid(s): [adb9540a-b954-4571-9d9b-2f330739d4da, adb528b2-b954-1234-9d9b-b27ag4h568e1]."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Updates a list of agents.</p>
+
+<p class='available-since'>
+  Available since v16.7.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">PATCH /go/api/agents</code></p>
+
+<p>Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">operations</code></td>
+<td>Object</td>
+<td>The <a href="#the-agent-update-operations">bulk update operations</a> performed on the set of agents.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">agent_config_state</code></td>
+<td>String</td>
+<td>Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents. Can be one of <code class="prettyprint">Enabled</code>, <code class="prettyprint">Disabled</code>.</td>
+</tr>
+</tbody></table>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message confirmation if the agents were updated successfully.</p>
+
+<p><a id='the-agent-update-operations'></a></p>
+
+<h3 id="the-bulk-update-operation-attributes">The bulk update operation attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Dev"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Test"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Production"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Linux"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Firefox"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"Chrome"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">environments</code></td>
+<td>Object</td>
+<td>The <a href="#the-agent-environments-update-operation">environments update operation</a> to be performed on the set of agents.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">resources</code></td>
+<td>Object</td>
+<td>The <a href="#the-agent-resources-update-operation">resources update operation</a> to be performed on the set of agents.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-agent-environments-update-operation'></a></p>
+
+<h3 id="the-environment-update-operation-attributes">The environment update operation attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Dev"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Test"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Production"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">add</code></td>
+<td>Array</td>
+<td>The list of environments to which the specified agents needs to be added.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">remove</code></td>
+<td>Array</td>
+<td>The list of environments from which the specified agents needs to be removed.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-agent-resources-update-operation'></a></p>
+
+<h3 id="the-resources-update-operation-attributes">The resources update operation attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Linux"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Firefox"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Chrome"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">add</code></td>
+<td>Array</td>
+<td>The list of resources that the agents needs to be tagged with.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">remove</code></td>
+<td>Array</td>
+<td>The list of resources that the agents needs to be removed from.</td>
+</tr>
+</tbody></table>
+
+<h2 id="bulk-delete-agents">Bulk delete agents</h2>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -X DELETE <span class="se">\</span>
+      -d <span class="s1">'{
+            "uuids": [
+              "adb9540a-b954-4571-9d9b-2f330739d4da",
+              "adb528b2-b954-1234-9d9b-b27ag4h568e1"
+            ]
+          }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deleted 2 agent(s)."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Deletes a list of agents.</p>
+
+<aside class="notice">
+  You must first <a href='#bulk-update-agents'>disable the agents</a> and ensure that their
+  <a href='#get-all-agents'>status</a> is not <code>Building</code>, before attempting to deleting them.
+</aside>
+
+<p class='available-since'>
+  Available since v16.7.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">DELETE /go/api/agents</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message confirmation if the agents were deleted.</p>
+
 <h2 id="agent-job-run-history">Agent job run history</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da/job_run_history'</span> <span class="se">\</span>
