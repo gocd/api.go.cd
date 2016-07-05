@@ -1,0 +1,109 @@
+## Bulk update agents
+
+```shell
+curl 'https://ci.example.com/go/api/agents' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v2+json' \
+      -H 'Content-Type: application/json' \
+      -X PATCH \
+      -d '{
+            "uuids": [
+              "adb9540a-b954-4571-9d9b-2f330739d4da",
+              "adb528b2-b954-1234-9d9b-b27ag4h568e1"
+            ],
+            "operations": {
+              "environments": {
+                "add": ["Dev", "Test"],
+                "remove": ["Production"]
+              },
+              "resources": {
+                "add": ["Linux", "Firefox"],
+                "remove": ["Chrome"]
+              }
+            },
+            "agent_config_state" : "enabled"
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
+```
+
+```json
+{
+  "message": "Updated agent(s) with uuid(s): [adb9540a-b954-4571-9d9b-2f330739d4da, adb528b2-b954-1234-9d9b-b27ag4h568e1]."
+}
+```
+
+Updates a list of agents.
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PATCH /go/api/agents`
+
+Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.
+
+<%=
+  describe_object(nil) do
+    operations            'Object',             'The [bulk update operations](#the-agent-update-operations) performed on the set of agents'
+    agent_config_state    'String',             'Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents.', one_of: %w(Enabled Disabled)
+  end
+ %>
+
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the agents were updated successfully.
+
+<%
+json = {
+  environments: {
+    add: %w(Dev Test),
+    remove: ['Production']
+  },
+  resources: {
+    add: %w(Linux Firefox),
+    remove: ['Chrome']
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The bulk update operation attributes', json: json, html_id: 'the-agent-update-operations' do
+  environments     'Object',  'The [environments update operation](#the-agent-environments-update-operation) to be performed on the set of agents'
+  resources        'Object',  'The [resources update operation](#the-agent-resources-update-operation) to be performed on the set of agents'
+end
+%>
+
+<%
+json = {
+  add: %w(Dev Test),
+  remove: ['Production']
+}
+%>
+
+<%=
+describe_sub_object 'The environment update operation attributes', json: json, html_id: 'the-agent-environments-update-operation' do
+  add              'Array',   'The list of environments to which the specified agents needs to be added'
+  remove           'Array',   'The list of environments from which the specified agents needs to be removed'
+end
+%>
+
+<%
+json = {
+  add: %w(Linux Firefox),
+  remove: ['Chrome']
+}
+%>
+
+<%=
+describe_sub_object 'The resources update operation attributes', json: json, html_id: 'the-agent-resources-update-operation' do
+  add              'Array',   'The list of resources that the agents needs to be tagged with'
+  remove           'Array',   'The list of resources that the agents needs to be removed from'
+end
+%>
