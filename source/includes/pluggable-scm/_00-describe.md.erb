@@ -1,0 +1,9 @@
+<%=
+describe_object 'The global scm config object', since: '16.7.0' do
+  id                'String',   'Each material is associated with an id by which it can be referenced in the pipelines. If the id is not provided during creation, a uuid will be generated. Id is mandatory while providing data for update.'
+  name              'String',   'The global name of the material.'
+  auto_update       'Boolean',  'Whether the material is set to poll for new changes.'
+  plugin_metadata   'Object',   'The [plugin metadata](#pluggable-scm-plugin-metadata) provides information about the plugin.'
+  configuration     'Object',   'The list of [properties](#pluggable-scm-configuration) (key-value pairs) to be provided for using the plugin'
+end
+%>

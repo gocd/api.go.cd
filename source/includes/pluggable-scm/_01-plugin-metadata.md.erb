@@ -1,0 +1,12 @@
+<%
+json = {
+  plugin_metadata: { id: 'github.pr', version: '1.1' }
+}
+%>
+
+<%=
+describe_sub_object 'The plugin metadata object', json: json, html_id: 'pluggable-scm-plugin-metadata' do
+  id        'String', 'The plugin id'
+  version   'String', 'The current version of the plugin'
+end
+%>
