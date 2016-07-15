@@ -49,6 +49,7 @@ The hook goes into the `hgrc` file, located at `/path/to/hg/repository/.hg/hgrc`
 [hooks]
 changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
     -u 'username:password' \
+    -H 'Confirm: true' \
     -X POST \
     -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
 ```
