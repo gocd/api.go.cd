@@ -1501,6 +1501,7 @@
 
 curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span> <span class="se">\</span>
     -u <span class="s1">'username:password'</span> <span class="se">\</span>
+    -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
     -X POST <span class="se">\</span>
     -d <span class="s2">"uuid=</span><span class="nv">$UUID</span><span class="s2">"</span>
 </code></pre>
@@ -1571,6 +1572,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 
 curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span> <span class="se">\</span>
     -u <span class="s1">'username:password'</span> <span class="se">\</span>
+    -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
     -X POST <span class="se">\</span>
     -d <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
 </code></pre>
@@ -1640,6 +1642,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 <pre class="highlight plaintext"><code>[hooks]
 changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
     -u 'username:password' \
+    -H 'Confirm: true' \
     -X POST \
     -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
 </code></pre>
