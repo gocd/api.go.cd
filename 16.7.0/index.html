@@ -439,8 +439,11 @@
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X PATCH <span class="se">\</span>
       -d <span class="s1">'{
-            "hostname": "agent02.example.com"
-          }'</span>
+        "hostname": "agent02.example.com",
+        "agent_config_state": "Enabled",
+        "resources": ["Java","Linux"],
+        "environments": ["Dev"]
+        }'</span>
 </code></pre>
 
 <blockquote>
@@ -472,8 +475,8 @@
   </span><span class="nt">"agent_config_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enabled"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"agent_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="s2">"linux"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Java"</span><span class="p">,</span><span class="s2">"Linux"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Dev"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
