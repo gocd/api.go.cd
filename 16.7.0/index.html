@@ -3840,6 +3840,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
             </span><span class="s2">"**/*.html"</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -3888,6 +3889,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">invert_filter</code></td>
+<td>Boolean</td>
+<td>Invert filter to enable whitelist. <strong>Since v16.7.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">submodule_folder</code></td>
 <td>String</td>
 <td>The git submodule in the git repository.</td>
@@ -3914,6 +3920,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myProject"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"check_externals"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -3967,6 +3974,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">invert_filter</code></td>
+<td>Boolean</td>
+<td>Invert filter to enable whitelist. <strong>Since v16.7.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">auto_update</code></td>
 <td>Boolean</td>
 <td>Whether to poll for new changes or not.</td>
@@ -3991,6 +4003,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://username:password@hg.example.com/hg/api.go.cd"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -4028,6 +4041,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">invert_filter</code></td>
+<td>Boolean</td>
+<td>Invert filter to enable whitelist. <strong>Since v16.7.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">auto_update</code></td>
 <td>Boolean</td>
 <td>Whether to poll for new changes or not.</td>
@@ -4051,6 +4069,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -4113,6 +4132,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">invert_filter</code></td>
+<td>Boolean</td>
+<td>Invert filter to enable whitelist. <strong>Since v16.7.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">auto_update</code></td>
 <td>Boolean</td>
 <td>Whether to poll for new changes or not.</td>
@@ -4136,7 +4160,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tfs_destination"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -4201,6 +4226,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">filter</code></td>
 <td>Object</td>
 <td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">invert_filter</code></td>
+<td>Boolean</td>
+<td>Invert filter to enable whitelist. <strong>Since v16.7.0</strong>.</td>
 </tr>
 </tbody></table>
 
@@ -4296,7 +4326,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plugin"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5e3612f7-6aa1-4d75-a9b7-6aeb52d98012"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -4326,6 +4357,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">filter</code></td>
 <td>Object</td>
 <td>The <a href="#pipeline-config-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">invert_filter</code></td>
+<td>Boolean</td>
+<td>Invert filter to enable whitelist. <strong>Since v16.7.0</strong>.</td>
 </tr>
 </tbody></table>
 
@@ -5304,6 +5340,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                     </span><span class="s2">"**/*.html"</span><span class="w">
             </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
@@ -5427,6 +5464,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                   "url": "git@github.com:sample_repo/example.git",
                   "destination": "destination1",
                   "filter": null,
+                  "invert_filter": false,
                   "name": null,
                   "auto_update": true,
                   "branch": "master",
@@ -5509,6 +5547,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination1"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
@@ -5607,6 +5646,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                           "url": "git@github.com:sample_repo/example.git",
                           "destination": "dest",
                           "filter": null,
+                          "invert_filter": false,
                           "name": null,
                           "auto_update": true,
                           "branch": "master",
@@ -5689,6 +5729,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
