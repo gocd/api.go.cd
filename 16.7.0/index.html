@@ -1968,7 +1968,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 <h2 id="create-artifact">Create artifact</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/pkg/foobar-widgets-1.2.3.jar'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
       -X POST <span class="se">\</span>
       -F <span class="s1">'file=@target/dist/foobar-widgets-1.2.3.jar'</span>
 </code></pre>
@@ -2018,7 +2018,7 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 <h2 id="append-to-artifact">Append to artifact</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/logs/operations.log'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
       -T logs/production.log
 </code></pre>
 
