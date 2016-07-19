@@ -13,6 +13,7 @@ json = {
         destination: 'tfs_destination',
         auto_update: true,
         filter: nil,
+        invert_filter: true
       }
     }
   ]
@@ -30,5 +31,6 @@ describe_sub_object 'The tfs material attributes', json: json, html_id: 'pipelin
   destination         'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
   auto_update         'Boolean', 'Whether to poll for new changes or not.'
   filter              'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  invert_filter       'Boolean', 'Invert filter to enable whitelist', since: '16.7.0'
 end
 %>
