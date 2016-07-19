@@ -12,7 +12,8 @@ json = {
         encrypted_password: 'aSdiFgRRZ6A=',
         destination: 'api-docs',
         filter: nil,
-        auto_update: true,
+        invert_filter: true,
+        auto_update: true
       }
     }
   ]
@@ -29,6 +30,7 @@ describe_sub_object 'The perforce material attributes', json: json, html_id: 'pi
   encrypted_password  'String',  'The encrypted password for the specified user.'
   destination         'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
   filter              'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  invert_filter       'Boolean', 'Invert filter to enable whitelist', since: '16.7.0'
   auto_update         'Boolean', 'Whether to poll for new changes or not.'
 end
 %>

@@ -5,7 +5,8 @@ json = {
       type: 'plugin',
       attributes: {
         ref: '5e3612f7-6aa1-4d75-a9b7-6aeb52d98012',
-        filter: nil
+        filter: nil,
+        invert_filter: true
       }
     }
   ]
@@ -13,8 +14,9 @@ json = {
 %>
 <%=
 describe_sub_object 'The plugin material attributes', json: json, html_id: 'pipeline-config-plugin-material' do
-  ref         'String', 'The unique svn plugin repository id.'
-  destination 'String', 'The directory (relative to the pipeline directory) in which source code will be checked out.'
-  filter      'Object', 'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  ref            'String', 'The unique svn plugin repository id.'
+  destination    'String', 'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  filter         'Object', 'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  invert_filter  'Boolean', 'Invert filter to enable whitelist', since: '16.7.0'
 end
 %>
