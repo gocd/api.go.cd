@@ -1,0 +1,25 @@
+<%
+    json = {
+  pluggable_instance_settings: {
+    configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false
+        }
+      }],
+      view: {
+        template: "<div>Plugin view template</div>"
+      }
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The pluggable_instance_settings object', json: json, html_id: 'pluggable-instance-settings' do
+  configurations    'Array', 'List of [configurations](#the-plugin-info-configurations-object) required to configure a pluggable instance'
+  view              'Object', 'The [view](#the-plugin-info-view-object) contains the Angular view template'
+end
+%>

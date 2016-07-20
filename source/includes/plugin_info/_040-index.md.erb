@@ -1,0 +1,62 @@
+## Get all plugin info
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/plugin_info' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "3924a894cf0e5bef02abe9de0df3bb84"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/plugin_info"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#plugin-info"
+    }
+  },
+  "_embedded": {
+    "plugin_info": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/plugin_info/plugin_id"
+          },
+          "doc": {
+            "href": "http://api.go.cd/#plugin-info"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/plugin_info/:id"
+          }
+        },
+        "id": "plugin_id",
+        "name": "SCM Plugin",
+        "display_name": "SCM Plugin For HG",
+        "version": "1.2.3",
+        "type": "scm"
+      }
+    ]
+  }
+}
+```
+
+Lists all available plugin info.
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/plugin_info`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [plugin info objects](#the-plugin-info-object).

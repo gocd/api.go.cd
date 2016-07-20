@@ -1,0 +1,79 @@
+## Get plugin info
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/plugin_info/my_plugin' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "4167e3ec81fdac0fb29d854b36ceb981"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/plugin_info/my_plugin"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#plugin-info"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/plugin_info/:id"
+    }
+  },
+  "id": "my_plugin",
+  "name": "My SCM Plugin",
+  "display_name": "SCM Plugin For HG",
+  "version": "1.2.3",
+  "type": "scm",
+  "pluggable_instance_settings": {
+    "configurations": [
+      {
+        "key": "url",
+        "metadata": {
+          "secure": false,
+          "required": true,
+          "part_of_identity": true
+        }
+      },
+      {
+        "key": "username",
+        "metadata": {
+          "secure": false,
+          "required": false,
+          "part_of_identity": false
+        }
+      },
+      {
+        "key": "password",
+        "metadata": {
+          "secure": true,
+          "required": false,
+          "part_of_identity": false
+        }
+      }
+    ],
+    "view": {
+    "template": "<div>Plugin view template </div>"
+    }
+  }
+}
+```
+
+Gets plugin info for a specified plugin id.
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/plugin_info/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [plugin info object](#the-plugin-info-object).

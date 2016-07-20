@@ -27,6 +27,7 @@ includes:
   - 160-pipeline-config
   - 170-version
   - 171-environment-config
+  - 180-plugin-info
   - errors
 
 search: true
