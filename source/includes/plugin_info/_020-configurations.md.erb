@@ -1,0 +1,20 @@
+<%
+    json =  {
+  configurations: [
+    {
+      key: "url",
+      metadata: {
+        secure: false,
+        required: true,
+        part_of_identity: false
+      }
+    }
+  ]
+}
+%>
+<%=
+describe_sub_object 'The plugin info configurations object', json: json, html_id: 'plugin-info-configurations' do
+  key      'String', 'Describes the configuration key'
+  metadata 'Object', 'Metadata for the configuration property'
+end
+%>

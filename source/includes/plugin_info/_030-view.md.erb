@@ -1,0 +1,13 @@
+<%
+    json = {
+  view: {
+    template: "<div>Plugin view template</div>"
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The plugin info view object', json: json, html_id: 'plugin-info-view' do
+  template    'String', 'The plugin Angular.js view template'
+end
+%>
