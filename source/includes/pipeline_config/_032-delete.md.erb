@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: application/vnd.go.cd.v2+json' \
       -X DELETE
 
 ```
@@ -13,7 +13,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
 ```
 
 ```json
