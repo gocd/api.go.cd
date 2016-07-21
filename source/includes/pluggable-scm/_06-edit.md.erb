@@ -1,0 +1,103 @@
+## Update Pluggable SCM object
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/scms/scmName' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
+      -H 'If-Match: "e064ca0fe5d8a39602e19666454b8d77"' \
+      -X PUT \
+      -d '{
+            "id": "scmID",
+            "name": "scmName",
+            "auto_update": true,
+            "plugin_metadata":
+            {
+              "id": "github.pr",
+              "version": "1"
+            },
+            "configuration": [
+            {
+              "key": "url",
+              "value": "git@github.com:sample/example.git"
+            },
+            {
+              "key": "username",
+              "value": "admin"
+            },
+            {
+              "key": "password",
+              "encrypted_value": "aSdiFgRRZ6A="
+            }
+            ]
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "e89135b38ddbcd9380c83eb524647bdd"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/scms/scmName"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#scms"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/scms/:material_name"
+    }
+  },
+  "id": "scmID",
+  "name": "scmName",
+  "plugin_metadata": {
+    "id": "github.pr",
+    "version": "1"
+  },
+  "auto_update": true,
+  "configuration": [
+    {
+      "key": "url",
+      "value": "https://github.com/sample/example.git"
+    },
+    {
+      "key": "username",
+      "value": "admin"
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+}
+```
+
+Update pipeline config for specified pipeline name.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update pluggable SCM API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  pipeline config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the pipeline config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/scms/:material_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [SCM](#the-global-scm-config-object) object.

@@ -28,6 +28,7 @@ includes:
   - 170-version
   - 171-environment-config
   - 180-plugin-info
+  - 182-pluggable-scm
   - errors
 
 search: true

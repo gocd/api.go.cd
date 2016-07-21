@@ -1,0 +1,66 @@
+## Get a Pluggable SCM material
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/scms/pluggable.scm.material.name' \
+      -u 'username:password' \
+      -H 'Accept:application/vnd.go.cd.v1+json'
+      -i
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "05548388f7ef5042cd39f7fe42e85735"
+
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/scms/pluggable.scm.material.name"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#scms"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/scms/:material_name"
+    }
+  },
+  "id": "scmID",
+  "name": "pluggable.scm.material.name",
+  "plugin_metadata": {
+    "id": "github.pr",
+    "version": "1"
+  },
+  "auto_update": true,
+  "configuration": [
+    {
+      "key": "url",
+      "value": "https://github.com/sample/example.git"
+    },
+    {
+      "key": "username",
+      "value": "admin"
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+}
+```
+
+Lists all available pluggable scm materials, these are materials that are present in the in `cruise-config.xml`.
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/scms/:material_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [SCM](#the-global-scm-config-object) object

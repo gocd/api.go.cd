@@ -1,0 +1,90 @@
+## Create a SCM object
+
+```shell
+$   curl 'http://ci.example.com/go/api/admin/scms' \
+  -u 'username:password' \
+  -H 'Accept:application/vnd.go.cd.v1+json' \
+  -H 'Content-Type:application/json' \
+  -X POST -d '{
+  "id": "scm-id",
+  "name": "foobar",
+  "auto_update": true,
+  "plugin_metadata": {
+    "id": "github.pr",
+    "version": "1"
+  },
+  "configuration": [
+    {
+      "key": "url",
+      "value": "git@github.com:sample/example.git"
+    },
+    {
+      "key": "username",
+      "value": "admin"
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+ }'
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/scms/scmName"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#scms"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/scms/:material_name"
+    }
+  },
+  "id": "scm-id",
+  "name": "scmName",
+  "plugin_metadata": {
+    "id": "github.pr",
+    "version": "1"
+  },
+  "auto_update": true,
+  "configuration": [
+    {
+      "key": "url",
+      "value": "https://github.com/sample/example.git"
+    },
+    {
+      "key": "username",
+      "encrypted_value": "50TVtMW3cBU="
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+}
+
+```
+
+Create a global SCM object.
+
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/scms`
+
+<p class='http-request-return-description'>Returns</p>
+
+A new [SCM](#the-global-scm-config-object) object.
