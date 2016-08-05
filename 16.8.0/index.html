@@ -222,7 +222,7 @@
 <p>The agents API allows users with administrator role to manage agents.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v2</code> of the API using <code>Accept: application/vnd.go.cd.v2+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v3</code> of the API using <code>Accept: application/vnd.go.cd.v3+json</code>
 </aside>
 
 <h2 id="the-agent-object">The agent object</h2>
@@ -249,6 +249,16 @@
 <td><code class="prettyprint">hostname</code></td>
 <td>String</td>
 <td>The hostname of the agent.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">elastic_agent_id</code></td>
+<td>String</td>
+<td>The elastic agent identifier of this agent. This attribute is only available if the agent is an elastic agent. <strong>Since v16.8.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">elastic_plugin_id</code></td>
+<td>String</td>
+<td>The identifier of the elastic agent plugin that manages this agent instance. This attribute is only available if the agent is an elastic agent. <strong>Since v16.8.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">ip_address</code></td>
@@ -288,7 +298,7 @@
 <tr>
 <td><code class="prettyprint">resources</code></td>
 <td>Array</td>
-<td>The set of resources that this agent is tagged with.</td>
+<td>The set of resources that this agent is tagged with. This attribute is only available if the agent is <strong>NOT</strong> an elastic agent.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">environments</code></td>
@@ -301,7 +311,7 @@
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre>
 
 <blockquote>
@@ -309,7 +319,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -380,7 +390,7 @@
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre>
 
 <blockquote>
@@ -388,7 +398,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -435,7 +445,7 @@
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X PATCH <span class="se">\</span>
       -d <span class="s1">'{
@@ -451,7 +461,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -519,7 +529,7 @@
 <tr>
 <td><code class="prettyprint">resources</code></td>
 <td><code class="prettyprint">String</code> &#124; <code class="prettyprint">Array</code></td>
-<td>A comma separated strings of resources, or an array of string resources.</td>
+<td>A comma separated strings of resources, or an array of string resources. Updating of resources is <strong>NOT</strong> supported by elastic agents.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">environments</code></td>
@@ -541,7 +551,7 @@
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -X DELETE
 </code></pre>
 
@@ -550,7 +560,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -591,7 +601,7 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X PATCH <span class="se">\</span>
       -d <span class="s1">'{
@@ -618,7 +628,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -701,7 +711,7 @@
 <tr>
 <td><code class="prettyprint">environments</code></td>
 <td>Object</td>
-<td>The <a href="#the-agent-environments-update-operation">environments update operation</a> to be performed on the set of agents.</td>
+<td>The <a href="#the-agent-environments-update-operation">environments update operation</a> to be performed on the set of agents. Updating of resources is <strong>NOT</strong> supported by elastic agents.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">resources</code></td>
@@ -786,7 +796,7 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X DELETE <span class="se">\</span>
       -d <span class="s1">'{
@@ -802,7 +812,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
