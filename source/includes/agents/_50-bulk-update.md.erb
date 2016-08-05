@@ -3,7 +3,7 @@
 ```shell
 curl 'https://ci.example.com/go/api/agents' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v2+json' \
+      -H 'Accept: application/vnd.go.cd.v3+json' \
       -H 'Content-Type: application/json' \
       -X PATCH \
       -d '{
@@ -29,7 +29,7 @@ curl 'https://ci.example.com/go/api/agents' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
+Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
 ```
 
 ```json
@@ -75,7 +75,7 @@ json = {
 
 <%=
 describe_sub_object 'The bulk update operation attributes', json: json, html_id: 'the-agent-update-operations' do
-  environments     'Object',  'The [environments update operation](#the-agent-environments-update-operation) to be performed on the set of agents'
+  environments     'Object',  'The [environments update operation](#the-agent-environments-update-operation) to be performed on the set of agents. Updating of resources is **NOT** supported by elastic agents.'
   resources        'Object',  'The [resources update operation](#the-agent-resources-update-operation) to be performed on the set of agents'
 end
 %>
