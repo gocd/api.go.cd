@@ -1982,6 +1982,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/pkg/foobar-widgets-1.2.3.jar'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Confirm:true'</span> <span class="se">\</span>
       -X POST <span class="se">\</span>
       -F <span class="s1">'file=@target/dist/foobar-widgets-1.2.3.jar'</span>
 </code></pre>
