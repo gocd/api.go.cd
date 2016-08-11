@@ -3,6 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/pkg/foobar-widgets-1.2.3.jar' \
       -u 'username:password' \
+      -H 'Confirm:true' \
       -X POST \
       -F 'file=@target/dist/foobar-widgets-1.2.3.jar'
 ```
