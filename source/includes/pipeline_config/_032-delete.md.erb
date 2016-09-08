@@ -22,7 +22,11 @@ Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
 }
 ```
 
-Deletes a pipeline.
+Deletes a pipeline from the config XML.
+
+<aside class="warning">
+   The history of the pipeline, that is, the data for each pipeline run will still be stored in the database. This data will not be removed.
+</aside>
 
 
 <%= available_since('16.6.0') %>
