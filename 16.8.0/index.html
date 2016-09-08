@@ -5837,7 +5837,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Deletes a pipeline.</p>
+<p>Deletes a pipeline from the config XML.</p>
+
+<aside class="warning">
+   The history of the pipeline, that is, the data for each pipeline run will still be stored in the database. This data will not be removed.
+</aside>
 
 <p class='available-since'>
   Available since v16.6.0.
