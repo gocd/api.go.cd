@@ -1,0 +1,17 @@
+<%
+json = {
+  build_details: {
+    pipeline: 'pipelineName',
+    stage:    'stageName',
+    job:      'jobName'
+  }
+}
+%>
+<%=
+describe_sub_object 'The build details object', json: json, html_id: 'agent-config-build-details-object' do
+  pipeline            'String',  'Name of the pipeline, whose job the agent is building.'
+  stage               'String',  'Name of the stage, whose job the agent is building.'
+  job                 'String',  'Name of the job the agent is building.'
+
+end
+%>
