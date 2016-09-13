@@ -3,14 +3,14 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/agents' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v3+json'
+      -H 'Accept: application/vnd.go.cd.v4+json'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
+Content-Type: application/vnd.go.cd.v4+json; charset=utf-8
 ```
 
 ```json
@@ -45,9 +45,9 @@ Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
         "free_space": 84983328768,
         "agent_config_state": "Enabled",
         "agent_state": "Idle",
-        "build_state": "Idle",
         "resources": ["java", "linux", "firefox"],
-        "environments": ["perf", "UAT"]
+        "environments": ["perf", "UAT"],
+        "build_state": "Idle"
       }
     ]
   }

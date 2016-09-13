@@ -3,7 +3,7 @@
 ```shell
 curl 'https://ci.example.com/go/api/agents' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v3+json' \
+      -H 'Accept: application/vnd.go.cd.v4+json' \
       -H 'Content-Type: application/json' \
       -X DELETE \
       -d '{
@@ -18,7 +18,7 @@ curl 'https://ci.example.com/go/api/agents' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
+Content-Type: application/vnd.go.cd.v4+json; charset=utf-8
 ```
 
 ```json

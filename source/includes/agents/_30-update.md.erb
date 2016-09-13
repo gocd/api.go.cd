@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v3+json' \
+      -H 'Accept: application/vnd.go.cd.v4+json' \
       -H 'Content-Type: application/json' \
       -X PATCH \
       -d '{
@@ -18,7 +18,7 @@ $ curl 'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4d
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
+Content-Type: application/vnd.go.cd.v4+json; charset=utf-8
 ```
 
 ```json
@@ -42,9 +42,9 @@ Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
   "free_space": 84834283520,
   "agent_config_state": "Enabled",
   "agent_state": "Idle",
-  "build_state": "Idle",
   "resources": ["Java","Linux"],
-  "environments": ["Dev"]
+  "environments": ["Dev"],
+  "build_state": "Idle"
 }
 ```
 
