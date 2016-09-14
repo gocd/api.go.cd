@@ -443,9 +443,9 @@
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/tab/pipeline/history/up42"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_job"</span><span class="w">
+    </span><span class="nt">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"job_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_job"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -937,9 +937,20 @@
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"build_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipelineName"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stageName"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jobName"</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"job"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/tab/build/detail/pipelineName/pipelineCounter/stageName/stageCounter/jobName"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/pipelines/pipelineName/pipelineCounter/stageName/stageCounter"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/tab/pipeline/history/pipelineName"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipelineName"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stageName"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"job_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jobName"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
