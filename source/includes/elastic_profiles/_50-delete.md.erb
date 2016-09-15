@@ -1,0 +1,33 @@
+## Delete an elastic agent profile
+
+```shell
+$ curl 'https://ci.example.com/go/api/elastic/profiles/unit-tests' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "message": "Elastic agent profile 'unit-test' was deleted successfully."
+}
+```
+
+Deletes an environment.
+
+<%= available_since('16.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/elastic/profiles/:profile_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the elastic agent profile was deleted.

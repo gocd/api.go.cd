@@ -1,0 +1,72 @@
+## Update an elastic agent profile
+
+```shell
+$ curl 'https://ci.example.com/go/api/elastic/profiles/unit-tests' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
+      -H 'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"' \
+      -X PUT \
+      -d '{
+        "plugin_id": "cd.go.contrib.elastic-agent.docker",
+        "properties": [
+          {
+            "key": "Image",
+            "value": "gocdcontrib/gocd-dev-build:1.0.0"
+          },
+          {
+            "key": "Environment",
+            "value": "JAVA_HOME=/opt/java\nMAKE_OPTS=-j8"
+          }
+        ]
+      }'
+
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "61406622382e51c2079c11dcbdb978fb"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/elastic/profiles/unit-tests"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#elastic-profiles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/elastic/profiles/:profile_id"
+    }
+  },
+  "id": "unit-tests",
+  "plugin_id": "cd.go.contrib.elastic-agent.docker",
+  "properties": [
+    {
+      "key": "Image",
+      "value": "gocdcontrib/gocd-dev-build:1.0.0"
+    },
+    {
+      "key": "Environment",
+      "value": "JAVA_HOME=/opt/java\nMAKE_OPTS=-j8"
+    }
+  ]
+}
+```
+
+Update some attributes of an elastic agent profile.
+
+<%= available_since('16.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/elastic/profiles/:profile_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [elastic agent profile object](#the-elastic-agent-profile-object).

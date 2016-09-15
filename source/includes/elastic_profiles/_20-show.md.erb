@@ -1,0 +1,59 @@
+## Get an elastic agent profile
+
+```shell
+$ curl 'https://ci.example.com/go/api/elastic/profiles/unit-tests' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/elastic/profiles/unit-tests"
+    },
+    "doc": {
+      "href": "http://api.go.cd/#elastic-profiles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/elastic/profiles/:profile_id"
+    }
+  },
+  "id": "unit-tests",
+  "plugin_id": "cd.go.contrib.elastic-agent.docker",
+  "properties": [
+    {
+      "key": "Image",
+      "value": "gocdcontrib/gocd-dev-build"
+    },
+    {
+      "key": "Environment",
+      "value": "JAVA_HOME=/opt/java\nMAKE_OPTS=-j8"
+    }
+  ]
+}
+```
+
+Gets elastic agent profile config for specified profile.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#edit-elastic-agent-profile'>edit elastic agent profile</a> documentation for more details.
+</aside>
+
+<%= available_since('16.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/elastic/profiles/:profile_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [elastic agent profile object](#the-elastic-agent-profile-object).
