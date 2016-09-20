@@ -1,0 +1,143 @@
+## Edit template config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/templates/template' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'If-Match: "05548388f7ef5042cd39f7fe42e85735"' \
+      -H 'Content-Type: application/json' \
+      -X PUT -d '{
+        "name": "template",
+        "stages": [
+          {
+            "name": "defaultStage",
+            "fetch_materials": true,
+            "clean_working_directory": false,
+            "never_cleanup_artifacts": false,
+            "environment_variables": [],
+            "jobs": [
+              {
+                "name": "defaultJob",
+                "run_instance_count": null,
+                "timeout": 0,
+                "environment_variables": [],
+                "resources": [],
+                "tasks": [
+                  {
+                    "type": "exec",
+                    "attributes": {
+                      "command": "sleep",
+                      "working_directory": null
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "e89135b38ddbcd9380c83eb524647bdd"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8153/go/api/admin/templates/template"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#template-config"
+    },
+    "find": {
+      "href": "http://localhost:8153/go/api/admin/templates/:template_name"
+    }
+  },
+  "name": "template",
+  "stages": [
+    {
+      "name": "defaultStage",
+      "fetch_materials": true,
+      "clean_working_directory": false,
+      "never_cleanup_artifacts": false,
+      "approval": {
+        "type": "success",
+        "authorization": {
+          "roles": [
+
+          ],
+          "users": [
+
+          ]
+        }
+      },
+      "environment_variables": [
+
+      ],
+      "jobs": [
+        {
+          "name": "defaultJob",
+          "run_instance_count": null,
+          "timeout": "never",
+          "environment_variables": [
+
+          ],
+          "resources": [
+
+          ],
+          "tasks": [
+            {
+              "type": "exec",
+              "attributes": {
+                "run_if": [
+
+                ],
+                "on_cancel": null,
+                "command": "sleep",
+                "working_directory": null
+              }
+            }
+          ],
+          "tabs": [
+
+          ],
+          "artifacts": [
+
+          ],
+          "properties": null
+        }
+      ]
+    }
+  ]
+}
+```
+
+Update template config for specified template name.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update template config API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  pipeline config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the pipeline config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('16.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/template/:template_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [template](#the-template-config-object) object.

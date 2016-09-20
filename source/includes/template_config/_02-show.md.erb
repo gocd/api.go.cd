@@ -1,0 +1,108 @@
+## Get template config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/templates/template.name' \
+      -u 'username:password' \
+      -H 'Accept:application/vnd.go.cd.v1+json'
+      -i
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "05548388f7ef5042cd39f7fe42e85735"
+
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8153/go/api/admin/templates/template.name"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#template-config"
+    },
+    "find": {
+      "href": "http://localhost:8153/go/api/admin/templates/:template_name"
+    }
+  },
+  "name": "template.name",
+  "stages": [
+    {
+      "name": "up42_stage",
+      "fetch_materials": true,
+      "clean_working_directory": false,
+      "never_cleanup_artifacts": false,
+      "approval": {
+        "type": "success",
+        "authorization": {
+          "roles": [
+
+          ],
+          "users": [
+
+          ]
+        }
+      },
+      "environment_variables": [
+
+      ],
+      "jobs": [
+        {
+          "name": "up42_job",
+          "run_instance_count": null,
+          "timeout": null,
+          "environment_variables": [
+
+          ],
+          "resources": [
+
+          ],
+          "tasks": [
+            {
+              "type": "exec",
+              "attributes": {
+                "run_if": [
+
+                ],
+                "on_cancel": null,
+                "command": "ls",
+                "working_directory": null
+              }
+            }
+          ],
+          "tabs": [
+
+          ],
+          "artifacts": [
+
+          ],
+          "properties": null
+        }
+      ]
+    }
+  ]
+}
+```
+
+Gets template config for specified template name.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-template-config'>edit template config</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('16.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/templates/:template_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [template](#the-template-config-object) object

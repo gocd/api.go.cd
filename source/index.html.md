@@ -27,6 +27,7 @@ includes:
   - 140-feeds
   - 150-dashboard
   - 160-pipeline-config
+  - 161-template-config
   - 170-version
   - 171-environment-config
   - 180-plugin-info
