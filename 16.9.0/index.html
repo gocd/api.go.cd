@@ -1744,6 +1744,12 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
   The server may be unavailable during the time that the backup is being taken.
 </aside>
 
+<aside class="notice">
+  The response from the call will not be received till the backup is complete
+  (synchronous). If the data to be backed up is a lot, this can take minutes
+  to complete.
+</aside>
+
 <p class='available-since'>
   Available since v15.2.0.
     <span
