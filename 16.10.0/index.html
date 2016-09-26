@@ -3731,7 +3731,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v2</code> of the API using <code>Accept: application/vnd.go.cd.v2+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v3</code> of the API using <code>Accept: application/vnd.go.cd.v3+json</code>
 </aside>
 
 <h2 id="the-pipeline-config-object">The pipeline config object</h2>
@@ -4668,6 +4668,18 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
 
       </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit_test"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"elastic_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker.unit-test"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4705,7 +4717,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">resources</code></td>
 <td>Array</td>
-<td>The list of (String) resources that specifies the resource which the job requires to build.</td>
+<td>The list of (String) resources that specifies the resource which the job requires to build. MUST NOT be specified along with <code class="prettyprint">elastic_profile_id</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">tasks</code></td>
@@ -4726,6 +4738,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">properties</code></td>
 <td>Array</td>
 <td>The list of <a href="#the-property-object">properties</a> of the build from XML files or artifacts created during your build.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">elastic_profile_id</code></td>
+<td>String</td>
+<td>The id of the elastic profile, specifying this attribute would run the job on an elastic agent asociated with this profile. MUST NOT be specified along with <code class="prettyprint">resources</code>. <strong>Since v16.10.0</strong>.</td>
 </tr>
 </tbody></table>
 
