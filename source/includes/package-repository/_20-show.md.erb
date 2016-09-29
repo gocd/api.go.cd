@@ -1,0 +1,87 @@
+## Get package repository
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/repositories/0530f1a9-5282-4b69-be59-066a35076452' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "4167e3ec81fdac0fb29d854b36ceb981"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/repositories/0530f1a9-5282-4b69-be59-066a35076452"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#package-repository"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+    }
+  },
+  "repo_id": "0530f1a9-5282-4b69-be59-066a35076452",
+  "name": "npmjs.org",
+  "plugin_metadata": {
+    "id": "npm",
+    "version": "1"
+  },
+  "configuration": [
+    {
+      "key": "REPO_URL",
+      "value": "http://registry.npmjs.com"
+    },
+    {
+      "key": "USERNAME",
+      "value": "admin"
+    },
+    {
+      "key": "PASSWORD",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ],
+  "packages": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/admin/packages/4444f1a9-5282-4b69-be59-066a35076123"
+        },
+        "doc": {
+          "href": "https://api.go.cd/#packages"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/admin/packages/:package_id"
+        }
+      },
+      "name": "prettyjson",
+      "id": "23a02c8e-daf7-41a0-8b91-1d7a1a0f6926"
+    }
+  ]
+}
+```
+
+Gets package repository for specified repository id.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-package-repository'>edit package repository</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('16.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/repositories/:repo_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [package repository object](#the-package-repository-object).

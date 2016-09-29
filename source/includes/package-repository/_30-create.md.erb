@@ -1,0 +1,99 @@
+## Create a package repository
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/repositories' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Content-Type: application/json' \
+      -X POST -d '{
+        "name" : "npmjs.org",
+        "plugin_metadata": {
+          "id": "npm",
+          "version": "1"
+        },
+        "configuration": [
+          {
+            "key": "REPO_URL",
+            "value": "http://registry.npmjs.com"
+          },
+          {
+            "key": "USERNAME",
+            "value": "admin"
+          },
+          {
+            "key": "PASSWORD",
+            "encrypted_value": "aSdiFgRRZ6A="
+          }
+        ]
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "d3b07384d113edec49eaa6238ad5ff00"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/repositories/0530f1a9-5282-4b69-be59-066a35076452"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#package-repository"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+    }
+  },
+  "repo_id": "0530f1a9-5282-4b69-be59-066a35076452",
+  "name": "npmjs.org",
+  "plugin_metadata": {
+    "id": "npm",
+    "version": "1"
+  },
+  "configuration": [
+    {
+      "key": "REPO_URL",
+      "value": "http://registry.npmjs.com"
+    },
+    {
+      "key": "USERNAME",
+      "value": "admin"
+    },
+    {
+      "key": "PASSWORD",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ],
+  "packages": [
+
+  ]
+}
+```
+
+Creates a package repository
+
+<%= available_since('16.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/repositories`
+
+The following properties may be specified:
+
+<%=
+describe_object nil do
+  repo_id                   'String',  'UUID of package repository'
+  name                      'String',  'name of package repository'
+  plugin_metadata           'Object',   'The [plugin emtedata](#pluggable-scm-plugin-metadata) provides information about the plugin.'
+  configuration             'Object',   'The list of [properties](#pluggable-scm-configuration) (key-value pairs) to be provided for using the plugin'
+end
+%>
+
+<p class='http-request-return-description'>Returns</p>
+
+The [package repository object](#the-package-repository-object).
