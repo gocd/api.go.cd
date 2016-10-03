@@ -6409,7 +6409,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">PATCH /go/api/admin/environments/environment_name</code></p>
+<p><code class="prettyprint">PUT /go/api/admin/environments/:environment_name</code></p>
 
 <p>Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.</p>
 
@@ -7034,7 +7034,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Lists all available pluggable scm materials, these are materials that are present in the in <code class="prettyprint">cruise-config.xml</code>.</p>
+<p>Gets the SCM object for a specified name.</p>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -7217,7 +7217,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Update pipeline config for specified pipeline name.</p>
+<p>Update global scm configuration for specified scm name.</p>
 
 <aside class="notice">
   <strong>Note:</strong>
