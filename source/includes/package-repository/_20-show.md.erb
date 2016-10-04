@@ -3,7 +3,8 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/repositories/0530f1a9-5282-4b69-be59-066a35076452' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json'
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -i
 ```
 
 > The above command returns JSON structured like this:
@@ -72,7 +73,7 @@ Gets package repository for specified repository id.
 <aside class="notice">
   <strong>Note:</strong> Please remember to save the value of the `ETag` header
   for conditional posts, see the
-  <a href='#edit-package-repository'>edit package repository</a>
+  <a href='#update-a-package-repository'>edit package repository</a>
   documentation for more details.
 </aside>
 

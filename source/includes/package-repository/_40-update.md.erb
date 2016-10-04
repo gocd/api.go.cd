@@ -4,6 +4,7 @@
 $ curl 'https://ci.example.com/go/api/admin/repositories/0530f1a9-5282-4b69-be59-066a35076452' \
       -u 'username:password' \
       -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'If-Match: "26b227605daf6f2d7768c8edaf61b861"' \
       -H 'Content-Type: application/json' \
       -X PUT -d '{
         "name" : "npmjs.org",
@@ -84,6 +85,23 @@ Update some attributes of a package repository.
 `PUT /go/api/admin/repositories/:repo_id`
 
 All the following properties must be specified.
+<aside class="notice">
+  <strong>Important:</strong>
+  Please note that this API allows to edit the configuration of package repository which contains packages.
+</aside>
+
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update package repository API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  package repository config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the package repository config, leading to a
+  conflict.
+</aside>
 
 <%=
 describe_object nil do
