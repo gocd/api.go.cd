@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/templates/template.name' \
       -u 'username:password' \
-      -H 'Accept:application/vnd.go.cd.v1+json'
+      -H 'Accept:application/vnd.go.cd.v2+json'
       -i
 ```
 
@@ -11,7 +11,7 @@ $ curl 'https://ci.example.com/go/api/admin/templates/template.name' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
 ETag: "05548388f7ef5042cd39f7fe42e85735"
 
 ```
@@ -20,13 +20,13 @@ ETag: "05548388f7ef5042cd39f7fe42e85735"
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8153/go/api/admin/templates/template.name"
+      "href": "https://ci.example.com/go/api/admin/templates/template.name"
     },
     "doc": {
       "href": "https://api.go.cd/#template-config"
     },
     "find": {
-      "href": "http://localhost:8153/go/api/admin/templates/:template_name"
+      "href": "https://ci.example.com/go/api/admin/templates/:template_name"
     }
   },
   "name": "template.name",

@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/templates' \
       -u 'username:password' \
-      -H 'Accept:application/vnd.go.cd.v1+json'
+      -H 'Accept:application/vnd.go.cd.v2+json'
 ```
 
 > The above command returns JSON structured like this:
@@ -17,47 +17,51 @@ Content-Type: application/json; charset=utf-8
 {
   "_links": {
     "self": {
-      "href": "http://localhost:8153/go/api/admin/templates"
+      "href": "https://ciexample.com/go/api/admin/templates"
     },
     "doc": {
       "href": "https://api.go.cd/#template-config"
     },
     "find": {
-      "href": "http://localhost:8153/go/api/admin/templates/:template_name"
+      "href": "https://ciexample.com/go/api/admin/templates/:template_name"
     }
   },
-  "templates": [
-    {
-      "_links": {
-        "self": {
-          "href": "http://localhost:8153/go/api/admin/templates/foo"
-        },
-        "doc": {
-          "href": "https://api.go.cd/#template-config"
-        },
-        "find": {
-          "href": "http://localhost:8153/go/api/admin/templates/:template_name"
-        }
-      },
-      "name": "foo",
-      "pipelines": [
-        {
-          "_links": {
-            "self": {
-              "href": "http://localhost:8153/go/api/admin/pipelines/up42"
-            },
-            "doc": {
-              "href": "https://api.go.cd/#pipeline-config"
-            },
-            "find": {
-              "href": "http://localhost:8153/go/api/admin/pipelines/:pipeline_name"
-            }
+  "_embedded": {
+    "templates": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ciexample.com/go/api/admin/templates/template1"
           },
-          "name": "up42"
+          "doc": {
+            "href": "https://api.go.cd/#template-config"
+          },
+          "find": {
+            "href": "https://ciexample.com/go/api/admin/templates/:template_name"
+          }
+        },
+        "name": "template1",
+        "_embedded": {
+          "pipelines": [
+            {
+              "_links": {
+                "self": {
+                  "href": "https://ciexample.com/go/api/admin/pipelines/up42"
+                },
+                "doc": {
+                  "href": "https://api.go.cd/#pipeline-config"
+                },
+                "find": {
+                  "href": "https://ciexample.com/go/api/admin/pipelines/:pipeline_name"
+                }
+              },
+              "name": "up42"
+            }
+          ]
         }
-      ]
-    }
-  ]
+      }
+    ]
+  }
 }
 ```
 
