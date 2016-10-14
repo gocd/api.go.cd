@@ -1,0 +1,36 @@
+## Delete a template
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/templates/template_name' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X DELETE
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "message": "The template 'template_name' was deleted successfully."
+}
+```
+
+Deletes a template from the config XML if it is not associated with any pipeline.
+
+
+<%= available_since('16.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/admin/templates/:template_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the template was deleted.
