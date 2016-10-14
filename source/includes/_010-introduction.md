@@ -8,7 +8,7 @@ All APIs SHOULD be accessed from `https://go-server-url:8154/go/api`. All data S
 
 ## Current version
 
-By default, all requests receive **Version 1** of the API. It is recommended to explicitly request this version via the `Accept` header.
+Since v15.2.0,  all requests receive **Version 1** of the API. It is recommended to explicitly request this version via the `Accept` header.
 
 `Accept: application/vnd.go.cd.v1+json`
 
