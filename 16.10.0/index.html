@@ -5411,7 +5411,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -i
 </code></pre>
 
@@ -5420,7 +5420,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre>
 
@@ -5562,7 +5562,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       -X PUT <span class="se">\</span>
@@ -5632,7 +5632,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre>
 
@@ -5745,7 +5745,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST -d <span class="s1">'{ "group": "first",
                     "pipeline": {
@@ -5815,7 +5815,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -5915,7 +5915,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -X DELETE
 
 </code></pre>
@@ -5925,7 +5925,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
