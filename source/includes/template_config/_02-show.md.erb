@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/templates/template.name' \
       -u 'username:password' \
-      -H 'Accept:application/vnd.go.cd.v2+json'
+      -H 'Accept:<%= data.apis.versions.templates %>'
       -i
 ```
 
@@ -11,7 +11,7 @@ $ curl 'https://ci.example.com/go/api/admin/templates/template.name' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
+Content-Type: <%= data.apis.versions.templates %>; charset=utf-8
 ETag: "05548388f7ef5042cd39f7fe42e85735"
 
 ```

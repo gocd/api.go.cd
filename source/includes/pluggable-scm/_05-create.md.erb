@@ -3,7 +3,7 @@
 ```shell
 $   curl 'http://ci.example.com/go/api/admin/scms' \
   -u 'username:password' \
-  -H 'Accept:application/vnd.go.cd.v1+json' \
+  -H 'Accept:<%= data.apis.versions.scm %>' \
   -H 'Content-Type:application/json' \
   -X POST -d '{
   "id": "scm-id",
@@ -35,7 +35,7 @@ $   curl 'http://ci.example.com/go/api/admin/scms' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.scm %>; charset=utf-8
 ```
 
 ```json

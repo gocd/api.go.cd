@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/environments/new_environment' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: <%= data.apis.versions.environments %>' \
       -H 'Content-Type: application/json' \
       -X PATCH \
       -d '{
@@ -23,7 +23,7 @@ $ curl 'https://ci.example.com/go/api/admin/environments/new_environment' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.environments %>; charset=utf-8
 ETag: "4167e3ec81fdac0fb29d854b36ceb981"
 ```
 

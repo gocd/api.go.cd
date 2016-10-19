@@ -2,14 +2,14 @@
 
 ```shell
 $ curl 'https://ci.example.com/go/api/version' \
-    -H 'Accept: application/vnd.go.cd.v1+json'
+    -H 'Accept: <%= data.apis.versions.version %>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v2+json; charset=utf-8
+Content-Type: <%= data.apis.versions.version %>; charset=utf-8
 ```
 
 ```json

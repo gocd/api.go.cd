@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/scms/scmName' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: <%= data.apis.versions.scm %>' \
       -H 'Content-Type: application/json' \
       -H 'If-Match: "e064ca0fe5d8a39602e19666454b8d77"' \
       -X PUT \
@@ -37,7 +37,7 @@ $ curl 'https://ci.example.com/go/api/admin/scms/scmName' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.scm %>; charset=utf-8
 ETag: "e89135b38ddbcd9380c83eb524647bdd"
 ```
 

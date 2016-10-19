@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/pipelines' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v3+json' \
+      -H 'Accept: <%= data.apis.versions.pipeline %>' \
       -H 'Content-Type: application/json' \
       -X POST -d '{ "group": "first",
                     "pipeline": {
@@ -73,7 +73,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
+Content-Type: <%= data.apis.versions.pipeline %>; charset=utf-8
 ```
 
 ```json

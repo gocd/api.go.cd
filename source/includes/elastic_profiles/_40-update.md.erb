@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/elastic/profiles/unit-tests' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: <%= data.apis.versions.elastic_profiles %>' \
       -H 'Content-Type: application/json' \
       -H 'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"' \
       -X PUT \
@@ -27,7 +27,7 @@ $ curl 'https://ci.example.com/go/api/elastic/profiles/unit-tests' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.elastic_profiles %>; charset=utf-8
 ETag: "61406622382e51c2079c11dcbdb978fb"
 ```
 
