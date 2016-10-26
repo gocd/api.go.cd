@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/plugin_info' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json'
+      -H 'Accept: <%= data.apis.versions.plugin_info %>'
 ```
 
 > The above command returns JSON structured like this:

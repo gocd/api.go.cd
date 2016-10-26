@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/backups' \
       -u 'username:password' \
       -H 'Confirm: true' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: <%= data.apis.versions.backup %>' \
       -X POST
 ```
 
@@ -12,7 +12,7 @@ $ curl 'https://ci.example.com/go/api/backups' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.backup %>; charset=utf-8
 ```
 
 ```json

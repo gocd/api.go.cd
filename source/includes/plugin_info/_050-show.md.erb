@@ -3,14 +3,14 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/plugin_info/my_plugin' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json'
+      -H 'Accept: <%= data.apis.versions.plugin_info %>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.plugin_info %>; charset=utf-8
 ETag: "4167e3ec81fdac0fb29d854b36ceb981"
 ```
 

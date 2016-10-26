@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/users/jdoe' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: <%= data.apis.versions.users %>' \
       -H 'Content-Type: application/json' \
       -X PATCH \
       -d '{
@@ -17,7 +17,7 @@ $ curl 'https://ci.example.com/go/api/users/jdoe' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.users %>; charset=utf-8
 ```
 
 ```json

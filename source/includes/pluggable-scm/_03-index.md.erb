@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/scms' \
       -u 'username:password' \
-      -H 'Accept:application/vnd.go.cd.v1+json'
+      -H 'Accept:<%= data.apis.versions.scm %>'
 ```
 
 > The above command returns JSON structured like this:

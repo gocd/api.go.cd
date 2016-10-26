@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v3+json' \
+      -H 'Accept: <%= data.apis.versions.pipeline %>' \
       -H 'Content-Type: application/json' \
       -H 'If-Match: "e064ca0fe5d8a39602e19666454b8d77"' \
       -X PUT \
@@ -72,7 +72,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v3+json; charset=utf-8
+Content-Type: <%= data.apis.versions.pipeline %>; charset=utf-8
 ETag: "e89135b38ddbcd9380c83eb524647bdd"
 ```
 
