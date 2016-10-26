@@ -224,7 +224,7 @@
 <p>The agents API allows users with administrator role to manage agents.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>Accept: application/vnd.go.cd.v4+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>application/vnd.go.cd.v4+json</code>
 </aside>
 
 <h2 id="the-agent-object">The agent object</h2>
@@ -5955,6 +5955,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>The template config API allows users with administrator role to manage template config.</p>
 
+<aside class="notice">
+  <strong>Important:</strong> Please note that this API requires using <code>v2</code> of the API using <code>Accept: application/vnd.go.cd.v2+json</code>
+</aside>
+
 <h2 id="the-template-config-object">The template config object</h2>
 
 <p class='available-since'>
@@ -5986,7 +5990,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept:application/vnd.go.cd.v2+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre>
 
 <blockquote>
@@ -6542,7 +6546,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
