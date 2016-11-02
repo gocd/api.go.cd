@@ -34,6 +34,7 @@ includes:
   - 180-plugin-info
   - 182-pluggable-scm
   - 183-package-repository
+  - 185-package-config
   - errors
 
 search: true

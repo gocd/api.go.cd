@@ -1,0 +1,93 @@
+## Edit a package
+
+```shell
+$ curl "http://localhost:8153/go/api/admin/packages/f579bb13-bed3-4ad1-a547-ff9d9bcf56d4" \
+-u 'admin:badger' \
+-H 'Accept: <%= data.apis.versions.package %>' \
+-H 'Content-Type: application/json' \
+-H 'If-Match: "08ae92bf39fc33e9d7326feb97047417"' \
+-X PUT -d '{
+  "id": "f579bb13-bed3-4ad1-a547-ff9d9bcf56d4",
+  "name": "foo",
+  "auto_update": true,
+  "package_repo": {
+    "id": "273b246e-145d-49d2-a1a4-f0285af9cccc"
+  },
+  "configuration": [{
+    "key": "PACKAGE_NAME",
+    "value": "update"
+  }]
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.package %>; charset=utf-8
+ETag: "e89135b38ddbcd9380c83eb524647bdd"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/packages/f579bb13-bed3-4ad1-a547-ff9d9bcf56d4"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#packages"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/packages/:package_id"
+    }
+  },
+  "name": "foo",
+  "id": "f579bb13-bed3-4ad1-a547-ff9d9bcf56d4",
+  "auto_update": true,
+  "package_repo": {
+    "_links": {
+      "self": {
+        "href": "https://ci.example.com/go/api/admin/repositories/273b246e-145d-49d2-a1a4-f0285af9cccc"
+      },
+      "doc": {
+        "href": "https://api.go.cd/#package-repositories"
+      },
+      "find": {
+        "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+      }
+    },
+    "id": "273b246e-145d-49d2-a1a4-f0285af9cccc",
+    "name": "foo"
+  },
+  "configuration": [
+    {
+      "key": "PACKAGE_NAME",
+      "value": "update"
+    }
+  ]
+}
+```
+
+Updates global package configuration for the specified package id.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update package API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  pipeline config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the pipeline config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/packages/:package_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [package](#the-package-config-object) object.

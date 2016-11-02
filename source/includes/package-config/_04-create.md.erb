@@ -1,0 +1,84 @@
+## Create a Package
+
+```shell
+$ curl "https://ci.example.com/go/api/admin/packages" \
+  -u 'admin:badger' \
+  -H 'Accept: <%= data.apis.versions.package %>' \
+  -H 'Content-Type: application/json' \
+  -X POST -d '{
+  "id": "package-id",
+  "name": "package_name",
+  "auto_update": false,
+  "package_repo": {
+    "id": "273b246e-145d-49d2-a1a4-f0285af9cccc"
+  },
+  "configuration": [
+    {
+      "key": "PACKAGE_NAME",
+      "value": "package"
+    }
+  ]
+}'
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.package %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/packages/package-id"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#packages"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/packages/:package_id"
+    }
+  },
+  "name": "package_name",
+  "id": "package-id",
+  "auto_update": false,
+  "package_repo": {
+    "_links": {
+      "self": {
+        "href": "https://ci.example.com/go/api/admin/repositories/273b246e-145d-49d2-a1a4-f0285af9cccc"
+      },
+      "doc": {
+        "href": "https://api.go.cd/#package-repositories"
+      },
+      "find": {
+        "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+      }
+    },
+    "id": "273b246e-145d-49d2-a1a4-f0285af9cccc",
+    "name": "foo"
+  },
+  "configuration": [
+    {
+      "key": "PACKAGE_NAME",
+      "value": "package"
+    }
+  ]
+}
+
+```
+
+Creates a package with specified configurations.
+
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/packages`
+
+<p class='http-request-return-description'>Returns</p>
+
+A new [package](#the-package-config-object) object.

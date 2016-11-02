@@ -1,0 +1,76 @@
+## Get a Package Material
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/packages/package.id' \
+      -u 'username:password' \
+      -H 'Accept:<%= data.apis.versions.package %>'
+      -i
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.package %>; charset=utf-8
+ETag: "08ae92bf39fc33e9d7326feb97047417"
+
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/packages/package.id"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#packages"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/packages/:package_id"
+    }
+  },
+  "name": "package",
+  "id": "package.id",
+  "auto_update": true,
+  "package_repo": {
+    "_links": {
+      "self": {
+        "href": "https://ci.example.com/go/api/admin/repositories/273b246e-145d-49d2-a1a4-f0285af9cccc"
+      },
+      "doc": {
+        "href": "https://api.go.cd/#package-repositories"
+      },
+      "find": {
+        "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+      }
+    },
+    "id": "273b246e-145d-49d2-a1a4-f0285af9cccc",
+    "name": "foo"
+  },
+  "configuration": [
+    {
+      "key": "PACKAGE_NAME",
+      "value": "package_name"
+    }
+  ]
+}
+```
+
+Gets the package config for a specified package id.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-a-package'>edit package</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/packages/:package_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [package](#the-package-config-object) object.

@@ -1,0 +1,36 @@
+## Delete a package material
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/packages/package-id' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.package %>' \
+      -X DELETE
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.package %>; charset=utf-8
+```
+
+```json
+{
+  "message": "The package definition 'package-id' was deleted successfully."
+}
+```
+
+Deletes a package from the respective repository if it is not associated with any pipeline.
+
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/admin/package/:package_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the package was deleted.
