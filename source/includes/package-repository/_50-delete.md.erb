@@ -1,0 +1,33 @@
+## Delete a package repository
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/repositories/641b3c4d7c6cf7678f3427916d7bd723' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "message": "Package Repository with id '641b3c4d7c6cf7678f3427916d7bd723' was deleted successfully."
+}
+```
+
+Deletes a package repository.
+
+<%= available_since('16.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/admin/repositories/:repo_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the package repository was deleted.

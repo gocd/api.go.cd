@@ -33,6 +33,7 @@ includes:
   - 172-elastic-agent-profiles
   - 180-plugin-info
   - 182-pluggable-scm
+  - 190-package-repository
   - errors
 
 search: true

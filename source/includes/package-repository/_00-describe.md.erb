@@ -1,0 +1,8 @@
+<%=
+describe_object 'The Package Repository object', since: '16.11.0' do
+  repo_id                   'String',  'UUID of package repository'
+  name                      'String',  'Name of package repository'
+  plugin_metadata           'Object',   'The [plugin metadata](#pluggable-scm-plugin-metadata) provides information about the plugin.'
+  configuration             'Object',   'The list of [properties](#pluggable-scm-configuration) (key-value pairs) to be provided for using the plugin'
+end
+%>

@@ -1,0 +1,116 @@
+## Update a package repository
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/repositories/0530f1a9-5282-4b69-be59-066a35076452' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'If-Match: "26b227605daf6f2d7768c8edaf61b861"' \
+      -H 'Content-Type: application/json' \
+      -X PUT -d '{
+        "name" : "npmjs.org",
+        "plugin_metadata": {
+          "id": "npm",
+          "version": "1"
+        },
+        "configuration": [
+          {
+            "key": "REPO_URL",
+            "value": "http://registry.npmjs.com"
+          },
+          {
+            "key": "USERNAME",
+            "value": "admin"
+          },
+          {
+            "key": "PASSWORD",
+            "encrypted_value": "aSdiFgRRZ6A="
+          }
+        ]
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+ETag: "4167e3ec81fdac0fb29d854b36ceb981"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/repositories/0530f1a9-5282-4b69-be59-066a35076452"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#package-repository"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+    }
+  },
+  "repo_id": "0530f1a9-5282-4b69-be59-066a35076452",
+  "name": "npmjs.org",
+  "plugin_metadata": {
+    "id": "npm",
+    "version": "1"
+  },
+  "configuration": [
+    {
+      "key": "REPO_URL",
+      "value": "http://registry.npmjs.com"
+    },
+    {
+      "key": "USERNAME",
+      "value": "admin"
+    },
+    {
+      "key": "PASSWORD",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ],
+  "packages": [
+
+  ]
+}
+```
+
+Update some attributes of a package repository.
+
+<%= available_since('16.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/repositories/:repo_id`
+
+All the following properties must be specified.
+<aside class="notice">
+  <strong>Important:</strong>
+  Please note that this API allows to edit the configuration of package repository which contains packages.
+</aside>
+
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update package repository API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  package repository config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the package repository config, leading to a
+  conflict.
+</aside>
+
+<%=
+describe_object nil do
+  name                      'String',  'name of package repository'
+  plugin_metadata           'Object',   'The [plugin emtedata](#pluggable-scm-plugin-metadata) provides information about the plugin.'
+  configuration             'Object',   'The list of [properties](#pluggable-scm-configuration) (key-value pairs) to be provided for using the plugin'
+end
+%>
+
+<p class='http-request-return-description'>Returns</p>
+
+The [package repository object](#the-package-repository-object).
