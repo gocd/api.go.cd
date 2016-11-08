@@ -1,0 +1,75 @@
+## Create a Repository
+
+```shell
+$   curl -i "https://ci.example.com/go/api/admin/repositories/" \
+-u 'admin:badger' \
+-H 'Accept: <%= data.apis.versions.repository %>' \
+-H 'Content-Type: application/json' \
+-X POST -d '{
+  "repo_id": "repository-id",
+  "name": "repo.name",
+  "plugin_metadata": {
+    "id": "deb",
+    "version": "1"
+  },
+  "configuration": [{
+    "key": "REPO_URL",
+    "value": "http://sample"
+  }]
+}'
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.repository %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/repositories/repository-id"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#package-repositories"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+    }
+  },
+  "repo_id": "repository-id",
+  "name": "repo.name",
+  "plugin_metadata": {
+    "id": "deb",
+    "version": "1"
+  },
+  "configuration": [
+    {
+      "key": "REPO_URL",
+      "value": "http://sample"
+    }
+  ],
+  "_embedded": {
+    "packages": [
+
+    ]
+  }
+}
+
+```
+
+Create the repository configuration in cruise-config.xml.
+
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/repositories`
+
+<p class='http-request-return-description'>Returns</p>
+
+A new [repository](#the-package-repository-config-object) object.
