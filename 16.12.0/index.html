@@ -8429,6 +8429,418 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>The updated <a href="#the-global-scm-config-object">SCM</a> object.</p>
 
+          <h1 id="package-repositories">Package Repositories</h1>
+
+<p>The repositories API allows admins and pipeline group admins to view, create and update a package repository.</p>
+
+<h2 id="the-package-repository-config-object">The package repository config object</h2>
+
+<p class='available-since'>
+  Available since v16.12.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">id</code></td>
+<td>String</td>
+<td>Each repository is associated with an id by which it can be referenced in the . If the id is not provided during creation, a uuid will be generated. Id is mandatory while providing data for update.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The global name of the repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">plugin_metadata</code></td>
+<td>Object</td>
+<td>The <a href="#pluggable-scm-plugin-metadata">plugin metadata</a> provides information about the plugin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">configuration</code></td>
+<td>Object</td>
+<td>The list of <a href="#pluggable-scm-configuration">properties</a> (key-value pairs) to be provided for using the plugin.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-repositories">Get all Repositories</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/repositories'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept:application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/#package-repositories"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"package_repositories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/dd8926c0-3b4a-4c9e-8012-957b179cec5b"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/#package-repositories"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/:repo_id"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"repo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd8926c0-3b4a-4c9e-8012-957b179cec5b"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repository"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"plugin_metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deb"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://sample-repo"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/packages/6bba891e-2675-49af-b16d-200bd6c6801e"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/#packages"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/packages/:package_id"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6bba891e-2675-49af-b16d-200bd6c6801e"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Lists all available package repositories in <code class="prettyprint">cruise-config.xml</code>.</p>
+
+<p class='available-since'>
+  Available since v16.12.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/repositories</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A list of <a href="#the-package-repository-config-object">repository</a> objects</p>
+
+<h2 id="get-a-repository">Get a Repository</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/repositories/dd8926c0-3b4a-4c9e-8012-957b179cec5b'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept:application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -i
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/dd8926c0-3b4a-4c9e-8012-957b179cec5b"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/#package-repositories"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/:repo_id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"repo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dd8926c0-3b4a-4c9e-8012-957b179cec5b"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repository"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plugin_metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://sample-repo"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/packages/6bba891e-2675-49af-b16d-200bd6c6801e"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/#packages"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/packages/:package_id"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6bba891e-2675-49af-b16d-200bd6c6801e"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Get a repository for a specified id</p>
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-a-repository'>edit repository</a>
+  documentation for more details.
+</aside>
+
+<p class='available-since'>
+  Available since v16.12.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/repositories/:repo_id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-package-repository-config-object">repository</a> object</p>
+
+<h2 id="create-a-repository">Create a Repository</h2>
+
+<pre class="highlight shell"><code><span class="gp">$   </span>curl -i <span class="s2">"https://ci.example.com/go/api/admin/repositories/"</span> <span class="se">\</span>
+-u <span class="s1">'admin:badger'</span> <span class="se">\</span>
+-H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+-H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+-X POST -d <span class="s1">'{
+  "repo_id": "repository-id",
+  "name": "repo.name",
+  "plugin_metadata": {
+    "id": "deb",
+    "version": "1"
+  },
+  "configuration": [{
+    "key": "REPO_URL",
+    "value": "http://sample"
+  }]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/repository-id"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/#package-repositories"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/:repo_id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"repo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repository-id"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repo.name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plugin_metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://sample"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>Create the repository configuration in cruise-config.xml.</p>
+
+<p class='available-since'>
+  Available since v16.12.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/admin/repositories</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A new <a href="#the-package-repository-config-object">repository</a> object.</p>
+
+<h2 id="edit-a-repository">Edit a repository</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -i <span class="s2">"https://ci.example.com/go/api/admin/repositories/repository-id"</span> <span class="se">\</span>
+-u <span class="s1">'admin:badger'</span> <span class="se">\</span>
+-H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+-H <span class="s1">'Content-Type: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+-H <span class="s1">'If-Match: "e34c022772eff57ec53b6d50853be343"'</span> <span class="se">\</span>
+-X PUT -d <span class="s1">'{
+  "repo_id": "repository-id",
+  "name": "repo.name",
+  "plugin_metadata": {
+    "id": "deb",
+    "version": "1"
+  },
+  "configuration": [{
+    "key": "REPO_URL",
+    "value": "http://updatedrepo"
+  }]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"122cd7ec0319b015653cac9a056063a7"</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/repository-id"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/#package-repositories"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/repositories/:repo_id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"repo_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repository-id"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repo.name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plugin_metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://updatedrepo"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"packages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Update package repository for specified repository id.</p>
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update repository API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  pipeline config resource.
+  <br/><br/>
+  This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
+  `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the pipeline config, leading to a
+  conflict.
+</aside>
+
+<p class='available-since'>
+  Available since v16.12.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">PUT /go/api/admin/repositories/:repo_id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The updated <a href="#the-package-repository-config-object">repository</a> object.</p>
+
+<h2 id="delete-a-repository">Delete a repository</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -i <span class="s2">"https://ci.example.com/go/api/admin/repositories/repository-id"</span> <span class="se">\</span>
+-u <span class="s1">'admin:badger'</span> <span class="se">\</span>
+-H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+-X DELETE
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The package repository 'repository-id' was deleted successfully."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Deletes a package repository from the config XML if its packages are not associated with any pipeline.</p>
+
+<p class='available-since'>
+  Available since v16.12.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">DELETE /go/api/admin/repositories/:repo_id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message confirmation if the repository was deleted.</p>
+
           <h1 id="errors">Errors</h1>
 
 <p>Go CD uses the following HTTP status codes to indicate errors.</p>
