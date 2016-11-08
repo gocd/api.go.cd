@@ -1,0 +1,81 @@
+## Get a Repository
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/repositories/dd8926c0-3b4a-4c9e-8012-957b179cec5b' \
+      -u 'username:password' \
+      -H 'Accept:<%= data.apis.versions.repository %>' \
+      -i
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.repository %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/repositories/dd8926c0-3b4a-4c9e-8012-957b179cec5b"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#package-repositories"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+    }
+  },
+  "repo_id": "dd8926c0-3b4a-4c9e-8012-957b179cec5b",
+  "name": "repository",
+  "plugin_metadata": {
+    "id": "deb",
+    "version": "1"
+  },
+  "configuration": [
+    {
+      "key": "REPO_URL",
+      "value": "http://sample-repo"
+    }
+  ],
+  "_embedded": {
+    "packages": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/packages/6bba891e-2675-49af-b16d-200bd6c6801e"
+          },
+          "doc": {
+            "href": "https://api.go.cd/#packages"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/packages/:package_id"
+          }
+        },
+        "name": "package",
+        "id": "6bba891e-2675-49af-b16d-200bd6c6801e"
+      }
+    ]
+  }
+}
+```
+
+Get a repository for a specified id
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-a-repository'>edit repository</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/repositories/:repo_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [repository](#the-package-repository-config-object) object

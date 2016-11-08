@@ -1,0 +1,36 @@
+## Delete a repository
+
+```shell
+$ curl -i "https://ci.example.com/go/api/admin/repositories/repository-id" \
+-u 'admin:badger' \
+-H 'Accept: <%= data.apis.versions.repository %>' \
+-X DELETE
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.repository %>; charset=utf-8
+```
+
+```json
+{
+  "message": "The package repository 'repository-id' was deleted successfully."
+}
+```
+
+Deletes a package repository from the config XML if its packages are not associated with any pipeline.
+
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/admin/repositories/:repo_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the repository was deleted.

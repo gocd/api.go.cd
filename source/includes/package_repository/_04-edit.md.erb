@@ -1,0 +1,86 @@
+## Edit a repository
+
+```shell
+$ curl -i "https://ci.example.com/go/api/admin/repositories/repository-id" \
+-u 'admin:badger' \
+-H 'Accept: application/vnd.go.cd.v1+json' \
+-H 'Content-Type: <%= data.apis.versions.repository %>' \
+-H 'If-Match: "e34c022772eff57ec53b6d50853be343"' \
+-X PUT -d '{
+  "repo_id": "repository-id",
+  "name": "repo.name",
+  "plugin_metadata": {
+    "id": "deb",
+    "version": "1"
+  },
+  "configuration": [{
+    "key": "REPO_URL",
+    "value": "http://updatedrepo"
+  }]
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.repository %>; charset=utf-8
+ETag: "122cd7ec0319b015653cac9a056063a7"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/repositories/repository-id"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#package-repositories"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+    }
+  },
+  "repo_id": "repository-id",
+  "name": "repo.name",
+  "plugin_metadata": {
+    "id": "deb",
+    "version": "1"
+  },
+  "configuration": [
+    {
+      "key": "REPO_URL",
+      "value": "http://updatedrepo"
+    }
+  ],
+  "_embedded": {
+    "packages": [
+
+    ]
+  }
+}
+```
+
+Update package repository for specified repository id.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update repository API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  pipeline config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the pipeline config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/repositories/:repo_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [repository](#the-package-repository-config-object) object.
