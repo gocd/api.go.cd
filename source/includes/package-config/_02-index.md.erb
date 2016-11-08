@@ -1,0 +1,125 @@
+## Get all packages
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/packages' \
+      -u 'username:password' \
+      -H 'Accept:<%= data.apis.versions.package %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.package %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/packages"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#packages"
+    }
+  },
+  "_embedded": {
+    "packages": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/packages/f579bb13-bed3-4ad1-a547-ff9d9bcf56d4"
+          },
+          "doc": {
+            "href": "https://api.go.cd/#packages"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/packages/:package_id"
+          }
+        },
+        "name": "package",
+        "id": "f579bb13-bed3-4ad1-a547-ff9d9bcf56d4",
+        "auto_update": true,
+        "package_repo": {
+          "_links": {
+            "self": {
+              "href": "https://ci.example.com/go/api/admin/repositories/273b246e-145d-49d2-a1a4-f0285af9cccc"
+            },
+            "doc": {
+              "href": "https://api.go.cd/#package-repositories"
+            },
+            "find": {
+              "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+            }
+          },
+          "id": "273b246e-145d-49d2-a1a4-f0285af9cccc",
+          "name": "foo"
+        },
+        "configuration": [
+          {
+            "key": "PACKAGE_NAME",
+            "value": "bar"
+          }
+        ]
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/packages/c3e1d398-96c0-4edd-a577-9b5c769d449b"
+          },
+          "doc": {
+            "href": "https://api.go.cd/#packages"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/packages/:package_id"
+          }
+        },
+        "name": "another_package",
+        "id": "c3e1d398-96c0-4edd-a577-9b5c769d449b",
+        "auto_update": true,
+        "package_repo": {
+          "_links": {
+            "self": {
+              "href": "https://ci.example.com/go/api/admin/repositories/273b246e-145d-49d2-a1a4-f0285af9cccc"
+            },
+            "doc": {
+              "href": "https://api.go.cd/#package-repositories"
+            },
+            "find": {
+              "href": "https://ci.example.com/go/api/admin/repositories/:repo_id"
+            }
+          },
+          "id": "273b246e-145d-49d2-a1a4-f0285af9cccc",
+          "name": "npm"
+        },
+        "configuration": [
+          {
+            "key": "PACKAGE_NAME",
+            "value": "group"
+          },
+          {
+            "key": "VERSION_SPEC",
+            "value": "1"
+          },
+          {
+            "key": "ARCHITECTURE",
+            "value": "jar"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Lists all available packages, these are materials that are present in the in `cruise-config.xml`.
+
+<%= available_since('16.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/packages`
+
+<p class='http-request-return-description'>Returns</p>
+
+A list of [packages](#the-package-config-object).

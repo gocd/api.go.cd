@@ -1,0 +1,12 @@
+<%
+json = {
+  package_repo: { id: '273b246e-145d-49d2-a1a4-f0285af9cccc', name: 'package-repository' }
+}
+%>
+
+<%=
+describe_sub_object 'The package repository object', json: json, html_id: 'package-config-repo' do
+  id        'String', 'The id of the package repository.'
+  name      'String', 'The name of the package repository'
+end
+%>
