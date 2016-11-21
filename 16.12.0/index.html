@@ -7711,7 +7711,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The type of the plugin. Can be one of <code class="prettyprint">authentication</code>, <code class="prettyprint">notification</code>, <code class="prettyprint">package-repository</code>, <code class="prettyprint">task</code>, <code class="prettyprint">scm</code>.</td>
+<td>The type of the plugin. Can be one of <code class="prettyprint">authentication</code>, <code class="prettyprint">notification</code>, <code class="prettyprint">package-repository</code>, <code class="prettyprint">task</code>, <code class="prettyprint">scm</code>, <code class="prettyprint">elastic</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">pluggable_instance_settings</code></td>
@@ -7799,6 +7799,85 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">metadata</code></td>
 <td>Object</td>
+<td>Metadata for the configuration property. For plugins of types <code class="prettyprint">authentication</code>, <code class="prettyprint">notification</code>, <code class="prettyprint">task</code> and <code class="prettyprint">scm</code>, the metadata consists of attributes <code class="prettyprint">secure</code>, <code class="prettyprint">required</code> and <code class="prettyprint">part_of_identity</code>. The attributes for <a href="#the-package-repository-configurations-object">package-repository</a> and <a href="#the-elastic-configurations-object">elastic</a> plugins are given below.</td>
+</tr>
+</tbody></table>
+
+<p><a id='package-repository-configurations'></a></p>
+
+<h3 id="the-package-repository-configurations-object">The package repository configurations object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"display_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repository URL"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">key</code></td>
+<td>String</td>
+<td>Describes the configuration key for a repository configuration property.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">metadata</code></td>
+<td>Object</td>
+<td>Metadata for the configuration property.</td>
+</tr>
+</tbody></table>
+
+<p><a id='elastic-agent-configurations'></a></p>
+
+<h3 id="the-elastic-configurations-object">The elastic configurations object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">key</code></td>
+<td>String</td>
+<td>Describes the configuration key for a elastic agent property.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">metadata</code></td>
+<td>Object</td>
 <td>Metadata for the configuration property.</td>
 </tr>
 </tbody></table>
@@ -7834,7 +7913,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre>
 
 <blockquote>
@@ -7898,7 +7977,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info/my_plugin'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre>
 
 <blockquote>
@@ -7906,7 +7985,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre>
 
