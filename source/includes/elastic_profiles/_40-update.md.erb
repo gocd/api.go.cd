@@ -61,6 +61,18 @@ ETag: "61406622382e51c2079c11dcbdb978fb"
 
 Update some attributes of an elastic agent profile.
 
+<aside class="notice">
+  <strong>Note:</strong>
+  The update elastic agent profile API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  elastic agent resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the elastic agent config, leading to a
+  conflict.
+</aside>
+
 <%= available_since('16.11.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

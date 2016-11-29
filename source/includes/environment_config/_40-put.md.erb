@@ -64,6 +64,18 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
 
 Update some attributes of an environment.
 
+<aside class="notice">
+  <strong>Note:</strong>
+  The update environment API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  environment config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the environment config, leading to a
+  conflict.
+</aside>
+
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
