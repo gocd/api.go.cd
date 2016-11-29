@@ -6436,11 +6436,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   <strong>Note:</strong>
   The update template config API requires that you submit the <code>If-Match</code>
   header with the latest ETag value that is representative of the current
-  pipeline config resource.
+  template resource.
   <br/><br/>
   This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
   `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
-  another user has modified the state of the pipeline config, leading to a
+  another user has modified the state of the template config, leading to a
   conflict.
 </aside>
 
@@ -6809,7 +6809,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <aside class="notice">
   <strong>Note:</strong> Please remember to save the value of the `ETag` header
   for conditional posts, see the
-  <a href='#edit-environment-config'>edit environment config</a>
+  <a href='#update-an-environment'>edit environment config</a>
   documentation for more details.
 </aside>
 
@@ -7033,6 +7033,18 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span></code></pre>
 
 <p>Update some attributes of an environment.</p>
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update environment API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  environment config resource.
+  <br/><br/>
+  This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
+  `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the environment config, leading to a
+  conflict.
+</aside>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -7476,7 +7488,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>Gets elastic agent profile config for specified profile.</p>
 
 <aside class="notice">
-  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#edit-elastic-agent-profile'>edit elastic agent profile</a> documentation for more details.
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-an-elastic-agent-profile'>edit elastic agent profile</a> documentation for more details.
 </aside>
 
 <p class='available-since'>
@@ -7624,6 +7636,18 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span></code></pre>
 
 <p>Update some attributes of an elastic agent profile.</p>
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update elastic agent profile API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  elastic agent resource.
+  <br/><br/>
+  This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
+  `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the elastic agent config, leading to a
+  conflict.
+</aside>
 
 <p class='available-since'>
   Available since v16.11.0.
@@ -8304,6 +8328,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Gets the SCM object for a specified name.</p>
 
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-pluggable-scm-object'>edit scm</a> documentation for more details.
+</aside>
+
 <p class='available-since'>
   Available since v16.7.0.
 </p>
@@ -8491,11 +8519,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   <strong>Note:</strong>
   The update pluggable SCM API requires that you submit the <code>If-Match</code>
   header with the latest ETag value that is representative of the current
-  pipeline config resource.
+  SCM config resource.
   <br/><br/>
   This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
   `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
-  another user has modified the state of the pipeline config, leading to a
+  another user has modified the state of the scm config, leading to a
   conflict.
 </aside>
 
@@ -8867,11 +8895,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   <strong>Note:</strong>
   The update repository API requires that you submit the <code>If-Match</code>
   header with the latest ETag value that is representative of the current
-  pipeline config resource.
+  repository config resource.
   <br/><br/>
   This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
   `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
-  another user has modified the state of the pipeline config, leading to a
+  another user has modified the state of the repository config, leading to a
   conflict.
 </aside>
 
@@ -9366,11 +9394,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   <strong>Note:</strong>
   The update package API requires that you submit the <code>If-Match</code>
   header with the latest ETag value that is representative of the current
-  pipeline config resource.
+  package config resource.
   <br/><br/>
   This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
   `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
-  another user has modified the state of the pipeline config, leading to a
+  another user has modified the state of the package config, leading to a
   conflict.
 </aside>
 
