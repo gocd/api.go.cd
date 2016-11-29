@@ -2,7 +2,7 @@
 
 ```shell
 $   curl -i "https://ci.example.com/go/api/admin/repositories/" \
--u 'admin:badger' \
+-u 'username:password' \
 -H 'Accept: <%= data.apis.versions.repository %>' \
 -H 'Content-Type: application/json' \
 -X POST -d '{
