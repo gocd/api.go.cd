@@ -35,6 +35,7 @@ blockquote + .highlight {
   + table tbody tr {
     code {
       word-break: normal;
+      white-space: nowrap;
     }
   }
 }
