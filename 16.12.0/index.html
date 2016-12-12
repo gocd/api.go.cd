@@ -7747,6 +7747,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Object</td>
 <td>List of <a href="#the-pluggable_instance_settings-object">pluggable_instance_settings</a> settings required to configure a pluggable instance e.g PluggableTask, PluggableSCM.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">image</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-icon-object">plugin icon</a> for the specific plugin. This is currently only supported by elastic agent plugins. <strong>Since v16.12.0</strong>.</td>
+</tr>
 </tbody></table>
 
 <p><a id='pluggable-instance-settings'></a></p>
@@ -7790,6 +7795,37 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">view</code></td>
 <td>Object</td>
 <td>The <a href="#the-plugin-info-view-object">view</a> contains the Angular view template.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-plugin-icon-object'></a></p>
+
+<h3 id="the-image-object">The Image Object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/svg+xml"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"...."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">content_type</code></td>
+<td>String</td>
+<td>A valid <a href="http://www.iana.org/assignments/media-types/media-types.xhtml#image">content type</a> for the image. Please make sure the content type is supported by most browsers.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">data</code></td>
+<td>String</td>
+<td>A <a href="https://en.wikipedia.org/wiki/Base64">base-64</a> encoded (single-line non-chunking) byte array of the byte-sequence that composes the image.</td>
 </tr>
 </tbody></table>
 
