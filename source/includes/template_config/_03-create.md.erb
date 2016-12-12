@@ -7,6 +7,12 @@ $   curl 'https://ci.example.com/go/api/admin/templates' \
       -H 'Content-Type: application/json' \
       -X POST -d '{
         "name": "template",
+        "authorization": {
+          "admins": {
+            "roles": [],
+            "users": ["operate"]
+          }
+        },
         "stages": [
           {
             "name": "defaultStage",
@@ -60,6 +66,12 @@ Content-Type: <%= data.apis.versions.templates %>; charset=utf-8
     }
   },
   "name": "template",
+  "authorization": {
+    "admins": {
+      "roles": [],
+      "users": ["jez"]
+    }
+  },
   "stages": [
     {
       "name": "defaultStage",
