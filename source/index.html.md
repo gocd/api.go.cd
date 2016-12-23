@@ -26,6 +26,7 @@ includes:
   - 135-config-repository
   - 140-feeds
   - 150-dashboard
+  - 155-encryption
   - 160-pipeline-config
   - 161-template-config
   - 170-version

@@ -1,0 +1,44 @@
+## Encrypt a plain text value
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/encrypt' \
+-u 'username:password' \
+-H 'Accept: <%= data.apis.versions.encryption %>' \
+-H 'Content-Type: application/json' \
+-X POST -d '{
+  "value": "badger"
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.encryption %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://ci.example.com/go/api/admin/encrypt"
+    },
+    "doc": {
+      "href": "https://api.go.cd/#encryption"
+    }
+  },
+  "encrypted_value": "aSdiFgRRZ6A="
+}
+```
+
+Returns the encrypted value for the plain text passed.
+
+<%= available_since('17.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/encrypt`
+
+<p class='http-request-return-description'>Returns</p>
+
+The encrypted value of the plain text.
