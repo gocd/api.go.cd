@@ -1,0 +1,10 @@
+# Encryption
+
+The encryption API allows users with any administrator privilege to get the cipher text(encrypted text) corresponding to any plain text value. You may use this cipher text in other APIs that allow you to configure the pipelines and templates.
+
+<aside class="notice">
+  <strong>Important:</strong>This API is rate limited to 30 requests per minute to prevent brute force attacks that may allow attackers to guess the cipher key. The number of requests is configurable by the system property
+  <code>go.encryption.api.max.requests</code>. Please check <a href="https://docs.go.cd/current/advanced_usage/other_config_options.html">this</a> documentation on how to configure system properties.
+</aside>
+
+<%= render_all_sub_topics('encryption') %>
