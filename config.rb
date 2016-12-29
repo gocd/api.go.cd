@@ -44,6 +44,7 @@ activate :s3_sync do |s3_sync|
   s3_sync.region       = 'us-east-1'
   s3_sync.prefer_gzip  = false
   s3_sync.delete       = false
+  s3_sync.prefix       = GOCD_VERSION
 end
 
 # Build Configuration
