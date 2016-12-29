@@ -6,8 +6,8 @@ language_tabs:
 
 toc_footers:
   - <a href='https://github.com/gocd/api.go.cd'>Edit this guide on GitHub</a>
-  - <a href='https://plugin-api.go.cd'>GoCD Plugin API Documentation</a>
-  - <a href='https://docs.go.cd'>GoCD User Documentation</a>
+  - <a href='https://plugin-api.gocd.io'>GoCD Plugin API Documentation</a>
+  - <a href='https://docs.gocd.io'>GoCD User Documentation</a>
 
 includes:
   - 010-introduction
