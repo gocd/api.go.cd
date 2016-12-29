@@ -1,4 +1,4 @@
-# Go CD API Documentation
+# GoCD API Documentation
 
 [![Build Status](https://snap-ci.com/gocd/api.go.cd/branch/master/build_image)](https://snap-ci.com/gocd/api.go.cd/branch/master)
 
