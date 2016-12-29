@@ -8,6 +8,8 @@ gem 'middleman-autoprefixer', '~> 2.7.0'
 gem "middleman-sprockets", "~> 4.0.0"
 gem 'rouge', '~> 1.10.1'
 gem 'redcarpet', '~> 3.3.4'
+gem 'middleman-s3_sync'
+gem 'mime-types'
 
 gem "middleman-livereload", "~> 3.4.0"
 gem 'rake', '~> 10.4.2'

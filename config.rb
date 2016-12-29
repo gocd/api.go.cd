@@ -39,6 +39,13 @@ end
 activate :relative_assets
 set :relative_links, true
 
+activate :s3_sync do |s3_sync|
+  s3_sync.bucket       = ENV['S3_BUCKET']
+  s3_sync.region       = 'us-east-1'
+  s3_sync.prefer_gzip  = false
+  s3_sync.delete       = false
+end
+
 # Build Configuration
 configure :build do
   set :build_dir, "build/#{GOCD_VERSION}"
