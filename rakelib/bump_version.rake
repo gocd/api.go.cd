@@ -58,7 +58,12 @@ task :bump_version do
       html = erb.result(binding)
       f.puts(html)
     end
-    sh("git add current versions.json index.html")
+    open('robots.txt', 'w') do |f|
+      erb = ERB.new(File.read("#{File.dirname(__FILE__)}/../lib/robots.txt.erb"), nil, '-')
+      html = erb.result(binding)
+      f.puts(html)
+    end
+    sh("git add current versions.json index.html robots.txt")
     sh("git commit -m 'Add new version to dropdown'")
     sh("git push")
   end
