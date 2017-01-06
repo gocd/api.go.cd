@@ -82,7 +82,7 @@ Update some attributes of an environment.
 
 `PUT /go/api/admin/environments/:environment_name`
 
-Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.
+All of the following properties must be specified. Not specifying a property will either fail the request or make that value blank during the update.
 
 <%=
   describe_object nil do
