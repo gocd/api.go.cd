@@ -1,0 +1,87 @@
+## Create an authorization configuration
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/auth_configs' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.authorization_configurations %>' \
+      -H 'Content-Type: application/json' \
+      -X POST -d '{
+        "id": "ldap",
+        "plugin_id": "cd.go.authentication.ldap",
+        "properties": [
+          {
+            "key": "Url",
+            "value": "ldap://ldap.server.url:389"
+          },
+          ...
+        ]
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.authorization_configurations %>; charset=utf-8
+ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/auth_configs/ldap"
+    },
+    "doc": {
+      "href": "https://api.gocd.io/#authorization-configuration"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/auth_configs/:auth_config_id"
+    }
+  },
+  "id": "ldap",
+  "plugin_id": "cd.go.authentication.ldap",
+  "properties": [
+    {
+      "key": "Url",
+      "value": "ldap://ldap.server.url:389"
+    },
+    {
+      "key": "SearchBase",
+      "value": "ou=users,ou=system"
+    },
+    {
+      "key": "ManagerDN",
+      "value": "uid=admin,ou=system"
+    },
+    {
+      "key": "SearchFilter",
+      "value": "uid"
+    },
+    {
+      "key": "Password",
+      "encrypted_value": "GLzARJ+Qr+M="
+    },
+    {
+      "key": "DisplayNameAttribute",
+      "value": "displayName"
+    },
+    {
+      "key": "EmailAttribute",
+      "value": "mail"
+    }
+  ]
+}
+```
+
+Creates an authorization configuration
+
+<%= available_since('17.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/security/auth_configs`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [authorization configuration object](#the-authorization-configuration-object).

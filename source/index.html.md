@@ -38,6 +38,7 @@ includes:
   - 182-pluggable-scm
   - 183-package-repository
   - 185-package-config
+  - 186-authorization-configurations
   - errors
 
 search: true
