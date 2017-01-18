@@ -6,6 +6,7 @@ Allow: /current
 Allow: /current/
 
 # Disallow versioned directories
+Disallow: /<%= current_version %>
 <% versions.each do |version_data| -%>
 Disallow: /<%= version_data[:version] %>
 <% end %>
