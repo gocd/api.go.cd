@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Middleman
 gem 'middleman', '~> 4.1.0'
 gem 'middleman-gh-pages', '~> 0.3.0'
+gem 'middleman-s3_sync', git: 'https://github.com/fredjean/middleman-s3_sync', branch: 'master', ref: '8c4e57a6'
 gem 'middleman-syntax', '~> 2.1.0'
 gem 'middleman-autoprefixer', '~> 2.7.0'
 gem "middleman-sprockets", "~> 4.0.0"
