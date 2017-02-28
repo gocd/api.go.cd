@@ -14,6 +14,15 @@ $ curl 'https://ci.example.com/go/api/admin/environments/new_environment' \
       "agents": {
         "add": ["12345678-e2f6-4c78-123456789012"],
         "remove": ["87654321-e2f6-4c78-123456789012"]
+      },
+      "environment_variables": {
+          "add": [
+            {
+              "name": "GO_SERVER_URL",
+              "value": "https://ci.example.com/go"
+            }
+          ],
+          "remove": ["URL"]
       }
 }'
 
@@ -74,7 +83,11 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
     }
   ],
   "environment_variables": [
-
+    {
+      "name": "GO_SERVER_URL",
+      "value": "https://ci.example.com/go",
+      "secure": false
+    }
   ]
 }
 
@@ -100,14 +113,24 @@ json = {
   agents: {
     add: %w(agent05 agent02),
     remove: ['agent01']
+  },
+  environment_variables: {
+    add: [
+      {
+        :name => 'GO_SERVER_URL',
+        :value => 'https://ci.example.com/go'
+      }
+    ],
+    remove: ['URL']
   }
 }
 %>
 
 <%=
 describe_sub_object 'The environments patch operation attributes', json: json, html_id: 'the-environments-patch-operations' do
-    pipelines     'Object',  'The [pipelines update operation](#the-environments-pipeline-update-operation) to be performed on the set of pipelines.'
-    agents        'Object',  'The [agents update operation](#the-environments-agent-update-operation) to be performed on the set of agents'
+    pipelines                 'Object',  'The [pipelines update operation](#the-environments-pipeline-update-operation) to be performed on the set of pipelines.'
+    agents                    'Object',  'The [agents update operation](#the-environments-agent-update-operation) to be performed on the set of agents'
+    environment_variables     'Object',  'The [environment variables update operation](#the-environments-environment-variables-update-operation) to be performed on the set of environment variables'
   end
  %>
 
@@ -136,6 +159,25 @@ json = {
 describe_sub_object 'The environments agent-update operation attributes', json: json, html_id: 'the-environments-agent-update-operation' do
   add              'Array',   'The list of agents which needs to be added to the specified environment'
   remove           'Array',   'The list of agents which needs to be removed to the specified environment'
+end
+%>
+
+<%
+json = {
+    add: [
+      {
+        :name => 'GO_SERVER_URL',
+        :value => 'https://ci.example.com/go'
+      }
+    ],
+    remove: ['URL']
+  }
+%>
+
+<%=
+describe_sub_object 'The environments environment-variable-update operation attributes', json: json, html_id: 'the-environments-environment-variables-update-operation' do
+  add              'Array',   'The list of environment variables which needs to be added to the specified environment'
+  remove           'Array',   'The list of environment variable names which needs to be removed to the specified environment'
 end
 %>
 
