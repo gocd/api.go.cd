@@ -10,3 +10,6 @@ gem 'rouge', '~> 1.9.0'
 gem 'redcarpet', '~> 3.3.2'
 
 gem 'rake', '~> 10.4.2'
+gem 'aws-sdk'
+gem 'parallel'
+gem 'mime-types'
