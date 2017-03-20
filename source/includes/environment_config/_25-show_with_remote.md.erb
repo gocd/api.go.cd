@@ -11,20 +11,19 @@ $ curl 'https://ci.example.com/go/api/admin/environments/my_environment/withremo
 ```http
 HTTP/1.1 200 OK
 Content-Type: <%= data.apis.versions.environments %>; charset=utf-8
-ETag: "4167e3ec81fdac0fb29d854b36ceb981"
 ```
 
 ```json
 {
   "_links": {
     "self": {
-      "href": "https://ci.example.com/go/api/admin/environments/my_environment"
+      "href": "https://ci.example.com/go/api/admin/environments/my_environment/withremote"
     },
     "doc": {
       "href": "https://api.gocd.io/#environment-config"
     },
     "find": {
-      "href": "https://ci.example.com/go/api/admin/environments/:environment_name"
+      "href": "https://ci.example.com/go/api/admin/environments/:environment_name/withremote"
     }
   },
   "name": "my_environment",
@@ -76,13 +75,6 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
 ```
 
 Gets environment config along with the remote configurations for specified environment name.
-
-<aside class="notice">
-  <strong>Note:</strong> Please remember to save the value of the `ETag` header
-  for conditional posts, see the
-  <a href='#update-an-environment'>edit environment config</a>
-  documentation for more details.
-</aside>
 
 <%= available_since('17.3.0') %>
 
