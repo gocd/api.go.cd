@@ -1,0 +1,40 @@
+## Notify other scm materials
+
+```shell
+$ curl 'https://ci.example.com/go/api/material/notify/scm' \
+      -u 'username:password' \
+      -H 'Confirm: true' \
+      -X POST \
+      -d "scm_name=material_name"
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: text/plain; charset=UTF-8
+```
+
+```plain
+The material is now scheduled for an update. Please check relevant pipeline(s) for status.
+```
+
+<%= partial 'includes/shared/material_notify_header' %>
+
+<%= available_since('14.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/material/notify/scm`
+
+The following post parameters must be specified.
+
+<%=
+  describe_object(nil) do
+    scm_name  'String',            'The scm_name is the material name as defined in pipeline material page'
+  end
+ %>
+
+<p class='http-request-return-description'>Returns</p>
+
+A text confirmation.
