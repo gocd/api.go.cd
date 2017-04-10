@@ -4,6 +4,7 @@ describe_object 'The pipeline config object', since: '15.3.0' do
   enable_pipeline_locking   'Boolean', 'Whether pipeline is locked to run single instance or not.'
   name                      'String',  'The name of the pipeline.'
   template                  'String',  'The name of the template used by pipeline. You MUST specify atleast one stage in `stages`, or `template`.'
+  origin                    'Object',  'The origin of the pipeline. Can be either [local origin object](#pipeline-config-config-xml-origin-object) for pipelines defined locally in cruise-config.xml or [config repo origin object](#pipeline-config-config-repo-origin-object) for the pipelines defined remotely in config repository.', since: '17.4.0'
   parameters                'Array',   'The list of [parameters](#pipeline-config-parameters) to be used for substitution in a pipeline or pipeline template.'
   environment_variables     'Array',   'The list of [environment variables](#pipeline-config-environment-variables) that will be passed to all tasks (commands) that are part of this pipeline.'
   materials                 'Array',   'The list of [materials](#pipeline-config-material-object) to be used by pipeline. You MUST specify atleast one material.'
