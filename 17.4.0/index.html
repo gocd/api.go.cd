@@ -3844,7 +3844,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v3</code> of the API using <code>Accept: application/vnd.go.cd.v3+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v3</code> of the API using <code>Accept: application/vnd.go.cd.v4+json</code>
 </aside>
 
 <h2 id="the-pipeline-config-object">The pipeline config object</h2>
@@ -3881,6 +3881,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">template</code></td>
 <td>String</td>
 <td>The name of the template used by pipeline. You MUST specify atleast one stage in <code class="prettyprint">stages</code>, or <code class="prettyprint">template</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">origin</code></td>
+<td>Object</td>
+<td>The origin of the pipeline. Can be either <a href="#pipeline-config-config-xml-origin-object">local origin object</a> for pipelines defined locally in cruise-config.xml or <a href="#pipeline-config-config-repo-origin-object">config repo origin object</a> for the pipelines defined remotely in config repository. <strong>Since v17.4.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">parameters</code></td>
@@ -5520,11 +5525,136 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
+<p><a id='pipeline-config-config-xml-origin-object'></a></p>
+
+<h3 id="the-local-origin-object">The local origin object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cruise-config.xml"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of origin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">file</code></td>
+<td>String</td>
+<td>The name of config file.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-config-repo-origin-object'></a></p>
+
+<h3 id="the-config-repo-origin-object">The config repo origin object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/repo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0771169c7178c9850ab098b40cc17b24f3d3c7a9"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of origin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">repo</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-config-repository-material-object">config repository material</a> object.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pipeline-config-material-object'></a></p>
+
+<h3 id="the-config-repository-material-object">The config repository material object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/repo"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0771169c7178c9850ab098b40cc17b24f3d3c7a9"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of a material. Can be one of <code class="prettyprint">git</code>, <code class="prettyprint">svn</code>, <code class="prettyprint">hg</code>, <code class="prettyprint">p4</code>, <code class="prettyprint">tfs</code>, <code class="prettyprint">dependency</code>, <code class="prettyprint">package</code>, <code class="prettyprint">plugin</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">attributes</code></td>
+<td>Object</td>
+<td>The <a href="#the-git-material-attributes">attributes</a> for each material type.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">revision</code></td>
+<td>revision</td>
+<td>The material revision to fetch the configurations from.</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-pipeline-config">Get pipeline config</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -i
 </code></pre>
 
@@ -5533,7 +5663,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre>
 
@@ -5553,6 +5683,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="nt">"enable_pipeline_locking"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cruise-config.xml"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -5675,7 +5809,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       -X PUT <span class="se">\</span>
@@ -5745,7 +5879,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre>
 
@@ -5765,6 +5899,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="nt">"enable_pipeline_locking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cruise-config.xml"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -5858,7 +5996,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST -d <span class="s1">'{ "group": "first",
                     "pipeline": {
@@ -5928,7 +6066,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -5947,6 +6085,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="nt">"enable_pipeline_locking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cruise-config.xml"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -6028,7 +6170,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -X DELETE
 
 </code></pre>
@@ -6038,7 +6180,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
