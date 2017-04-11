@@ -63,7 +63,7 @@ material_json = {
 
 <%=
 describe_sub_object 'The config repository material object', json: material_json, html_id: 'pipeline-config-material-object' do
-  type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs dependency package plugin)
+  type            'String',      'The type of a material. Currently config repository supports only `git` materials.'
   attributes      'Object',      'The [attributes](#the-git-material-attributes) for each material type.'
   revision        'revision',    'The material revision to fetch the configurations from.'
 end
