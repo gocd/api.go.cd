@@ -1,13 +1,17 @@
 [
   {
-    "version": "17.4.0",
-    "location": "https://api.gocd.io/17.4.0/",
+    "version": "17.5.0",
+    "location": "https://api.gocd.io/17.5.0/",
     "type": "next"
   },
   {
-    "version": "17.3.0",
-    "location": "https://api.gocd.io/17.3.0/",
+    "version": "17.4.0",
+    "location": "https://api.gocd.io/17.4.0/",
     "type": "latest"
+  },
+  {
+    "version": "17.3.0",
+    "location": "https://api.gocd.io/17.3.0/"
   },
   {
     "version": "17.2.0",
