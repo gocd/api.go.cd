@@ -1,0 +1,33 @@
+## Delete a role
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles/blackbird' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
+```
+
+```json
+{
+  "message": "The plugin role config 'blackbird' was deleted successfully."
+}
+```
+
+Deletes the role.
+
+<%= available_since('17.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE go/api/admin/security/roles/:role_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message if the role is deleted or not.

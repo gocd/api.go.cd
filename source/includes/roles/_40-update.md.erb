@@ -1,0 +1,71 @@
+## Update a role
+
+Update attributes of the role identified by the specified role name.
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles/spacetiger' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>' \
+      -H 'Content-Type: application/json' \
+      -H 'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"' \
+      -X PUT \
+      -d '{
+        "name": "spacetiger",
+        "type": "gocd",
+        "attributes": {
+          "users": ["alice"]
+        }
+      }'
+
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
+ETag: "61406622382e51c2079c11dcbdb978fb"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/spacetiger"
+    },
+    "doc": {
+      "href": "https://api.gocd.io/#roles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+    }
+  },
+  "name": "spacetiger",
+  "type": "gocd",
+  "attributes": {
+    "users": [ "alice" ]
+  }
+}
+```
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update role API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  role.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the elastic agent config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('17.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT go/api/admin/security/roles/:role_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [role object](#the-role-object).

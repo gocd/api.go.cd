@@ -1,0 +1,153 @@
+## Get all roles
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/roles"
+    },
+    "doc": {
+      "href": "https://api.gocd.io/#roles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+    }
+  },
+  "_embedded": {
+    "roles": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/spacetiger"
+          },
+          "doc": {
+            "href": "https://api.gocd.io/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "spacetiger",
+        "type": "gocd",
+        "attributes": {
+          "users": ["alice", "bob", "robin"]
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/blackbird"
+          },
+          "doc": {
+            "href": "https://api.gocd.io/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "blackbird",
+        "type": "plugin",
+        "attributes": {
+          "auth_config_id": "ldap",
+          "properties": [
+            {
+              "key": "UserGroupMembershipAttribute",
+              "value": "memberOf"
+            },
+            {
+              "key": "GroupIdentifiers",
+              "value": "ou=admins,ou=groups,ou=system,dc=example,dc=com"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+```
+
+Lists all available roles which includes gocd role and plugin role.
+
+<%= available_since('17.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/security/roles`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [role object](#the-role-object).
+
+
+## Get all roles by type
+
+> Get all roles by type
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles?type=gocd' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>'
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/roles"
+    },
+    "doc": {
+      "href": "https://api.gocd.io/#roles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+    }
+  },
+  "_embedded": {
+    "roles": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/spacetiger"
+          },
+          "doc": {
+            "href": "https://api.gocd.io/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "spacetiger",
+        "type": "gocd",
+        "attributes": {
+          "users": ["alice", "bob", "robin"]
+        }
+      }
+    ]
+  }
+}
+```
+
+List all available roles of specified type.
+
+<%= available_since('17.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/security/roles?type=:role_type`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [role object](#the-role-object).
