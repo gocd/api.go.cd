@@ -1,0 +1,50 @@
+## Get current user
+
+```shell
+$ curl 'https://ci.example.com/go/api/current_user' \
+      -u 'jdoe:password' \
+      -H 'Accept: <%= data.apis.versions.current_user %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.current_user %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "https://api.gocd.io/#users"
+    },
+    "self": {
+      "href": "https://ci.example.com/go/api/users/jdoe"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/users/:login_name"
+    }
+  },
+  "login_name": "jdoe",
+  "display_name": "John Doe",
+  "enabled": true,
+  "email": null,
+  "email_me": false,
+  "checkin_aliases": [
+
+  ]
+}
+```
+
+Gets the current user
+
+<%= available_since("17.5.0") %>
+
+<p class="http-request-heading">HTTP Request</p>
+
+`GET /go/api/current_user`
+
+<p class="http-request-return-description">Returns</p>
+
+A [user object](#the-user-object).

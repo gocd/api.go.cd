@@ -1,9 +1,9 @@
-## Update a user
+## Update current user
 
 ```shell
-$ curl 'https://ci.example.com/go/api/users/jdoe' \
-      -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.users %>' \
+$ curl 'https://ci.example.com/go/api/current_user' \
+      -u 'jdoe:password' \
+      -H 'Accept: <%= data.apis.versions.current_user %>' \
       -H 'Content-Type: application/json' \
       -X PATCH \
       -d '{
@@ -17,7 +17,7 @@ $ curl 'https://ci.example.com/go/api/users/jdoe' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.users %>; charset=utf-8
+Content-Type: <%= data.apis.versions.current_user %>; charset=utf-8
 ```
 
 ```json
@@ -45,25 +45,24 @@ Content-Type: <%= data.apis.versions.users %>; charset=utf-8
 }
 ```
 
-Update some attributes of a user.
+Update some attributes of the current user.
 
-<%= available_since('15.2.0') %>
+<%= available_since("17.5.0") %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`PATCH /go/api/users/:login_name`
+`PATCH /go/api/current_user`
 
 Atleast one of the following properties must be specified, not specifying the property will leave it unchanged.
 
 <%=
   describe_object nil do
-    enabled           'Boolean',    "Boolean indicating if the user is enabled (can log in)"
-    email             'String',     "The user's email address"
-    email_me          'Boolean',    "Boolean indicating if the user should be signed up for email notifications"
-    checkin_aliases   'Array',      "A list of SCM checkin aliases to map users to SCM commits"
+    email             "String",     "The user's email address"
+    email_me          "Boolean",    "Boolean indicating if the user should be signed up for email notifications"
+    checkin_aliases   "Array",      "A list of SCM checkin aliases to map users to SCM commits"
   end
  %>
 
-<p class='http-request-return-description'>Returns</p>
+<p class="http-request-return-description">Returns</p>
 
 The updated [user object](#the-user-object).

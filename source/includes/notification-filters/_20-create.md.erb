@@ -1,0 +1,67 @@
+## Create a notification filter
+
+```shell
+$ curl 'https://ci.example.com/go/api/notification_filters' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.notification_filters %>' \
+      -H 'Content-Type: application/json' \
+      -X POST \
+      -d '{
+            "pipeline": "my_pipeline",
+            "stage": "my_stage",
+            "event": "Breaks",
+            "match_commits": true
+          }'
+
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.notification_filters %>; charset=utf-8
+```
+
+```json
+{
+  "filters": [
+    {
+      "id": 1,
+      "pipeline": "already_existed",
+      "stage": "[Any Stage]",
+      "event": "All",
+      "match_commits": true
+    },
+    {
+      "id": 2,
+      "pipeline": "my_pipeline",
+      "stage": "my_stage",
+      "event": "Breaks",
+      "match_commits": true
+    }
+  ]
+}
+```
+
+Creates a notification filter for the authenticated user.
+
+<%= available_since("17.5.0") %>
+
+<p class="http-request-heading">HTTP Request</p>
+
+`POST /go/api/notification_filters`
+
+The following properties may be specified:
+
+<%=
+  describe_object nil do
+    pipeline       "String",   "The pipeline name to match. Can also be \"[Any Pipeline]\"", mandatory: true
+    stage          "String",   "The stage name to match. Can also be \"[Any Stage]\"", mandatory: true
+    event          "String",   "The event to match. Can be one of: \"All\", \"Passes\", \"Fails\", \"Breaks\", \"Fixed\", \"Cancelled\"", mandatory: true
+    match_commits  "Boolean",  "Should the filter only match the user's commits? Defaults to false if omitted."
+  end
+%>
+
+<p class="http-request-return-description">Returns</p>
+
+An array of [notification filter objects](#the-notification-filter-object) representing the current set the user's notification filters.

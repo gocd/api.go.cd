@@ -14,6 +14,8 @@ includes:
   - 020-authentication
   - 030-agents
   - 040-users
+  - 042-current-user
+  - 044-notification-filters
   - 050-materials
   - 060-backups
   - 070-pipeline-groups
