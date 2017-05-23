@@ -1,0 +1,40 @@
+## Show all notification filters
+
+```shell
+$ curl 'https://ci.example.com/go/api/notification_filters' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.notification_filters %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.notification_filters %>; charset=utf-8
+```
+
+```json
+{
+  "filters": [
+    {
+      "id": 10,
+      "pipeline": "my_pipeline",
+      "stage": "[Any Stage]",
+      "event": "Breaks",
+      "match_commits": true
+    }
+  ]
+}
+```
+
+Lists all notification filters for the authenticated user.
+
+<%= available_since("17.5.0") %>
+
+<p class="http-request-heading">HTTP Request</p>
+
+`GET /go/api/notification_filters`
+
+<p class="http-request-return-description">Returns</p>
+
+An array of [notification filter objects](#the-notification-filter-object) representing the current set the user’s notification filters.

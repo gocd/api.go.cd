@@ -1,0 +1,9 @@
+<%=
+describe_object "The notification filter object", since: "17.5.0" do
+  id             "Number",   "The internal ID of the notification filter"
+  pipeline       "String",   "The pipeline name to which the notification filter should match"
+  stage          "String",   "The stage name to which the notification filter should match"
+  event          "String",   "The event to which the notification filter should match"
+  match_commits  "Boolean",  "Boolean indicating if the notification filter should match only the user's commits (true) or all commits (false)"
+end
+%>
