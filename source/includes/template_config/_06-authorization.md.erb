@@ -1,0 +1,20 @@
+<%
+json = {
+  authorization: {
+    admins: {
+      roles: [
+
+      ],
+      users: [
+        "someUser"
+      ]
+    }
+  },
+}
+%>
+
+<%=
+describe_sub_object 'The template authorization object', json: json, html_id: 'template-config-authorization' do
+  admins        'Object', 'Provides the information about the roles and users that are configured to be template admins.'
+end
+%>

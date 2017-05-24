@@ -1,6 +1,7 @@
 <%=
 describe_object 'The template config object', since: '16.10.0' do
   name                      'String',  'The name of the template.'
+  authorization             'Object',  'The [authorization](#the-template-authorization-object) provides information about the template admins.', since: '17.1.0'
   stages                    'Array',   'The list of [stages](#pipeline-config-stage-object). You MUST specify atleast one stage in `stages`, or `template`.'
 end
 %>

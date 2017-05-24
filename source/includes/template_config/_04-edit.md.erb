@@ -8,6 +8,12 @@ $ curl 'https://ci.example.com/go/api/admin/templates/template' \
       -H 'Content-Type: application/json' \
       -X PUT -d '{
         "name": "template",
+        "authorization": {
+          "admins": {
+            "roles": [],
+            "users": ["user1", "user2"]
+          }
+        },
         "stages": [
           {
             "name": "defaultStage",
@@ -60,6 +66,12 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
     }
   },
   "name": "template",
+  "authorization": {
+    "admins": {
+      "roles": [],
+      "users": ["user1", "user2"]
+    }
+  },
   "stages": [
     {
       "name": "defaultStage",
