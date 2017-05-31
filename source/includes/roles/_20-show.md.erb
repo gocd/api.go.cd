@@ -1,0 +1,55 @@
+## Get a role
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles/blackbird' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
+ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/blackbird"
+    },
+    "doc": {
+      "href": "https://api.gocd.io/#roles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+    }
+  },
+  "name": "blackbird",
+  "auth_config_id": "ldap",
+  "properties": [
+    {
+      "key": "MemberOf",
+      "value": "ou=blackbird,ou=area51,dc=example,dc=com"
+    }
+  ]
+}
+```
+
+Gets role for specified role name.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-a-role'>edit role</a> documentation for more details.
+</aside>
+
+<%= available_since('17.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/security/roles/:role_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [role object](#the-role-object).

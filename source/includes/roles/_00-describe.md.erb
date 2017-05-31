@@ -1,0 +1,20 @@
+<%=
+describe_object 'The role object', since: '17.5.0' do
+  name         'String',     'The name of the role.'
+  type         'String',     'Type of the role. Use `gocd` to create core role and `plugin` to create plugin role.'
+  attributes   'Object',     'Attributes are used to describes the configuration for [gocd role](#the-gocd-role-attributes) or [plugin role](#The-plugin-role-attributes).'
+end
+%>
+
+<%=
+describe_object 'The gocd role attributes', since: '17.5.0' do
+  users         'Array',     'The list of users belongs to the role.'
+end
+%>
+
+<%=
+describe_object 'The plugin role attributes', since: '17.5.0' do
+  auth_config_id  'String',     'The authorization configuration identifier.'
+  properties      'Array',      'The list of [configuration properties](#the-configuration-property-object) that represent the configuration of this plugin role.'
+end
+%>

@@ -39,6 +39,7 @@ includes:
   - 183-package-repository
   - 185-package-config
   - 186-authorization-configurations
+  - 187-roles
   - errors
 
 search: true
