@@ -44,7 +44,7 @@ task :bump_version do
 
     next_version_data = {
       version: next_version,
-      location: "https://api.gocd.io/#{next_version}/",
+      location: "https://api.gocd.org/#{next_version}/",
       type: "next"
     }
 
