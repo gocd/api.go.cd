@@ -54,3 +54,24 @@ curl 'https://ci.example.com/go/api/material/notify/git' \
     -X POST \
     -d "repository_url=git://git.example.com/git/funky-widgets.git"
 ```
+
+
+
+### Hosting your repository on GitHub [Enterprise]?
+
+__Available since v17.6__ support for GitHub organisation webhook notifications.
+
+To notify Go of an update to a repository via an organisation level webhook (GitHub Push Event), configure GitHub to use the webhooks api negating the need for basic authentication on each request.
+*Polling must be turned off for the pipeline associated with this material*
+
+`{server-url}/api/webhooks/github/notify`
+
+Instead this mechanism will verify/authorise a valid GitHub event payload by using its `X-Hub-Signature` header. Within the Go `config.xml` you will now find a `webhookSecret` attribute on the `<server/>`, this UUID is read only.
+
+
+#####Expectations
+Your request will have the appropriate GitHub headers.
+`X-GitHub-Event: push`
+`X-Hub-Signature: {payload signed with your Go webhookSecret}`
+
+_The api will return a HTTP:202 for ping event, but no material will be updated._
