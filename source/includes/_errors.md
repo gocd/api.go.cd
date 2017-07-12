@@ -12,6 +12,7 @@ Error Code | Meaning
 406        | Not Acceptable        -- You requested a format that isn't json.
 409        | Conflict              -- The request could not be completed due to a conflict with the current state of the resource.
 410        | Gone                  -- The resource requested has been removed from our servers.
+412        | Precondition Failed   -- The request could not be completed because the state of the resource is not the latest while being updated.
 422        | Unprocessible Entity  -- The server understood the request, but the request is semantically erroneous.
 500        | Internal Server Error -- We had a problem with our server. Try again later.
 501        | Not implemented       -- The server does not support the functionality required to fulfill the request.
