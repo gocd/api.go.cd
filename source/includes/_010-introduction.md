@@ -6,14 +6,16 @@ We currently provide language bindings in Shell! You can view code examples on t
 
 All APIs SHOULD be accessed from `https://go-server-url:8154/go/api`. All data SHOULD be sent and recieved as JSON, specifically `application/vnd.go.cd.v1+json`. You may access the APIs over plain text, but for security reasons we suggest that you use SSL.
 
-## Current version
+## API versions
 
-By default, all requests receive **Version 1** of the API. It is recommended to explicitly request this version via the `Accept` header.
+It is recommended to explicitly request the version of an API via the `Accept` header.
 
 `Accept: application/vnd.go.cd.v1+json`
 
-If you specify an unsupported, Accept header, GoCD will respond with the current default JSON representation of the resource.
+`Accept: application/vnd.go.cd.v2+json` etc
+
+If you specify an unsupported Accept header, GoCD will respond with the error message `The url you are trying to reach appears to be incorrect`.
 
 <aside class="notice">
-  <strong>Important:</strong> The default version of the API may change in the future. If you care about the stability of the API, make sure that you are requesting a specific version in the <code>Accept</code> header as shown in the example above.
+  <strong>Important:</strong> The version of an API may change in the future. If you care about the stability of the API, make sure that you are requesting a specific version in the <code>Accept</code> header as shown in the example above.
 </aside>
