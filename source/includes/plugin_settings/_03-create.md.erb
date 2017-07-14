@@ -1,0 +1,86 @@
+## Create Plugin Settings
+
+```shell
+$   curl -i 'https://ci.example.com/go/api/admin/plugin_settings' \
+-u 'username:password' \
+-H 'Accept: <%= data.apis.versions.plugin_settings %>' \
+-H 'Content-Type: application/json' \
+-X POST -d '{
+  "plugin_id": "github.oauth.login",
+  "plugin_settings_properties": [
+    {
+      "key": "server_base_url",
+      "value": "https://ci.example.com"
+    },
+    {
+      "key": "consumer_key",
+      "value": "consumerkey"
+    },
+    {
+      "key": "consumer_secret",
+      "value": "consumersecret"
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+}'
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.plugin_settings %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/plugin_settings/github.oauth.login"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#plugin-settings"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/plugin_settings/:plugin_id"
+    }
+  },
+  "plugin_id": "github.oauth.login",
+  "plugin_settings_properties": [
+    {
+      "key": "server_base_url",
+      "value": "https://ci.example.com"
+    },
+    {
+      "key": "consumer_key",
+      "value": "consumerkey"
+    },
+    {
+      "key": "consumer_secret",
+      "value": "consumersecret"
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+}
+
+```
+
+Create plugin settings in the database.
+
+
+<%= available_since('17.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/plugin_settings`
+
+<p class='http-request-return-description'>Returns</p>
+
+A new [Plugin Settings](#the-plugin-settings-object) object.

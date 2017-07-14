@@ -1,0 +1,17 @@
+<%
+json = {
+  plugin_settings_properties:   [
+    { key: 'username', value: 'admin' },
+    { key: 'password', encrypted_value: '1f3rrs9uhn63hd' },
+    { key: 'url', value: 'https://github.com/sample/example.git' }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The plugin settings property object', json: json, html_id: 'plugin-settings-properties' do
+  key             'String',  'The name of the property key'
+  value           'String',  'The value of the property. You MUST specify one of `value` or `encrypted_value`.'
+  encrypted_value 'String',  'The encrypted value of the property. You MUST specify one of `value` or `encrypted_value`.'
+end
+%>
