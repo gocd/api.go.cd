@@ -1,0 +1,68 @@
+## Get a Config repo
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/config_repos/repo1' \
+      -u 'username:password' \
+      -H 'Accept:<%= data.apis.versions.scm %>' \
+      -i
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
+ETag: "05548388f7ef5042cd39f7fe42e85735"
+
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/config_repos/repo1"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#config-repos"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+    }
+  },
+  "id": "repo1",
+  "plugin": "json.config.plugin",
+  "material": {
+    "type": "git",
+    "attributes": {
+      "url": "https://github.com/config-repo/gocd-json-config-example.git",
+      "destination": null,
+      "filter": null,
+      "invert_filter": false,
+      "name": null,
+      "auto_update": true,
+      "branch": "master",
+      "submodule_folder": null,
+      "shallow_clone": false
+    }
+  },
+  "configuration": [
+
+  ]
+}
+```
+
+Gets the config repo object for a specified id.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-config-repo-object'>edit config repo</a> documentation for more details.
+</aside>
+
+<%= available_since('17.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/config_repos/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [config-repo](#the-config-repo-object) object

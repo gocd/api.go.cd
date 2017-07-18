@@ -1,0 +1,72 @@
+## Get all Config repos
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/config_repos' \
+      -u 'username:password' \
+      -H 'Accept:<%= data.apis.versions.scm %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/config_repos"
+    }
+  },
+  "_embedded": {
+    "config_repos": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/config_repos/repo1"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#config-repos"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+          }
+        },
+        "id": "repo1",
+        "plugin": "json.config.plugin",
+        "material": {
+          "type": "git",
+          "attributes": {
+            "url": "https://github.com/config-repo/gocd-json-config-example.git",
+            "destination": null,
+            "filter": null,
+            "invert_filter": false,
+            "name": null,
+            "auto_update": true,
+            "branch": "master",
+            "submodule_folder": null,
+            "shallow_clone": false
+          }
+        },
+        "configuration": [
+
+        ]
+      }
+    ]
+  }
+}
+```
+
+Lists all available config repos, these are config repositories that are present in the in `cruise-config.xml`.
+
+<%= available_since('17.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/config_repos`
+
+<p class='http-request-return-description'>Returns</p>
+
+A list of [config-repo](#the-config-repo-object) objects
