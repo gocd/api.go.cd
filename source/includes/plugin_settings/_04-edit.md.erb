@@ -1,0 +1,97 @@
+## Update Plugin Settings
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/plugin_settings/github.oauth.login' \
+-u 'username:password' \
+-H 'Accept: <%= data.apis.versions.plugin_settings %>' \
+-H 'Content-Type: application/json' \
+-H 'If-Match: "05548388f7ef5042cd39f7fe42e85735"' \
+-X PUT -d '{
+  "plugin_id": "github.oauth.login",
+  "plugin_settings_properties": [
+    {
+      "key": "server_base_url",
+      "value": "https://ci.example.com"
+    },
+    {
+      "key": "consumer_key",
+      "value": "updated_consumer_key"
+    },
+    {
+      "key": "consumer_secret",
+      "value": "consumersecret"
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.plugin_settings %>; charset=utf-8
+ETag: "e89135b38ddbcd9380c83eb524647bdd"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/plugin_settings/github.oauth.login"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#plugin-settings"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/plugin_settings/:plugin_id"
+    }
+  },
+  "plugin_id": "github.oauth.login",
+  "plugin_settings_properties": [
+    {
+      "key": "server_base_url",
+      "value": "https://ci.example.com"
+    },
+    {
+      "key": "consumer_key",
+      "value": "updated_consumer_key"
+    },
+    {
+      "key": "consumer_secret",
+      "value": "consumersecret"
+    },
+    {
+      "key": "password",
+      "encrypted_value": "aSdiFgRRZ6A="
+    }
+  ]
+}
+```
+
+Updates plugin settings for the specified plugin id.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update plugin settings API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  plugin settings resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the plugin settings resource, leading to a
+  conflict.
+</aside>
+
+<%= available_since('17.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/plugin_settings/:plugin_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [Plugin Settings](#the-plugin-settings-object) object.

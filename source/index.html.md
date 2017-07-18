@@ -35,6 +35,7 @@ includes:
   - 171-environment-config
   - 172-elastic-agent-profiles
   - 180-plugin-info
+  - 181-plugin-settings
   - 182-pluggable-scm
   - 183-package-repository
   - 185-package-config
