@@ -10,7 +10,7 @@ All APIs require you to authenticate yourself using your username and password. 
 # With shell, you can just pass the correct header with each request
 $ curl 'https://ci.example.com/go/api/agents' \
       -u 'username:password' \
-      -H 'Accept: application/vnd.go.cd.v2+json' \
+      -H 'Accept: application/vnd.go.cd.v4+json' \
 ```
 
 > Make sure to replace the `username` and `password` with the username and password that you use to access the go server. The above command returns the following response:
