@@ -15,7 +15,7 @@
 <%=
 describe_sub_object 'The plugin info configurations object', json: json, html_id: 'plugin-info-configurations' do
   key      'String', 'Describes the configuration key'
-  metadata 'Object', "Metadata for the configuration property. For plugins of types `authentication`, `notification`, `task` and `scm`, the metadata consists of attributes `secure`, `required` and `part_of_identity`. The attributes for [package-repository](#the-package-repository-configurations-object) and [elastic](#the-elastic-configurations-object) plugins are given below."
+  metadata 'Object', "Metadata for the configuration property. For plugins of types `scm`, the metadata consists of attributes `secure`, `required` and `part_of_identity`. The attributes for [package-repository](#the-package-repository-configurations-object) and [elastic](#the-elastic-configurations-object) plugins are given below."
 end
 %>
 
