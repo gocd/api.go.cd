@@ -17,8 +17,11 @@
 }
 %>
 
+### The pluggable_instance_settings object
+
+The pluggable_instance_settings attribute could be named auth_config_settings, role_settings, scm_settings, task_settings etc. depending on the plugin.
 <%=
-describe_sub_object 'The pluggable_instance_settings object', json: json, html_id: 'pluggable-instance-settings' do
+describe_sub_object '', json: json, html_id: 'pluggable-instance-settings' do
   configurations    'Array', 'List of [configurations](#the-plugin-info-configurations-object) required to configure a pluggable instance'
   view              'Object', 'The [view](#the-plugin-info-view-object) contains the Angular view template'
 end

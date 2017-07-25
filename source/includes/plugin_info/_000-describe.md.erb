@@ -2,7 +2,6 @@
 describe_object 'The plugin info object', since: '16.7.0' do
   id                           'String',     'Plugin unique identifier'
   name                         'String',     'Name of the plugin'
-  display_name                 'String',     'Plugin display name to be used in views'
   version                      'String',     'The version of the plugin'
   type                         'String',     'The type of the plugin', one_of: %w(authentication notification package-repository task scm elastic)
   pluggable_instance_settings  'Object',     'List of [pluggable_instance_settings](#the-pluggable_instance_settings-object) settings required to configure a pluggable instance e.g PluggableTask, PluggableSCM'
