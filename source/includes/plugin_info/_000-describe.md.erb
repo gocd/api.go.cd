@@ -4,7 +4,13 @@ describe_object 'The plugin info object', since: '16.7.0' do
   name                         'String',     'Name of the plugin'
   version                      'String',     'The version of the plugin'
   type                         'String',     'The type of the plugin', one_of: %w(authentication notification package-repository task scm elastic)
-  pluggable_instance_settings  'Object',     'List of [pluggable_instance_settings](#the-pluggable_instance_settings-object) settings required to configure a pluggable instance e.g PluggableTask, PluggableSCM'
+  status                       'Object',     'The [state](#) of the plugin'
+  plugin_file_location         'String',     'Location where the plugin jar is stored'
+  bundled_plugin               'Boolean',    'States if the plugin is bundled with Go-server'
+  about                        'Object',     '[Information](#) about the plugin'
+  display_name                 'String',     'Plugin display name to be used in views'
+  package_settings             'Object',     '[Package settings object](#package-instance-settings) for package repository plugins'
+  repository_settings          'Object',     '[Repository settings object](#repository-instance-settings) for package repository plugins'
   image                        'Object',     'The [plugin icon](#the-plugin-icon-object) for the specific plugin. This is currently only supported by elastic agent plugins.', since: '16.12.0'
 end
 %>

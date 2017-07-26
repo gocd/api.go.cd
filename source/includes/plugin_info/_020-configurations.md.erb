@@ -22,17 +22,16 @@ end
 <%
     repo_json =  {
   configurations: [
-    {
-      key: "REPO_URL",
-      metadata: {
-        secure: false,
-        display_order: 0,
-        required: true,
-        part_of_identity: false,
-        display_name: "Repository URL"
-      }
-    }
-  ]
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false,
+          display_name: "Display name",
+          display_order: 0
+        }
+      }]
 }
 %>
 

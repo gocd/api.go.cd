@@ -1,29 +1,48 @@
 <%
-    json = {
-  pluggable_instance_settings: {
+    package_settings_json = {
+  package_settings: {
     configurations: [
       {
         key: "url",
         metadata: {
           secure: false,
           required: true,
-          part_of_identity: false
+          part_of_identity: false,
+          display_name: "Display name",
+          display_order: 0
         }
-      }],
-      view: {
-        template: "<div>Plugin view template</div>"
-      }
+      }]
   }
 }
 %>
 
-### The pluggable_instance_settings object
-
-The pluggable_instance_settings attribute could be named auth_config_settings, role_settings, scm_settings, task_settings etc. depending on the plugin.
 <%=
-describe_sub_object '', json: json, html_id: 'pluggable-instance-settings' do
+describe_sub_object 'Package settings object', json: package_settings_json, html_id: 'package-instance-settings' do
   configurations    'Array', 'List of [configurations](#the-plugin-info-configurations-object) required to configure a pluggable instance'
-  view              'Object', 'The [view](#the-plugin-info-view-object) contains the Angular view template'
+end
+%>
+
+<%
+    repository_settings_json = {
+  repository_settings: {
+    configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false,
+          display_name: "Display name",
+          display_order: 0
+        }
+      }]
+  }
+}
+%>
+
+<%=
+describe_sub_object 'Repository settings object', json: repository_settings_json, html_id: 'repository-instance-settings' do
+  configurations    'Array', 'List of [configurations](#the-plugin-info-configurations-object) required to configure a pluggable instance'
 end
 %>
 
