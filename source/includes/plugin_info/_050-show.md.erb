@@ -1,0 +1,84 @@
+## Get plugin info
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/plugin_info/my_plugin' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.plugin_info %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.plugin_info %>; charset=utf-8
+ETag: "4167e3ec81fdac0fb29d854b36ceb981"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "ci.example.com/go/api/admin/plugin_info/sns.notification.plugin"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#plugin-info"
+    },
+    "find": {
+      "href": "ci.example.com/go/api/admin/plugin_info/:plugin_id"
+    }
+  },
+  "id": "my_plugin",
+  "version": "1",
+  "type": "notification",
+  "status": {
+    "state": "active"
+  },
+  "plugin_file_location": "/Users/tobby/gocd/server/plugins/external/my_plugin-0.7.jar",
+  "bundled_plugin": false,
+  "about": {
+    "name": "My plugin",
+    "version": "0.7",
+    "target_go_version": "17.3.0",
+    "description": "Sends notifications to the AWS Simple Notification Service (SNS)",
+    "target_operating_systems": [
+
+    ],
+    "vendor": {
+      "name": "author",
+      "url": "https://github.com/gituser/my-sns-notification-plugin"
+    }
+  },
+  "plugin_settings": {
+    "configurations": [
+      {
+        "key": "topic",
+        "metadata": {
+          "secure": false,
+          "required": true
+        }
+      },
+      {
+        "key": "region",
+        "metadata": {
+          "secure": false,
+          "required": false
+        }
+      }
+    ],
+    "view": {
+      "template": "<div>Plugin view template</div>"
+    }
+  }
+}
+```
+Gets plugin info for a specific plugin id.
+
+<%= available_since('16.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/plugin_info/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [plugin info object](#the-plugin-info-object)
