@@ -72,8 +72,7 @@ end
         key: "url",
         metadata: {
           secure: false,
-          required: true,
-          part_of_identity: false,
+          required: true
         }
       }]
 }
@@ -82,7 +81,7 @@ end
 <%=
 describe_sub_object 'Plugin settings configurations object', json: plugin_settings_json, html_id: 'plugin-settings-configurations' do
   key      'String', 'Describes the configuration key'
-  metadata 'Object', "Metadata for the configuration property which includes attributes `secure`, `required` and `part_of_identity`"
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure` and `required`"
 end
 %>
 
