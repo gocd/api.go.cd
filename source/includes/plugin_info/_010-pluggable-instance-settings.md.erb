@@ -3,7 +3,7 @@
   package_settings: {
     configurations: [
       {
-        key: "url",
+        key: "Package_name",
         metadata: {
           secure: false,
           required: true,
@@ -18,7 +18,7 @@
 
 <%=
 describe_sub_object 'Package settings object', json: package_settings_json, html_id: 'package-instance-settings' do
-  configurations    'Array', 'List of [configurations](#the-plugin-info-configurations-object) required to configure a pluggable instance'
+  configurations    'Array', 'List of [configurations](#package-settings-configurations) required to configure a pluggable instance'
 end
 %>
 
@@ -42,7 +42,140 @@ end
 
 <%=
 describe_sub_object 'Repository settings object', json: repository_settings_json, html_id: 'repository-instance-settings' do
-  configurations    'Array', 'List of [configurations](#the-plugin-info-configurations-object) required to configure a pluggable instance'
+  configurations    'Array', 'List of [configurations](#repository-settings-configurations) required to configure a pluggable instance'
+end
+%>
+
+<%
+    scm_settings_json = {
+  scm_settings: {
+    configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false,
+        }
+      }],
+    views: {
+      template: "<div>Plugin view template</div>"
+    }
+  }
+}
+%>
+
+<%=
+describe_sub_object 'SCM settings object', json: scm_settings_json, html_id: 'scm-instance-settings' do
+  configurations    'Array', 'List of [configurations](#scm-settings-configurations) required to configure a pluggable instance'
+  views             'Object', 'The [view](#plugin-info-view) contains the Angular view template'
+end
+%>
+
+<%
+    plugin_settings_json = {
+  plugin_settings: {
+    configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false,
+        }
+      }],
+    views: {
+      template: "<div>Plugin view template</div>"
+    }
+  }
+}
+%>
+
+<%=
+describe_sub_object 'Plugin settings object', json: plugin_settings_json, html_id: 'plugin-instance-settings' do
+  configurations    'Array', 'List of [configurations](#plugin-settings-configurations) required to configure a pluggable instance'
+  views             'Object', 'The [view](#plugin-info-view) contains the Angular view template'
+end
+%>
+
+<%
+    auth_config_settings_json = {
+  auth_config_settings: {
+    configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true
+        }
+      }],
+    views: {
+      template: "<div>Plugin view template</div>"
+    },
+    capabilities: {
+      can_search: true,
+      supported_auth_type: "Password",
+      can_authorize: false
+    }
+  }
+}
+%>
+
+<%=
+describe_sub_object 'Auth config settings object', json: auth_config_settings_json, html_id: 'auth-config-instance-settings' do
+  configurations    'Array', 'List of [configurations](#auth-config-settings-configurations) required to configure a pluggable instance'
+  views             'Object', 'The [view](#plugin-info-view) contains the Angular view template'
+end
+%>
+
+<%
+    role_settings_json = {
+  role_settings: {
+    configurations: [
+      {
+        key: "Organizations",
+        metadata: {
+          secure: false,
+          required: true
+        }
+      }],
+    views: {
+      template: "<div>Plugin view template</div>"
+    },
+    capabilities: {
+      can_search: true,
+      supported_auth_type: "Password",
+      can_authorize: false
+    }
+  }
+}
+%>
+
+<%=
+describe_sub_object 'Role settings object', json: role_settings_json, html_id: 'role-instance-settings' do
+  configurations    'Array', 'List of [configurations](#role-settings-configurations) required to configure a pluggable instance'
+  views             'Object', 'The [view](#plugin-info-view) contains the Angular view template'
+end
+%>
+
+<%
+    profile_settings_json = {
+  profile_settings: {
+    configurations: [
+      {
+        key: "Image",
+        metadata: {
+          secure: false,
+          required: true
+        }
+      }]
+  }
+}
+%>
+
+<%=
+describe_sub_object 'Profile settings object', json: profile_settings_json, html_id: 'profile-instance-settings' do
+  configurations    'Array', 'List of [configurations](#profile-settings-configurations) required to configure a pluggable instance'
 end
 %>
 

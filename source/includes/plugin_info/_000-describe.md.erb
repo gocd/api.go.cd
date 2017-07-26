@@ -11,6 +11,12 @@ describe_object 'The plugin info object', since: '16.7.0' do
   display_name                 'String',     'Plugin display name to be used in views'
   package_settings             'Object',     '[Package settings object](#package-instance-settings) for package repository plugins'
   repository_settings          'Object',     '[Repository settings object](#repository-instance-settings) for package repository plugins'
+  scm_settings                 'Object',     '[Scm settings object](#scm-instance-settings) for SCM plugins'
+  plugin_settings              'Object',     '[Plugin settings object](#plugin-instance-settings) for all plugins (currently this information is provided by Notification, Authentication, Elastic and Configuration repository plugins)'
+  auth_config_settings         'Object',     '[Auth Config settings object](#auth-config-instance-settings) for authorization plugins'
+  profile_settings             'Object',     '[Profile settings object](#profile-instance-settings) for elastic agents plugins'
+  role_settings                'Object',     '[Role settings object](#role-instance-settings) for authorization plugins'
   image                        'Object',     'The [plugin icon](#the-plugin-icon-object) for the specific plugin. This is currently only supported by elastic agent plugins.', since: '16.12.0'
+  capabilities                 'Object',     'Definition of features supported by an authorization plugin.'
 end
 %>

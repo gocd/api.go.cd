@@ -1,26 +1,28 @@
 <%
-    json =  {
+    package_settings_json =  {
   configurations: [
-    {
-      key: "url",
-      metadata: {
-        secure: false,
-        required: true,
-        part_of_identity: false
-      }
-    }
-  ]
+      {
+        key: "Package name",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false,
+          display_name: "Display name",
+          display_order: 0
+        }
+      }]
 }
 %>
+
 <%=
-describe_sub_object 'The plugin info configurations object', json: json, html_id: 'plugin-info-configurations' do
-  key      'String', 'Describes the configuration key'
-  metadata 'Object', "Metadata for the configuration property. For plugins of types `scm`, the metadata consists of attributes `secure`, `required` and `part_of_identity`. The attributes for [package-repository](#the-package-repository-configurations-object) and [elastic](#the-elastic-configurations-object) plugins are given below."
+describe_sub_object 'Package settings configurations object', json: package_settings_json, html_id: 'package-settings-configurations' do
+  key      'String', 'Describes the configuration key for a package configuration property'
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure`, `required`, `part_of_identity`, `display_name` and `display_order`"
 end
 %>
 
 <%
-    repo_json =  {
+    repository_settings_json =  {
   configurations: [
       {
         key: "url",
@@ -36,9 +38,111 @@ end
 %>
 
 <%=
-describe_sub_object 'The package repository configurations object', json: repo_json, html_id: 'package-repository-configurations' do
+describe_sub_object 'Repository settings configurations object', json: repository_settings_json, html_id: 'repository-settings-configurations' do
   key      'String', 'Describes the configuration key for a repository configuration property'
-  metadata 'Object', "Metadata for the configuration property."
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure`, `required`, `part_of_identity`, `display_name` and `display_order`"
+end
+%>
+
+<%
+    scm_settings_json =  {
+  configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false,
+        }
+      }]
+}
+%>
+
+<%=
+describe_sub_object 'SCM settings configurations object', json: scm_settings_json, html_id: 'scm-settings-configurations' do
+  key      'String', 'Describes the configuration key for an scm configuration property'
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure`, `required` and `part_of_identity`"
+end
+%>
+
+<%
+    plugin_settings_json =  {
+  configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+          part_of_identity: false,
+        }
+      }]
+}
+%>
+
+<%=
+describe_sub_object 'Plugin settings configurations object', json: plugin_settings_json, html_id: 'plugin-settings-configurations' do
+  key      'String', 'Describes the configuration key'
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure`, `required` and `part_of_identity`"
+end
+%>
+
+<%
+    auth_config_settings_json =  {
+  configurations: [
+      {
+        key: "url",
+        metadata: {
+          secure: false,
+          required: true,
+        }
+      }]
+}
+%>
+
+<%=
+describe_sub_object 'Auth config settings configurations object', json: auth_config_settings_json, html_id: 'auth-config-settings-configurations' do
+  key      'String', 'Describes the configuration key for an authorization configuration property'
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure` and `required`"
+end
+%>
+
+<%
+    role_settings_json =  {
+  configurations: [
+      {
+        key: "Organization",
+        metadata: {
+          secure: false,
+          required: true,
+        }
+      }]
+}
+%>
+
+<%=
+describe_sub_object 'Role config settings configurations object', json: role_settings_json, html_id: 'role-settings-configurations' do
+  key      'String', 'Describes the configuration key for a role configuration property'
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure` and `required`"
+end
+%>
+
+<%
+    profile_settings_json =  {
+  configurations: [
+      {
+        key: "Profile name",
+        metadata: {
+          secure: false,
+          required: true,
+        }
+      }]
+}
+%>
+
+<%=
+describe_sub_object 'Profile settings configurations object', json: profile_settings_json, html_id: 'profile-settings-configurations' do
+  key      'String', 'Describes the configuration key for a  profile configuration property'
+  metadata 'Object', "Metadata for the configuration property which includes attributes `secure` and `required`"
 end
 %>
 
@@ -57,8 +161,8 @@ end
 %>
 
 <%=
-describe_sub_object 'The elastic configurations object', json: elastic_json, html_id: 'elastic-agent-configurations' do
-  key      'String', 'Describes the configuration key for a elastic agent property'
+describe_sub_object 'Elastic configurations object', json: elastic_json, html_id: 'elastic-agent-configurations' do
+  key      'String', 'Describes the configuration key for an elastic agent property'
   metadata 'Object', "Metadata for the configuration property."
 end
 %>
