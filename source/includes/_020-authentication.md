@@ -44,7 +44,7 @@ To use Basic Authentication with the Go API, simply send the username and passwo
 Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if go is authenticating against an external source like LDAP.
 
 ```shell
-$ curl 'https://ci.example.com/go/api'
+$ curl 'https://ci.example.com/go/api' \
       -b 'JSESSIONID=15kvus1kdrec46vk2a6jmtmo' \
       -H 'Accept: application/vnd.go.cd.v1+json'
 ```
