@@ -196,7 +196,7 @@
 <h2 id="cookie-session-authentication">Cookie/Session authentication</h2>
 
 <p>Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if go is authenticating against an external source like LDAP.</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api'</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api'</span> <span class="se">\</span>
       -b <span class="s1">'JSESSIONID=15kvus1kdrec46vk2a6jmtmo'</span> <span class="se">\</span>
       -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre>
