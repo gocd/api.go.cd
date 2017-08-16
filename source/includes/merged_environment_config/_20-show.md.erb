@@ -1,0 +1,175 @@
+## Get a merged environment config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/environments/my_environment/merged' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.merged_environments %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.merged_environments %>; charset=utf-8
+ETag: "4167e3ec81fdac0fb29d854b36ceb981"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/environments/Dev/merged"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#merged-environment-config"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/environments/:environment_name/merged"
+    }
+  },
+  "name": "Dev",
+  "origins": [
+    {
+      "type": "local",
+      "file": {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/admin/config_xml"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#get-configuration"
+          }
+        },
+        "name": "cruise-config.xml"
+      }
+    },
+    {
+      "type": "config repo",
+      "repo": {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/config_repos/plugin-1"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#config-repos"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+          }
+        },
+        "id": "plugin-1"
+      }
+    }
+  ],
+  "pipelines": [
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/remote"
+        },
+        "doc": {
+          "href": "https://api.gocd.org/#pipeline-config"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+        }
+      },
+      "name": "remote",
+      "origin": {
+        "type": "config repo",
+        "repo": {
+          "_links": {
+            "self": {
+              "href": "https://ci.example.com/go/api/admin/config_repos/plugin-1"
+            },
+            "doc": {
+              "href": "https://api.gocd.org/#config-repos"
+            },
+            "find": {
+              "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+            }
+          },
+          "id": "plugin-1"
+        }
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/up42"
+        },
+        "doc": {
+          "href": "https://api.gocd.org/#pipeline-config"
+        },
+        "find": {
+          "href": "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+        }
+      },
+      "name": "up42",
+      "origin": {
+        "type": "config repo",
+        "repo": {
+          "_links": {
+            "self": {
+              "href": "https://ci.example.com/go/api/admin/config_repos/plugin-1"
+            },
+            "doc": {
+              "href": "https://api.gocd.org/#config-repos"
+            },
+            "find": {
+              "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+            }
+          },
+          "id": "plugin-1"
+        }
+      }
+    }
+  ],
+  "agents": [
+
+  ],
+  "environment_variables": [
+    {
+      "secure": false,
+      "name": "key1",
+      "value": "value123",
+      "origin": {
+        "type": "config repo",
+        "repo": {
+          "_links": {
+            "self": {
+              "href": "https://ci.example.com/go/api/admin/config_repos/plugin-1"
+            },
+            "doc": {
+              "href": "https://api.gocd.org/#config-repos"
+            },
+            "find": {
+              "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+            }
+          },
+          "id": "plugin-1"
+        }
+      }
+    }
+  ]
+}
+```
+
+Gets a merged environment config for specified environment name.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#update-an-environment'>edit environment config</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('17.9.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/environments/:environment_name/merged`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [merged environment config object](#the-merged-environment-config-object).

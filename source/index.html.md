@@ -33,7 +33,8 @@ includes:
   - 161-template-config
   - 170-version
   - 171-environment-config
-  - 172-elastic-agent-profiles
+  - 172-merged-environment-config
+  - 175-elastic-agent-profiles
   - 180-plugin-info
   - 182-pluggable-scm
   - 183-package-repository
