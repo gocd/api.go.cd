@@ -40,6 +40,7 @@ includes:
   - 185-package-config
   - 186-authorization-configurations
   - 187-roles
+  - 188-config-repos
   - errors
 
 search: true
