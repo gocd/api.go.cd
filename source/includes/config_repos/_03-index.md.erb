@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/config_repos' \
       -u 'username:password' \
-      -H 'Accept:<%= data.apis.versions.scm %>'
+      -H 'Accept:<%= data.apis.versions.config_repos %>'
 ```
 
 > The above command returns JSON structured like this:
@@ -51,7 +51,6 @@ Content-Type: application/json; charset=utf-8
           }
         },
         "configuration": [
-
         ]
       }
     ]
