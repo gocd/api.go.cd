@@ -24,49 +24,54 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
       "href": "https://api.gocd.org/#plugin-info"
     },
     "find": {
-      "href": "https://ci.example.com/go/api/admin/plugin_info/:id"
+      "href": "https://ci.example.com/go/api/admin/plugin_info/:plugin_id"
     }
   },
   "id": "my_plugin",
-  "name": "My SCM Plugin",
-  "display_name": "SCM Plugin For HG",
-  "version": "1.2.3",
-  "type": "scm",
-  "pluggable_instance_settings": {
+  "version": "1",
+  "type": "notification",
+  "status": {
+    "state": "active"
+  },
+  "plugin_file_location": "/Users/tobby/gocd/server/plugins/external/my_plugin-0.7.jar",
+  "bundled_plugin": false,
+  "about": {
+    "name": "My plugin",
+    "version": "0.7",
+    "target_go_version": "17.3.0",
+    "description": "Sends notifications to the AWS Simple Notification Service (SNS)",
+    "target_operating_systems": [
+
+    ],
+    "vendor": {
+      "name": "author",
+      "url": "https://github.com/gituser/my-sns-notification-plugin"
+    }
+  },
+  "plugin_settings": {
     "configurations": [
       {
-        "key": "url",
+        "key": "topic",
         "metadata": {
           "secure": false,
-          "required": true,
-          "part_of_identity": true
+          "required": true
         }
       },
       {
-        "key": "username",
+        "key": "region",
         "metadata": {
           "secure": false,
-          "required": false,
-          "part_of_identity": false
-        }
-      },
-      {
-        "key": "password",
-        "metadata": {
-          "secure": true,
-          "required": false,
-          "part_of_identity": false
+          "required": false
         }
       }
     ],
     "view": {
-    "template": "<div>Plugin view template </div>"
+      "template": "<div>Plugin view template</div>"
     }
   }
 }
 ```
-
-Gets plugin info for a specified plugin id.
+Gets plugin info for a specific plugin id.
 
 <%= available_since('16.7.0') %>
 
@@ -76,4 +81,4 @@ Gets plugin info for a specified plugin id.
 
 <p class='http-request-return-description'>Returns</p>
 
-The [plugin info object](#the-plugin-info-object).
+The [plugin info object](#the-plugin-info-object)

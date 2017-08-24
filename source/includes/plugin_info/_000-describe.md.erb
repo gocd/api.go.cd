@@ -2,10 +2,24 @@
 describe_object 'The plugin info object', since: '16.7.0' do
   id                           'String',     'Plugin unique identifier'
   name                         'String',     'Name of the plugin'
-  display_name                 'String',     'Plugin display name to be used in views'
   version                      'String',     'The version of the plugin'
-  type                         'String',     'The type of the plugin', one_of: %w(authentication notification package-repository task scm elastic)
-  pluggable_instance_settings  'Object',     'List of [pluggable_instance_settings](#the-pluggable_instance_settings-object) settings required to configure a pluggable instance e.g PluggableTask, PluggableSCM'
-  image                        'Object',     'The [plugin icon](#the-plugin-icon-object) for the specific plugin. This is currently only supported by elastic agent plugins.', since: '16.12.0'
+  type                         'String',     'The type of the plugin', one_of: %w(authentication notification authorization package-repository task scm elastic configuration)
+  status                       'Object',     'Information about status of plugin which states whether it is loaded or not and a message in case it failed to do so'
+  plugin_file_location         'String',     'Location where the plugin jar is stored'
+  bundled_plugin               'Boolean',    'States if the plugin is bundled with Go-server'
+  about                        'Object',     'Information about the plugin which includes `name` `version` `target_go_version` `description` `target_operating_systems` `vendor`'
+  display_name                 'String',     'Plugin display name to be used in views'
+  package_settings             'Object',     '[Package settings object](#package-instance-settings) for package repository plugins'
+  repository_settings          'Object',     '[Repository settings object](#repository-instance-settings) for package repository plugins'
+  scm_settings                 'Object',     '[Scm settings object](#scm-instance-settings) for SCM plugins'
+  plugin_settings              'Object',     '[Plugin settings object](#plugin-instance-settings) for all plugins (currently this information is provided by Notification, Authentication, Elastic and Configuration repository plugins)'
+  auth_config_settings         'Object',     '[Auth Config settings object](#auth-config-instance-settings) for authorization plugins'
+  profile_settings             'Object',     '[Profile settings object](#profile-instance-settings) for elastic agents plugins'
+  role_settings                'Object',     '[Role settings object](#role-instance-settings) for authorization plugins'
+  image                        'String',     'Plugin icon for the specific plugin. This is currently only supported by elastic agent and authorization plugins.', since: '16.12.0'
+  display_image_url            'String',     'Plugin icon url for authentication plugins. '
+  capabilities                 'Object',     'Definition of features supported by an authorization plugin.'
+  supports_password_based_authentication 'Boolean',  'States if password-file based authentication is supported by the authentication plugin'
+  supports_web_based_authentication      'Boolean',  'States if web based authentication is supported by the authentication plugin'
 end
 %>
