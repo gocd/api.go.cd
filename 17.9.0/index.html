@@ -9279,9 +9279,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Plugin unique identifier.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">plugin_settings_properties</code></td>
+<td><code class="prettyprint">configuration</code></td>
 <td>Object</td>
-<td>List of <a href="#plugin-settings-properties">plugin_settings_properties</a> required to configure the plugin settings.</td>
+<td>List of <a href="#plugin-settings-properties">configuration</a> required to configure the plugin settings.</td>
 </tr>
 </tbody></table>
 
@@ -9290,7 +9290,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <h3 id="the-plugin-settings-property-object">The plugin settings property object</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"plugin_settings_properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="w">
@@ -9364,7 +9364,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github.oauth.login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"plugin_settings_properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"consumer_key"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"consumerkey"</span><span class="w">
@@ -9392,7 +9392,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Available since v17.8.0.
+  Available since v17.9.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -9411,7 +9411,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 -X POST -d <span class="s1">'{
   "plugin_id": "github.oauth.login",
-  "plugin_settings_properties": [
+  "configuration": [
     {
       "key": "server_base_url",
       "value": "https://ci.example.com"
@@ -9453,7 +9453,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github.oauth.login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"plugin_settings_properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server_base_url"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com"</span><span class="w">
@@ -9478,7 +9478,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>Create plugin settings for a plugin based on user inputs.</p>
 
 <p class='available-since'>
-  Available since v17.8.0.
+  Available since v17.9.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -9498,7 +9498,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 -H <span class="s1">'If-Match: "05548388f7ef5042cd39f7fe42e85735"'</span> <span class="se">\</span>
 -X PUT -d <span class="s1">'{
   "plugin_id": "github.oauth.login",
-  "plugin_settings_properties": [
+  "configuration": [
     {
       "key": "server_base_url",
       "value": "https://ci.example.com"
@@ -9541,7 +9541,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github.oauth.login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"plugin_settings_properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server_base_url"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com"</span><span class="w">
@@ -9577,7 +9577,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Available since v17.8.0.
+  Available since v17.9.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
