@@ -7,7 +7,7 @@ $   curl -i 'https://ci.example.com/go/api/admin/plugin_settings' \
 -H 'Content-Type: application/json' \
 -X POST -d '{
   "plugin_id": "github.oauth.login",
-  "plugin_settings_properties": [
+  "configuration": [
     {
       "key": "server_base_url",
       "value": "https://ci.example.com"
@@ -50,7 +50,7 @@ Content-Type: <%= data.apis.versions.plugin_settings %>; charset=utf-8
     }
   },
   "plugin_id": "github.oauth.login",
-  "plugin_settings_properties": [
+  "configuration": [
     {
       "key": "server_base_url",
       "value": "https://ci.example.com"
@@ -75,7 +75,7 @@ Content-Type: <%= data.apis.versions.plugin_settings %>; charset=utf-8
 Create plugin settings for a plugin based on user inputs.
 
 
-<%= available_since('17.8.0') %>
+<%= available_since('17.9.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 

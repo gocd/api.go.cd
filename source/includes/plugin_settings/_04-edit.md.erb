@@ -8,7 +8,7 @@ $ curl 'https://ci.example.com/go/api/admin/plugin_settings/github.oauth.login' 
 -H 'If-Match: "05548388f7ef5042cd39f7fe42e85735"' \
 -X PUT -d '{
   "plugin_id": "github.oauth.login",
-  "plugin_settings_properties": [
+  "configuration": [
     {
       "key": "server_base_url",
       "value": "https://ci.example.com"
@@ -51,7 +51,7 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
     }
   },
   "plugin_id": "github.oauth.login",
-  "plugin_settings_properties": [
+  "configuration": [
     {
       "key": "server_base_url",
       "value": "https://ci.example.com"
@@ -86,7 +86,7 @@ Updates plugin settings for the specified plugin id.
   conflict.
 </aside>
 
-<%= available_since('17.8.0') %>
+<%= available_since('17.9.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
