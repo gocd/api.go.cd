@@ -1,11 +1,287 @@
 <%=
 describe_object 'The plugin info object', since: '16.7.0' do
   id                           'String',     'Plugin unique identifier'
-  name                         'String',     'Name of the plugin'
-  display_name                 'String',     'Plugin display name to be used in views'
-  version                      'String',     'The version of the plugin'
-  type                         'String',     'The type of the plugin', one_of: %w(authentication notification package-repository task scm elastic)
-  pluggable_instance_settings  'Object',     'List of [pluggable_instance_settings](#the-pluggable_instance_settings-object) settings required to configure a pluggable instance e.g PluggableTask, PluggableSCM'
-  image                        'Object',     'The [plugin icon](#the-plugin-icon-object) for the specific plugin. This is currently only supported by elastic agent plugins.', since: '16.12.0'
+  type                         'String',     'The type of the plugin', one_of: %w(authentication notification package-repository task scm elastic configrepo authorization)
+  status                       'Object',     'The [status](#plugin-status) of the plugin.'
+  plugin_file_location         'String',     'The location where the plugin is installed'
+  bundled_plugin               'Boolean',    'Indicates whether the plugin is bundled with GoCD'
+  about                        'Object',     '[Additional details](#plugin-about) about the plugin.'
+  vendor                       'Object',     'Details about the [plugin author](#plugin-vendor)'
+  extension_info               'Object',     '[Configuration related information](#config-repo-extension-info) pertaining to the plugin\'s extension'
 end
 %>
+
+<%
+    plugin_status = {
+      state: "invalid",
+      messages: ['Plugin not supported']
+    }
+%>
+
+<%=
+describe_sub_object 'The plugin status object', json: plugin_status, html_id: 'plugin-status' do
+  state    'String', 'Status of the plugin. Could be one of %w(active invalid)'
+  messages              'Array', 'Array of messages stating the reason why the plugin isn\'t loaded'
+end
+%>
+
+<%
+    vendor_json = {
+      name: "GoCD contributors",
+      url: "http://thoughtworks.com"
+    }
+%>
+
+<%=
+describe_sub_object 'The plugin vendor object', json: vendor_json, html_id: 'plugin-vendor' do
+  name    'String', 'Name of the plugin author'
+  url     'String', 'Url to know more details about the plugin author'
+end
+%>
+
+<%
+    about_json = {
+      name: "GitHub Pull Requests Builder",
+      version: "1.3.3",
+      target_go_version: "15.1.0",
+      description: "Plugin that polls a GitHub repository for pull requests and triggers a build for each of them",
+      target_operating_systems: []
+    }
+%>
+
+<%=
+describe_sub_object 'The plugin about object', json: about_json, html_id: 'plugin-about' do
+  name    'String', 'Name of the plugin'
+  version 'String', 'Version of the plugin that\'s installed'
+  target_go_version 'String', 'The version of GoCD from which the plugin is compatible with GoCD.'
+  description 'String', "Short description about what the plugin does"
+  target_operating_systems 'Array', 'List of operating systems on which the plugin is expected to work.'
+end
+%>
+
+<%
+  config_repo_json = {
+   extension_info: {
+    plugin_settings: {
+      configurations: [
+        {
+          key: "url",
+          metadata: {
+            secure: false,
+            required: true,
+          }
+        }],
+      view: {
+        template: "<div>Plugin view template</div>"
+      }
+    }
+   }
+  }
+%>
+
+<%= describe_sub_object 'The config repo extension info object', json: config_repo_json, html_id: 'config-repo-extension-info' do
+  plugin_settings 'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+ end
+ %>
+
+ <%
+  elastic_agent_json = {
+    extension_info: {
+      plugin_settings: {
+        configurations: [
+          {
+            key: "InstanceType",
+            metadata: {
+              secure: false,
+              required: true,
+            }
+          }],
+        view: {
+          template: "<div>Plugin view template</div>"
+        }
+      },
+      profile_settings: {
+        configurations: [
+          {
+            key: "Image",
+            metadata: {
+              secure: false,
+              required: true,
+            }
+          }],
+        view: {
+          template: "<div>Profile view template</div>"
+        }
+      },
+      capabilities: {
+        supports_status_report: true
+      }
+    }
+  }
+ %>
+
+ <%= describe_sub_object 'The elastic agent extension info object', json: elastic_agent_json, html_id: 'elastic-agent-extension-info' do
+    plugin_settings   'Object',  'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+    profile_settings  'Object',  'The [html view](#the-plugin-info-view-object) for the profile and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure a elastic profile.'
+    capabilities      'Object',  'The [capabilities](#capabilities) object indicate the enhancements that a plugin provides.'
+ end
+ %>
+
+ <%
+  auth_json = {
+    extension_info: {
+      auth_config_settings: {
+        configurations: [
+          {
+            key: "Id",
+            metadata: {
+              secure: false,
+              required: true,
+            }
+          }],
+        view: {
+          template: "<div>Auth view template</div>"
+        }
+      },
+
+      role_config_settings: {
+        configurations: [
+          {
+            key: "Name",
+            metadata: {
+              secure: false,
+              required: true,
+            }
+          }],
+        view: {
+          template: "<div>Role view template</div>"
+        }
+      },
+    }
+  }
+ %>
+
+<%= describe_sub_object 'The auth extension info object', json: auth_json, html_id: 'auth-extension-info' do
+    auth_config_settings  'Object',  'The [html view](#the-plugin-info-view-object) for auth config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure auth configs.'
+    role_config_settings  'Object',  'The [html view](#the-plugin-info-view-object) for role config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure role configs.'
+    capabilities          'Object',  'The [capabilities](#capabilities) object indicate the enhancements that a plugin provides.'
+ end
+ %>
+
+ <%
+  scm_json = {
+    scm_settings: {
+      configurations: [
+        {
+          key: "url",
+          metadata: {
+            secure: false,
+            required: true,
+            part_of_identity: true
+          }
+        }],
+      view: {
+        template: "<div>Scm view template</div>"
+      }
+    }
+  }
+ %>
+
+<%= describe_sub_object 'The scm extension info object', json: scm_json, html_id: 'scm-extension-info' do
+    scm_settings  'Object',  'The [html view](#the-plugin-info-view-object) for pluggable scm and the list of [properties](#scm-configurations) that can be used to configure the pluggable scm material.'
+ end
+ %>
+
+<%
+  task_json = {
+    scm_settings: {
+      configurations: [
+        {
+          key: "script",
+          metadata: {
+            secure: false,
+            required: true,
+          }
+        }],
+      view: {
+        template: "<div>Task view template</div>"
+      }
+    }
+  }
+ %>
+
+<%= describe_sub_object 'The task extension info object', json: task_json, html_id: 'task-extension-info' do
+    task_settings  'Object',  'The [html view](#the-plugin-info-view-object) for pluggable task and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure the pluggable task.'
+ end
+ %>
+
+<%
+  pkg_repo_json = {
+    extension_info: {
+      package_settings: {
+        configurations: [
+        {
+          key: "PACKAGE_SPEC",
+          metadata: {
+            secure: false,
+            display_order: 0,
+            required: true,
+            part_of_identity: false,
+            display_name: "Package Spec"
+          }
+        }],
+        view: {
+          template: "<div>Package view template</div>"
+        }
+      },
+
+      repository_settings: {
+        configurations: [
+        {
+          key: "REPO_URL",
+          metadata: {
+            secure: false,
+            display_order: 0,
+            required: true,
+            part_of_identity: false,
+            display_name: "Repository URL"
+          }
+        }],
+        view: {
+          template: "<div>Repository view template</div>"
+        }
+      }
+    }
+  }
+ %>
+
+<%= describe_sub_object 'The package repo extension info object', json: pkg_repo_json, html_id: 'pkg-repo-extension-info' do
+    package_settings     'Object',  'The [html view](#the-plugin-info-view-object) for the package material and the list of [properties](#package-repository-configurations) that can be used to configure a package material.'
+    repository_settings  'Object',  'The [html view](#the-plugin-info-view-object) for repository and the list of [properties](#package-repository-configurations) that can be used to configure package repositories.'
+ end
+%>
+
+<%
+  notification_json = {
+   extension_info: {
+    plugin_settings: {
+      configurations: [
+        {
+          key: "url",
+          metadata: {
+            secure: false,
+            required: true,
+          }
+        }],
+      view: {
+        template: "<div>Plugin view template</div>"
+      }
+    }
+   }
+  }
+%>
+
+<%= describe_sub_object 'The notification extension info object', json: notification_json, html_id: 'notification-extension-info' do
+  plugin_settings 'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+ end
+ %>

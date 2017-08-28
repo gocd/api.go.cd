@@ -28,39 +28,46 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
     }
   },
   "id": "my_plugin",
-  "name": "My SCM Plugin",
-  "display_name": "SCM Plugin For HG",
-  "version": "1.2.3",
-  "type": "scm",
-  "pluggable_instance_settings": {
-    "configurations": [
-      {
-        "key": "url",
-        "metadata": {
-          "secure": false,
-          "required": true,
-          "part_of_identity": true
-        }
-      },
-      {
-        "key": "username",
-        "metadata": {
-          "secure": false,
-          "required": false,
-          "part_of_identity": false
-        }
-      },
-      {
-        "key": "password",
-        "metadata": {
-          "secure": true,
-          "required": false,
-          "part_of_identity": false
-        }
-      }
+  "type": "configrepo",
+  "status": {
+    "state": "active"
+  },
+  "plugin_file_location": "/path/to/server/plugins/external/my_plugin.jar",
+  "bundled_plugin": false,
+  "about": {
+    "name": "My Plugin",
+    "version": "0.2",
+    "target_go_version": "16.1.0",
+    "description": "Short desc",
+    "target_operating_systems": [
+
     ],
-    "view": {
-    "template": "<div>Plugin view template </div>"
+    "vendor": {
+      "name": "GoCD contributors",
+      "url": "https://github.com/tomzo/gocd-json-config-plugin"
+    }
+  },
+  "extension_info": {
+    "plugin_settings": {
+      "configurations": [
+        {
+          "key": "pipeline_pattern",
+          "metadata": {
+            "secure": false,
+            "required": false
+          }
+        },
+        {
+          "key": "environment_pattern",
+          "metadata": {
+            "secure": false,
+            "required": false
+          }
+        }
+      ],
+      "view": {
+        "template": "Some view"
+      }
     }
   }
 }
