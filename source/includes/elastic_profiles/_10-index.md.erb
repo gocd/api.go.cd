@@ -42,7 +42,29 @@ ETag: "32628084ef10b0c82a55f8f2f867d8d0"
           }
         },
         "id": "unit-tests",
-        "plugin_id": "cd.go.contrib.elastic-agent.docker"
+        "plugin_id": "cd.go.contrib.elastic-agent.docker",
+        "properties": [
+          {
+            "key": "Image",
+            "value": "alpine:latest"
+          },
+          {
+            "key": "Command",
+            "value": ""
+          },
+          {
+            "key": "Environment",
+            "value": ""
+          },
+          {
+            "key": "MaxMemory",
+            "value": "200M"
+          },
+          {
+            "key": "ReservedMemory",
+            "value": "150M"
+          }
+        ]
       }
     ]
   }
