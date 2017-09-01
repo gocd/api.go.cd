@@ -1,6 +1,28 @@
 <%=
-describe_sub_object 'The pipeline material object', html_id: 'config-repo-material-object' do
+describe_sub_object 'The config repository material object', html_id: 'config-repo-material-object' do
   type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs)
-  attributes      'Object',      'The [attributes](#the-git-material-attributes) for each material type.'
+  attributes      'Object',      'The [attributes](#config-repo-material-attributes) for each material type.'
+end
+%>
+
+
+<%
+json = {
+  materials: [
+    {
+      type: 'git',
+      attributes: {
+        url: 'https://github.com/gocd/api.go.cd',
+        branch: 'master'
+      }
+    }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The config repository material attributes', json: json, html_id: 'config-repo-material-attributes' do
+  url              'String',  'The URL of the git repository.'
+  branch           'String',  'The git branch to build.'
 end
 %>
