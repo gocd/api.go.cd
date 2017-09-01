@@ -2,33 +2,29 @@
 
 ```shell
 $   curl 'http://ci.example.com/go/api/admin/config_repos' \
-  -u 'username:password' \
-  -H 'Accept:<%= data.apis.versions.config_repos %>' \
-  -H 'Content-Type:application/json' \
-  -X POST -d '{
-    "id": "repo-2",
-    "plugin_id": "json.config.plugin",
-    "material": {
-      "type": "git",
-      "attributes": {
-        "url": "https://github.com/config-repo/gocd-json-config-example2.git",
-        "destination": null,
-        "filter": null,
-        "invert_filter": false,
-        "name": null,
-        "auto_update": true,
-        "branch": "master",
-        "submodule_folder": null,
-        "shallow_clone": false
-      }
-    },
-    "configuration": [
-      {
-       "key": "pattern",
-       "value": "*.myextension"
-     }
-    ]
-  }'
+        -u 'username:password' \
+        -H 'Accept:<%= data.apis.versions.config_repos %>' \
+        -H 'Content-Type:application/json' \
+        -X POST -d '{
+          "id": "repo-2",
+          "plugin_id": "json.config.plugin",
+          "material": {
+            "type": "git",
+            "attributes": {
+              "url": "https://github.com/config-repo/gocd-json-config-example2.git",
+              "destination": null,
+              "filter": null,
+              "invert_filter": false,
+              "name": null,
+              "auto_update": true,
+              "branch": "master",
+              "submodule_folder": null,
+              "shallow_clone": false
+            }
+          },
+          "configuration": [
+          ]
+        }'
 ```
 
 
@@ -69,10 +65,7 @@ Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
     }
   },
   "configuration": [
-    {
-      "key": "pattern",
-      "value": "*.myextension"
-    }
+
   ]
 }
 ```
