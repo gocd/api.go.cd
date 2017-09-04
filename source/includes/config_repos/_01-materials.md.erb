@@ -1,6 +1,80 @@
 <%=
-describe_sub_object 'The pipeline material object', html_id: 'config-repo-material-object' do
+describe_sub_object 'The config repository material object', html_id: 'config-repo-material-object' do
   type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs)
-  attributes      'Object',      'The [attributes](#the-git-material-attributes) for each material type.'
+  attributes      'Object',      'The [attributes](#config-repo-material-attributes) for each material type.'
+end
+%>
+
+<%
+json = {
+      type: 'git',
+      attributes: {
+        url: 'https://github.com/gocd/api.go.cd',
+        branch: 'master'
+      }
+    }
+%>
+
+<%=
+describe_sub_object 'The git material attributes', json: json, html_id: 'config-repo-git-material-attributes' do
+  url              'String',  'The URL of the git repository.'
+  branch           'String',  'The git branch to build.'
+end
+%>
+
+<%
+json = {
+      type: 'svn',
+      attributes: {
+        url: 'svn://svn.example.com/myProject/trunk',
+      }
+    }
+%>
+
+<%=
+describe_sub_object 'The svn material attributes', json: json, html_id: 'config-repo-svn-material-attributes' do
+  url              'String',  'The URL of the subversion repository.'
+end
+%>
+
+<%
+json = {
+      type: 'hg',
+      attributes: {
+        url: 'http://username:password@hg.example.com/hg/api.go.cd',
+      }
+    }
+%>
+<%=
+describe_sub_object 'The mercurial material attributes', json: json, html_id: 'config-repo-hg-material' do
+  url            'String',  'The URL of the mercurial repository.'
+end
+%>
+
+<%
+json = {
+      type: 'p4',
+      attributes: {
+        port: 'p4.example.com:8080'
+      }
+    }
+%>
+<%=
+describe_sub_object 'The perforce material attributes', json: json, html_id: 'config-repo-p4-material' do
+  port                'String',  'Perforce server connection to use (`[transport:]host:port`).'
+end
+%>
+
+<%
+json = {
+      type: 'tfs',
+      attributes: {
+        url: 'http://tfs.exampe.com:8000/tfs'
+      }
+    }
+%>
+<%=
+describe_sub_object 'The tfs material attributes', json: json, html_id: 'config-repo-tfs-material' do
+  url                 'String',  'The URL for the Collection on the TFS Server.'
 end
 %>
