@@ -7,6 +7,9 @@
 ### <%= object.__name %>
 <% end -%>
 
+<% if !object.__options[:desc].nil? %>
+#### <%= object.__options[:desc] %>
+<% end %>
 <% if !object.__options[:json].nil? %>
 ```json
 <%= JSON.pretty_generate(object.__options[:json]) %>

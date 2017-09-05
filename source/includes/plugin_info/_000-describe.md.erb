@@ -144,7 +144,7 @@ end
         }
       },
 
-      role_config_settings: {
+      role_settings: {
         configurations: [
           {
             key: "Name",
@@ -161,15 +161,17 @@ end
   }
  %>
 
-<%= describe_sub_object 'The auth extension info object', json: auth_json, html_id: 'auth-extension-info' do
+<%= describe_sub_object 'The authorization extension info object', json: auth_json, html_id: 'auth-extension-info' do
     auth_config_settings  'Object',  'The [html view](#the-plugin-info-view-object) for auth config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure auth configs.'
-    role_config_settings  'Object',  'The [html view](#the-plugin-info-view-object) for role config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure role configs.'
+    role_settings         'Object',  'The [html view](#the-plugin-info-view-object) for role config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure role configs.'
     capabilities          'Object',  'The [capabilities](#capabilities) object indicate the enhancements that a plugin provides.'
  end
  %>
 
  <%
   scm_json = {
+  extension_info: {
+    display_name: "Github",
     scm_settings: {
       configurations: [
         {
@@ -185,16 +187,21 @@ end
       }
     }
   }
+
+  }
  %>
 
 <%= describe_sub_object 'The scm extension info object', json: scm_json, html_id: 'scm-extension-info' do
+    display_name  'String',  'The descriptive name of the plugin'
     scm_settings  'Object',  'The [html view](#the-plugin-info-view-object) for pluggable scm and the list of [properties](#scm-configurations) that can be used to configure the pluggable scm material.'
  end
  %>
 
 <%
   task_json = {
-    scm_settings: {
+    extension_info: {
+    display_name: "Task",
+    task_settings: {
       configurations: [
         {
           key: "script",
@@ -204,13 +211,15 @@ end
           }
         }],
       view: {
-        template: "<div>Task view template</div>"
+        template: "<div>task view template</div>"
       }
     }
   }
+ }
  %>
 
 <%= describe_sub_object 'The task extension info object', json: task_json, html_id: 'task-extension-info' do
+    display_name  'String',  'The descriptive name of the plugin'
     task_settings  'Object',  'The [html view](#the-plugin-info-view-object) for pluggable task and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure the pluggable task.'
  end
  %>
@@ -283,5 +292,38 @@ end
 
 <%= describe_sub_object 'The notification extension info object', json: notification_json, html_id: 'notification-extension-info' do
   plugin_settings 'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+ end
+ %>
+
+ <%
+  authentication_json = {
+   extension_info: {
+    plugin_settings: {
+      configurations: [
+        {
+          key: "go_server_url",
+          metadata: {
+            secure: false,
+            required: true,
+          }
+        }],
+      view: {
+        template: "<div>Plugin view template</div>"
+      }
+    },
+    display_name: 'Some Authentication Plugin',
+    display_image_url: 'Base 64 encoded image',
+    supports_password_based_authentication: false,
+    supports_web_based_authentication: true
+   }
+  }
+%>
+
+<%= describe_sub_object 'The authentication extension info object', json: authentication_json, html_id: 'authentication-extension-info', desc: "The authentication extension has been deprecated since GoCD 17.5.0. Support for authentication extension is going to be removed in 18.1.0 (scheduled to be released in Jan 2018)." do
+    plugin_settings                         'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+    display_name                            'String',  'The descriptive name of the plugin'
+    display_image_url                       'Object',  'The base 64 encoded image that will be shown on the GoCD login screen.'
+    supports_password_based_authentication  'Boolean', 'Indicates whether the plugin supports password based authentication.'
+    supports_web_based_authentication       'Boolean', 'Indicates whether the plugin supports web based authentication.'
  end
  %>
