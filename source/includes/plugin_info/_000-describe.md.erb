@@ -20,8 +20,8 @@ end
 
 <%=
 describe_sub_object 'The plugin status object', json: plugin_status, html_id: 'plugin-status' do
-  state    'String', 'Status of the plugin. Could be one of %w(active invalid)'
-  messages              'Array', 'Array of messages stating the reason why the plugin isn\'t loaded'
+  state    'String', 'Status of the plugin.', one_of: %w(active invalid)
+  messages 'Array', 'Array of messages stating the reason why the plugin isn\'t loaded. The messages are shown only if the status is  *invalid*.'
 end
 %>
 
@@ -35,7 +35,7 @@ end
 <%=
 describe_sub_object 'The plugin vendor object', json: vendor_json, html_id: 'plugin-vendor' do
   name    'String', 'Name of the plugin author'
-  url     'String', 'Url to know more details about the plugin author'
+  url     'String', 'Link to know more details about the plugin author'
 end
 %>
 
@@ -51,10 +51,10 @@ end
 
 <%=
 describe_sub_object 'The plugin about object', json: about_json, html_id: 'plugin-about' do
-  name    'String', 'Name of the plugin'
-  version 'String', 'Version of the plugin that\'s installed'
-  target_go_version 'String', 'The version of GoCD from which the plugin is compatible with GoCD.'
-  description 'String', "Short description about what the plugin does"
+  name                     'String', 'Name of the plugin'
+  version                  'String', 'Version of the plugin that\'s installed'
+  target_go_version        'String', 'Minimal version of GoCD required for the plugin to work'
+  description              'String', "Short description about what the plugin does"
   target_operating_systems 'Array', 'List of operating systems on which the plugin is expected to work.'
 end
 %>
