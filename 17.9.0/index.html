@@ -8446,55 +8446,176 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Plugin unique identifier.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the plugin. Can be one of <code class="prettyprint">authentication</code>, <code class="prettyprint">notification</code>, <code class="prettyprint">package-repository</code>, <code class="prettyprint">task</code>, <code class="prettyprint">scm</code>, <code class="prettyprint">elastic</code>, <code class="prettyprint">configrepo</code>, <code class="prettyprint">authorization</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td>Object</td>
+<td>The <a href="#plugin-status">status</a> of the plugin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">plugin_file_location</code></td>
+<td>String</td>
+<td>The location where the plugin is installed.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bundled_plugin</code></td>
+<td>Boolean</td>
+<td>Indicates whether the plugin is bundled with GoCD.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">about</code></td>
+<td>Object</td>
+<td><a href="#plugin-about">Additional details</a> about the plugin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">vendor</code></td>
+<td>Object</td>
+<td>Details about the <a href="#plugin-vendor">plugin author</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">extension_info</code></td>
+<td>Object</td>
+<td><a href="#config-repo-extension-info">Configuration related information</a> pertaining to the plugin&rsquo;s extension.</td>
+</tr>
+</tbody></table>
+
+<p><a id='plugin-status'></a></p>
+
+<h3 id="the-plugin-status-object">The plugin status object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Plugin not supported"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">state</code></td>
+<td>String</td>
+<td>Status of the plugin. Can be one of <code class="prettyprint">active</code>, <code class="prettyprint">invalid</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">messages</code></td>
+<td>Array</td>
+<td>Array of messages stating the reason why the plugin isn&rsquo;t loaded. The messages are shown only if the status is  <em>invalid</em>.</td>
+</tr>
+</tbody></table>
+
+<p><a id='plugin-vendor'></a></p>
+
+<h3 id="the-plugin-vendor-object">The plugin vendor object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoCD contributors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://thoughtworks.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>Name of the plugin author.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>Link to know more details about the plugin author.</td>
+</tr>
+</tbody></table>
+
+<p><a id='plugin-about'></a></p>
+
+<h3 id="the-plugin-about-object">The plugin about object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub Pull Requests Builder"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3.3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"target_go_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Plugin that polls a GitHub repository for pull requests and triggers a build for each of them"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"target_operating_systems"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
 <td><code class="prettyprint">name</code></td>
 <td>String</td>
 <td>Name of the plugin.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">display_name</code></td>
-<td>String</td>
-<td>Plugin display name to be used in views.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">version</code></td>
 <td>String</td>
-<td>The version of the plugin.</td>
+<td>Version of the plugin that&rsquo;s installed.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">type</code></td>
+<td><code class="prettyprint">target_go_version</code></td>
 <td>String</td>
-<td>The type of the plugin. Can be one of <code class="prettyprint">authentication</code>, <code class="prettyprint">notification</code>, <code class="prettyprint">package-repository</code>, <code class="prettyprint">task</code>, <code class="prettyprint">scm</code>, <code class="prettyprint">elastic</code>.</td>
+<td>Minimal version of GoCD required for the plugin to work.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">pluggable_instance_settings</code></td>
-<td>Object</td>
-<td>List of <a href="#the-pluggable_instance_settings-object">pluggable_instance_settings</a> settings required to configure a pluggable instance e.g PluggableTask, PluggableSCM.</td>
+<td><code class="prettyprint">description</code></td>
+<td>String</td>
+<td>Short description about what the plugin does.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">image</code></td>
-<td>Object</td>
-<td>The <a href="#the-plugin-icon-object">plugin icon</a> for the specific plugin. This is currently only supported by elastic agent plugins. <strong>Since v16.12.0</strong>.</td>
+<td><code class="prettyprint">target_operating_systems</code></td>
+<td>Array</td>
+<td>List of operating systems on which the plugin is expected to work.</td>
 </tr>
 </tbody></table>
 
-<p><a id='pluggable-instance-settings'></a></p>
+<p><a id='config-repo-extension-info'></a></p>
 
-<h3 id="the-pluggable_instance_settings-object">The pluggable_instance_settings object</h3>
+<h3 id="the-config-repo-extension-info-object">The config repo extension info object</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"pluggable_instance_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -8510,24 +8631,50 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">configurations</code></td>
-<td>Array</td>
-<td>List of <a href="#the-plugin-info-configurations-object">configurations</a> required to configure a pluggable instance.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">view</code></td>
+<td><code class="prettyprint">plugin_settings</code></td>
 <td>Object</td>
-<td>The <a href="#the-plugin-info-view-object">view</a> contains the Angular view template.</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for the plugin and the list of <a href="#the-plugin-info-configurations-object">properties</a> required to be configured.</td>
 </tr>
 </tbody></table>
 
-<p><a id='the-plugin-icon-object'></a></p>
+<p><p><a id='elastic-agent-extension-info'></a></p></p>
 
-<h3 id="the-image-object">The Image Object</h3>
+<h3 id="the-elastic-agent-extension-info-object">The elastic agent extension info object</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/svg+xml"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"...."</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InstanceType"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"profile_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Profile view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"supports_status_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -8541,14 +8688,347 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">content_type</code></td>
-<td>String</td>
-<td>A valid <a href="http://www.iana.org/assignments/media-types/media-types.xhtml#image">content type</a> for the image. Please make sure the content type is supported by most browsers.</td>
+<td><code class="prettyprint">plugin_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for the plugin and the list of <a href="#the-plugin-info-configurations-object">properties</a> required to be configured.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">data</code></td>
+<td><code class="prettyprint">profile_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for the profile and the list of <a href="#the-plugin-info-configurations-object">properties</a> that can be used to configure a elastic profile.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">capabilities</code></td>
+<td>Object</td>
+<td>The <a href="#capabilities">capabilities</a> object indicate the enhancements that a plugin provides.</td>
+</tr>
+</tbody></table>
+
+<p><a id='auth-extension-info'></a></p>
+
+<h3 id="the-authorization-extension-info-object">The authorization extension info object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"auth_config_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Id"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Auth view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"role_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Role view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">auth_config_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for auth config and the list of <a href="#the-plugin-info-configurations-object">properties</a> that can be used to configure auth configs.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">role_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for role config and the list of <a href="#the-plugin-info-configurations-object">properties</a> that can be used to configure role configs.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">capabilities</code></td>
+<td>Object</td>
+<td>The <a href="#capabilities">capabilities</a> object indicate the enhancements that a plugin provides.</td>
+</tr>
+</tbody></table>
+
+<p><a id='scm-extension-info'></a></p>
+
+<h3 id="the-scm-extension-info-object">The scm extension info object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"scm_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Scm view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">display_name</code></td>
 <td>String</td>
-<td>A <a href="https://en.wikipedia.org/wiki/Base64">base-64</a> encoded (single-line non-chunking) byte array of the byte-sequence that composes the image.</td>
+<td>The descriptive name of the plugin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">scm_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for pluggable scm and the list of <a href="#scm-configurations">properties</a> that can be used to configure the pluggable scm material.</td>
+</tr>
+</tbody></table>
+
+<p><a id='task-extension-info'></a></p>
+
+<h3 id="the-task-extension-info-object">The task extension info object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Task"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"task_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"script"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;task view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">display_name</code></td>
+<td>String</td>
+<td>The descriptive name of the plugin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">task_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for pluggable task and the list of <a href="#the-plugin-info-configurations-object">properties</a> that can be used to configure the pluggable task.</td>
+</tr>
+</tbody></table>
+
+<p><a id='pkg-repo-extension-info'></a></p>
+
+<h3 id="the-package-repo-extension-info-object">The package repo extension info object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"package_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PACKAGE_SPEC"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"display_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package Spec"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Package view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"repository_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"display_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repository URL"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Repository view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">package_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for the package material and the list of <a href="#package-repository-configurations">properties</a> that can be used to configure a package material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">repository_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for repository and the list of <a href="#package-repository-configurations">properties</a> that can be used to configure package repositories.</td>
+</tr>
+</tbody></table>
+
+<p><a id='notification-extension-info'></a></p>
+
+<h3 id="the-notification-extension-info-object">The notification extension info object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">plugin_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for the plugin and the list of <a href="#the-plugin-info-configurations-object">properties</a> required to be configured.</td>
+</tr>
+</tbody></table>
+
+<p><a id='authentication-extension-info'></a></p>
+
+<h3 id="the-authentication-extension-info-object">The authentication extension info object</h3>
+
+<h4 id="the-authentication-extension-has-been-deprecated-since-gocd-17-5-0-support-for-authentication-extension-is-going-to-be-removed-in-18-1-0-scheduled-to-be-released-in-jan-2018">The authentication extension has been deprecated since GoCD 17.5.0. Support for authentication extension is going to be removed in 18.1.0 (scheduled to be released in Jan 2018).</h4>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"go_server_url"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some Authentication Plugin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"display_image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base 64 encoded image"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"supports_password_based_authentication"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"supports_web_based_authentication"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">plugin_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> for the plugin and the list of <a href="#the-plugin-info-configurations-object">properties</a> required to be configured.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">display_name</code></td>
+<td>String</td>
+<td>The descriptive name of the plugin.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">display_image_url</code></td>
+<td>Object</td>
+<td>The base 64 encoded image that will be shown on the GoCD login screen.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">supports_password_based_authentication</code></td>
+<td>Boolean</td>
+<td>Indicates whether the plugin supports password based authentication.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">supports_web_based_authentication</code></td>
+<td>Boolean</td>
+<td>Indicates whether the plugin supports web based authentication.</td>
 </tr>
 </tbody></table>
 
@@ -8562,8 +9042,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -8587,7 +9066,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">metadata</code></td>
 <td>Object</td>
-<td>Metadata for the configuration property. For plugins of types <code class="prettyprint">authentication</code>, <code class="prettyprint">notification</code>, <code class="prettyprint">task</code> and <code class="prettyprint">scm</code>, the metadata consists of attributes <code class="prettyprint">secure</code>, <code class="prettyprint">required</code> and <code class="prettyprint">part_of_identity</code>. The attributes for <a href="#the-package-repository-configurations-object">package-repository</a> and <a href="#the-elastic-configurations-object">elastic</a> plugins are given below.</td>
+<td>Metadata for the configuration property. The metadata consists of attributes <code class="prettyprint">secure</code>, <code class="prettyprint">required</code>. The attributes for <a href="#the-package-repository-configurations-object">package-repository</a> and <a href="#the-scm-configurations-object">scm</a> plugins are given below.</td>
 </tr>
 </tbody></table>
 
@@ -8632,17 +9111,18 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<p><a id='elastic-agent-configurations'></a></p>
+<p><a id='scm-configurations'></a></p>
 
-<h3 id="the-elastic-configurations-object">The elastic configurations object</h3>
+<h3 id="the-scm-configurations-object">The scm configurations object</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -8661,7 +9141,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">key</code></td>
 <td>String</td>
-<td>Describes the configuration key for a elastic agent property.</td>
+<td>Describes the configuration key for a repository configuration property.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">metadata</code></td>
@@ -8701,7 +9181,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre>
 
 <blockquote>
@@ -8716,7 +9196,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/plugin_info"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8153/go/api/admin/plugin_info"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8153/go/api/admin/plugin_info/:plugin_id"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#plugin-info"</span><span class="w">
@@ -8727,7 +9210,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="p">{</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/plugin_info/plugin_id"</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/plugin_info/json.config.plugin"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#plugin-info"</span><span class="w">
@@ -8736,11 +9219,49 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
             </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/plugin_info/:id"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plugin_id"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SCM Plugin"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SCM Plugin For HG"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2.3"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scm"</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json.config.plugin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"configrepo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"plugin_file_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Users/varshavs/gocd/server/plugins/bundled/gocd-json-config-plugin.jar"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bundled_plugin"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"about"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JSON Configuration Plugin"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"target_go_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16.1.0"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Configuration plugin that supports Go configuration in JSON"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"target_operating_systems"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+          </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"vendor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tomasz Setkowski"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/tomzo/gocd-json-config-plugin"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_pattern"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment_pattern"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some view"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -8765,7 +9286,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info/my_plugin'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre>
 
 <blockquote>
@@ -8773,7 +9294,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre>
 
@@ -8790,39 +9311,46 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_plugin"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My SCM Plugin"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SCM Plugin For HG"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2.3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scm"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"pluggable_instance_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"configrepo"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"plugin_file_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/server/plugins/external/my_plugin.jar"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bundled_plugin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"about"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Plugin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"target_go_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16.1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short desc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"target_operating_systems"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
     </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template &lt;/div&gt;"</span><span class="w">
+    </span><span class="nt">"vendor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoCD contributors"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/tomzo/gocd-json-config-plugin"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_pattern"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment_pattern"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some view"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
