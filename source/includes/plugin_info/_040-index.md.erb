@@ -18,7 +18,10 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
 {
   "_links": {
     "self": {
-      "href": "https://ci.example.com/go/api/admin/plugin_info"
+      "href": "http://localhost:8153/go/api/admin/plugin_info"
+    },
+    "find": {
+      "href": "http://localhost:8153/go/api/admin/plugin_info/:plugin_id"
     },
     "doc": {
       "href": "https://api.gocd.org/#plugin-info"
@@ -29,7 +32,7 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
       {
         "_links": {
           "self": {
-            "href": "https://ci.example.com/go/api/admin/plugin_info/plugin_id"
+            "href": "https://ci.example.com/go/api/admin/plugin_info/json.config.plugin"
           },
           "doc": {
             "href": "https://api.gocd.org/#plugin-info"
@@ -38,11 +41,49 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
             "href": "https://ci.example.com/go/api/admin/plugin_info/:id"
           }
         },
-        "id": "plugin_id",
-        "name": "SCM Plugin",
-        "display_name": "SCM Plugin For HG",
-        "version": "1.2.3",
-        "type": "scm"
+        "id": "json.config.plugin",
+        "type": "configrepo",
+        "status": {
+          "state": "active"
+        },
+        "plugin_file_location": "/Users/varshavs/gocd/server/plugins/bundled/gocd-json-config-plugin.jar",
+        "bundled_plugin": true,
+        "about": {
+          "name": "JSON Configuration Plugin",
+          "version": "0.2",
+          "target_go_version": "16.1.0",
+          "description": "Configuration plugin that supports Go configuration in JSON",
+          "target_operating_systems": [
+
+          ],
+          "vendor": {
+            "name": "Tomasz Setkowski",
+            "url": "https://github.com/tomzo/gocd-json-config-plugin"
+          }
+        },
+        "extension_info": {
+          "plugin_settings": {
+            "configurations": [
+              {
+                "key": "pipeline_pattern",
+                "metadata": {
+                  "secure": false,
+                  "required": false
+                }
+              },
+              {
+                "key": "environment_pattern",
+                "metadata": {
+                  "secure": false,
+                  "required": false
+                }
+              }
+            ],
+            "view": {
+              "template": "Some view"
+            }
+          }
+        }
       }
     ]
   }

@@ -6,7 +6,6 @@
       metadata: {
         secure: false,
         required: true,
-        part_of_identity: false
       }
     }
   ]
@@ -15,7 +14,7 @@
 <%=
 describe_sub_object 'The plugin info configurations object', json: json, html_id: 'plugin-info-configurations' do
   key      'String', 'Describes the configuration key'
-  metadata 'Object', "Metadata for the configuration property. For plugins of types `authentication`, `notification`, `task` and `scm`, the metadata consists of attributes `secure`, `required` and `part_of_identity`. The attributes for [package-repository](#the-package-repository-configurations-object) and [elastic](#the-elastic-configurations-object) plugins are given below."
+  metadata 'Object', "Metadata for the configuration property. The metadata consists of attributes `secure`, `required`. The attributes for [package-repository](#the-package-repository-configurations-object) and [scm](#the-scm-configurations-object) plugins are given below."
 end
 %>
 
@@ -44,13 +43,14 @@ end
 %>
 
 <%
-    elastic_json =  {
+    scm_json =  {
   configurations: [
     {
-      key: "Image",
+      key: "REPO_URL",
       metadata: {
         secure: false,
-        required: true
+        required: true,
+        part_of_identity: false,
       }
     }
   ]
@@ -58,8 +58,8 @@ end
 %>
 
 <%=
-describe_sub_object 'The elastic configurations object', json: elastic_json, html_id: 'elastic-agent-configurations' do
-  key      'String', 'Describes the configuration key for a elastic agent property'
+describe_sub_object 'The scm configurations object', json: scm_json, html_id: 'scm-configurations' do
+  key      'String', 'Describes the configuration key for a repository configuration property'
   metadata 'Object', "Metadata for the configuration property."
 end
 %>
