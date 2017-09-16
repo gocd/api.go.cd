@@ -1,0 +1,18 @@
+<a id="github-webhook"></a>
+
+### Hosting your repository on GitHub, or GitHub Enterprise?
+
+<%= available_since('17.6.0') %>
+
+To notify GoCD of a push to a GitHub repository via a repository or organization webhook, configure GitHub to use the webhooks api negating the need for basic authentication on each request.
+
+**Note:** Polling must be turned off for the pipeline associated with this material.
+
+`https://gocd.example.com:8154/go/api/webhooks/github/notify`
+
+To secure the http endpoint, the webhook configuration on GitHub must specify a _Secret_, the value of the _Secret_ should be same as the value of the `webhookSecret` attribute on the `<server/>` element in the file `cruise-config.xml`. Do not specify any basic authentication credentials in the webhook URL.
+
+
+##### Returns
+
+A text confirmation, with the http status `202 Accepted`.

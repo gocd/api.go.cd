@@ -1,0 +1,17 @@
+<a id="gitlab-webhook"></a>
+
+### Hosting your repository on GitLab?
+
+<%= available_since('17.11.0') %>
+
+To notify GoCD of an push to GitLab repository via a group or project webhook, configure GitLab to use the webhooks api negating the need for basic authentication on each request.
+
+**Note:** Polling must be turned off for the pipeline associated with this material.
+
+`https://gocd.example.com:8154/go/api/webhooks/gitlab/notify`
+
+To secure the http endpoint, the webhook configuration on GitLab must specify a _Secret Token_, the value of the _Secret Token_ should be same as the value of the `webhookSecret` attribute on the `<server/>` element in the file `cruise-config.xml`. Do not specify any basic authentication credentials in the webhook URL.
+
+##### Returns
+
+A text confirmation, with the http status `202 Accepted`.
