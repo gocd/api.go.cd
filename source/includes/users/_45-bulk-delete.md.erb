@@ -1,0 +1,41 @@
+## Bulk Delete Users
+
+```shell
+$ curl 'https://ci.example.com/go/api/users' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.users %>' \
+      -H 'Content-Type: application/json' \
+      -X DELETE \
+      -d '{"users": ["jez", "tez"]}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.users %>; charset=utf-8
+```
+
+```json
+{
+  "message": "Users '[\"jez\", \"tez\"]' were deleted successfully."
+}
+```
+
+Deletes multiple users.
+
+<aside class="notice">
+  You must first <a href='#update-a-user'>disable users</a> before deleting it.
+</aside>
+
+<%=
+available_since('17.11.0')
+%>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/users`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirming if the users were deleted.

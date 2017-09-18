@@ -1,7 +1,5 @@
 # GoCD API Documentation
 
-[![Build Status](https://snap-ci.com/gocd/api.go.cd/branch/master/build_image)](https://snap-ci.com/gocd/api.go.cd/branch/master)
-
 Checkout the live documentation at https://api.gocd.org
 
 # Contributing to the API Documentation
