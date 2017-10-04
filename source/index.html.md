@@ -13,6 +13,7 @@ includes:
   - 010-introduction
   - 020-authentication
   - 030-agents
+  - 035-agent-health
   - 040-users
   - 042-current-user
   - 044-notification-filters
