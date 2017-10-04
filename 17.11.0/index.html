@@ -987,6 +987,58 @@
 </tr>
 </tbody></table>
 
+          <h1 id="agent-health">Agent Health</h1>
+
+<p>The agents API allows users to monitor if the agent is connected to the server and is authorized to perform a build.</p>
+
+<h2 id="check-agent-server-connectivity">Check agent-server connectivity</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'http://localhost:8152/health/v1/isConnectedToServer'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a plain text response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=utf-8</span>
+
+OK!
+</code></pre>
+
+<p>This API when invoked on an agent, will indicate if the agent-server connectivity is in a state that allows agents to run builds.</p>
+
+<p class='available-since'>
+  Available since v17.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /health/v1/isConnectedToServer</code> </p>
+
+<p>You may alternatively use:</p>
+
+<p><code class="prettyprint">GET /health/latest/isConnectedToServer</code> </p>
+
+<p>which will render the most recent version of the api.</p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A status code <code class="prettyprint">200</code> along with text <code class="prettyprint">OK!</code> if all the following conditions are met:</p>
+
+<ul>
+<li>able to establish HTTP(s) contact with the server</li>
+<li>is authorized by the server (by an admin, or by auto-registration)</li>
+</ul>
+
+<p>The endpoint will return status <code class="prettyprint">503</code> in any other cases.</p>
+
+<p>Two consecutive failing pings will be treated as having failed healthcheck.</p>
+
+<aside class="notice">
+  <strong>Note:</strong> When a GoCD server is upgraded, the agent will automatically upgrade itself by downloading a copy from the GoCD server. During the time a new agent jar is being downloaded, this api endpoint may not be available.
+</aside>
+
           <h1 id="users">Users</h1>
 
 <p>The users API allows users with administrator role to manage users.</p>
