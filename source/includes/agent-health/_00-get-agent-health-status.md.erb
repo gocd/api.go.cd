@@ -1,0 +1,43 @@
+## Check agent-server connectivity
+
+```shell
+$ curl 'http://localhost:8152/health/v1/isConnectedToServer'
+```
+
+> The above command returns a plain text response:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=utf-8
+
+OK!
+```
+
+This API when invoked on an agent, will indicate if the agent-server connectivity is in a state that allows agents to run builds.
+
+<%= available_since('17.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /health/v1/isConnectedToServer` 
+
+You may alternatively use:
+
+`GET /health/latest/isConnectedToServer` 
+
+which will render the most recent version of the api.
+
+<p class='http-request-return-description'>Returns</p>
+
+A status code `200` along with text `OK!` if all the following conditions are met:
+
+- able to establish HTTP(s) contact with the server
+- is authorized by the server (by an admin, or by auto-registration)
+
+The endpoint will return status `503` in any other cases.
+
+Two consecutive failing pings will be treated as having failed healthcheck.
+
+<aside class="notice">
+  <strong>Note:</strong> When a GoCD server is upgraded, the agent will automatically upgrade itself by downloading a copy from the GoCD server. During the time a new agent jar is being downloaded, this api endpoint may not be available.
+</aside>
