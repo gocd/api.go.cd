@@ -2121,25 +2121,68 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
     -d <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
 </code></pre>
 
+<p><a id="bitbucket-webhook"></a></p>
+
+<h3 id="hosting-your-repository-on-bitbucket">Hosting your repository on BitBucket?</h3>
+
+<p class='available-since'>
+  Available since v17.11.0.
+</p>
+
+<p>To notify GoCD of an push to BitBucket repository via a group or project webhook, configure BitBucket to use the webhooks api negating the need for basic authentication on each request.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+
+<p><code class="prettyprint">https://{webhookSecret}:x@gocd.example.com:8154/go/api/webhooks/bitbucket/notify</code></p>
+
+<p>To secure the http endpoint, the webhook configuration on bitbucket must specify a <em>Basic Authentication User</em>, the value of the <em>Basic Authentication User</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+
+<h5 id="returns">Returns</h5>
+
+<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
+
 <p><a id="github-webhook"></a></p>
 
-<h3 id="hosting-your-repository-on-github-enterprise">Hosting your repository on GitHub [Enterprise]?</h3>
+<h3 id="hosting-your-repository-on-github-or-github-enterprise">Hosting your repository on GitHub, or GitHub Enterprise?</h3>
 
 <p class='available-since'>
   Available since v17.6.0.
 </p>
 
-<p>To notify GoCD of an update to a repository via an organisation level webhook (GitHub Push Event), configure GitHub to use the webhooks api negating the need for basic authentication on each request.
-<em>Polling must be turned off for the pipeline associated with this material</em></p>
+<p>To notify GoCD of a push to a GitHub repository via a repository or organization webhook, configure GitHub to use the webhooks api negating the need for basic authentication on each request.</p>
 
-<p><code class="prettyprint">{server-url}/api/webhooks/github/notify</code></p>
+<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/github/notify</code></p>
 
 <p>To secure the http endpoint, the webhook configuration on GitHub must specify a <em>Secret</em>, the value of the <em>Secret</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
 
 <h5 id="returns">Returns</h5>
 
 <p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
+
+<p><a id="gitlab-webhook"></a></p>
+
+<h3 id="hosting-your-repository-on-gitlab">Hosting your repository on GitLab?</h3>
+
+<p class='available-since'>
+  Available since v17.11.0.
+</p>
+
+<p>To notify GoCD of an push to GitLab repository via a group or project webhook, configure GitLab to use the webhooks api negating the need for basic authentication on each request.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify</code></p>
+
+<p>To secure the http endpoint, the webhook configuration on GitLab must specify a <em>Secret Token</em>, the value of the <em>Secret Token</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+
+<h5 id="returns">Returns</h5>
+
+<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
+
 <h2 id="notify-mercurial-materials">Notify Mercurial materials</h2>
+
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/material/notify/hg'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
       -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
@@ -2150,9 +2193,11 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 <blockquote>
 <p>The above command returns the following response:</p>
 </blockquote>
+
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
 </code></pre>
+
 <pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
 </code></pre>
 
