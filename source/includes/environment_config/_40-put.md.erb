@@ -87,8 +87,8 @@ All of the following properties must be specified. Not specifying a property wil
 <%=
   describe_object nil do
   name                      'String',  'The name of environment'
-  pipelines                 'Array',   'List of pipeline names that should be added to this environment'
-  agents                    'Array',   'List of agent uuids that should be added to this environment'
+  pipelines                 'Array',   'List of pipeline names that should be part of this environment'
+  agents                    'Array',   'List of agent uuids that should be part of this environment'
   environment_variables     'Array',   'The list of [environment variables](#pipeline-config-environment-variables) that will be passed to all tasks (commands) that are part of this environment.'
   end
  %>
