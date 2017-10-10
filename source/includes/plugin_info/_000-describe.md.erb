@@ -238,10 +238,7 @@ end
             part_of_identity: false,
             display_name: "Package Spec"
           }
-        }],
-        view: {
-          template: "<div>Package view template</div>"
-        }
+        }]
       },
 
       repository_settings: {
@@ -255,18 +252,15 @@ end
             part_of_identity: false,
             display_name: "Repository URL"
           }
-        }],
-        view: {
-          template: "<div>Repository view template</div>"
-        }
+        }]
       }
     }
   }
  %>
 
 <%= describe_sub_object 'The package repo extension info object', json: pkg_repo_json, html_id: 'pkg-repo-extension-info' do
-    package_settings     'Object',  'The [html view](#the-plugin-info-view-object) for the package material and the list of [properties](#package-repository-configurations) that can be used to configure a package material.'
-    repository_settings  'Object',  'The [html view](#the-plugin-info-view-object) for repository and the list of [properties](#package-repository-configurations) that can be used to configure package repositories.'
+    package_settings     'Object',  'The list of [properties](#package-repository-configurations) that can be used to configure a package material. A form is created for the user based on these properties. No request is currently made to fetch the view for package settings.'
+    repository_settings  'Object',  'The list of [properties](#package-repository-configurations) that can be used to configure package repositories. A form is created for the user based on these properties. No request is currently made to fetch the view for repository settings.'
  end
 %>
 
