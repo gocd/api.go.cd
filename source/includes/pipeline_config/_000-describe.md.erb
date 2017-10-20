@@ -1,7 +1,7 @@
 <%=
 describe_object 'The pipeline config object', since: '15.3.0' do
   label_template            'String',  'The label template to customise the pipeline instance label. Both of material names and `${COUNT}` are available in the `label_template`. If not specified, `label_template` defaults to `${COUNT}`.'
-  enable_pipeline_locking   'Boolean', 'Whether pipeline is locked to run single instance or not.'
+  lock_behavior             'String',  'Define the pipeline lock behavior. Can be one of `lockOnFailure`, `unlockWhenFinished` or `none` (default).'
   name                      'String',  'The name of the pipeline.'
   template                  'String',  'The name of the template used by pipeline. You MUST specify atleast one stage in `stages`, or `template`.'
   origin                    'Object',  'The origin of the pipeline. Can be either [local origin object](#pipeline-config-config-xml-origin-object) for pipelines defined locally in cruise-config.xml or [config repo origin object](#pipeline-config-config-repo-origin-object) for the pipelines defined remotely in config repository.', since: '17.4.0'

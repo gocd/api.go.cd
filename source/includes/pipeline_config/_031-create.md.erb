@@ -8,7 +8,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines' \
       -X POST -d '{ "group": "first",
                     "pipeline": {
                     "label_template": "${COUNT}",
-                    "enable_pipeline_locking": true,
+                    "lock_behavior": "lockOnFailure",
                     "name": "new_pipeline",
                     "template": null,
                     "materials": [
@@ -90,7 +90,7 @@ Content-Type: <%= data.apis.versions.pipeline %>; charset=utf-8
     }
   },
   "label_template": "${COUNT}",
-  "enable_pipeline_locking": true,
+  "lock_behavior": "lockOnFailure",
   "name": "new_pipeline",
   "template": null,
   "origin": {
