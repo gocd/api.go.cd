@@ -12,6 +12,7 @@ toc_footers:
 includes:
   - 010-introduction
   - 020-authentication
+  - 025-server-health
   - 030-agents
   - 035-agent-health
   - 040-users
