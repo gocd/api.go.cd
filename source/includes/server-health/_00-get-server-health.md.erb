@@ -1,0 +1,23 @@
+## Check Server Health
+
+```shell
+$ curl 'http://localhost:8153/go/api/v1/health'
+```
+
+> The above command returns a plain text response:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+{
+  "health": "OK"
+}
+```
+
+This API will indicate if the server is up.
+
+<%= available_since('17.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/v1/health`
