@@ -234,6 +234,36 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+          <h1 id="server-health">Server Health</h1>
+
+<p>The server health API allows users to monitor if the GoCD server is up and running. Usually used for health checks in Docker and Kubernetes.</p>
+
+<h2 id="check-server-health">Check Server Health</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'http://localhost:8153/go/api/v1/health'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a plain text response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="s">{</span>
+<span class="s">  "health": "OK"</span>
+<span class="s">}</span>
+</code></pre>
+
+<p>This API will indicate if the server is up.</p>
+
+<p class='available-since'>
+  Available since v17.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/v1/health</code></p>
+
           <h1 id="agents">Agents</h1>
 
 <p>The agents API allows users with administrator role to manage agents.</p>
@@ -6852,7 +6882,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template.name'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span>
+      -H <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       -i
 </code></pre>
 
