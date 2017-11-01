@@ -1,0 +1,95 @@
+## Update Config repo object
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/config_repos/repo-1' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.config_repos %>' \
+      -H 'Content-Type: application/json' \
+      -H 'If-Match: "e064ca0fe5d8a39602e19666454b8d77"' \
+      -X PUT \
+      -d '{
+            "id": "repo-2",
+            "plugin": "json.config.plugin",
+            "material": {
+              "type": "git",
+              "attributes": {
+                "url": "https://github.com/config-repo/gocd-json-config-example2.git",
+                "name": null,
+                "branch": "master",
+                "shallow_clone": false
+              }
+            },
+            "configuration": [
+              {
+               "key": "pattern",
+               "value": "*.myextension"
+             }
+            ]
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
+ETag: "e89135b38ddbcd9380c83eb524647bdd"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/config_repos/repo-2"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#config-repos"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+    }
+  },
+  "id": "repo-2",
+  "plugin_id": "json.config.plugin",
+  "material": {
+    "type": "git",
+    "attributes": {
+      "url": "https://github.com/config-repo/gocd-json-config-example2.git",
+      "name": null,
+      "branch": "master",
+      "shallow_clone": false
+    }
+  },
+  "configuration": [
+    {
+      "key": "pattern",
+      "value": "*.myextension"
+    }
+  ]
+}
+
+```
+
+Update config repos for specified config repo id.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update config repo API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  config repo config resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the config repo config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('17.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/config_repos/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [config-repo](#the-config-repo-object) object

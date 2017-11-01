@@ -1,0 +1,8 @@
+<%=
+describe_object 'The config repo object', since: '17.12.0' do
+  id                'String',   'Each config repo is associated with an unique id by which it can be referenced. Id is mandatory field for config repo.'
+  plugin_id         'String',   'The name of the config repo plugin.'
+  material          'Object',   'The [material](#config-repo-material-object) to be used by the config repo.'
+  configuration     'Object',   'The list of [properties](#pluggable-scm-configuration) (key-value pairs) to be provided for using the plugin'
+end
+%>
