@@ -14,7 +14,7 @@ $   curl 'http://ci.example.com/go/api/admin/config_repos' \
         "url": "https://github.com/config-repo/gocd-json-config-example2.git",
         "name": null,
         "branch": "master",
-        "shallow_clone": false
+        "auto_update": true
       }
     },
     "configuration": [
@@ -55,7 +55,7 @@ Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
       "url": "https://github.com/config-repo/gocd-json-config-example2.git",
       "name": null,
       "branch": "master",
-      "shallow_clone": false
+      "auto_update": true
     }
   },
   "configuration": [
