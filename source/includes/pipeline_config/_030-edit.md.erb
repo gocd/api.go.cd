@@ -9,7 +9,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
       -X PUT \
       -d '{
             "label_template": "${COUNT}",
-            "enable_pipeline_locking": true,
+            "lock_behavior": "unlockWhenFinished",
             "name": "my_pipeline",
             "template": null,
             "materials": [
@@ -90,7 +90,7 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
     }
   },
   "label_template": "${COUNT}",
-  "enable_pipeline_locking": true,
+  "lock_behavior": "unlockWhenFinished",
   "name": "my_pipeline",
   "template": null,
   "origin": {
