@@ -73,20 +73,16 @@ end
 
 <%
 json = {
-  materials: [
-    {
-      type: 'p4',
-      attributes: {
-        name: 'api-docs',
-        port: 'p4.example.com:8080',
-        use_tickets: true,
-        view: 'sample_view',
-        auto_update: true,
-        username: 'admin',
-        encrypted_password: 'aSdiFgRRZ6A='
-      }
-    }
-  ]
+  type: 'p4',
+  attributes: {
+    name: 'api-docs',
+    port: 'p4.example.com:8080',
+    use_tickets: true,
+    view: 'sample_view',
+    auto_update: true,
+    username: 'admin',
+    encrypted_password: 'aSdiFgRRZ6A='
+  }
 }
 %>
 
@@ -105,19 +101,15 @@ end
 
 <%
 json = {
-  materials: [
-    {
-      type: 'tfs',
-      attributes: {
-        name: 'tfs',
-        url: 'http://tfs.exampe.com:8000/tfs',
-        project_path: '$/',
-        domain: 'corporate/domain',
-        username: 'admin',
-        encrypted_password: 'aSdiFgRRZ6A='
-      }
-    }
-  ]
+  type: 'tfs',
+  attributes: {
+    name: 'tfs',
+    url: 'http://tfs.exampe.com:8000/tfs',
+    project_path: '$/',
+    domain: 'corporate/domain',
+    username: 'admin',
+    encrypted_password: 'aSdiFgRRZ6A='
+  }
 }
 %>
 
