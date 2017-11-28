@@ -4442,7 +4442,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">origin</code></td>
 <td>Object</td>
-<td>The origin of the pipeline. Can be either <a href="#pipeline-config-config-xml-origin-object">local origin object</a> for pipelines defined locally in cruise-config.xml or <a href="#pipeline-config-config-repo-origin-object">config repo origin object</a> for the pipelines defined remotely in config repository. <strong>Since v17.4.0</strong>.</td>
+<td>The <a href="#pipeline-config-origin-object">origin</a> of the pipeline. Can be either <code class="prettyprint">gocd</code> origin for pipelines defined in cruise-config.xml or <code class="prettyprint">config_repo</code> origin for pipelines defined remotely in config repository. <strong>Since v17.4.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">parameters</code></td>
@@ -6082,102 +6082,24 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<p><a id='pipeline-config-config-xml-origin-object'></a></p>
-
-<h3 id="the-local-origin-object">The local origin object</h3>
-
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cruise-config.xml"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">type</code></td>
-<td>String</td>
-<td>The type of origin.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">file</code></td>
-<td>String</td>
-<td>The name of config file.</td>
-</tr>
-</tbody></table>
-
-<p><a id='pipeline-config-config-repo-origin-object'></a></p>
+<p><a id='pipeline-config-origin-object'></a></p>
 
 <h3 id="the-config-repo-origin-object">The config repo origin object</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"repo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/repo"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8153/go/api/admin/config_repos/repo1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0771169c7178c9850ab098b40cc17b24f3d3c7a9"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">type</code></td>
-<td>String</td>
-<td>The type of origin.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">repo</code></td>
-<td>Object</td>
-<td>The <a href="#pipeline-config-config-repository-material-object">config repository material</a> object.</td>
-</tr>
-</tbody></table>
-
-<p><a id='pipeline-config-material-object'></a></p>
-
-<h3 id="the-config-repository-material-object">The config repository material object</h3>
-
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/repo"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#config-repos"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8153/go/api/admin/config_repos/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0771169c7178c9850ab098b40cc17b24f3d3c7a9"</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config_repo"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repo1"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -6193,17 +6115,12 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The type of a material. Currently config repository supports only <code class="prettyprint">git</code> materials.</td>
+<td>The type of origin. Can be either <code class="prettyprint">gocd</code> or <code class="prettyprint">config_repo</code>.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">attributes</code></td>
-<td>Object</td>
-<td>The <a href="#the-git-material-attributes">attributes</a> for each material type.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">revision</code></td>
-<td>revision</td>
-<td>The material revision to fetch the configurations from.</td>
+<td><code class="prettyprint">id</code></td>
+<td>String</td>
+<td>The identifier of the config repository. This attribute is only available if type of the origin is <code class="prettyprint">config_repo</code>.</td>
 </tr>
 </tbody></table>
 
