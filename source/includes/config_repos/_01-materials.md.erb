@@ -1,0 +1,143 @@
+
+<%=
+describe_sub_object 'The config repository material object', html_id: 'config-repo-material-object' do
+  type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs scm)
+  attributes      'Object',      'The [attributes](#config-repo-git-material-attributes) for each material type.'
+end
+%>
+
+<%
+json = {
+      type: 'git',
+      attributes: {
+        name: 'api-docs',
+        url: 'https://github.com/gocd/api.go.cd',
+        branch: 'master',
+        auto_update: true
+      }
+    }
+%>
+
+<%=
+describe_sub_object 'The git material attributes', json: json, html_id: 'config-repo-git-material-attributes' do
+  name             'String',  'The name of Git material.'
+  url              'String',  'The URL of the git repository.'
+  branch           'String',  'The git branch to build.'
+  auto_update      'Boolean', 'Whether to poll for new changes or not.'
+end
+%>
+
+<%
+json = {
+      type: 'svn',
+      attributes: {
+        name: 'svn',
+        url: 'svn://svn.example.com/myProject/trunk',
+        username: 'admin',
+        auto_update: true,
+        encrypted_password: 'aSdiFgRRZ6A=',
+        check_externals: true
+      }
+    }
+%>
+
+<%=
+describe_sub_object 'The svn material attributes', json: json, html_id: 'config-repo-svn-material-attributes' do
+  name                'String',  'The name of Svn material.'
+  url                 'String',  'The URL of the subversion repository.'
+  username            'String',  'The user account for the remote repository.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  check_externals     'Boolean', 'Whether the changes o the externals will trigger the pipeline automatically or not.'
+end
+%>
+
+<%
+json = {
+      type: 'hg',
+      attributes: {
+        name: 'api-docs',
+        url: 'http://username:password@hg.example.com/hg/api.go.cd',
+        auto_update: true
+      }
+    }
+%>
+<%=
+describe_sub_object 'The mercurial material attributes', json: json, html_id: 'config-repo-hg-material-attributes' do
+  name           'String',  'The name of hg material.'
+  url            'String',  'The URL of the mercurial repository.'
+  auto_update    'Boolean', 'Whether to poll for new changes or not.'
+end
+%>
+
+<%
+json = {
+  type: 'p4',
+  attributes: {
+    name: 'api-docs',
+    port: 'p4.example.com:8080',
+    use_tickets: true,
+    view: 'sample_view',
+    auto_update: true,
+    username: 'admin',
+    encrypted_password: 'aSdiFgRRZ6A='
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The perforce material attributes', json: json, html_id: 'config-repo-p4-material-attributes' do
+  name                'String',  'The name of p4 material.'
+  port                'String',  'Perforce server connection to use (`[transport:]host:port`).'
+  use_tickets         'Boolean', 'Whether to work with the Perforce tickets or not.'
+  view                'String',  'The Perforce view.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  username            'String',  'The username to be used.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+end
+%>
+
+<%
+json = {
+  type: 'tfs',
+  attributes: {
+    name: 'tfs',
+    url: 'http://tfs.exampe.com:8000/tfs',
+    project_path: '$/',
+    domain: 'corporate/domain',
+    username: 'admin',
+    encrypted_password: 'aSdiFgRRZ6A='
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The tfs material attributes', json: json, html_id: 'config-repo-tfs-material-attributes' do
+  name                'String',  'The name of this material.'
+  url                 'String',  'The URL for the Collection on the TFS Server.'
+  project_path        'String',  'The project path within the TFS collection.'
+  domain              'String',  'The domain name for TFS authentication credentials.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  username            'String',  'The username of the account to access the TFS collection'
+  password            'String',  'The password of the account to access the TFS collection.'
+  encrypted_password  'String',  'The encrypted password of the account to access the TFS collection.'
+end
+%>
+
+<%
+json = {
+  type: 'package',
+  attributes: {
+    ref: 'e289f497-057b-46bc-bb69-8043454f5c1b'
+  }
+}
+
+%>
+<%=
+describe_sub_object 'The package material attributes', json: json, html_id: 'config-repo-package-material' do
+  ref 'String', 'The unique package repository id.'
+end
+%>
+
