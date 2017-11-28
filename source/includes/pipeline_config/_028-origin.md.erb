@@ -1,24 +1,4 @@
 <%
-gocd_origin_json = {
-  _links: {
-    self: {
-      href: 'http://localhost:8153/go/admin/config_xml'
-    },
-    doc: {
-      href: 'https://api.gocd.org/#get-configuration'
-    }
-  },
-  type: 'gocd'
-}
-%>
-
-<%=
-describe_sub_object 'The gocd config origin object', json: gocd_origin_json, html_id: 'pipeline-config-config-xml-origin-object' do
-  type   'String', 'The type of origin.'
-end
-%>
-
-<%
 config_repo_origin_json = {
   _links: {
     self: {
@@ -37,8 +17,8 @@ config_repo_origin_json = {
 %>
 
 <%=
-describe_sub_object 'The config repo origin object', json: config_repo_origin_json, html_id: 'pipeline-config-config-repo-origin-object' do
-  type   'String', 'The type of origin.'
-  id     'String', 'The identifier of the config repository.'
+describe_sub_object 'The config repo origin object', json: config_repo_origin_json, html_id: 'pipeline-config-origin-object' do
+  type   'String', 'The type of origin. Can be either `gocd` or `config_repo`'
+  id     'String', 'The identifier of the config repository. This attribute is only available if type of the origin is `config_repo`'
 end
 %>
