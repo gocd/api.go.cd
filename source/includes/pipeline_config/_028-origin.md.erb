@@ -1,70 +1,24 @@
 <%
-local_origin_json = {
-  origin: {
-    type: 'local',
-    file: 'cruise-config.xml'
-  },
-}
-%>
-
-<%=
-describe_sub_object 'The local origin object', json: local_origin_json, html_id: 'pipeline-config-config-xml-origin-object' do
-  type   'String', 'The type of origin.'
-  file   'String', 'The name of config file.'
-end
-%>
-
-<%
-remote_origin_json = {
-  type: 'local',
-  repo: {
-    type: 'git',
-    attributes: {
-      url: 'https://github.com/config-repo/repo',
-      destination: nil,
-      filter: nil,
-      invert_filter: false,
-      name: nil,
-      auto_update: true,
-      branch: 'master',
-      submodule_folder: nil,
-      shallow_clone: false
+config_repo_origin_json = {
+  _links: {
+    self: {
+      href: 'http://localhost:8153/go/api/admin/config_repos/repo1'
     },
-    revision: '0771169c7178c9850ab098b40cc17b24f3d3c7a9'
+    doc: {
+      href: 'https://api.gocd.org/#config-repos'
+    },
+    find: {
+      href: 'http://localhost:8153/go/api/admin/config_repos/:id'
+    }
   },
+  type: 'config_repo',
+  id: 'repo1'
 }
 %>
 
 <%=
-describe_sub_object 'The config repo origin object', json: remote_origin_json, html_id: 'pipeline-config-config-repo-origin-object' do
-  type   'String', 'The type of origin.'
-  repo   'Object', 'The [config repository material](#pipeline-config-config-repository-material-object) object'
-end
-%>
-
-
-<%
-material_json = {
-  type: 'git',
-  attributes: {
-    url: 'https://github.com/config-repo/repo',
-    destination: nil,
-    filter: nil,
-    invert_filter: false,
-    name: nil,
-    auto_update: true,
-    branch: 'master',
-    submodule_folder: nil,
-    shallow_clone: false
-  },
-  revision: '0771169c7178c9850ab098b40cc17b24f3d3c7a9'
-}
-%>
-
-<%=
-describe_sub_object 'The config repository material object', json: material_json, html_id: 'pipeline-config-material-object' do
-  type            'String',      'The type of a material. Currently config repository supports only `git` materials.'
-  attributes      'Object',      'The [attributes](#the-git-material-attributes) for each material type.'
-  revision        'revision',    'The material revision to fetch the configurations from.'
+describe_sub_object 'The config repo origin object', json: config_repo_origin_json, html_id: 'pipeline-config-origin-object' do
+  type   'String', 'The type of origin. Can be either `gocd` or `config_repo`'
+  id     'String', 'The identifier of the config repository. This attribute is only available if type of the origin is `config_repo`'
 end
 %>
