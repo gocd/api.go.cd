@@ -94,8 +94,15 @@ Content-Type: <%= data.apis.versions.pipeline %>; charset=utf-8
   "name": "new_pipeline",
   "template": null,
   "origin": {
-    "type": "local",
-    "file": "cruise-config.xml"
+    "_links": {
+      "self": {
+        "href": "https://ci.example.com/go/admin/config_xml"
+      },
+      "doc": {
+        "href": "https://api.gocd.org/#get-configuration"
+      }
+    },
+    "type": "gocd"
   },
   "parameters": [],
   "environment_variables": [],
