@@ -94,8 +94,15 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
   "name": "my_pipeline",
   "template": null,
   "origin": {
-    "type": "local",
-    "file": "cruise-config.xml"
+    "_links": {
+      "self": {
+        "href": "https://ci.example.com/go/admin/config_xml"
+      },
+      "doc": {
+        "href": "https://api.gocd.org/#get-configuration"
+      }
+    },
+    "type": "gocd"
   },
   "params": [],
   "environment_variables": [],
