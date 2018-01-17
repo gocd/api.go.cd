@@ -1,0 +1,69 @@
+## Get all artifact stores
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/artifact_stores' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.artifact_store %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.artifact_store %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#artifact_stores"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores/:id"
+    }
+  },
+  "_embedded" : {
+    "artifact_stores" : [ {
+      "_links" : {
+        "self" : {
+          "href" : "https://ci.example.com/go/api/admin/artifact_stores/hub.docker"
+        },
+        "doc" : {
+          "href" : "https://api.gocd.org/current/#artifact_stores"
+        },
+        "find" : {
+          "href" : "https://ci.example.com/go/api/admin/artifact_stores/:id"
+        }
+      },
+      "id" : "hub.docker",
+      "plugin_id" : "cd.go.artifact.docker.registry",
+      "properties" : [ {
+        "key" : "RegistryURL",
+        "value" : "https://your_docker_registry_url"
+      }, {
+        "key" : "Username",
+        "value" : "admin"
+      }, {
+        "key" : "Password",
+        "encrypted_value" : "AES:tdfTtYtIUSAF2JXJP/3YwA==:43Kjidjuh42NHKisCAs/BQ=="
+      } ]
+    } ]
+  }
+}
+```
+
+Lists all available artifact stores.
+
+<%= available_since('18.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/artifact_stores`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [artifact store object](#the-artifact-store-object).

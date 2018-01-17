@@ -1,0 +1,83 @@
+## Update an artifact store
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/artifact_stores/docker' \
+  -u 'admin:badger' \
+  -H 'Accept: <%= data.apis.versions.artifact_store %>' \
+  -H 'Content-Type: application/json' \
+  -H 'If-Match: "e239974f09be2d88565c584c01ba0954"' \
+  -X PUT -d '{
+    "id": "docker",
+    "plugin_id": "cd.go.artifact.docker.registry",
+    "properties" : [ {
+      "key" : "RegistryURL",
+      "value" : "https://your_docker_registry_url"
+    }, {
+      "key" : "Username",
+      "value" : "admin"
+    }, {
+      "key" : "Password",
+      "value" : "new_password"
+    }]
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.artifact_store %>; charset=utf-8
+ETag: "fe2670c76227d5d96f76007f3803dc68"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores/docker"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#artifact_stores"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores/:id"
+    }
+  },
+  "id" : "docker",
+  "plugin_id" : "cd.go.artifact.docker.registry",
+  "properties" : [ {
+    "key" : "RegistryURL",
+    "value" : "https://your_docker_registry_url"
+  }, {
+    "key" : "Username",
+    "value" : "admin"
+  }, {
+    "key" : "Password",
+    "encrypted_value" : "AES:yIow3jqZjP+mWuKubdwhTw==:safdVBEoe6sIjuuILGP53g=="
+  } ]
+}
+```
+
+Update some attributes of an artifact store.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update artifact store API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  artifact store.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the elastic agent config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('18.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT go/api/admin/artifact_stores/:storeId`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated The [artifact store object](#the-artifact-store-object)..
