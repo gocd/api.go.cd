@@ -45,8 +45,11 @@ task :upload_to_s3 do
     end
 
     local_files =  Dir.glob('**/*', File::FNM_DOTMATCH).reject {|fn| File.directory?(fn) }
-    need_to_be_created = local_files.select {|object_to_be_created| !objects_from_s3.include?(object_to_be_created);}
+    local_files << Dir.glob("current/**/*", File::FNM_DOTMATCH).reject {|fn| File.directory?(fn) }
 
+    need_to_be_created = local_files.flatten.select {|object_to_be_created| !objects_from_s3.include?(object_to_be_created);}
+    puts 'Files that need to be created on s3'
+    p need_to_be_created
     puts "Creating..."
     Parallel.map(need_to_be_created, in_threads: 5) do |file|
       puts "Uploading new file #{file} to #{S3_BUCKET}/#{file}"
