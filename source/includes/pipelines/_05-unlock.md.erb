@@ -1,32 +1,36 @@
 ## Releasing a pipeline lock
 
 ```shell
-
-$ curl 'http://ci.example.com/go/api/pipelines/pipeline1/releaseLock' \
-       -u 'username:password' \
-       -H 'Confirm: true' \
-       -X POST
+$ curl 'https://ci.example.com/go/api/pipelines/pipeline1/unlock' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.pipeline_operations %>' \
+      -H 'X-GoCD-Confirm: true'
+      -X POST
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
-pipeline lock released for pipeline1
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+
+{
+  "message" : "Pipeline lock released for pipeline1."
+}
 ```
 
 Release a lock on a pipeline so that you can start up a new instance without having to wait for the earlier instance to finish.
+
 <aside class="notice">
  A pipeline lock can only be released when a pipeline is locked, AND there is no running instance of the pipeline.
 </aside>
 
-<%= available_since('14.3.0') %>
+<%= available_since('18.2.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`POST /go/api/pipelines/:pipeline_name/releaseLock`
+`POST /go/api/pipelines/:pipeline_name/unlock`
 
 <p class='http-request-return-description'>Returns</p>
 
-A text confirmation.
+A message confirming that the pipeline was unlocked.

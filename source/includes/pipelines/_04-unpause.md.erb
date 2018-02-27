@@ -3,7 +3,8 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/pipelines/pipeline1/unpause' \
       -u 'username:password' \
-      -H 'Confirm: true' \
+      -H 'Accept: <%= data.apis.versions.pipeline_operations %>' \
+      -H 'X-GoCD-Confirm: true'
       -X POST
 ```
 
@@ -11,12 +12,16 @@ $ curl 'https://ci.example.com/go/api/pipelines/pipeline1/unpause' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+
+{
+  "message" : "Pipeline 'pipeline1' unpaused successfully."
+}
 ```
 
 Unpause the specified pipeline.
 
-<%= available_since('14.3.0') %>
+<%= available_since('18.2.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
@@ -24,4 +29,4 @@ Unpause the specified pipeline.
 
 <p class='http-request-return-description'>Returns</p>
 
-Nothing.
+A message confirming that the pipeline was unpaused.
