@@ -58,7 +58,7 @@ The following properties may be specified:
     pipeline       "String",   "The pipeline name to match. Can also be \"[Any Pipeline]\"", mandatory: true
     stage          "String",   "The stage name to match. Can also be \"[Any Stage]\"", mandatory: true
     event          "String",   "The event to match. Can be one of: \"All\", \"Passes\", \"Fails\", \"Breaks\", \"Fixed\", \"Cancelled\"", mandatory: true
-    match_commits  "Boolean",  "Should the filter only match the user's commits? Defaults to false if omitted."
+    match_commits  "Boolean",  "Should the filter only match the user's commits?", defaults_to: false
   end
 %>
 
