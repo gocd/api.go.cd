@@ -2,41 +2,100 @@
 
 ```shell
 
-$ curl 'http://ci.example.com/go/api/pipelines/pipeline1/schedule' \
+$ curl 'https://ci.example.com/go/api/pipelines/pipeline1/schedule' \
        -u 'username:password' \
-       -H 'Confirm: true' \
+       -H 'Accept: <%= data.apis.versions.pipeline_operations %>' \
+       -H 'Content-Type: application/json' \
        -X POST
+       -d '{
+             "environment_variables": [
+               {
+                 "name": "USERNAME",
+                 "secure": false,
+                 "value": "bob"
+               },
+               {
+                 "name": "SSH_PASSPHRASE",
+                 "value": "some passphrase",
+                 "secure": true,
+               },
+               {
+                 "name": "PASSWORD",
+                 "encrypted_value": "YEepp1G0C05SpP0fcp4Jh+kPmWwXH5Nq",
+                 "secure": true,
+               }
+             ],
+             "materials": [
+               {
+                 "fingerprint": "b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c",
+                 "revision": "123"
+               },
+               {
+                 "fingerprint": "7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730",
+                 "revision": "1058e75b18e8a645dd71702851994a010789f450"
+               }
+             ],
+             "update_materials_before_scheduling": true
+           }'
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 202 Accepted
-Content-Type: text/html; charset=utf-8
-Request to schedule pipeline pipeline1 accepted
+Content-Type: <%= data.apis.versions.pipeline_operations %>; charset=utf-8
+```
+
+```json
+{
+  "message" : "Request to schedule pipeline pipeline1 accepted"
+}
 ```
 
 Scheduling allows user to trigger a specific pipeline.
 
-<%= available_since('14.3.0') %>
+<%= available_since('18.2.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
 `POST /go/api/pipelines/:pipeline_name/schedule`
 
-You may optionally submit specific materials information and environment variables in order to schedule the pipeline with the specified set of materials and parameterize it with the specified environment variables.
+The following properties may be specified.
 
-Post Data                                                                     | Desciption
-------------------------------------------------------------------------------|--------------
-no parameter                                                                  | Triggers a new instance of the specified pipeline with the latest revision of all materials.
-`materials[svn_material]=3456`                                                | Triggers a new instance of the specified pipeline with revision `3456` of the material whose `materialName` attribute is `svn_version`.
-`materials[repo-name:pkg-name]=gcc-4.4.7-3.el6.x86_64`                        | Triggers a new instance of the specified pipeline with revision `gcc-4.4.7-3.el6.x86_64` of the rpm package material.
-`materials[svn_material]=3456&materials[upstream_foo]=upstream_foo/2/dist/1`  | Triggers a new instance of the specified pipeline by specifying multiple materials.
-`variables[ENV_VAR_1]=value1`                                                 | Triggers a new instance of the specified pipeline with a parameterized environment variable. Pipeline-level environment variable `ENV_VAR_1` will be set to `value1`.
-`materials[svn_material]=3456&variables[ENV_VAR_1]=value1&variables[ENV_VAR_2]=value2` | Triggers a new instance of the specified pipeline with revision `3456` of the material and two parameterized environment variables, `ENV_VAR_1` and `ENV_VAR_2`.
-`secure_variables[PASSWORD]=new_password`                                     | Triggers a new instance of the specified pipeline with a parameterized secure environment variable. Pipeline-level secure environment variable `PASSWORD` will be set to `new_password`.
-
+<%=
+  describe_object(nil) do
+    environment_variables              'Array',   'A list of [environment variables](#the-environment-variable-object) that can be overridden while scheduling the pipeline'
+    materials                          'Array',   'A list of [materials](#the-scheduling-material-object) that must be used to trigger a new instance of the pipeline.', defaults_to: 'triggering all '
+    update_materials_before_scheduling 'Boolean', 'Whether a material update should be updated before scheduling.', defaults_to: true
+  end
+%>
 
 <p class='http-request-return-description'>Returns</p>
 
-A text confirmation.
+A message indicating if the request was accepted.
+
+<%
+json = {
+  materials:   [
+    { fingerprint: '5ae0ad30a5daf288a5d5ad0779f5599e18628079db282b9979a5a1647e7d6064', revision: '123' },
+    { fingerprint: '06cd91c5bae482aef5b26d48e22e6f2e2dd7c9e880e02d55ce16e5aafc3c0c4b', revision: 'ccfbcd41f7d9dd2f10323d9a4f19c7f0aa5f6fe0' },
+    {fingerprint: 'bc3f161b22bef8b027446e0fb56a1c6dda5d02c14bbbe1415b428fcf949aaa09', revision: 'upstream_foo/2/dist/1'},
+    {fingerprint: '29f7131be1c8475331e17dbde34df03483d17c711ecbc36427ead6ec6408666f', revision: 'gcc-4.4.7-3.el6.x86_64'}
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The scheduling material object', json: json, html_id: 'the-scheduling-material-object' do
+  fingerprint 'String', 'The fingerprint of the [material object](#materials)'
+  revision    'String', 'The revision of the material that should be used to trigger the pipeline', list: [
+        'For git and hg repositories, this will be the SHA of the commit',
+        'For subversion repositories, this will be the integer revision.',
+        'For perforce repositories, this will be the changelist number.',
+        'For TFS repositories, this will be the changeset ID.',
+        'For pipeline dependency materials, this will be the pipeline identifier in the form `:pipeline_name/:pipeline_counter/:stage_name/:stage_counter`.',
+        'For package materials, this will be the revision identifier of the package as specified by the package material plugin.'
+      ]
+end
+%>
+

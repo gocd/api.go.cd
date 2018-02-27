@@ -60,9 +60,26 @@ module DescribeObjectHelper
   def describe_property(property)
     original_description = property.description.gsub(/\.$/, '') #remove any trailing period.
 
+    if property.options[:list]
+      original_description.gsub!(/\.$/, '')
+      original_description << ':'
+      original_description << '<ul>'
+      property.options[:list].each do |list_item|
+        original_description << '<li>'
+        original_description << list_item.gsub(/\.$/, '') << '.'
+        original_description << '</li>'
+      end
+      original_description << '</ul>'
+    end
+
     if property.options[:one_of]
       original_description.gsub!(/\.$/, '')
       original_description << ". Can be one of " << property.options[:one_of].collect{|enum| "`#{enum}`" }.join(', ') << '.'
+    end
+
+    if property.options[:defaults_to]
+      original_description.gsub!(/\.$/, '')
+      original_description << ". Defaults to #{property.options[:defaults_to]}."
     end
 
     if property.options[:mandatory]
