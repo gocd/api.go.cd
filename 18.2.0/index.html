@@ -3102,6 +3102,10 @@ File logs/operations.log was appended successfully
 </tr>
 </tbody></table>
 
+<aside class="notice">
+  If you do not specify a JSON request body, you MUST set the http request header <code>X-GoCD-Confirm</code> with any random string. This is done to force the browser to perform a <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests'>CORS preflight</a> check.
+</aside>
+
 <p class='http-request-return-description'>Returns</p>
 
 <p>A message confirming that the pipeline was paused.</p>
@@ -3264,7 +3268,7 @@ File logs/operations.log was appended successfully
 <tr>
 <td><code class="prettyprint">materials</code></td>
 <td>Array</td>
-<td>A list of <a href="#the-scheduling-material-object">materials</a> that must be used to trigger a new instance of the pipeline. Defaults to triggering all .</td>
+<td>A list of <a href="#the-scheduling-material-object">materials</a> that must be used to trigger a new instance of the pipeline. Defaults to triggering with the latest revision of all pipelines.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">update_materials_before_scheduling</code></td>
@@ -3272,6 +3276,10 @@ File logs/operations.log was appended successfully
 <td>Whether a material update should be updated before scheduling. Defaults to true.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+  If you do not specify a JSON request body, you MUST set the http request header <code>X-GoCD-Confirm</code> with any random string. This is done to force the browser to perform a <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests'>CORS preflight</a> check.
+</aside>
 
 <p class='http-request-return-description'>Returns</p>
 
