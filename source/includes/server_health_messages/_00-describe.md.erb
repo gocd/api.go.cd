@@ -1,0 +1,8 @@
+<%=
+describe_object 'The server health message object', since: '18.2.0' do
+  message 'String',     'A short summary of the error or warning.'
+  detail  'String',     'A longer message with more details about the error.'
+  level   'String',     'The intensity of the message.', one_of: %w(WARNING ERROR)
+  time    'String',     'The UTC time when the message was gnerated.'
+end
+%>

@@ -1,0 +1,34 @@
+## Get server health messages
+
+```shell
+$ curl 'https://ci.example.com/go/api/server_health_messages' \
+    -H 'Accept: <%= data.apis.versions.server_health %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.server_health %>; charset=utf-8
+```
+
+```json
+[{
+  "message" : "Job 'Security-Checks/test/dependency-check' is not responding",
+  "detail" : "Job <a href='/go/tab/build/detail/Security-Checks/847/test/1/dependency-check'>Security-Checks/test/dependency-check</a> is currently running but has not shown any console activity in the last 26 minute(s). This job may be hung.",
+  "level" : "WARNING",
+  "time" : "2018-02-27T07:36:30Z"
+}]
+```
+
+Gets the current server health messages
+
+<%= available_since('18.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/server_health_messages`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [server health message objects](#the-server-health-message-object).
