@@ -65,10 +65,12 @@ The following properties may be specified.
 <%=
   describe_object(nil) do
     environment_variables              'Array',   'A list of [environment variables](#the-environment-variable-object) that can be overridden while scheduling the pipeline'
-    materials                          'Array',   'A list of [materials](#the-scheduling-material-object) that must be used to trigger a new instance of the pipeline.', defaults_to: 'triggering all '
+    materials                          'Array',   'A list of [materials](#the-scheduling-material-object) that must be used to trigger a new instance of the pipeline.', defaults_to: 'triggering with the latest revision of all pipelines'
     update_materials_before_scheduling 'Boolean', 'Whether a material update should be updated before scheduling.', defaults_to: true
   end
 %>
+
+<%= partial 'includes/shared/cors_preflight' %>
 
 <p class='http-request-return-description'>Returns</p>
 
