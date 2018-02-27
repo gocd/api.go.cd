@@ -1842,7 +1842,7 @@ OK!
 <tr>
 <td><code class="prettyprint">match_commits</code></td>
 <td>Boolean</td>
-<td>Should the filter only match the user&rsquo;s commits? Defaults to false if omitted.</td>
+<td>Should the filter only match the user&rsquo;s commits?.</td>
 </tr>
 </tbody></table>
 
@@ -3185,10 +3185,41 @@ File logs/operations.log was appended successfully
 <h2 id="scheduling-pipelines">Scheduling pipelines</h2>
 
 <pre class="highlight shell"><code>
-<span class="gp">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/schedule'</span> <span class="se">\</span>
+<span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines/pipeline1/schedule'</span> <span class="se">\</span>
        -u <span class="s1">'username:password'</span> <span class="se">\</span>
-       -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+       -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
        -X POST
+       -d <span class="s1">'{
+             "environment_variables": [
+               {
+                 "name": "USERNAME",
+                 "secure": false,
+                 "value": "bob"
+               },
+               {
+                 "name": "SSH_PASSPHRASE",
+                 "value": "some passphrase",
+                 "secure": true,
+               },
+               {
+                 "name": "PASSWORD",
+                 "encrypted_value": "YEepp1G0C05SpP0fcp4Jh+kPmWwXH5Nq",
+                 "secure": true,
+               }
+             ],
+             "materials": [
+               {
+                 "fingerprint": "b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c",
+                 "revision": "123"
+               },
+               {
+                 "fingerprint": "7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730",
+                 "revision": "1058e75b18e8a645dd71702851994a010789f450"
+               }
+             ],
+             "update_materials_before_scheduling": true
+           }'</span>
 </code></pre>
 
 <blockquote>
@@ -3196,61 +3227,102 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/html; charset=utf-8</span>
-<span class="s">Request to schedule pipeline pipeline1 accepted</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 </code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Request to schedule pipeline pipeline1 accepted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <p>Scheduling allows user to trigger a specific pipeline.</p>
 
 <p class='available-since'>
-  Available since v14.3.0.
+  Available since v18.2.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/pipelines/:pipeline_name/schedule</code></p>
 
-<p>You may optionally submit specific materials information and environment variables in order to schedule the pipeline with the specified set of materials and parameterize it with the specified environment variables.</p>
+<p>The following properties may be specified.</p>
+
+<p class='attributes-table-follows'></p>
 
 <table><thead>
 <tr>
-<th>Post Data</th>
-<th>Desciption</th>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>no parameter</td>
-<td>Triggers a new instance of the specified pipeline with the latest revision of all materials.</td>
+<td><code class="prettyprint">environment_variables</code></td>
+<td>Array</td>
+<td>A list of <a href="#the-environment-variable-object">environment variables</a> that can be overridden while scheduling the pipeline.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">materials[svn_material]=3456</code></td>
-<td>Triggers a new instance of the specified pipeline with revision <code class="prettyprint">3456</code> of the material whose <code class="prettyprint">materialName</code> attribute is <code class="prettyprint">svn_version</code>.</td>
+<td><code class="prettyprint">materials</code></td>
+<td>Array</td>
+<td>A list of <a href="#the-scheduling-material-object">materials</a> that must be used to trigger a new instance of the pipeline. Defaults to triggering all .</td>
 </tr>
 <tr>
-<td><code class="prettyprint">materials[repo-name:pkg-name]=gcc-4.4.7-3.el6.x86_64</code></td>
-<td>Triggers a new instance of the specified pipeline with revision <code class="prettyprint">gcc-4.4.7-3.el6.x86_64</code> of the rpm package material.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">materials[svn_material]=3456&amp;materials[upstream_foo]=upstream_foo/2/dist/1</code></td>
-<td>Triggers a new instance of the specified pipeline by specifying multiple materials.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">variables[ENV_VAR_1]=value1</code></td>
-<td>Triggers a new instance of the specified pipeline with a parameterized environment variable. Pipeline-level environment variable <code class="prettyprint">ENV_VAR_1</code> will be set to <code class="prettyprint">value1</code>.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">materials[svn_material]=3456&amp;variables[ENV_VAR_1]=value1&amp;variables[ENV_VAR_2]=value2</code></td>
-<td>Triggers a new instance of the specified pipeline with revision <code class="prettyprint">3456</code> of the material and two parameterized environment variables, <code class="prettyprint">ENV_VAR_1</code> and <code class="prettyprint">ENV_VAR_2</code>.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">secure_variables[PASSWORD]=new_password</code></td>
-<td>Triggers a new instance of the specified pipeline with a parameterized secure environment variable. Pipeline-level secure environment variable <code class="prettyprint">PASSWORD</code> will be set to <code class="prettyprint">new_password</code>.</td>
+<td><code class="prettyprint">update_materials_before_scheduling</code></td>
+<td>Boolean</td>
+<td>Whether a material update should be updated before scheduling. Defaults to true.</td>
 </tr>
 </tbody></table>
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A text confirmation.</p>
+<p>A message indicating if the request was accepted.</p>
+
+<p><a id='the-scheduling-material-object'></a></p>
+
+<h3 id="the-scheduling-material-object">The scheduling material object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ae0ad30a5daf288a5d5ad0779f5599e18628079db282b9979a5a1647e7d6064"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"06cd91c5bae482aef5b26d48e22e6f2e2dd7c9e880e02d55ce16e5aafc3c0c4b"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ccfbcd41f7d9dd2f10323d9a4f19c7f0aa5f6fe0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bc3f161b22bef8b027446e0fb56a1c6dda5d02c14bbbe1415b428fcf949aaa09"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_foo/2/dist/1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29f7131be1c8475331e17dbde34df03483d17c711ecbc36427ead6ec6408666f"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gcc-4.4.7-3.el6.x86_64"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">fingerprint</code></td>
+<td>String</td>
+<td>The fingerprint of the <a href="#materials">material object</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">revision</code></td>
+<td>String</td>
+<td>The revision of the material that should be used to trigger the pipeline:<ul><li>For git and hg repositories, this will be the SHA of the commit.</li><li>For subversion repositories, this will be the integer revision.</li><li>For perforce repositories, this will be the changelist number.</li><li>For TFS repositories, this will be the changeset ID.</li><li>For pipeline dependency materials, this will be the pipeline identifier in the form <code class="prettyprint">:pipeline_name/:pipeline_counter/:stage_name/:stage_counter</code>.</li><li>For package materials, this will be the revision identifier of the package as specified by the package material plugin.</li></ul>.</td>
+</tr>
+</tbody></table>
 
           <h1 id="stages">Stages</h1>
 
@@ -4441,7 +4513,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">label_template</code></td>
 <td>String</td>
-<td>The label template to customise the pipeline instance label. Both of material names and <code class="prettyprint">${COUNT}</code> are available in the <code class="prettyprint">label_template</code>. If not specified, <code class="prettyprint">label_template</code> defaults to <code class="prettyprint">${COUNT}</code>.</td>
+<td>The label template to customise the pipeline instance label. Both of material names and <code class="prettyprint">${COUNT}</code> are available in the <code class="prettyprint">label_template</code>. Defaults to <code class="prettyprint">${COUNT}</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">lock_behavior</code></td>
@@ -5684,7 +5756,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">build_file</code></td>
 <td>String</td>
-<td>The path to rake file. If not specified, the path defaults to <code class="prettyprint">rakefile</code>.</td>
+<td>The path to rake file. Defaults to <code class="prettyprint">rakefile</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">target</code></td>
@@ -7730,7 +7802,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">environment_variables</code></td>
 <td>Array</td>
-<td>The list of <a href="#environment-config-environment-variables">environment variables</a> that will be passed to all tasks (commands) that are part of this environment.</td>
+<td>The list of <a href="#the-environment-variable-object">environment variables</a> that will be passed to all tasks (commands) that are part of this environment.</td>
 </tr>
 </tbody></table>
 
@@ -11660,7 +11732,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">attributes</code></td>
 <td>Object</td>
-<td>Attributes are used to describes the configuration for <a href="#the-gocd-role-attributes">gocd role</a> or <a href="#The-plugin-role-attributes">plugin role</a>.</td>
+<td>Attributes are used to describes the configuration for <a href="#the-gocd-role-attributes">gocd role</a> or <a href="#the-plugin-role-attributes">plugin role</a>.</td>
 </tr>
 </tbody></table>
 
@@ -12675,7 +12747,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>Gets the config repo object for a specified id.</p>
 
 <aside class="notice">
-  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-config-repo-object'>edit config repo</a> documentation for more details.
+  <strong>Note:</strong>Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#the-config-repo-object'>edit config repo</a> documentation for more details.
 </aside>
 
 <p class='available-since'>
