@@ -1,0 +1,57 @@
+## Get template authorization
+
+```shell
+$ curl -i 'https://ci.example.com/go/api/admin/templates/template_name/authorization' \
+-u 'username:password' \
+-H 'Accept: <%= data.apis.versions.template_auth %>'
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.template_auth %>; charset=utf-8
+```
+
+```json
+{
+  "all_group_admins_are_view_users": true,
+  "admin": {
+    "roles": [
+      "xyz"
+    ],
+    "users": [
+
+    ]
+  },
+  "view": {
+    "roles": [
+
+    ],
+    "users": [
+      "user"
+    ]
+  }
+}
+```
+
+Returns template authorization for the specified template name.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-template-authorization'>edit template authorization</a>
+  documentation for more details.
+</aside>
+
+<%= available_since('18.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/templates/:template_name/authorization`
+
+<p class='http-request-return-description'>Returns</p>
+
+The template [authorization](#the-template-authorization-object) object.

@@ -4,3 +4,25 @@ describe_object 'The template config object', since: '16.10.0' do
   stages                    'Array',   'The list of [stages](#pipeline-config-stage-object). You MUST specify atleast one stage in `stages`, or `template`.'
 end
 %>
+
+<%=
+describe_object 'The template authorization object', since: '18.2.0' do
+  all_group_admins_are_view_users 'Boolean',  'This property specifies whether the group admins are allowed to view the template configuration.'
+  admin                           'Object',   'The users and roles that have [admin](#template-auth) permissions to edit the template configuration.'
+  view                            'Object',   'The explicitly configured users and roles that have permissions to [view](#template-auth) the template configuration.'
+end
+%>
+
+<%
+    auth_json = {
+        roles: ["role1", "role2"],
+        users: ["user1", "user2"]
+    }
+%>
+
+<%=
+describe_sub_object 'The authorization object', json: auth_json, html_id: 'template-auth' do
+  users    'Array', 'List of user names that should be granted the specified permission.'
+  roles    'Array', 'List of roles that should be granted the specified permission.'
+end
+%>

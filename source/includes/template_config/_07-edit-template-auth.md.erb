@@ -1,0 +1,81 @@
+## Edit template authorization
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/templates/template_name/authorization' \
+-u 'username:password' \
+-H 'Accept:  <%= data.apis.versions.template_auth %>' \
+-H 'Content-Type: application/json' \
+-H 'If-Match: "d124ed4db70c23110924f488a031c8c9"' \
+-X PUT -d '{
+"all_group_admins_are_view_users": true,
+"admin": {
+  "roles": [],
+  "users": [
+    "user"
+  ]
+},
+"view": {
+  "roles": [
+    "xyz"
+  ],
+  "users": [
+    "view"
+  ]
+}
+}'
+
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.template_auth %>; charset=utf-8
+```
+
+```json
+{
+  "all_group_admins_are_view_users": true,
+  "admin": {
+    "roles": [
+
+    ],
+    "users": [
+      "user"
+    ]
+  },
+  "view": {
+    "roles": [
+      "xyz"
+    ],
+    "users": [
+      "view"
+    ]
+  }
+}
+```
+
+Update template authorization for the specified template.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update template authorization API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  template resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the template config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('18.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/templates/:template_name/authorization`
+
+<p class='http-request-return-description'>Returns</p>
+
+The template [authorization](#the-template-authorization-object) object.
