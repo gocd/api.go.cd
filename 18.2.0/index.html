@@ -6835,6 +6835,75 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
+<h2 id="the-template-authorization-object">The template authorization object</h2>
+
+<p class='available-since'>
+  Available since v18.2.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">all_group_admins_are_view_users</code></td>
+<td>Boolean</td>
+<td>This property specifies whether the group admins are allowed to view the template configuration.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">admin</code></td>
+<td>Object</td>
+<td>The users and roles that have <a href="#template-auth">admin</a> permissions to edit the template configuration.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">view</code></td>
+<td>Object</td>
+<td>The explicitly configured users and roles that have permissions to <a href="#template-auth">view</a> the template configuration.</td>
+</tr>
+</tbody></table>
+
+<p><a id='template-auth'></a></p>
+
+<h3 id="the-authorization-object">The authorization object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"role1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"role2"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"user1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user2"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">users</code></td>
+<td>Array</td>
+<td>List of user names that should be granted the specified permission.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">roles</code></td>
+<td>Array</td>
+<td>List of roles that should be granted the specified permission.</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-all-templates">Get all templates</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
@@ -7340,6 +7409,146 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p class='http-request-return-description'>Returns</p>
 
 <p>A message confirmation if the template was deleted.</p>
+
+<h2 id="get-template-authorization">Get template authorization</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -i <span class="s1">'https://ci.example.com/go/api/admin/templates/template_name/authorization'</span> <span class="se">\</span>
+-u <span class="s1">'username:password'</span> <span class="se">\</span>
+-H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"all_group_admins_are_view_users"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"admin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"xyz"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"user"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Returns template authorization for the specified template name.</p>
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header
+  for conditional posts, see the
+  <a href='#edit-template-authorization'>edit template authorization</a>
+  documentation for more details.
+</aside>
+
+<p class='available-since'>
+  Available since v18.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/templates/:template_name/authorization</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The template <a href="#the-template-authorization-object">authorization</a> object.</p>
+
+<h2 id="edit-template-authorization">Edit template authorization</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template_name/authorization'</span> <span class="se">\</span>
+-u <span class="s1">'username:password'</span> <span class="se">\</span>
+-H <span class="s1">'Accept:  application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+-H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+-H <span class="s1">'If-Match: "d124ed4db70c23110924f488a031c8c9"'</span> <span class="se">\</span>
+-X PUT -d <span class="s1">'{
+"all_group_admins_are_view_users": true,
+"admin": {
+  "roles": [],
+  "users": [
+    "user"
+  ]
+},
+"view": {
+  "roles": [
+    "xyz"
+  ],
+  "users": [
+    "view"
+  ]
+}
+}'</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"all_group_admins_are_view_users"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"admin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"user"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"xyz"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"view"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Update template authorization for the specified template.</p>
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update template authorization API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  template resource.
+  <br/><br/>
+  This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
+  `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the template config, leading to a
+  conflict.
+</aside>
+
+<p class='available-since'>
+  Available since v18.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">PUT /go/api/admin/templates/:template_name/authorization</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The template <a href="#the-template-authorization-object">authorization</a> object.</p>
 
           <h1 id="version">Version</h1>
 
