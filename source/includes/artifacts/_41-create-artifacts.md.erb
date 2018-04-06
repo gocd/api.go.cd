@@ -1,0 +1,77 @@
+## Create multiple artifacts
+
+```shell
+$ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination' \
+      -u 'username:password' \
+      -H 'Confirm: true' \
+      -X POST \
+      -F 'zipfile=@target/dist/zip-of-files.zip'
+```
+
+> The above command uploads the *contents* of the zip file `target/dist/zip-of-files.zip` to the specified job at the remote directory `path/in/destination/` and returns the following response:
+
+```http
+HTTP/1.1 201 Created
+Content-Type: text/plain; charset=UTF-8
+
+File path/in/destination was created successfully
+```
+
+> Example:
+
+```shell
+$ unzip -l /location/of/test.zip
+Archive:  location/of/test.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  04-06-2018 10:28   x/
+        0  04-06-2018 10:29   x/y/
+        6  04-06-2018 10:29   x/y/z.txt
+        6  04-06-2018 10:29   x/y/a.txt
+---------                     -------
+       12                     4 files
+
+$ pwd
+/location/of/gocd/artifacts/pipelines/PipelineName/541/StageName/1/JobName
+
+$ ls
+cruise-output/
+
+
+$ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination' \
+      ... \
+      -F 'zipfile=@/location/of/test.zip'
+
+$ ls
+cruise-output/   path/
+
+$ find path
+path
+path/in
+path/in/destination
+path/in/destination/x
+path/in/destination/x/y
+path/in/destination/x/y/z.txt
+path/in/destination/x/y/a.txt
+```
+
+Uploads local files as artifacts to the GoCD server. This is done by creating a zip file of the files which need to be uploaded. The GoCD
+server will unzip the files, once it is uploaded, allowing multiple files to be uploaded at a time.
+
+<%= available_since('14.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_directory`
+
+The following form parameter must be specified
+
+<%=
+  describe_object(nil) do
+    zipfile  'String',            'The zip file to be uploaded as `multipart/form-data`'
+  end
+ %>
+
+<p class='http-request-return-description'>Returns</p>
+
+An acknowledgement that the directory was created.
