@@ -2110,6 +2110,97 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 
 <p>An acknowledgement that the file was created.</p>
 
+<h2 id="create-multiple-artifacts">Create multiple artifacts</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -F <span class="s1">'zipfile=@target/dist/zip-of-files.zip'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command uploads the <em>contents</em> of the zip file <code class="prettyprint">target/dist/zip-of-files.zip</code> to the specified job at the remote directory <code class="prettyprint">path/in/destination/</code> and returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
+
+File path/in/destination was created successfully
+</code></pre>
+
+<blockquote>
+<p>Example:</p>
+</blockquote>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>unzip -l /location/of/test.zip
+Archive:  location/of/test.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  04-06-2018 10:28   x/
+        0  04-06-2018 10:29   x/y/
+        6  04-06-2018 10:29   x/y/z.txt
+        6  04-06-2018 10:29   x/y/a.txt
+---------                     -------
+       12                     4 files
+
+<span class="gp">$ </span><span class="nb">pwd</span>
+/location/of/gocd/artifacts/pipelines/PipelineName/541/StageName/1/JobName
+
+<span class="gp">$ </span>ls
+cruise-output/
+
+
+<span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination'</span> <span class="se">\</span>
+      ... <span class="se">\</span>
+      -F <span class="s1">'zipfile=@/location/of/test.zip'</span>
+
+<span class="gp">$ </span>ls
+cruise-output/   path/
+
+<span class="gp">$ </span>find path
+path
+path/in
+path/in/destination
+path/in/destination/x
+path/in/destination/x/y
+path/in/destination/x/y/z.txt
+path/in/destination/x/y/a.txt
+</code></pre>
+
+<p>Uploads local files as artifacts to the GoCD server. This is done by creating a zip file of the files which need to be uploaded. The GoCD
+server will unzip the files, once it is uploaded, allowing multiple files to be uploaded at a time.</p>
+
+<p class='available-since'>
+  Available since v14.3.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/files/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name/*path_to_directory</code></p>
+
+<p>The following form parameter must be specified</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">zipfile</code></td>
+<td>String</td>
+<td>The zip file to be uploaded as <code class="prettyprint">multipart/form-data</code>.</td>
+</tr>
+</tbody></table>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An acknowledgement that the directory was created.</p>
+
 <h2 id="append-to-artifact">Append to artifact</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/logs/operations.log'</span> <span class="se">\</span>
