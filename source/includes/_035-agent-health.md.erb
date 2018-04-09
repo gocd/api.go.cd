@@ -2,4 +2,8 @@
 
 The agents API allows users to monitor if the agent is connected to the server and is authorized to perform a build.
 
+<aside class="notice">
+  <strong>Note:</strong> For security reasons, this endpoint is only bound to the <code>localhost</code> interface. If you're accessing the endpoint from a remote machine and want to expose this endpoint externally — please see <a href="https://docs.gocd.org/<%= GOCD_VERSION %>/advanced_usage/agent-health-check-api.html">this documentation</a> on how to configure the endpoint bind address and port.
+</aside>
+
 <%= render_all_sub_topics('agent-health') %>
