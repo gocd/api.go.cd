@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/pipelines/pipeline1/unpause' \
       -u 'username:password' \
       -H 'Accept: <%= data.apis.versions.pipeline_operations %>' \
-      -H 'X-GoCD-Confirm: true'
+      -H 'X-GoCD-Confirm: true' \
       -X POST
 ```
 
