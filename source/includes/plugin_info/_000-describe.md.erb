@@ -1,13 +1,12 @@
 <%=
 describe_object 'The plugin info object', since: '16.7.0' do
-  id                           'String',     'Plugin unique identifier'
-  type                         'String',     'The type of the plugin', one_of: %w(authentication notification package-repository task scm elastic configrepo authorization)
-  status                       'Object',     'The [status](#plugin-status) of the plugin.'
-  plugin_file_location         'String',     'The location where the plugin is installed'
-  bundled_plugin               'Boolean',    'Indicates whether the plugin is bundled with GoCD'
-  about                        'Object',     '[Additional details](#plugin-about) about the plugin.'
-  vendor                       'Object',     'Details about the [plugin author](#plugin-vendor)'
-  extension_info               'Object',     '[Configuration related information](#config-repo-extension-info) pertaining to the plugin\'s extension'
+  id                    'String',  'Plugin unique identifier'
+  status                'Object',  'The [status](#plugin-status) of the plugin.'
+  plugin_file_location  'String',  'The location where the plugin is installed'
+  bundled_plugin        'Boolean', 'Indicates whether the plugin is bundled with GoCD'
+  about                 'Object',  '[Additional details](#plugin-about) about the plugin.'
+  vendor                'Object',  'Details about the [plugin author](#plugin-vendor)'
+  extensions            'Array',   'A list of [extension information](#config-repo-extension-info) pertaining to the list of extensions the plugin implements.'
 end
 %>
 
@@ -61,137 +60,162 @@ end
 
 <%
   config_repo_json = {
-   extension_info: {
-    plugin_settings: {
-      configurations: [
-        {
-          key: "url",
-          metadata: {
-            secure: false,
-            required: true,
+    extensions: [
+      {
+        type: 'configrepo',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "url",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
           }
-        }],
-      view: {
-        template: "<div>Plugin view template</div>"
+        }
       }
-    }
-   }
+    ]
   }
 %>
 
-<%= describe_sub_object 'The config repo extension info object', json: config_repo_json, html_id: 'config-repo-extension-info' do
+<%= describe_sub_object 'Extension information object: Config repo', json: config_repo_json, html_id: 'config-repo-extension-info' do
+  type            'String', 'The type of the extension, which is `configrepo`'
   plugin_settings 'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
  end
  %>
 
  <%
   elastic_agent_json = {
-    extension_info: {
-      plugin_settings: {
-        configurations: [
-          {
-            key: "InstanceType",
-            metadata: {
-              secure: false,
-              required: true,
+    extensions: [
+      {
+        type: 'elastic',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "InstanceType",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Plugin view template</div>"
-        }
-      },
-      profile_settings: {
-        configurations: [
-          {
-            key: "Image",
-            metadata: {
-              secure: false,
-              required: true,
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
+          }
+        },
+        profile_settings: {
+          configurations: [
+            {
+              key: "Image",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Profile view template</div>"
+          ],
+          view: {
+            template: "<div>Profile view template</div>"
+          }
+        },
+        capabilities: {
+          supports_status_report: true
         }
-      },
-      capabilities: {
-        supports_status_report: true
       }
-    }
+    ]
   }
  %>
 
- <%= describe_sub_object 'The elastic agent extension info object', json: elastic_agent_json, html_id: 'elastic-agent-extension-info' do
+<%= describe_sub_object 'Extension information object: Elastic agent', json: elastic_agent_json, html_id: 'elastic-agent-extension-info' do
+    type              'String', 'The type of the extension, which is `elastic`'
     plugin_settings   'Object',  'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
     profile_settings  'Object',  'The [html view](#the-plugin-info-view-object) for the profile and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure a elastic profile.'
-    capabilities      'Object',  'The [capabilities](#capabilities) object indicate the enhancements that a plugin provides.'
+    capabilities      'Object',  'The [capabilities](#elastic-agent-capabilites-object) object indicates the enhancements that a plugin provides.'
  end
  %>
 
  <%
   auth_json = {
-    extension_info: {
-      auth_config_settings: {
-        configurations: [
-          {
-            key: "Id",
-            metadata: {
-              secure: false,
-              required: true,
+    extensions: [
+      {
+        type: 'authorization',
+        auth_config_settings: {
+          configurations: [
+            {
+              key: "Id",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Auth view template</div>"
-        }
-      },
-
-      role_settings: {
-        configurations: [
-          {
-            key: "Name",
-            metadata: {
-              secure: false,
-              required: true,
+          ],
+          view: {
+            template: "<div>Auth view template</div>"
+          }
+        },
+        role_settings: {
+          configurations: [
+            {
+              key: "Name",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Role view template</div>"
+          ],
+          view: {
+            template: "<div>Role view template</div>"
+          }
+        },
+        capabilities: {
+          can_search: true,
+          supported_auth_type: 'password',
+          can_authorize: true
         }
-      },
-    }
+      }
+    ]
   }
  %>
 
-<%= describe_sub_object 'The authorization extension info object', json: auth_json, html_id: 'auth-extension-info' do
+<%= describe_sub_object 'Extension information object: Authorization', json: auth_json, html_id: 'auth-extension-info' do
+    type                  'String', 'The type of the extension, which is `authorization`'
     auth_config_settings  'Object',  'The [html view](#the-plugin-info-view-object) for auth config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure auth configs.'
     role_settings         'Object',  'The [html view](#the-plugin-info-view-object) for role config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure role configs.'
-    capabilities          'Object',  'The [capabilities](#capabilities) object indicate the enhancements that a plugin provides.'
+    capabilities          'Object',  'The [capabilities](#authorization-capabilites-object) object indicates the enhancements that a plugin provides.'
  end
  %>
 
  <%
   scm_json = {
-  extension_info: {
-    display_name: "Github",
-    scm_settings: {
-      configurations: [
-        {
-          key: "url",
-          metadata: {
-            secure: false,
-            required: true,
-            part_of_identity: true
+    extensions: [
+      {
+        type: 'scm',
+        display_name: "Github",
+        scm_settings: {
+          configurations: [
+            {
+              key: "url",
+              metadata: {
+                secure: false,
+                required: true,
+                part_of_identity: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Scm view template</div>"
           }
-        }],
-      view: {
-        template: "<div>Scm view template</div>"
+        }
       }
-    }
-  }
-
+    ]
   }
  %>
 
-<%= describe_sub_object 'The scm extension info object', json: scm_json, html_id: 'scm-extension-info' do
+<%= describe_sub_object 'Extension information object: SCM', json: scm_json, html_id: 'scm-extension-info' do
+    type          'String', 'The type of the extension, which is `scm`'
     display_name  'String',  'The descriptive name of the plugin'
     scm_settings  'Object',  'The [html view](#the-plugin-info-view-object) for pluggable scm and the list of [properties](#scm-configurations) that can be used to configure the pluggable scm material.'
  end
@@ -199,66 +223,76 @@ end
 
 <%
   task_json = {
-    extension_info: {
-    display_name: "Task",
-    task_settings: {
-      configurations: [
-        {
-          key: "script",
-          metadata: {
-            secure: false,
-            required: true,
+    extensions: [
+      {
+        type: 'task',
+        display_name: "Task",
+        task_settings: {
+          configurations: [
+            {
+              key: "script",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>task view template</div>"
           }
-        }],
-      view: {
-        template: "<div>task view template</div>"
+        }
       }
-    }
+    ]
   }
- }
  %>
 
-<%= describe_sub_object 'The task extension info object', json: task_json, html_id: 'task-extension-info' do
-    display_name  'String',  'The descriptive name of the plugin'
-    task_settings  'Object',  'The [html view](#the-plugin-info-view-object) for pluggable task and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure the pluggable task.'
+<%= describe_sub_object 'Extension information object: Task', json: task_json, html_id: 'task-extension-info' do
+    type          'String', 'The type of the extension, which is `task`'
+    display_name  'String', 'The descriptive name of the plugin'
+    task_settings 'Object', 'The [html view](#the-plugin-info-view-object) for pluggable task and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure the pluggable task.'
  end
  %>
 
 <%
   pkg_repo_json = {
-    extension_info: {
-      package_settings: {
-        configurations: [
-        {
-          key: "PACKAGE_SPEC",
-          metadata: {
-            secure: false,
-            display_order: 0,
-            required: true,
-            part_of_identity: false,
-            display_name: "Package Spec"
-          }
-        }]
-      },
-
-      repository_settings: {
-        configurations: [
-        {
-          key: "REPO_URL",
-          metadata: {
-            secure: false,
-            display_order: 0,
-            required: true,
-            part_of_identity: false,
-            display_name: "Repository URL"
-          }
-        }]
+    extensions: [
+      {
+        type: 'package-repository',
+        package_settings: {
+          configurations: [
+            {
+              key: "PACKAGE_SPEC",
+              metadata: {
+                secure: false,
+                display_order: 0,
+                required: true,
+                part_of_identity: false,
+                display_name: "Package Spec"
+              }
+            }
+          ]
+        },
+        repository_settings: {
+          configurations: [
+            {
+              key: "REPO_URL",
+              metadata: {
+                secure: false,
+                display_order: 0,
+                required: true,
+                part_of_identity: false,
+                display_name: "Repository URL"
+              }
+            }
+          ]
+        }
       }
-    }
+    ]
   }
  %>
 
-<%= describe_sub_object 'The package repo extension info object', json: pkg_repo_json, html_id: 'pkg-repo-extension-info' do
+<%= describe_sub_object 'Extension information object: Package repo', json: pkg_repo_json, html_id: 'pkg-repo-extension-info' do
+    type                 'String', 'The type of the extension, which is `package-repository`'
     package_settings     'Object',  'The list of [properties](#package-repository-configurations) that can be used to configure a package material. A form is created for the user based on these properties. No request is currently made to fetch the view for package settings.'
     repository_settings  'Object',  'The list of [properties](#package-repository-configurations) that can be used to configure package repositories. A form is created for the user based on these properties. No request is currently made to fetch the view for repository settings.'
  end
@@ -266,58 +300,70 @@ end
 
 <%
   notification_json = {
-   extension_info: {
-    plugin_settings: {
-      configurations: [
-        {
-          key: "url",
-          metadata: {
-            secure: false,
-            required: true,
+    extensions: [
+      {
+        type: 'notification',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "url",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
           }
-        }],
-      view: {
-        template: "<div>Plugin view template</div>"
+        }
       }
-    }
-   }
+    ]
   }
 %>
 
-<%= describe_sub_object 'The notification extension info object', json: notification_json, html_id: 'notification-extension-info' do
+<%= describe_sub_object 'Extension information object: Notification', json: notification_json, html_id: 'notification-extension-info' do
+  type            'String', 'The type of the extension, which is `notification`'
   plugin_settings 'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
  end
  %>
 
  <%
-  authentication_json = {
-   extension_info: {
-    plugin_settings: {
-      configurations: [
-        {
-          key: "go_server_url",
-          metadata: {
-            secure: false,
-            required: true,
+  analytics_json = {
+    extensions: [
+      {
+        type: 'analytics',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "analytics_source_url",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
           }
-        }],
-      view: {
-        template: "<div>Plugin view template</div>"
+        },
+        capabilities: {
+          supported_analytics: [
+            {
+              type: "pipeline",
+              id: "pipeline_duration",
+              title: "Pipeline Duration"
+            }
+          ]
+        }
       }
-    },
-    display_name: 'Some Authentication Plugin',
-    display_image_url: 'Base 64 encoded image',
-    supports_password_based_authentication: false,
-    supports_web_based_authentication: true
-   }
+    ]
   }
 %>
 
-<%= describe_sub_object 'The authentication extension info object', json: authentication_json, html_id: 'authentication-extension-info', desc: "The authentication extension has been deprecated since GoCD 17.5.0. Support for authentication extension is going to be removed in 18.1.0 (scheduled to be released in Jan 2018)." do
-    plugin_settings                         'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
-    display_name                            'String',  'The descriptive name of the plugin'
-    display_image_url                       'Object',  'The base 64 encoded image that will be shown on the GoCD login screen.'
-    supports_password_based_authentication  'Boolean', 'Indicates whether the plugin supports password based authentication.'
-    supports_web_based_authentication       'Boolean', 'Indicates whether the plugin supports web based authentication.'
+<%= describe_sub_object 'Extension information object: Analytics', json: analytics_json, html_id: 'analytics-extension-info' do
+    type              'String', 'The type of the extension, which is `analytics`'
+    plugin_settings   'Object',  'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+    capabilities      'Object',  'The [capabilities](#analytics-capabilites-object) object indicates the enhancements that a plugin provides.'
  end
  %>

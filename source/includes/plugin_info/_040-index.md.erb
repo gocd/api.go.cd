@@ -10,7 +10,7 @@ $ curl 'https://ci.example.com/go/api/admin/plugin_info' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Content-Type: <%= data.apis.versions.plugin_info %>; charset=utf-8
 ETag: "3924a894cf0e5bef02abe9de0df3bb84"
 ```
 
@@ -42,7 +42,6 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
           }
         },
         "id": "json.config.plugin",
-        "type": "configrepo",
         "status": {
           "state": "active"
         },
@@ -61,29 +60,32 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
             "url": "https://github.com/tomzo/gocd-json-config-plugin"
           }
         },
-        "extension_info": {
-          "plugin_settings": {
-            "configurations": [
-              {
-                "key": "pipeline_pattern",
-                "metadata": {
-                  "secure": false,
-                  "required": false
+        "extensions": [
+          {
+            "type": "configrepo",
+            "plugin_settings": {
+              "configurations": [
+                {
+                  "key": "pipeline_pattern",
+                  "metadata": {
+                    "secure": false,
+                    "required": false
+                  }
+                },
+                {
+                  "key": "environment_pattern",
+                  "metadata": {
+                    "secure": false,
+                    "required": false
+                  }
                 }
-              },
-              {
-                "key": "environment_pattern",
-                "metadata": {
-                  "secure": false,
-                  "required": false
-                }
+              ],
+              "view": {
+                "template": "Some view"
               }
-            ],
-            "view": {
-              "template": "Some view"
             }
           }
-        }
+        ]
       }
     ]
   }

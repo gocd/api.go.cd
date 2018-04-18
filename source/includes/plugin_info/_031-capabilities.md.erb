@@ -1,0 +1,55 @@
+<%
+    elastic_capabilities_json =  {
+      capabilities: {
+        supports_status_report: true,
+        supports_agent_status_report: true
+      }
+}
+%>
+
+<%=
+describe_sub_object 'The Elastic Agents Capabilities object', json: elastic_capabilities_json, html_id: 'elastic-agent-capabilites-object' do
+  supports_status_report       'Boolean', 'Indicates if plugin supports plugin level status report.'
+  supports_agent_status_report 'Boolean', 'Indicates if plugin supports status report for a specific agent.'
+end
+%>
+
+<%
+    authorization_capabilities_json =  {
+      capabilities: {
+        can_search: true,
+        supported_auth_type: 'password',
+        can_authorize: true
+      }
+}
+%>
+
+<%=
+describe_sub_object 'The Authorization Capabilities object', json: authorization_capabilities_json, html_id: 'authorization-capabilites-object' do
+  can_search          'Boolean', 'Indicates if plugin supports user search.'
+  supported_auth_type 'String',  'Specifies the type of authentication supported, can be one of `password` or `web`'
+  can_authorize       'Boolean', 'Indicates if plugin supports authorization.'
+end
+%>
+
+<%
+    analytics_capabilities_json =  {
+      capabilities: {
+        supported_analytics: [
+          {
+            type: "pipeline",
+            id: "pipeline_duration",
+            title: "Pipeline Duration"
+          }
+        ]
+      }
+}
+%>
+
+<%=
+describe_sub_object 'The Analytics Capabilities object', json: analytics_capabilities_json, html_id: 'analytics-capabilites-object', desc: 'The analytics capablities contains a list of supported_analytics, with the following attributes.' do
+  id    'String', 'Unique identifier for an analytics.'
+  title 'String', 'Title for the analytics.'
+  type  'String', 'The type of the analytics.'
+end
+%>
