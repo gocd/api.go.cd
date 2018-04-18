@@ -8968,11 +8968,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Plugin unique identifier.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">type</code></td>
-<td>String</td>
-<td>The type of the plugin. Can be one of <code class="prettyprint">authentication</code>, <code class="prettyprint">notification</code>, <code class="prettyprint">package-repository</code>, <code class="prettyprint">task</code>, <code class="prettyprint">scm</code>, <code class="prettyprint">elastic</code>, <code class="prettyprint">configrepo</code>, <code class="prettyprint">authorization</code>.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">status</code></td>
 <td>Object</td>
 <td>The <a href="#plugin-status">status</a> of the plugin.</td>
@@ -8998,9 +8993,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Details about the <a href="#plugin-vendor">plugin author</a>.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">extension_info</code></td>
-<td>Object</td>
-<td><a href="#config-repo-extension-info">Configuration related information</a> pertaining to the plugin&rsquo;s extension.</td>
+<td><code class="prettyprint">extensions</code></td>
+<td>Array</td>
+<td>A list of <a href="#config-repo-extension-info">extension information</a> pertaining to the list of extensions the plugin implements.</td>
 </tr>
 </tbody></table>
 
@@ -9121,25 +9116,28 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p><a id='config-repo-extension-info'></a></p>
 
-<h3 id="the-config-repo-extension-info-object">The config repo extension info object</h3>
+<h3 id="extension-information-object-config-repo">Extension information object: Config repo</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"configrepo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9152,6 +9150,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">configrepo</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">plugin_settings</code></td>
 <td>Object</td>
@@ -9159,44 +9162,47 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<p><p><a id='elastic-agent-extension-info'></a></p></p>
+<p><a id='elastic-agent-extension-info'></a></p>
 
-<h3 id="the-elastic-agent-extension-info-object">The elastic agent extension info object</h3>
+<h3 id="extension-information-object-elastic-agent">Extension information object: Elastic agent</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InstanceType"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elastic"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InstanceType"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"profile_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"profile_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Profile view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Profile view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"supports_status_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"supports_status_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9209,6 +9215,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">elastic</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">plugin_settings</code></td>
 <td>Object</td>
@@ -9222,45 +9233,53 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">capabilities</code></td>
 <td>Object</td>
-<td>The <a href="#capabilities">capabilities</a> object indicate the enhancements that a plugin provides.</td>
+<td>The <a href="#elastic-agent-capabilites-object">capabilities</a> object indicates the enhancements that a plugin provides.</td>
 </tr>
 </tbody></table>
 
 <p><a id='auth-extension-info'></a></p>
 
-<h3 id="the-authorization-extension-info-object">The authorization extension info object</h3>
+<h3 id="extension-information-object-authorization">Extension information object: Authorization</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"auth_config_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Id"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"authorization"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"auth_config_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Id"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Auth view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Auth view template&lt;/div&gt;"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"role_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"role_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Role view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Role view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"can_search"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"supported_auth_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"can_authorize"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9273,6 +9292,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">authorization</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">auth_config_settings</code></td>
 <td>Object</td>
@@ -9286,33 +9310,36 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">capabilities</code></td>
 <td>Object</td>
-<td>The <a href="#capabilities">capabilities</a> object indicate the enhancements that a plugin provides.</td>
+<td>The <a href="#authorization-capabilites-object">capabilities</a> object indicates the enhancements that a plugin provides.</td>
 </tr>
 </tbody></table>
 
 <p><a id='scm-extension-info'></a></p>
 
-<h3 id="the-scm-extension-info-object">The scm extension info object</h3>
+<h3 id="extension-information-object-scm">Extension information object: SCM</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"scm_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scm"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Github"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"scm_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Scm view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Scm view template&lt;/div&gt;"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9325,6 +9352,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">scm</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">display_name</code></td>
 <td>String</td>
@@ -9339,26 +9371,29 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p><a id='task-extension-info'></a></p>
 
-<h3 id="the-task-extension-info-object">The task extension info object</h3>
+<h3 id="extension-information-object-task">Extension information object: Task</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Task"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"task_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"script"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"task"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Task"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"task_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"script"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;task view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;task view template&lt;/div&gt;"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9371,6 +9406,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">task</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">display_name</code></td>
 <td>String</td>
@@ -9385,39 +9425,42 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p><a id='pkg-repo-extension-info'></a></p>
 
-<h3 id="the-package-repo-extension-info-object">The package repo extension info object</h3>
+<h3 id="extension-information-object-package-repo">Extension information object: Package repo</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"package_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PACKAGE_SPEC"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"display_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package Spec"</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package-repository"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"package_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PACKAGE_SPEC"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"display_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package Spec"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"repository_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"display_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repository URL"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"repository_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPO_URL"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"display_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"part_of_identity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repository URL"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9430,6 +9473,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">package-repository</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">package_settings</code></td>
 <td>Object</td>
@@ -9444,25 +9492,28 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p><a id='notification-extension-info'></a></p>
 
-<h3 id="the-notification-extension-info-object">The notification extension info object</h3>
+<h3 id="extension-information-object-notification">Extension information object: Notification</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notification"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9475,6 +9526,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">notification</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">plugin_settings</code></td>
 <td>Object</td>
@@ -9482,33 +9538,39 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<p><a id='authentication-extension-info'></a></p>
+<p><a id='analytics-extension-info'></a></p>
 
-<h3 id="the-authentication-extension-info-object">The authentication extension info object</h3>
-
-<h4 id="the-authentication-extension-has-been-deprecated-since-gocd-17-5-0-support-for-authentication-extension-is-going-to-be-removed-in-18-1-0-scheduled-to-be-released-in-jan-2018">The authentication extension has been deprecated since GoCD 17.5.0. Support for authentication extension is going to be removed in 18.1.0 (scheduled to be released in Jan 2018).</h4>
+<h3 id="extension-information-object-analytics">Extension information object: Analytics</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"go_server_url"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analytics"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analytics_source_url"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"supported_analytics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_duration"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline Duration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some Authentication Plugin"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"display_image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base 64 encoded image"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"supports_password_based_authentication"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"supports_web_based_authentication"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9522,29 +9584,19 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </thead><tbody>
 <tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">analytics</code>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">plugin_settings</code></td>
 <td>Object</td>
 <td>The <a href="#the-plugin-info-view-object">html view</a> for the plugin and the list of <a href="#the-plugin-info-configurations-object">properties</a> required to be configured.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">display_name</code></td>
-<td>String</td>
-<td>The descriptive name of the plugin.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">display_image_url</code></td>
+<td><code class="prettyprint">capabilities</code></td>
 <td>Object</td>
-<td>The base 64 encoded image that will be shown on the GoCD login screen.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">supports_password_based_authentication</code></td>
-<td>Boolean</td>
-<td>Indicates whether the plugin supports password based authentication.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">supports_web_based_authentication</code></td>
-<td>Boolean</td>
-<td>Indicates whether the plugin supports web based authentication.</td>
+<td>The <a href="#analytics-capabilites-object">capabilities</a> object indicates the enhancements that a plugin provides.</td>
 </tr>
 </tbody></table>
 
@@ -9693,11 +9745,128 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
+<p><a id='elastic-agent-capabilites-object'></a></p>
+
+<h3 id="the-elastic-agents-capabilities-object">The Elastic Agents Capabilities object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"supports_status_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"supports_agent_status_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">supports_status_report</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports plugin level status report.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">supports_agent_status_report</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports status report for a specific agent.</td>
+</tr>
+</tbody></table>
+
+<p><a id='authorization-capabilites-object'></a></p>
+
+<h3 id="the-authorization-capabilities-object">The Authorization Capabilities object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"can_search"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"supported_auth_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"can_authorize"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">can_search</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports user search.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">supported_auth_type</code></td>
+<td>String</td>
+<td>Specifies the type of authentication supported, can be one of <code class="prettyprint">password</code> or <code class="prettyprint">web</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_authorize</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports authorization.</td>
+</tr>
+</tbody></table>
+
+<p><a id='analytics-capabilites-object'></a></p>
+
+<h3 id="the-analytics-capabilities-object">The Analytics Capabilities object</h3>
+
+<h4 id="the-analytics-capablities-contains-a-list-of-supported_analytics-with-the-following-attributes">The analytics capablities contains a list of supported_analytics, with the following attributes.</h4>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"supported_analytics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_duration"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline Duration"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">id</code></td>
+<td>String</td>
+<td>Unique identifier for an analytics.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">title</code></td>
+<td>String</td>
+<td>Title for the analytics.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the analytics.</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-all-plugin-info">Get all plugin info</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
 </code></pre>
 
 <blockquote>
@@ -9705,7 +9874,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"3924a894cf0e5bef02abe9de0df3bb84"</span>
 </code></pre>
 
@@ -9736,7 +9905,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json.config.plugin"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"configrepo"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
         </span><span class="p">},</span><span class="w">
@@ -9755,29 +9923,32 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
             </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/tomzo/gocd-json-config-plugin"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_pattern"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"configrepo"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_pattern"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment_pattern"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment_pattern"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-                </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some view"</span><span class="w">
               </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some view"</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -9802,7 +9973,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info/my_plugin'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
 </code></pre>
 
 <blockquote>
@@ -9810,7 +9981,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre>
 
@@ -9827,7 +9998,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_plugin"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"configrepo"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -9846,29 +10016,32 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/tomzo/gocd-json-config-plugin"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_pattern"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="nt">"extension_info"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"configrepo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plugin_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_pattern"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment_pattern"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment_pattern"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some view"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Some view"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
