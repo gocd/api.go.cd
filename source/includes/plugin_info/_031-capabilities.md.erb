@@ -28,7 +28,7 @@ end
 describe_sub_object 'The Authorization Capabilities object', json: authorization_capabilities_json, html_id: 'authorization-capabilites-object' do
   can_search          'Boolean', 'Indicates if plugin supports user search.'
   supported_auth_type 'String',  'Specifies the type of authentication supported, can be one of `password` or `web`'
-  can_authorize       'Boolean', 'Indicates if plugin supports authorization.' 
+  can_authorize       'Boolean', 'Indicates if plugin supports authorization.'
 end
 %>
 
@@ -49,7 +49,7 @@ end
 <%=
 describe_sub_object 'The Analytics Capabilities object', json: analytics_capabilities_json, html_id: 'analytics-capabilites-object', desc: 'The analytics capablities contains a list of supported_analytics, with the following attributes.' do
   id    'String', 'Unique identifier for an analytics.'
-  title 'String', 'Title for the analytics.' 
-  type  'String', 'The type of the analytics.'  
+  title 'String', 'Title for the analytics.'
+  type  'String', 'The type of the analytics.'
 end
 %>
