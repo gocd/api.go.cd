@@ -60,25 +60,26 @@ end
 
 <%
   config_repo_json = {
-  extensions: [
-    {
-      type: 'configrepo',
-      plugin_settings: {
-      configurations: [
-        {
-          key: "url",
-          metadata: {
-            secure: false,
-            required: true,
+    extensions: [
+      {
+        type: 'configrepo',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "url",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
           }
-        }],
-      view: {
-        template: "<div>Plugin view template</div>"
+        }
       }
-      }
-    }
-  ]
-}
+    ]
+  }
 %>
 
 <%= describe_sub_object 'Extension information object: Config repo', json: config_repo_json, html_id: 'config-repo-extension-info' do
@@ -89,38 +90,42 @@ end
 
  <%
   elastic_agent_json = {
-    extensions: [{
-      type: 'elastic',
-      plugin_settings: {
-        configurations: [
-          {
-            key: "InstanceType",
-            metadata: {
-              secure: false,
-              required: true,
+    extensions: [
+      {
+        type: 'elastic',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "InstanceType",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Plugin view template</div>"
-        }
-      },
-      profile_settings: {
-        configurations: [
-          {
-            key: "Image",
-            metadata: {
-              secure: false,
-              required: true,
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
+          }
+        },
+        profile_settings: {
+          configurations: [
+            {
+              key: "Image",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Profile view template</div>"
+          ],
+          view: {
+            template: "<div>Profile view template</div>"
+          }
+        },
+        capabilities: {
+          supports_status_report: true
         }
-      },
-      capabilities: {
-        supports_status_report: true
       }
-    }]
+    ]
   }
  %>
 
@@ -134,40 +139,44 @@ end
 
  <%
   auth_json = {
-   extensions: [{
-      type: 'authorization',
-      auth_config_settings: {
-        configurations: [
-          {
-            key: "Id",
-            metadata: {
-              secure: false,
-              required: true,
+    extensions: [
+      {
+        type: 'authorization',
+        auth_config_settings: {
+          configurations: [
+            {
+              key: "Id",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Auth view template</div>"
-        }
-      },
-      role_settings: {
-        configurations: [
-          {
-            key: "Name",
-            metadata: {
-              secure: false,
-              required: true,
+          ],
+          view: {
+            template: "<div>Auth view template</div>"
+          }
+        },
+        role_settings: {
+          configurations: [
+            {
+              key: "Name",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Role view template</div>"
+          ],
+          view: {
+            template: "<div>Role view template</div>"
+          }
+        },
+        capabilities: {
+          can_search: true,
+          supported_auth_type: 'password',
+          can_authorize: true
         }
-      },
-      capabilities: {
-        can_search: true,
-        supported_auth_type: 'password',
-        can_authorize: true
-  }
-    }]
+      }
+    ]
   }
  %>
 
@@ -181,24 +190,27 @@ end
 
  <%
   scm_json = {
-   extensions: [{
-    type: 'scm',
-    display_name: "Github",
-    scm_settings: {
-      configurations: [
-        {
-          key: "url",
-          metadata: {
-            secure: false,
-            required: true,
-            part_of_identity: true
+    extensions: [
+      {
+        type: 'scm',
+        display_name: "Github",
+        scm_settings: {
+          configurations: [
+            {
+              key: "url",
+              metadata: {
+                secure: false,
+                required: true,
+                part_of_identity: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Scm view template</div>"
           }
-        }],
-      view: {
-        template: "<div>Scm view template</div>"
+        }
       }
-    }
-  }]
+    ]
   }
  %>
 
@@ -211,24 +223,27 @@ end
 
 <%
   task_json = {
-    extensions: [{
-      type: 'task',
-      display_name: "Task",
-      task_settings: {
-        configurations: [
-          {
-            key: "script",
-            metadata: {
-              secure: false,
-              required: true,
+    extensions: [
+      {
+        type: 'task',
+        display_name: "Task",
+        task_settings: {
+          configurations: [
+            {
+              key: "script",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>task view template</div>"
+          ],
+          view: {
+            template: "<div>task view template</div>"
+          }
         }
       }
-   }]
- }
+    ]
+  }
  %>
 
 <%= describe_sub_object 'Extension information object: Task', json: task_json, html_id: 'task-extension-info' do
@@ -240,36 +255,39 @@ end
 
 <%
   pkg_repo_json = {
-    extensions: [{
-      type: 'package-repository',
-      package_settings: {
-        configurations: [
-        {
-          key: "PACKAGE_SPEC",
-          metadata: {
-            secure: false,
-            display_order: 0,
-            required: true,
-            part_of_identity: false,
-            display_name: "Package Spec"
-          }
-        }]
-      },
-
-      repository_settings: {
-        configurations: [
-        {
-          key: "REPO_URL",
-          metadata: {
-            secure: false,
-            display_order: 0,
-            required: true,
-            part_of_identity: false,
-            display_name: "Repository URL"
-          }
-        }]
+    extensions: [
+      {
+        type: 'package-repository',
+        package_settings: {
+          configurations: [
+            {
+              key: "PACKAGE_SPEC",
+              metadata: {
+                secure: false,
+                display_order: 0,
+                required: true,
+                part_of_identity: false,
+                display_name: "Package Spec"
+              }
+            }
+          ]
+        },
+        repository_settings: {
+          configurations: [
+            {
+              key: "REPO_URL",
+              metadata: {
+                secure: false,
+                display_order: 0,
+                required: true,
+                part_of_identity: false,
+                display_name: "Repository URL"
+              }
+            }
+          ]
+        }
       }
-    }]
+    ]
   }
  %>
 
@@ -282,22 +300,25 @@ end
 
 <%
   notification_json = {
-   extensions: [{
-     type: 'notification',
-     plugin_settings: {
-      configurations: [
-        {
-          key: "url",
-          metadata: {
-            secure: false,
-            required: true,
+    extensions: [
+      {
+        type: 'notification',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "url",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
           }
-        }],
-      view: {
-        template: "<div>Plugin view template</div>"
+        }
       }
-    }
-   }]
+    ]
   }
 %>
 
@@ -309,31 +330,34 @@ end
 
  <%
   analytics_json = {
-   extensions: [{
-      type: 'analytics',
-      plugin_settings: {
-        configurations: [
-          {
-            key: "analytics_source_url",
-            metadata: {
-              secure: false,
-              required: true,
+    extensions: [
+      {
+        type: 'analytics',
+        plugin_settings: {
+          configurations: [
+            {
+              key: "analytics_source_url",
+              metadata: {
+                secure: false,
+                required: true
+              }
             }
-          }],
-        view: {
-          template: "<div>Plugin view template</div>"
-        }
-      },
-      capabilities: {
-        supported_analytics: [
-          {
-            type: "pipeline",
-            id: "pipeline_duration",
-            title: "Pipeline Duration"
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
           }
-        ]
+        },
+        capabilities: {
+          supported_analytics: [
+            {
+              type: "pipeline",
+              id: "pipeline_duration",
+              title: "Pipeline Duration"
+            }
+          ]
+        }
       }
-    }]
+    ]
   }
 %>
 

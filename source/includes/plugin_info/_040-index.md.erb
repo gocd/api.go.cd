@@ -60,30 +60,32 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
             "url": "https://github.com/tomzo/gocd-json-config-plugin"
           }
         },
-        "extensions": [{
-          "type": "configrepo",
-          "plugin_settings": {
-            "configurations": [
-              {
-                "key": "pipeline_pattern",
-                "metadata": {
-                  "secure": false,
-                  "required": false
+        "extensions": [
+          {
+            "type": "configrepo",
+            "plugin_settings": {
+              "configurations": [
+                {
+                  "key": "pipeline_pattern",
+                  "metadata": {
+                    "secure": false,
+                    "required": false
+                  }
+                },
+                {
+                  "key": "environment_pattern",
+                  "metadata": {
+                    "secure": false,
+                    "required": false
+                  }
                 }
-              },
-              {
-                "key": "environment_pattern",
-                "metadata": {
-                  "secure": false,
-                  "required": false
-                }
+              ],
+              "view": {
+                "template": "Some view"
               }
-            ],
-            "view": {
-              "template": "Some view"
             }
           }
-        }]
+        ]
       }
     ]
   }
