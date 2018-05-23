@@ -1,0 +1,50 @@
+.gdpr-banner {
+  box-sizing: border-box;
+  background: #fff;
+  padding: 10px 66px;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
+  font-size: 14px;
+
+  a, a:active, a:visited {
+    text-decoration: none;
+  }
+
+  a, a:visited {
+    color: #4A90E2;
+  }
+
+  a:hover, a:active {
+    color: #94399E
+  }
+
+  .gdpr-close {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    right: 40px;
+    margin-top: -8px;
+    cursor: pointer;
+
+    &:before, &:after {
+      position: absolute;
+      left: 7px;
+      content: '';
+      height: 17.63px;
+      width: 3px;
+      background-color: #333;
+    }
+
+    &:before { transform: rotate(45deg); }
+    &:after { transform: rotate(-45deg); }
+  }
+}
+
+.gdpr-banner ~ * {
+  transform: translateY(64px);
+}
