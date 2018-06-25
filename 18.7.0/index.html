@@ -4595,7 +4595,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v5</code> of the API using <code>Accept: application/vnd.go.cd.v5+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v5</code> of the API using <code>Accept: application/vnd.go.cd.v6+json</code>
 </aside>
 
 <h2 id="the-pipeline-config-object">The pipeline config object</h2>
@@ -5887,6 +5887,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"passed"</span><span class="w">
         </span><span class="p">],</span><span class="w">
@@ -5896,6 +5897,22 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"is_source_a_file"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some-upstream-pipeline"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"job"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"artifact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dest_on_agent"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"artifact"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -5911,6 +5928,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td><code class="prettyprint">origin</code></td>
+<td>String</td>
+<td>Origin indicates whether the artifact to fetch is on the GoCD server or in an external repository. Can be one of <code class="prettyprint">gocd</code>, <code class="prettyprint">external</code>.</td>
+</tr>
 <tr>
 <td><code class="prettyprint">run_if</code></td>
 <td>Array</td>
@@ -5934,22 +5956,32 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">source</code></td>
 <td>String</td>
-<td>The path of the artifact directory or file of a specific job, relative to the sandbox directory. If the directory or file does not exist, the job is failed.</td>
+<td>The path of the artifact directory or file of a specific job, relative to the sandbox directory. If the directory or file does not exist, the job is failed. Should be specified if origin is <code class="prettyprint">gocd</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">is_source_a_file</code></td>
 <td>Boolean</td>
-<td>Whether source is a file or directory.</td>
+<td>Whether source is a file or directory. Should be specified if origin is <code class="prettyprint">gocd</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">destination</code></td>
 <td>String</td>
-<td>The path of the directory where the artifact is fetched to.</td>
+<td>The path of the directory where the artifact is fetched to. Should be specified if origin is <code class="prettyprint">gocd</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">on_cancel</code></td>
 <td>Object</td>
 <td>The <a href="#pipeline-config-task">task</a> specifies a task to execute when a stage is cancelled.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">artifact_id</code></td>
+<td>String</td>
+<td>The external artifact that was published by an upstream pipeline or stage. Should be specified if origin is <code class="prettyprint">external</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">configuration</code></td>
+<td>Array</td>
+<td>A list of <code class="prettyprint">key</code>-<code class="prettyprint">value</code> pairs which defines the plugin configuration. Should be specified if origin is <code class="prettyprint">external</code>.</td>
 </tr>
 </tbody></table>
 
@@ -6063,6 +6095,21 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"res1"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"artifact_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dockerhub"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd/gocd-server"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_COUNTER}"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -6080,17 +6127,32 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The type of the artifact. Can be one of <code class="prettyprint">test</code>, <code class="prettyprint">build</code>.</td>
+<td>The type of the artifact. Can be one of <code class="prettyprint">test</code>, <code class="prettyprint">build</code>, <code class="prettyprint">external</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">source</code></td>
 <td>String</td>
-<td>The file or folder to publish to the server.</td>
+<td>The file or folder to publish to the server. Should be specified if type is either <code class="prettyprint">test</code> or <code class="prettyprint">build</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">destination</code></td>
 <td>String</td>
-<td>The destination is relative to the artifacts folder of the current job instance on the server side. If it is not specified, the artifact will be stored in the root of the artifacts directory.</td>
+<td>The destination is relative to the artifacts folder of the current job instance on the server side. If it is not specified, the artifact will be stored in the root of the artifacts directory. Should be specified if type is either <code class="prettyprint">test</code> or <code class="prettyprint">build</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">id</code></td>
+<td>String</td>
+<td>The artifact id for an external artifact. This id can be used later in a downstream fetch task. Should be specified if type is <code class="prettyprint">external</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">store_id</code></td>
+<td>String</td>
+<td>The artifact store id referencing an existing global artifact store. Should be specified if type is <code class="prettyprint">external</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">configuration</code></td>
+<td>Array</td>
+<td>A list of <code class="prettyprint">key</code>-<code class="prettyprint">value</code> pairs which defines the plugin configuration. Should be specified if type is <code class="prettyprint">external</code>.</td>
 </tr>
 </tbody></table>
 
@@ -6322,7 +6384,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       -i
 </code></pre>
 
@@ -6331,7 +6393,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre>
 
@@ -6347,115 +6409,116 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:name"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"label_template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lock_behavior"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+  </span><span class="nt">"label_template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lock_behavior"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lockOnFailure"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#get-configuration"</span><span class="w">
+      </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-configuration"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:example/sample_repo.git"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"ignore"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"**/*.*"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"**/*.html"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"parameters"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"invert_filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"auto_update"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"branch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"submodule_folder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shallow_clone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_stage"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"passed"</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"command"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"args"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_job"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"Linux"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"Java"</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                  </span><span class="s2">"passed"</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nt">"on_cancel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
-                  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-                  </span><span class="p">}</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sleep"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                  </span><span class="s2">"10"</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-         </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cobertura"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target/site/cobertura/*.xml"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"result"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"build"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"res1"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"store_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dockerhub"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd/gocd-server"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"j2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"job"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"timer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tracking_tool"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -6484,7 +6547,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       -X PUT <span class="se">\</span>
@@ -6498,7 +6561,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                 "type": "git",
                 "attributes": {
                   "url": "git@github.com:sample_repo/example.git",
-                  "destination": "destination1",
+                  "destination": "dest",
                   "filter": null,
                   "invert_filter": false,
                   "name": null,
@@ -6541,6 +6604,43 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                           "working_directory": null
                         }
                       }
+                    ],
+                    "artifacts": [
+                      {
+                        "type": "external",
+                        "artifact_id": "docker-image",
+                        "store_id": "dockerhub",
+                        "configuration": [
+                          {
+                            "key": "Image",
+                            "value": "gocd/gocd-server"
+                          },
+                          {
+                            "key": "Tag",
+                            "value": "v${GO_PIPELINE_COUNTER}"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "s2",
+                "jobs": [
+                  {
+                    "name": "j2",
+                    "tasks": [
+                      {
+                        "type": "fetch",
+                        "attributes": {
+                          "origin": "external",
+                          "pipeline": "",
+                          "stage": "defaultStage",
+                          "job": "defaultJob",
+                          "artifact_id": "docker-image"
+                        }
+                      }
                     ]
                   }
                 ]
@@ -6554,7 +6654,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre>
 
@@ -6570,81 +6670,116 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:name"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"label_template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lock_behavior"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unlockWhenFinished"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+  </span><span class="nt">"label_template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lock_behavior"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lockOnFailure"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#get-configuration"</span><span class="w">
+      </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-configuration"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination1"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"parameters"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"invert_filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"auto_update"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"branch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"submodule_folder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shallow_clone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"passed"</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"command"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"args"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                  </span><span class="s2">"passed"</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"store_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dockerhub"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd/gocd-server"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"j2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"job"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"timer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tracking_tool"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -6678,7 +6813,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST -d <span class="s1">'{ "group": "first",
                     "pipeline": {
@@ -6734,6 +6869,43 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                                   "working_directory": null
                                 }
                               }
+                            ],
+                            "artifacts": [
+                              {
+                                "type": "external",
+                                "artifact_id": "docker-image",
+                                "store_id": "dockerhub",
+                                "configuration": [
+                                  {
+                                    "key": "Image",
+                                    "value": "gocd/gocd-server"
+                                  },
+                                  {
+                                    "key": "Tag",
+                                    "value": "v${GO_PIPELINE_COUNTER}"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "s2",
+                        "jobs": [
+                          {
+                            "name": "j2",
+                            "tasks": [
+                              {
+                                "type": "fetch",
+                                "attributes": {
+                                  "origin": "external",
+                                  "pipeline": "",
+                                  "stage": "defaultStage",
+                                  "job": "defaultJob",
+                                  "artifact_id": "docker-image"
+                                }
+                              }
                             ]
                           }
                         ]
@@ -6748,7 +6920,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -6763,81 +6935,116 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:name"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"label_template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lock_behavior"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lockOnFailure"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+  </span><span class="nt">"label_template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lock_behavior"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lockOnFailure"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#get-configuration"</span><span class="w">
+      </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-configuration"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nt">"parameters"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"destination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"invert_filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"auto_update"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"branch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"submodule_folder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"shallow_clone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"passed"</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"command"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"args"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"never"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                  </span><span class="s2">"passed"</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"store_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dockerhub"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd/gocd-server"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"j2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"job"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"tracking_tool"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"timer"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tracking_tool"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -6859,7 +7066,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       -X DELETE
 
 </code></pre>
@@ -6869,7 +7076,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -6900,7 +7107,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>The template config API allows users with administrator role to manage template config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v3</code> of the API using <code>Accept: application/vnd.go.cd.v3+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v3</code> of the API using <code>Accept: application/vnd.go.cd.v4+json</code>
 </aside>
 
 <h2 id="the-template-config-object">The template config object</h2>
@@ -7003,7 +7210,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
 </code></pre>
 
 <blockquote>
@@ -7083,7 +7290,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template.name'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -i
 </code></pre>
 
@@ -7092,7 +7299,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre>
@@ -7109,63 +7316,84 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/templates/:template_name"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template.name"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"template.name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"passed"</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"command"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"args"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_job"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"never"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"elastic_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nt">"on_cancel"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"store_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dockerhub"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd/gocd-server"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
+        </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"j2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"job"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -7194,7 +7422,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$   </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST -d <span class="s1">'{
         "name": "template",
@@ -7217,8 +7445,48 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                   {
                     "type": "exec",
                     "attributes": {
+                      "run_if": [
+                        "passed"
+                      ],
                       "command": "ls",
                       "working_directory": null
+                    }
+                  }
+                ],
+                "artifacts": [
+                  {
+                    "type": "external",
+                    "artifact_id": "docker-image",
+                    "store_id": "dockerhub",
+                    "configuration": [
+                      {
+                        "key": "Image",
+                        "value": "goose"
+                      },
+                      {
+                        "key": "Tag",
+                        "value": "v${GO_PIPELINE_LABEL}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "s2",
+            "jobs": [
+              {
+                "name": "j2",
+                "tasks": [
+                  {
+                    "type": "fetch",
+                    "attributes": {
+                      "origin": "external",
+                      "pipeline": "",
+                      "stage": "defaultStage",
+                      "job": "defaultJob",
+                      "artifact_id": "docker-image"
                     }
                   }
                 ]
@@ -7234,7 +7502,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -7249,63 +7517,84 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/templates/:template_name"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"passed"</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"command"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"args"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"elastic_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elastic_profile_id"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"never"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nt">"on_cancel"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"store_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dockerhub"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd/gocd-server"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
+        </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"j2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"job"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -7328,7 +7617,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "05548388f7ef5042cd39f7fe42e85735"'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X PUT -d <span class="s1">'{
@@ -7344,6 +7633,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
               {
                 "name": "defaultJob",
                 "run_instance_count": null,
+                "elastic_profile_id": "elastic_profile_id",
                 "timeout": 0,
                 "environment_variables": [],
                 "resources": [],
@@ -7351,8 +7641,48 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
                   {
                     "type": "exec",
                     "attributes": {
-                      "command": "sleep",
+                      "run_if": [
+                        "passed"
+                      ],
+                      "command": "ls",
                       "working_directory": null
+                    }
+                  }
+                ],
+                "artifacts": [
+                  {
+                    "type": "external",
+                    "artifact_id": "docker-image",
+                    "store_id": "dockerhub",
+                    "configuration": [
+                      {
+                        "key": "Image",
+                        "value": "goose"
+                      },
+                      {
+                        "key": "Tag",
+                        "value": "v${GO_PIPELINE_LABEL}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "s2",
+            "jobs": [
+              {
+                "name": "j2",
+                "tasks": [
+                  {
+                    "type": "fetch",
+                    "attributes": {
+                      "origin": "external",
+                      "pipeline": "",
+                      "stage": "defaultStage",
+                      "job": "defaultJob",
+                      "artifact_id": "docker-image"
                     }
                   }
                 ]
@@ -7368,7 +7698,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre>
 
@@ -7384,62 +7714,84 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/templates/:template_name"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"never_cleanup_artifacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">]</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"passed"</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"command"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ls"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"args"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"run_instance_count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"never"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exec"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"run_if"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nt">"on_cancel"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sleep"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"tabs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"artifacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"store_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dockerhub"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd/gocd-server"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
+        </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fetch_materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"clean_working_directory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"never_cleanup_artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"approval"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"j2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"run_instance_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"resources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"job"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"run_if"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"artifact_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"docker-image"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -7473,7 +7825,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template_name'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       -X DELETE
 
 </code></pre>
@@ -7483,7 +7835,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
