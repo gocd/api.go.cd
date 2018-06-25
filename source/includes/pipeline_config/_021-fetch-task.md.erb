@@ -4,6 +4,7 @@ json = {
     {
       type: 'fetch',
       attributes: {
+        origin: 'gocd',
         run_if: ['passed'],
         pipeline: 'upstream',
         stage: 'upstream_stage',
@@ -12,19 +13,38 @@ json = {
         source: 'result',
         destination: 'test'
       }
+    },
+    {
+      type: "fetch",
+      attributes: {
+        origin: "external",
+        pipeline: "some-upstream-pipeline",
+        stage: "defaultStage",
+        job: "defaultJob",
+        artifact_id: "s3",
+        configuration: [
+          {
+            key: 'dest_on_agent',
+            value: 'artifact'
+          }
+        ]
+      }
     }
   ]
 }
 %>
 <%=
 describe_sub_object 'The fetch task attributes', json: json, html_id: 'pipeline-config-fetch-task' do
+  origin           'String',  'Origin indicates whether the artifact to fetch is on the GoCD server or in an external repository.', one_of: %w(gocd external)
   run_if           'Array',   'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
   pipeline         'String',  'The name of direct upstream pipeline or ancestor pipeline of one of the upstream pipelines on which the pipeline of the job depends on. '
   stage            'String',  'The name of the stage to fetch artifacts from.'
   job              'String',  'The name of the job to fetch artifacts from.'
-  source           'String',  'The path of the artifact directory or file of a specific job, relative to the sandbox directory. If the directory or file does not exist, the job is failed.'
-  is_source_a_file 'Boolean', 'Whether source is a file or directory.'
-  destination      'String',  'The path of the directory where the artifact is fetched to.'
+  source           'String',  'The path of the artifact directory or file of a specific job, relative to the sandbox directory. If the directory or file does not exist, the job is failed. Should be specified if origin is `gocd`.'
+  is_source_a_file 'Boolean', 'Whether source is a file or directory. Should be specified if origin is `gocd`.'
+  destination      'String',  'The path of the directory where the artifact is fetched to. Should be specified if origin is `gocd`.'
   on_cancel        'Object',  'The [task](#pipeline-config-task) specifies a task to execute when a stage is cancelled.'
+  artifact_id      'String',  'The external artifact that was published by an upstream pipeline or stage. Should be specified if origin is `external`.'
+  configuration    'Array',  'A list of `key`-`value` pairs which defines the plugin configuration. Should be specified if origin is `external`.'
 end
 %>

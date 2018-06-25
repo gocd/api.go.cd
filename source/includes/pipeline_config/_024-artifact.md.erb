@@ -2,14 +2,18 @@
 json = {
   artifacts: [
     { source: 'target', destination: 'result', type: 'build' },
-    { source: 'test',   destination: 'res1',   type: 'test' }
+    { source: 'test',   destination: 'res1',   type: 'test' },
+    { artifact_id: 'docker-image', store_id: 'dockerhub', type: 'external', configuration: [{key: 'Image', value: 'gocd/gocd-server'}, {key: 'Tag', value: 'v${GO_PIPELINE_COUNTER}'}]}
   ]
 }
 %>
 <%=
 describe_sub_object 'The pipeline config artifact object', json: json, html_id: 'pipeline-config-job-artifact' do
-  type        'String', 'The type of the artifact.', one_of: %w(test build)
-  source      'String', 'The file or folder to publish to the server.'
-  destination 'String', 'The destination is relative to the artifacts folder of the current job instance on the server side. If it is not specified, the artifact will be stored in the root of the artifacts directory.'
+  type          'String', 'The type of the artifact.', one_of: %w(test build external)
+  source        'String', 'The file or folder to publish to the server. Should be specified if type is either `test` or `build`.'
+  destination   'String', 'The destination is relative to the artifacts folder of the current job instance on the server side. If it is not specified, the artifact will be stored in the root of the artifacts directory. Should be specified if type is either `test` or `build`.'
+  id            'String', 'The artifact id for an external artifact. This id can be used later in a downstream fetch task. Should be specified if type is `external`.'
+  store_id      'String', 'The artifact store id referencing an existing global artifact store. Should be specified if type is `external`.'
+  configuration 'Array',  'A list of `key`-`value` pairs which defines the plugin configuration. Should be specified if type is `external`.'
 end
 %>

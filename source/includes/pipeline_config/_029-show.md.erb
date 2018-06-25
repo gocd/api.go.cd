@@ -28,115 +28,116 @@ ETag: "e064ca0fe5d8a39602e19666454b8d77"
       "href": "https://ci.example.com/go/api/admin/pipelines/:name"
     }
   },
-  "label_template": "${COUNT}",
-  "lock_behavior": "none",
-  "name": "my_pipeline",
-  "template": null,
-  "origin": {
-    "_links": {
-      "self": {
-        "href": "https://ci.example.com/go/admin/config_xml"
+  "label_template" : "${COUNT}",
+  "lock_behavior" : "lockOnFailure",
+  "name" : "new_pipeline",
+  "template" : null,
+  "origin" : {
+    "_links" : {
+      "self" : {
+        "href" : "https://ci.example.com/go/admin/config_xml"
       },
-      "doc": {
-        "href": "https://api.gocd.org/#get-configuration"
+      "doc" : {
+        "href" : "https://api.gocd.org/current/#get-configuration"
       }
     },
-    "type": "gocd"
+    "type" : "gocd"
   },
-  "params": [],
-  "environment_variables": [],
-  "materials": [
-    {
-      "type": "git",
-      "attributes": {
-        "url": "git@github.com:example/sample_repo.git",
-        "destination": "code",
-        "filter": {
-            "ignore": [
-                    "**/*.*",
-                    "**/*.html"
-            ]
-        },
-        "invert_filter": false,
-        "name": "git",
-        "auto_update": true,
-        "branch": "master",
-        "submodule_folder": null,
-        "shallow_clone": true
+  "parameters" : [ ],
+  "environment_variables" : [ ],
+  "materials" : [ {
+    "type" : "git",
+    "attributes" : {
+      "url" : "git@github.com:sample_repo/example.git",
+      "destination" : "dest",
+      "filter" : null,
+      "invert_filter" : false,
+      "name" : null,
+      "auto_update" : true,
+      "branch" : "master",
+      "submodule_folder" : null,
+      "shallow_clone" : false
+    }
+  } ],
+  "stages" : [ {
+    "name" : "defaultStage",
+    "fetch_materials" : true,
+    "clean_working_directory" : false,
+    "never_cleanup_artifacts" : false,
+    "approval" : {
+      "type" : "success",
+      "authorization" : {
+        "roles" : [ ],
+        "users" : [ ]
       }
-    }
-  ],
-  "stages": [
-    {
-      "name": "my_stage",
-      "fetch_materials": true,
-      "clean_working_directory": false,
-      "never_cleanup_artifacts": false,
-      "approval": {
-        "type": "success",
-        "authorization": {
-          "roles": [],
-          "users": []
+    },
+    "environment_variables" : [ ],
+    "jobs" : [ {
+      "name" : "defaultJob",
+      "run_instance_count" : null,
+      "timeout" : null,
+      "environment_variables" : [ ],
+      "resources" : [ ],
+      "tasks" : [ {
+        "type" : "exec",
+        "attributes" : {
+          "run_if" : [ "passed" ],
+          "command" : "ls",
+          "args" : ""
         }
-      },
-      "environment_variables": [],
-      "jobs": [
-        {
-          "name": "my_job",
-          "run_instance_count": null,
-          "timeout": 0,
-          "environment_variables": [],
-          "resources": [
-                "Linux",
-                "Java"
-          ],
-          "tasks": [
-            {
-              "type": "exec",
-              "attributes": {
-                "run_if": [
-                  "passed"
-                ],
-                "on_cancel": {
-                  "type": "exec",
-                  "attributes": {
-                    "command": "ls",
-                    "working_directory": null
-                  }
-                },
-                "command": "sleep",
-                "arguments": [
-                  "10"
-                ],
-                "working_directory": null
-              }
-            }
-         ],
-          "tabs": [
-            {
-              "name": "cobertura",
-              "path": "target/site/cobertura/*.xml"
-            }
-          ],
-          "artifacts": [
-            {
-              "source": "target",
-              "destination": "result",
-              "type": "build"
-            },
-            {
-              "source": "test",
-              "destination": "res1",
-              "type": "test"
-            }
-          ],
-          "properties": null
+      } ],
+      "tabs" : [ ],
+      "artifacts" : [ {
+        "type" : "external",
+        "artifact_id" : "docker-image",
+        "store_id" : "dockerhub",
+        "configuration" : [ {
+          "key" : "Image",
+          "value" : "gocd/gocd-server"
+        }, {
+          "key" : "Tag",
+          "value" : "v${GO_PIPELINE_LABEL}"
+        }]
+      } ],
+      "properties" : null
+    } ]
+  }, {
+    "name" : "s2",
+    "fetch_materials" : true,
+    "clean_working_directory" : false,
+    "never_cleanup_artifacts" : false,
+    "approval" : {
+      "type" : "success",
+      "authorization" : {
+        "roles" : [ ],
+        "users" : [ ]
+      }
+    },
+    "environment_variables" : [ ],
+    "jobs" : [ {
+      "name" : "j2",
+      "run_instance_count" : null,
+      "timeout" : null,
+      "environment_variables" : [ ],
+      "resources" : [ ],
+      "tasks" : [ {
+        "type" : "fetch",
+        "attributes" : {
+          "origin" : "external",
+          "pipeline" : "",
+          "stage" : "defaultStage",
+          "job" : "defaultJob",
+          "run_if" : [ ],
+          "artifact_id" : "docker-image"
         }
-      ]
-    }
-  ],
-  "tracking_tool": null,
-  "timer": null
+      } ],
+      "tabs" : [ ],
+      "artifacts" : [ ],
+      "properties" : null
+    } ]
+  } ],
+  "tracking_tool" : null,
+  "timer" : null
 }
 ```
 
