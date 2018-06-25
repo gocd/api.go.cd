@@ -26,8 +26,48 @@ $   curl 'https://ci.example.com/go/api/admin/templates' \
                   {
                     "type": "exec",
                     "attributes": {
+                      "run_if": [
+                        "passed"
+                      ],
                       "command": "ls",
                       "working_directory": null
+                    }
+                  }
+                ],
+                "artifacts": [
+                  {
+                    "type": "external",
+                    "artifact_id": "docker-image",
+                    "store_id": "dockerhub",
+                    "configuration": [
+                      {
+                        "key": "Image",
+                        "value": "goose"
+                      },
+                      {
+                        "key": "Tag",
+                        "value": "v${GO_PIPELINE_LABEL}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "s2",
+            "jobs": [
+              {
+                "name": "j2",
+                "tasks": [
+                  {
+                    "type": "fetch",
+                    "attributes": {
+                      "origin": "external",
+                      "pipeline": "",
+                      "stage": "defaultStage",
+                      "job": "defaultJob",
+                      "artifact_id": "docker-image"
                     }
                   }
                 ]
@@ -59,63 +99,84 @@ Content-Type: <%= data.apis.versions.templates %>; charset=utf-8
       "href": "https://ci.example.com/go/api/admin/templates/:template_name"
     }
   },
-  "name": "template",
-  "stages": [
-    {
-      "name": "defaultStage",
-      "fetch_materials": true,
-      "clean_working_directory": false,
-      "never_cleanup_artifacts": false,
-      "approval": {
-        "type": "success",
-        "authorization": {
-          "roles": [
-
-          ],
-          "users": [
-
-          ]
+  "name" : "template",
+  "stages" : [ {
+    "name" : "defaultStage",
+    "fetch_materials" : true,
+    "clean_working_directory" : false,
+    "never_cleanup_artifacts" : false,
+    "approval" : {
+      "type" : "success",
+      "authorization" : {
+        "roles" : [ ],
+        "users" : [ ]
+      }
+    },
+    "environment_variables" : [ ],
+    "jobs" : [ {
+      "name" : "defaultJob",
+      "run_instance_count" : null,
+      "timeout" : null,
+      "environment_variables" : [ ],
+      "resources" : [ ],
+      "tasks" : [ {
+        "type" : "exec",
+        "attributes" : {
+          "run_if" : [ "passed" ],
+          "command" : "ls",
+          "args" : ""
         }
-      },
-      "environment_variables": [
-
-      ],
-      "jobs": [
-        {
-          "name": "defaultJob",
-          "run_instance_count": null,
-          "elastic_profile_id": "elastic_profile_id",
-          "timeout": "never",
-          "environment_variables": [
-
-          ],
-          "resources": [
-
-          ],
-          "tasks": [
-            {
-              "type": "exec",
-              "attributes": {
-                "run_if": [
-
-                ],
-                "on_cancel": null,
-                "command": "ls",
-                "working_directory": null
-              }
-            }
-          ],
-          "tabs": [
-
-          ],
-          "artifacts": [
-
-          ],
-          "properties": null
+      } ],
+      "tabs" : [ ],
+      "artifacts" : [ {
+        "type" : "external",
+        "artifact_id" : "docker-image",
+        "store_id" : "dockerhub",
+        "configuration" : [ {
+          "key" : "Image",
+          "value" : "gocd/gocd-server"
+        }, {
+          "key" : "Tag",
+          "value" : "v${GO_PIPELINE_LABEL}"
+        } ]
+      } ],
+      "properties" : null
+    } ]
+  }, {
+    "name" : "s2",
+    "fetch_materials" : true,
+    "clean_working_directory" : false,
+    "never_cleanup_artifacts" : false,
+    "approval" : {
+      "type" : "success",
+      "authorization" : {
+        "roles" : [ ],
+        "users" : [ ]
+      }
+    },
+    "environment_variables" : [ ],
+    "jobs" : [ {
+      "name" : "j2",
+      "run_instance_count" : null,
+      "timeout" : null,
+      "environment_variables" : [ ],
+      "resources" : [ ],
+      "tasks" : [ {
+        "type" : "fetch",
+        "attributes" : {
+          "origin" : "external",
+          "pipeline" : "",
+          "stage" : "defaultStage",
+          "job" : "defaultJob",
+          "run_if" : [ ],
+          "artifact_id" : "docker-image"
         }
-      ]
-    }
-  ]
+      } ],
+      "tabs" : [ ],
+      "artifacts" : [ ],
+      "properties" : null
+    } ]
+  } ]
 }
 
 ```
