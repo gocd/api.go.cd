@@ -1,0 +1,59 @@
+## Get an artifact store
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/artifact_stores/docker' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.artifact_store %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.artifact_store %>; charset=utf-8
+ETag: "fff30fd05db389acded4e993c1ecd5a4"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores/hub.docker"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#artifact_stores"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores/:id"
+    }
+  },
+  "id" : "hub.docker",
+  "plugin_id" : "cd.go.artifact.docker.registry",
+  "properties" : [ {
+    "key" : "RegistryURL",
+    "value" : "https://your_docker_registry_url"
+  }, {
+    "key" : "Username",
+    "value" : "admin"
+  }, {
+    "key" : "Password",
+    "encrypted_value" : "AES:tdfTtYtIUSAF2JXJP/3YwA==:43Kjidjuh42NHKisCAs/BQ=="
+  } ]
+}
+```
+
+Gets an artifact store for specified id.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#the-artifact-store-object'>edit artifact store</a> documentation for more details.
+</aside>
+
+<%= available_since('18.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/artifact_stores/:storeId`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [artifact store object](#the-artifact-store-object).

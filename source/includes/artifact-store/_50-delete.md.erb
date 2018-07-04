@@ -1,0 +1,33 @@
+## Delete an artifact store
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/artifact_stores/docker' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.artifact_store %>' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.artifact_store %>; charset=utf-8
+```
+
+```json
+{
+  "message": "The artifactStore 'docker' was deleted successfully."
+}
+```
+
+Deletes the artifact store.
+
+<%= available_since('18.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE go/api/admin/artifact_stores/:storeId`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message if the artifact store is deleted or not.

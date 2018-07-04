@@ -1,0 +1,70 @@
+## Create an artifact store
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/artifact_stores' \
+  -u 'username:password' \
+  -H 'Accept: <%= data.apis.versions.artifact_store %>' \
+  -H 'Content-Type: application/json' \
+  -X POST -d '{
+    "id": "docker",
+    "plugin_id": "cd.go.artifact.docker.registry",
+    "properties" : [ {
+      "key" : "RegistryURL",
+      "value" : "https://your_docker_registry_url"
+    }, {
+      "key" : "Username",
+      "value" : "admin"
+    }, {
+      "key" : "Password",
+      "value" : "badger"
+    }]
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.artifact_store %>; charset=utf-8
+ETag: "e239974f09be2d88565c584c01ba0954"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores/docker"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#artifact_stores"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/artifact_stores/:id"
+    }
+  },
+  "id" : "docker",
+  "plugin_id" : "cd.go.artifact.docker.registry",
+  "properties" : [ {
+    "key" : "RegistryURL",
+    "value" : "https://your_docker_registry_url"
+  }, {
+    "key" : "Username",
+    "value" : "admin"
+  }, {
+    "key" : "Password",
+    "encrypted_value" : "AES:UbZMF/cQZCcywknuzW6r4Q==:Qbz5so1iz3WS2a4FSW775A=="
+  } ]
+}
+```
+
+Creates an artifact store
+
+<%= available_since('18.7.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/artifact_stores`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [artifact store object](#the-artifact-store-object).

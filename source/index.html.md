@@ -44,6 +44,7 @@ includes:
   - 186-authorization-configurations
   - 187-roles
   - 188-config-repos
+  - 189-artifact-store
   - 190-server-health-messages
   - errors
 
