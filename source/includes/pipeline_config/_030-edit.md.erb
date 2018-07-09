@@ -90,7 +90,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
                       {
                         "type": "fetch",
                         "attributes": {
-                          "origin": "external",
+                          "artifact_origin": "external",
                           "pipeline": "",
                           "stage": "defaultStage",
                           "job": "defaultJob",
@@ -221,7 +221,7 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
       "tasks" : [ {
         "type" : "fetch",
         "attributes" : {
-          "origin" : "external",
+          "artifact_origin" : "external",
           "pipeline" : "",
           "stage" : "defaultStage",
           "job" : "defaultJob",

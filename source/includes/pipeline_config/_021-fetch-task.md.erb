@@ -4,7 +4,7 @@ json = {
     {
       type: 'fetch',
       attributes: {
-        origin: 'gocd',
+        artifact_origin: 'gocd',
         run_if: ['passed'],
         pipeline: 'upstream',
         stage: 'upstream_stage',
@@ -17,7 +17,7 @@ json = {
     {
       type: "fetch",
       attributes: {
-        origin: "external",
+        artifact_origin: "external",
         pipeline: "some-upstream-pipeline",
         stage: "defaultStage",
         job: "defaultJob",
@@ -35,7 +35,7 @@ json = {
 %>
 <%=
 describe_sub_object 'The fetch task attributes', json: json, html_id: 'pipeline-config-fetch-task' do
-  origin           'String',  'Origin indicates whether the artifact to fetch is on the GoCD server or in an external repository.', one_of: %w(gocd external)
+  artifact_origin           'String',  'Origin indicates whether the artifact to fetch is on the GoCD server or in an external repository.', one_of: %w(gocd external)
   run_if           'Array',   'The `run_if` condition specifies when a task should be allowed to run.', one_of: %w(passed failed any)
   pipeline         'String',  'The name of direct upstream pipeline or ancestor pipeline of one of the upstream pipelines on which the pipeline of the job depends on. '
   stage            'String',  'The name of the stage to fetch artifacts from.'

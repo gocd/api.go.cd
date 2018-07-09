@@ -89,7 +89,7 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines' \
                               {
                                 "type": "fetch",
                                 "attributes": {
-                                  "origin": "external",
+                                  "artifact_origin": "external",
                                   "pipeline": "",
                                   "stage": "defaultStage",
                                   "job": "defaultJob",
@@ -221,7 +221,7 @@ Content-Type: <%= data.apis.versions.pipeline %>; charset=utf-8
       "tasks" : [ {
         "type" : "fetch",
         "attributes" : {
-          "origin" : "external",
+          "artifact_origin" : "external",
           "pipeline" : "",
           "stage" : "defaultStage",
           "job" : "defaultJob",
