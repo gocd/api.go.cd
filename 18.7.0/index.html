@@ -9340,11 +9340,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><a href="#plugin-about">Additional details</a> about the plugin.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">vendor</code></td>
-<td>Object</td>
-<td>Details about the <a href="#plugin-vendor">plugin author</a>.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">extensions</code></td>
 <td>Array</td>
 <td>A list of <a href="#config-repo-extension-info">extension information</a> pertaining to the list of extensions the plugin implements.</td>
@@ -9426,7 +9421,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Plugin that polls a GitHub repository for pull requests and triggers a build for each of them"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"target_operating_systems"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
 
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"vendor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoCD contributors"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://thoughtworks.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -9463,6 +9462,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">target_operating_systems</code></td>
 <td>Array</td>
 <td>List of operating systems on which the plugin is expected to work.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">vendor</code></td>
+<td>Object</td>
+<td>Details about the <a href="#plugin-vendor">plugin author</a>.</td>
 </tr>
 </tbody></table>
 
