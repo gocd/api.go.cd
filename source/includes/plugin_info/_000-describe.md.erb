@@ -5,7 +5,6 @@ describe_object 'The plugin info object', since: '16.7.0' do
   plugin_file_location  'String',  'The location where the plugin is installed'
   bundled_plugin        'Boolean', 'Indicates whether the plugin is bundled with GoCD'
   about                 'Object',  '[Additional details](#plugin-about) about the plugin.'
-  vendor                'Object',  'Details about the [plugin author](#plugin-vendor)'
   extensions            'Array',   'A list of [extension information](#config-repo-extension-info) pertaining to the list of extensions the plugin implements.'
 end
 %>
@@ -44,7 +43,11 @@ end
       version: "1.3.3",
       target_go_version: "15.1.0",
       description: "Plugin that polls a GitHub repository for pull requests and triggers a build for each of them",
-      target_operating_systems: []
+      target_operating_systems: [],
+      vendor:  {
+        name: "GoCD contributors",
+        url: "http://thoughtworks.com"
+      }
     }
 %>
 
@@ -55,6 +58,7 @@ describe_sub_object 'The plugin about object', json: about_json, html_id: 'plugi
   target_go_version        'String', 'Minimal version of GoCD required for the plugin to work'
   description              'String', "Short description about what the plugin does"
   target_operating_systems 'Array', 'List of operating systems on which the plugin is expected to work.'
+  vendor                   'Object',  'Details about the [plugin author](#plugin-vendor)'
 end
 %>
 
