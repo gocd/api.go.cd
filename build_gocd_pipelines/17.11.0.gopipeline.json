@@ -1,0 +1,22 @@
+{
+  "format_version": 1,
+  "group": "gocd-api-docs",
+  "name": "api.go.cd-release-17.11.0",
+  "label_template": "${COUNT}",
+  "lock_behavior": "none",
+  "template": "api.go.cd",
+  "materials": [
+    {
+      "type": "git",
+      "url": "https://git.gocd.io/git/gocd/api.go.cd",
+      "destination": null,
+      "filter": null,
+      "invert_filter": false,
+      "name": null,
+      "auto_update": true,
+      "branch": "release-17.11.0",
+      "submodule_folder": null,
+      "shallow_clone": true
+    }
+  ]
+}
