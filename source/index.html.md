@@ -46,6 +46,7 @@ includes:
   - 188-config-repos
   - 189-artifact-store
   - 190-server-health-messages
+  - 200-system-admins
   - errors
 
 search: true
