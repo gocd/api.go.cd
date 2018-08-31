@@ -1,0 +1,103 @@
+## Update a pipeline group
+
+Update authorization config of the specified pipeline group.
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/pipeline_groups/first' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.pipeline_group_config %>' \
+      -H 'Content-Type: application/json' \
+      -H 'If-Match: "17f5a9edf150884e5fc4315b4a7814cd"' \
+      -X PUT \
+      -d '{
+        "name": "first",
+        "authorization": {
+          "view": {
+            "users": ["alice"],
+            "roles": ["role"]
+          },
+          "operate": {
+            "users": ["alice"]
+          },
+          "admins": {
+            "users": ["bob"]
+          }
+        }
+      }'
+
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.pipeline_group_config %>; charset=utf-8
+ETag: "ae1d9184358c297a23118fe0e0e64c50"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/pipeline_groups/first"
+    },
+    "doc" : {
+      "href" : "https://api.go.cd/current/#pipeline-group-config"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/pipeline_groups/:group"
+    }
+  },
+  "name" : "first",
+  "authorization" : {
+    "view" : {
+      "users" : [ "alice" ],
+      "roles" : [ "role" ]
+    },
+    "operate": {
+      "users" : [ "alice" ],
+      "roles" : [ ]
+    },
+    "admins" : {
+      "users" : [ "bob" ],
+      "roles" : [ ]
+    }
+  },
+  "pipelines" : [ {
+    "_links" : {
+      "self" : {
+        "href" : "https://ci.example.com/go/api/admin/pipelines/up42"
+      },
+      "doc" : {
+        "href" : "https://api.gocd.org/#pipeline-config"
+      },
+      "find" : {
+        "href" : "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+      }
+    },
+    "name" : "up42"
+  } ]
+}
+```
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update pipeline group API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  role.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the pipeline group config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('18.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT go/api/admin/pipeline_groups/:group_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [pipeline group object](#the-pipeline-group-object).

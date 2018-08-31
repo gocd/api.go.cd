@@ -1,0 +1,72 @@
+## Get a pipeline group
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/pipeline_groups/first' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.pipeline_group_config %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.pipeline_group_config %>; charset=utf-8
+ETag: "17f5a9edf150884e5fc4315b4a7814cd"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/pipeline_groups/first"
+    },
+    "doc" : {
+      "href" : "https://api.go.cd/current/#pipeline-group-config"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/pipeline_groups/:group"
+    }
+  },
+  "name" : "first",
+  "authorization" : {
+    "view" : {
+      "users" : [ "operate" ],
+      "roles" : [ ]
+    },
+    "admins" : {
+      "users" : [ "operate" ],
+      "roles" : [ ]
+    }
+  },
+  "pipelines" : [ {
+    "_links" : {
+      "self" : {
+        "href" : "https://ci.example.com/go/api/admin/pipelines/up42"
+      },
+      "doc" : {
+        "href" : "https://api.gocd.org/#pipeline-config"
+      },
+      "find" : {
+        "href" : "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+      }
+    },
+    "name" : "up42"
+  } ]
+}
+```
+
+Gets config for specified pipeline group.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-a-pipeline-group'>update pipeline group</a> documentation for more details.
+</aside>
+
+<%= available_since('18.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/pipeline_groups/:group_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [pipeline group object](#the-pipeline-group-object).
