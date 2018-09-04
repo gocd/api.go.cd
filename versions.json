@@ -1,13 +1,17 @@
 [
   {
-    "version": "18.8.0",
-    "location": "https://api.gocd.org/18.8.0/",
+    "version": "18.9.0",
+    "location": "https://api.gocd.org/18.9.0/",
     "type": "next"
   },
   {
-    "version": "18.7.0",
-    "location": "https://api.gocd.org/18.7.0/",
+    "version": "18.8.0",
+    "location": "https://api.gocd.org/18.8.0/",
     "type": "latest"
+  },
+  {
+    "version": "18.7.0",
+    "location": "https://api.gocd.org/18.7.0/"
   },
   {
     "version": "18.6.0",
