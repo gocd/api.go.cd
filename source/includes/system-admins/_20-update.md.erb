@@ -1,6 +1,6 @@
 ## Update system admins
 
-Update system admins and replace the system admins with roles and users in the request. The role in the list of roles must be present in roles config.
+Update system admins and replace the system admins with roles and users in the request. The list of roles in the update request must be present in roles config.
 
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/security/system_admins' \
@@ -10,8 +10,8 @@ $ curl 'https://ci.example.com/go/api/admin/security/system_admins' \
       -H 'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"' \
       -X PUT \
       -d '{
-          	"users": ["user1", "user2", "user3"],
-          	"roles": ["role1"]
+          	"users": ["bob", "jdoe", "john"],
+          	"roles": ["manager"]
           }'
 
 ```
@@ -34,8 +34,8 @@ ETag: "61406622382e51c2079c11dcbdb978fb"
       "href" : "https://ci.example.com/go/api/admin/security/system_admins"
     }
   },
-  "roles" : [ "role1" ],
-  "users" : [ "user1" , "user2", "user3"]
+  "roles" : [ "manager" ],
+  "users" : [ "bob" , "jdoe", "john"]
 }
 ```
 
