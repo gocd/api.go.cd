@@ -14267,7 +14267,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
           <h1 id="system-admins">System Admins</h1>
 
-<p>The System Admins API allows admin users to manage System Admins.</p>
+<p>The API allows admin users to manage System Admins.</p>
 
 <h2 id="the-system-admins-object">The system admins object</h2>
 
@@ -14320,8 +14320,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/security/system_admins"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"role1"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">"role2"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"user1"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">"user2"</span><span class="p">]</span><span class="w">
+  </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"manager"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"john"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">"maria"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -14337,11 +14337,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>An array of <a href="#the-system-admins-object">system admins</a>.</p>
+<p>An <a href="#the-system-admins-object">array of roles and users</a> having system admin privileges.</p>
 
 <h2 id="update-system-admins">Update system admins</h2>
 
-<p>Update system admins and replace the system admins with roles and users in the request. The role in the list of roles must be present in roles config.</p>
+<p>Update system admins and replace the system admins with roles and users in the request. The list of roles in the update request must be present in roles config.</p>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/system_admins'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
@@ -14350,8 +14350,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       -H <span class="s1">'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"'</span> <span class="se">\</span>
       -X PUT <span class="se">\</span>
       -d <span class="s1">'{
-            "users": ["user1", "user2", "user3"],
-            "roles": ["role1"]
+            "users": ["bob", "jdoe", "john"],
+            "roles": ["manager"]
           }'</span>
 
 </code></pre>
@@ -14374,8 +14374,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/security/system_admins"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"role1"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"user1"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">"user2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"user3"</span><span class="p">]</span><span class="w">
+  </span><span class="nt">"roles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"manager"</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"users"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"bob"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s2">"jdoe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"john"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
