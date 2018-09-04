@@ -23,8 +23,8 @@ Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
       "href" : "https://ci.example.com/go/api/admin/security/system_admins"
     }
   },
-  "roles" : [ "role1" , "role2"],
-  "users" : [ "user1" , "user2"]
+  "roles" : [ "manager"],
+  "users" : [ "john" , "maria"]
 }
 ```
 
@@ -38,5 +38,5 @@ Lists all system admins which includes users and roles.
 
 <p class='http-request-return-description'>Returns</p>
 
-An array of [system admins](#the-system-admins-object).
+An [array of roles and users](#the-system-admins-object) having system admin privileges.
 
