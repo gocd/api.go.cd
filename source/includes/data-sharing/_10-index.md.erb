@@ -1,0 +1,46 @@
+## Get current data sharing settings
+
+```shell
+$ curl 'https://ci.example.com/go/api/data_sharing/settings' \
+-u 'username:password' \
+-H 'Accept: <%= data.apis.versions.data_sharing %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.data_sharing %>; charset=utf-8
+ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/data_sharing/settings"
+    },
+    "doc" : {
+      "href" : "https://api.go.cd/current/#data_sharing_settings"
+    }
+  },
+  "_embedded" : {
+    "allow" : true,
+    "updated_by" : "admin",
+    "updated_on" : "2018-09-09T10:00:00Z"
+  }
+}
+```
+
+Gets the current state of data sharing consent and related information.
+
+<%= available_since('18.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/data_sharing/settings`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [data sharing object](#the-data-sharing-object). There will also be an "ETag" header whose value is needed when updating the settings.
+
