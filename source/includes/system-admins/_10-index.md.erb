@@ -1,0 +1,42 @@
+## Get all system admins
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/system_admins' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "doc" : {
+      "href" : "https://api.gocd.org/#system_admins"
+    },
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/security/system_admins"
+    }
+  },
+  "roles" : [ "manager"],
+  "users" : [ "john" , "maria"]
+}
+```
+
+Lists all system admins which includes users and roles.
+
+<%= available_since('18.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/security/system_admins`
+
+<p class='http-request-return-description'>Returns</p>
+
+An [array of roles and users](#the-system-admins-object) having system admin privileges.
+
