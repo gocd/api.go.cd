@@ -1,0 +1,15 @@
+<%=
+describe_object 'The pipeline group object', since: '18.10.0' do
+  name          'String',     'The name of the pipeline group.'
+  authorization 'Object',     'The [authorization configuration](#the-pipeline-group-authorization-configuration) for the pipeline group.'
+  pipelines     'Array',      'The list of pipelines that belong to the pipeline group.'
+end
+%>
+
+<%=
+describe_object 'The pipeline group authorization configuration', since: '18.10.0' do
+  view         'Object',     'The list of `users` and `roles` with view permission for this pipeline group.'
+  operate      'Object',     'The list of `users` and `roles` with operate permission for this pipeline group.'
+  admins       'Object',     'The list of `users` and `roles` with admin permission for this pipeline group.'
+end
+%>

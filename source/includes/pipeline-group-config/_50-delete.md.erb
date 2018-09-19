@@ -1,0 +1,37 @@
+## Delete a pipeline group
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/pipeline_groups/first' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.pipeline_group_config %>' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.pipeline_group_config %>; charset=utf-8
+```
+
+```json
+{
+  "message": "The Pipeline group 'first' was deleted successfully."
+}
+```
+
+Deletes the pipeline group.
+
+<aside class="notice">
+  <strong>Note:</strong> This endpoint only deletes an empty pipeline group (without any pipelines). Use the <a href="#delete-a-pipeline">pipeline config API</a> to delete them first before deleting the group.
+</aside>
+
+<%= available_since('18.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE go/api/admin/pipeline_groups/:group_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the pipeline group was deleted.

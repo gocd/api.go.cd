@@ -33,6 +33,7 @@ includes:
   - 155-encryption
   - 160-pipeline-config
   - 161-template-config
+  - 165-pipeline-group-config
   - 170-version
   - 171-environment-config
   - 172-elastic-agent-profiles

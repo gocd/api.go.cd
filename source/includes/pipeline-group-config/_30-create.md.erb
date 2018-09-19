@@ -1,0 +1,79 @@
+## Create a pipeline group
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/pipeline_groups' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.pipeline_group_config %>' \
+      -H 'Content-Type: application/json' \
+      -X POST -d '{
+        "name": "second",
+        "authorization": {
+          "view": {
+            "users": ["alice"],
+            "roles": ["role"]
+          },
+          "operate": {
+            "users": ["alice"]
+          },
+          "admins": {
+            "users": ["bob"]
+          }
+        }
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.pipeline_group_config %>; charset=utf-8
+ETag: "f35e562b555dbbba2c92f44ebcf58c83"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/pipeline_groups/second"
+    },
+    "doc": {
+      "href": "https://api.go.cd/current/#pipeline-group-config"
+    },
+    "find": {
+      "href": "http://ci.example.com/go/api/admin/pipeline_groups/:group_name"
+    }
+  },
+  "name": "second",
+  "authorization": {
+    "view": {
+      "users": ["alice"],
+      "roles": ["role"]
+    },
+    "operate": {
+      "users": ["alice"],
+      "roles": [ ]
+    },
+    "admins": {
+      "users": ["bob"],
+      "roles": [ ]
+    }
+  },
+  "pipelines": [ ]
+}
+```
+
+Create a pipeline group.
+
+<aside class="notice">
+  <strong>Note:</strong> This endpoint will not create pipelines, please use the <a href="#create-a-pipeline">pipeline config API</a> to create them once the group is created.
+</aside>
+
+<%= available_since('18.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/pipeline_groups`
+
+<p class='http-request-return-description'>Returns</p>
+
+The new [pipeline group object](#the-pipeline-group-object).
