@@ -22,6 +22,10 @@ Content-Type: <%= data.apis.versions.pipeline_group_config %>; charset=utf-8
 
 Deletes the pipeline group.
 
+<aside class="notice">
+  <strong>Note:</strong> This endpoint only deletes an empty pipeline group (without any pipelines). Use the <a href="#delete-a-pipeline">pipeline config API</a> to delete them first before deleting the group.
+</aside>
+
 <%= available_since('18.10.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
