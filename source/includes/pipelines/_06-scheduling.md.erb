@@ -6,7 +6,7 @@ $ curl 'https://ci.example.com/go/api/pipelines/pipeline1/schedule' \
        -u 'username:password' \
        -H 'Accept: <%= data.apis.versions.pipeline_operations %>' \
        -H 'Content-Type: application/json' \
-       -X POST
+       -X POST \
        -d '{
              "environment_variables": [
                {
