@@ -1,0 +1,34 @@
+## Run failed jobs
+
+```shell
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStages/run-failed-jobs' \
+      -u 'username:password' \
+      -H 'X-GoCD-Confirm: true' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X POST
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: application/vnd.go.cd.v1+json;charset=utf-8
+```
+
+```
+{
+  "message" : "Request to rerun jobs accepted"
+}
+```
+
+Runs failed jobs in a completed stage.
+
+<%= available_since('18.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/run-failed-jobs`
+
+<p class='http-request-return-description'>Returns</p>
+
+A text confirmation.
