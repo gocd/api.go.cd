@@ -1,7 +1,7 @@
 ## Run selected jobs
 
 ```shell
-$ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStages/run-selected-jobs' \
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-selected-jobs' \
       -u 'username:password' \
       -H 'Content-Type: application/json' \
       -H 'Accept: application/vnd.go.cd.v1+json' \
@@ -18,7 +18,7 @@ HTTP/1.1 202 Accepted
 Content-Type: application/vnd.go.cd.v1+json;charset=utf-8
 ```
 
-```
+```json
 {
   "message" : "Request to rerun jobs accepted"
 }
@@ -26,11 +26,11 @@ Content-Type: application/vnd.go.cd.v1+json;charset=utf-8
 
 Runs specified jobs in a completed stage.
 
-<%= available_since('18.10.0') %>
+<%= available_since('18.11.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/run-selected-jobs`
+`POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/run-selected-jobs`
 
 Following property must be specified:
 
