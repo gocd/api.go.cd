@@ -1,0 +1,117 @@
+## Get Dashboard
+
+```shell
+$ curl 'https://ci.example.com/go/api/dashboard' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.dashboard %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8153/go/api/dashboard"
+    },
+    "doc" : {
+      "href" : "https://api.go.cd/current/#dashboard"
+    }
+  },
+  "_personalization" : "2356e5d4241f22987d8f8cb8920913fda237385b423bd7eec7e97b2a9eb1be1a",
+  "_embedded" : {
+    "pipeline_groups" : [ {
+      "_links" : {
+        "doc" : {
+          "href" : "https://api.go.cd/current/#pipeline-groups"
+        },
+        "self" : {
+          "href" : "http://localhost:8153/go/api/config/pipeline_groups"
+        }
+      },
+      "name" : "first",
+      "pipelines" : [ "up42" ],
+      "can_administer" : true
+    } ],
+    "environments" : [ {
+      "_links" : {
+        "doc" : {
+          "href" : "https://api.gocd.org/current/#environment-config"
+        },
+        "self" : {
+          "href" : "http://localhost:8153/go/api/admin/environments/asd"
+        }
+      },
+      "name" : "asd",
+      "pipelines" : [ "up42" ],
+      "can_administer" : true
+    } ],
+    "pipelines" : [ {
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8153/go/api/pipelines/up42/history"
+        },
+        "doc" : {
+          "href" : "https://api.go.cd/current/#pipelines"
+        }
+      },
+      "name" : "up42",
+      "last_updated_timestamp" : 1542863609039,
+      "locked" : false,
+      "pause_info" : {
+        "paused" : false,
+        "paused_by" : null,
+        "pause_reason" : null
+      },
+      "can_operate" : true,
+      "can_administer" : true,
+      "can_unlock" : true,
+      "can_pause" : true,
+      "from_config_repo" : false,
+      "_embedded" : {
+        "instances" : [ {
+          "_links" : {
+            "self" : {
+              "href" : "http://localhost:8153/go/api/pipelines/up42/instance/1"
+            }
+          },
+          "label" : "1",
+          "counter" : 1,
+          "triggered_by" : "Triggered by changes",
+          "scheduled_at" : "2018-11-21T09:43:07Z",
+          "_embedded" : {
+            "stages" : [ {
+              "_links" : {
+                "self" : {
+                  "href" : "http://localhost:8153/go/api/stages/up42/1/up42_stage/1"
+                }
+              },
+              "name" : "up42_stage",
+              "counter" : "1",
+              "status" : "Building",
+              "approved_by" : "changes",
+              "scheduled_at" : "2018-11-21T09:43:07Z"
+            } ]
+          }
+        } ]
+      }
+    } ]
+  }
+}
+```
+
+Lists pipelines on Dashboard along with pipeline groups and environments information.
+
+<%= available_since('15.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/dashboard`
+
+<p class='http-request-return-description'>Returns</p>
+An array of pipelines on Dashboard.
