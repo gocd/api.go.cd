@@ -1,0 +1,45 @@
+## Run selected jobs
+
+```shell
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-selected-jobs' \
+      -u 'username:password' \
+      -H 'Content-Type: application/json' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X POST \
+      -d '{
+            jobs: ["job1", "job2"]
+      }'
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: application/vnd.go.cd.v1+json;charset=utf-8
+```
+
+```json
+{
+  "message" : "Request to rerun jobs accepted"
+}
+```
+
+Runs specified jobs in a completed stage.
+
+<%= available_since('18.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/run-selected-jobs`
+
+Following property must be specified:
+
+<%=
+  describe_object nil do
+    jobs   'Array',      "A list job names that needs to be triggered again", mandatory: true
+  end
+%>
+
+<p class='http-request-return-description'>Returns</p>
+
+A text confirmation.

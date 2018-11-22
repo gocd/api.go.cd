@@ -1,0 +1,34 @@
+## Run stage
+
+```shell
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStages/run' \
+      -u 'username:password' \
+      -H 'X-GoCD-Confirm: true' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -X POST
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: application/vnd.go.cd.v1+json;charset=utf-8
+```
+
+```
+{
+  "message" : "Request to schedule stage testAPI/1/defaultStage accepted"
+}
+```
+
+Runs a specified stage.
+
+<%= available_since('18.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/run`
+
+<p class='http-request-return-description'>Returns</p>
+
+A text confirmation.
