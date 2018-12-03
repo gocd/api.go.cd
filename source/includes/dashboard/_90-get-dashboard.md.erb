@@ -17,7 +17,7 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
 {
   "_links" : {
     "self" : {
-      "href" : "http://localhost:8153/go/api/dashboard"
+      "href" : "https://ci.example.com/go/api/dashboard"
     },
     "doc" : {
       "href" : "https://api.go.cd/current/#dashboard"
@@ -31,7 +31,7 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
           "href" : "https://api.go.cd/current/#pipeline-groups"
         },
         "self" : {
-          "href" : "http://localhost:8153/go/api/config/pipeline_groups"
+          "href" : "https://ci.example.com/go/api/config/pipeline_groups"
         }
       },
       "name" : "first",
@@ -44,7 +44,7 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
           "href" : "https://api.gocd.org/current/#environment-config"
         },
         "self" : {
-          "href" : "http://localhost:8153/go/api/admin/environments/asd"
+          "href" : "https://ci.example.com/go/api/admin/environments/asd"
         }
       },
       "name" : "asd",
@@ -54,7 +54,7 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
     "pipelines" : [ {
       "_links" : {
         "self" : {
-          "href" : "http://localhost:8153/go/api/pipelines/up42/history"
+          "href" : "https://ci.example.com/go/api/pipelines/up42/history"
         },
         "doc" : {
           "href" : "https://api.go.cd/current/#pipelines"
@@ -77,7 +77,7 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
         "instances" : [ {
           "_links" : {
             "self" : {
-              "href" : "http://localhost:8153/go/api/pipelines/up42/instance/1"
+              "href" : "https://ci.example.com/go/api/pipelines/up42/instance/1"
             }
           },
           "label" : "1",
@@ -88,7 +88,7 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
             "stages" : [ {
               "_links" : {
                 "self" : {
-                  "href" : "http://localhost:8153/go/api/stages/up42/1/up42_stage/1"
+                  "href" : "https://ci.example.com/go/api/stages/up42/1/up42_stage/1"
                 }
               },
               "name" : "up42_stage",
@@ -107,7 +107,7 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
 
 Lists pipelines on Dashboard along with pipeline groups and environments information.
 
-<%= available_since('15.3.0') %>
+<%= available_since('18.12.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
