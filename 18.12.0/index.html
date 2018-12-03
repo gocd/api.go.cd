@@ -4499,11 +4499,349 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>The Dashboard API allows users to view dashboard information.</p>
 
+<h2 id="dashboard-object">Dashboard object</h2>
+
+<p class='available-since'>
+  Available since v18.12.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">pipelines</code></td>
+<td>Object</td>
+<td>The list of <a href="#dashboard-pipeline">pipelines</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">environments</code></td>
+<td>Object</td>
+<td>The list of <a href="#dashboard-environment">environments</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipeline_groups</code></td>
+<td>Object</td>
+<td>The list of <a href="#dashboard-pipeline-group">dashboard pipeline groups</a>.</td>
+</tr>
+</tbody></table>
+
+<p><a id='dashboard-pipeline'></a></p>
+
+<h3 id="dashboard-pipeline-object">Dashboard pipeline object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">last_updated_timestamp</code></td>
+<td>Number</td>
+<td>The dashboard pipeline instance&rsquo;s last updated timestamp.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">locked</code></td>
+<td>Boolean</td>
+<td>Whether the current pipeline instance is locked.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pause_info</code></td>
+<td>Object</td>
+<td>The <a href="#dashboard-pipeline-pause-info">pause information</a> of the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_operate</code></td>
+<td>Boolean</td>
+<td>Whether the current user has permission to trigger the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_administer</code></td>
+<td>Boolean</td>
+<td>Whether the current user has permission to edit the pipeline configurations.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_unlock</code></td>
+<td>Boolean</td>
+<td>Whether the current user has permission to unlock a locked pipeline isntance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_pause</code></td>
+<td>Boolean</td>
+<td>Whether the current user has permission to pause the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">from_config_repo</code></td>
+<td>Boolean</td>
+<td>Whether the pipeline&rsquo;s configuration is defined using pipeline as code.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">instances</code></td>
+<td>Object</td>
+<td>The list of <a href="#dashboard-pipeline-pipeline-instance">pipeline instances</a>.</td>
+</tr>
+</tbody></table>
+
+<p><a id='dashboard-pipeline-pause-info'></a></p>
+
+<h3 id="dashboard-pipeline-pause-information-object">Dashboard pipeline pause information object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"pause_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"paused"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"paused_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pause_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline Under Maintenance"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">paused</code></td>
+<td>Boolean</td>
+<td>Whether the current pipeline instance is paused.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">paused_by</code></td>
+<td>String</td>
+<td>The name of the user who paused the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pause_reason</code></td>
+<td>String</td>
+<td>The pause cause of the pipeline.</td>
+</tr>
+</tbody></table>
+
+<p><a id='dashboard-pipeline-pipeline-instance'></a></p>
+
+<h3 id="dashboard-pipeline-pipeline-instance-object">Dashboard pipeline pipeline-instance object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"instances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"triggered_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Triggered by changes"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"scheduled_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-21T09:43:07Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"scheduled_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-21T09:43:07Z"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">label</code></td>
+<td>String</td>
+<td>The label of the current pipeline instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">counter</code></td>
+<td>Number</td>
+<td>The pipeline counter of the current pipeline instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">triggered_by</code></td>
+<td>String</td>
+<td>The name of the user who triggered the current pipeline instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">scheduled_at</code></td>
+<td>Date</td>
+<td>The schedule time of the current pipeline instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stages</code></td>
+<td>Object</td>
+<td>The list of <a href="#dashboard-pipeline-pipeline-instance-stage">stages</a> of the current pipeline instance.</td>
+</tr>
+</tbody></table>
+
+<p><a id='dashboard-pipeline-pipeline-instance-stage'></a></p>
+
+<h3 id="dashboard-pipeline-39-s-stage-object">Dashboard pipeline&rsquo;s stage object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"scheduled_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-21T09:43:07Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the stage.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">counter</code></td>
+<td>Number</td>
+<td>The stage counter of the current stage instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td>String</td>
+<td>The status of the current stage instance. Can be one of <code class="prettyprint">Building</code>, <code class="prettyprint">Cancelled</code>, <code class="prettyprint">Passed</code>, <code class="prettyprint">Failed</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">approved_by</code></td>
+<td>String</td>
+<td>The approver of the current stage instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">scheduled_at</code></td>
+<td>Date</td>
+<td>The schedule time of the current stage instance.</td>
+</tr>
+</tbody></table>
+
+<p><a id='dashboard-environment'></a></p>
+
+<h3 id="dashboard-environment-object">Dashboard environment object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"up42"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"can_administer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the environment.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipelines</code></td>
+<td>Object</td>
+<td>The list of pipelines which belongs to the current environment.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_administer</code></td>
+<td>Boolean</td>
+<td>Whether the current has permission to edit the environment configurations.</td>
+</tr>
+</tbody></table>
+
+<p><a id='dashboard-pipeline-group'></a></p>
+
+<h3 id="dashboard-pipeline-group-object">Dashboard Pipeline Group object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"pipeline_groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"up42"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"can_administer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the pipeline group.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipelines</code></td>
+<td>Object</td>
+<td>The list of pipelines which belongs to the current pipeline group.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_administer</code></td>
+<td>Boolean</td>
+<td>Whether the current user have permissions to edit the pipeline group configurations.</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-dashboard">Get Dashboard</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/dashboard'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre>
 
 <blockquote>
@@ -4511,145 +4849,104 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/dashboard"</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/dashboard"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#dashboard"</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/current/#dashboard"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"pipeline_groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/config/pipeline_groups"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#pipeline-groups"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"_personalization"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2356e5d4241f22987d8f8cb8920913fda237385b423bd7eec7e97b2a9eb1be1a"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pipeline_groups"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/current/#pipeline-groups"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/first/history"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#pipelines"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"settings_path"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/pipelines/first/general"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/first/schedule"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"trigger_with_options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/first/schedule"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"pause"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/first/pause"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"unpause"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/first/unpause"</span><span class="w">
+        </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/config/pipeline_groups"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipelines"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"up42"</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"can_administer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"environments"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#environment-config"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/environments/asd"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"asd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pipelines"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"up42"</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"can_administer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"pipelines"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/up42/history"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.go.cd/current/#pipelines"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_updated_timestamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1542863609039</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"locked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"pause_info"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"paused"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"paused_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pause_reason"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"can_operate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"can_administer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"can_unlock"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"can_pause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"from_config_repo"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"instances"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/up42/instance/1"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"label"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"triggered_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Triggered by changes"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scheduled_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-21T09:43:07Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/stages/up42/1/up42_stage/1"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
               </span><span class="p">},</span><span class="w">
-              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"pause_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"paused"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"paused_by"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"pause_reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"instances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                  </span><span class="p">{</span><span class="w">
-                    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/first/instance/2"</span><span class="w">
-                      </span><span class="p">},</span><span class="w">
-                      </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-pipeline-instance"</span><span class="w">
-                      </span><span class="p">},</span><span class="w">
-                      </span><span class="nt">"history_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/pipelines/first/history"</span><span class="w">
-                      </span><span class="p">},</span><span class="w">
-                      </span><span class="nt">"vsm_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/pipelines/value_stream_map/first/2"</span><span class="w">
-                      </span><span class="p">},</span><span class="w">
-                      </span><span class="nt">"compare_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/compare/first/1/with/2"</span><span class="w">
-                      </span><span class="p">},</span><span class="w">
-                      </span><span class="nt">"build_cause_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/pipelines/first/2/build_cause"</span><span class="w">
-                      </span><span class="p">}</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"schedule_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18T11:11:36.378Z"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"triggered_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                      </span><span class="nt">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                        </span><span class="p">{</span><span class="w">
-                          </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                            </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                              </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/stages/first/2/stage1/2"</span><span class="w">
-                            </span><span class="p">},</span><span class="w">
-                            </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                              </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-stage-instance"</span><span class="w">
-                            </span><span class="p">}</span><span class="w">
-                          </span><span class="p">},</span><span class="w">
-                          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage1"</span><span class="p">,</span><span class="w">
-                          </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
-                          </span><span class="nt">"previous_stage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                            </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                              </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/stages/first/1/stage1/2"</span><span class="w">
-                              </span><span class="p">},</span><span class="w">
-                              </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-stage-instance"</span><span class="w">
-                              </span><span class="p">}</span><span class="w">
-                            </span><span class="p">},</span><span class="w">
-                            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage1"</span><span class="p">,</span><span class="w">
-                            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="w">
-                          </span><span class="p">}</span><span class="w">
-                        </span><span class="p">},</span><span class="w">
-                        </span><span class="p">{</span><span class="w">
-                          </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                            </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                              </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/stages/first/2/stage2/1"</span><span class="w">
-                            </span><span class="p">},</span><span class="w">
-                            </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                              </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-stage-instance"</span><span class="w">
-                            </span><span class="p">}</span><span class="w">
-                          </span><span class="p">},</span><span class="w">
-                          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage2"</span><span class="p">,</span><span class="w">
-                          </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="w">
-                        </span><span class="p">}</span><span class="w">
-                      </span><span class="p">]</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                  </span><span class="p">}</span><span class="w">
-                </span><span class="p">]</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+              </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"approved_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"scheduled_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-21T09:43:07Z"</span><span class="w">
+            </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Lists pipelines on Dashboard.</p>
+<p>Lists pipelines on Dashboard along with pipeline groups and environments information.</p>
 
 <p class='available-since'>
-  Available since v15.3.0.
+  Available since v18.12.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
