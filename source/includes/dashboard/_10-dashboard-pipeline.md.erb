@@ -1,0 +1,15 @@
+<%=
+describe_sub_object 'Dashboard pipeline object', since: '18.12.0', html_id: 'dashboard-pipeline' do
+  name                        'String',      'The name of the pipeline.'
+  last_updated_timestamp      'Number',      'The dashboard pipeline instance\'s last updated timestamp.'
+  locked                      'Boolean',     'Whether the current pipeline instance is locked.'
+  pause_info                  'Object',      'The [pause information](#dashboard-pipeline-pause-info) of the pipeline.'
+  can_operate                 'Boolean',     'Whether the current user has permission to trigger the pipeline.'
+  can_administer              'Boolean',     'Whether the current user has permission to edit the pipeline configurations.'
+  can_unlock                  'Boolean',     'Whether the current user has permission to unlock a locked pipeline isntance.'
+  can_pause                   'Boolean',     'Whether the current user has permission to pause the pipeline.'
+  from_config_repo            'Boolean',     'Whether the pipeline\'s configuration is defined using pipeline as code.'
+  instances                   'Object',      'The list of [pipeline instances](#dashboard-pipeline-pipeline-instance).'
+end
+%>
+
