@@ -1,0 +1,43 @@
+## Get usage information for an elastic agent profile
+
+```shell
+$ curl 'https://ci.example.com/go/api/elastic/profiles/Profile1/usages' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.elastic_profiles %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.elastic_profiles %>; charset=utf-8
+```
+
+```json
+[
+  {
+    "pipeline_name": "pipeline1",
+    "stage_name": "prepare",
+    "job_name": "build",
+    "template_name": "Template1"
+  },
+  {
+    "pipeline_name": "pipeline2",
+    "stage_name": "clean",
+    "job_name": "clean_artifacts"
+  }
+]
+```
+
+Returns usage information for an elastic profile.
+
+<%= available_since('18.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/elastic/profiles/:profile_id/usages`
+
+<p class='http-request-return-description'>Returns</p>
+
+A list containing information about where a particular elastic agent profile is being used.
+<br />The `template_name` attribute is returned only if the pipeline is using pipeline template.
