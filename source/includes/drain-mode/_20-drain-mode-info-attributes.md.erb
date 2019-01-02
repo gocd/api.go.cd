@@ -1,0 +1,40 @@
+<%
+json = {
+  attributes: {
+      is_completely_drained: true,
+      running_systems: {
+        mdu:[
+          {
+            type: 'hg',
+            mdu_start_time: '2018-12-10T04:19:31Z',
+            attributes: {
+              url: 'https://bdpiparva@bitbucket.org/foo/bar-mercurial',
+              name: 'Foobar',
+              auto_update: true,
+              invert_filter: false
+            }
+          }
+        ],
+        jobs:[
+          {
+            pipeline_name: 'up42',
+            pipeline_counter: 5,
+            stage_name: 'up42_stage',
+            stage_counter: '1',
+            name: 'up42_job',
+            state: 'Scheduled',
+            scheduled_date: '2018-12-31T10:57:17Z',
+            agent_uuid: 'agent-uuid-1'
+           }
+        ]
+      }
+  }
+}
+%>
+
+<%=
+describe_sub_object 'Drain Mode Attributes', json: json, html_id: 'drain-mode-info-attributes' do
+	is_completely_drained   'Boolean',   'Whether the GoCD system is completely drained'
+	running_systems         'Object',    '[GoCD running sub-systems](#drain-mode-info-running-systems)'
+end
+%>

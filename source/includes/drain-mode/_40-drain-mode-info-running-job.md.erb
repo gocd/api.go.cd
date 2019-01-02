@@ -1,0 +1,25 @@
+<%
+json = {
+  pipeline_name: 'up42',
+  pipeline_counter: 5,
+  stage_name: 'up42_stage',
+  stage_counter: '1',
+  name: 'up42_job',
+  state: 'Scheduled',
+  scheduled_date: '2018-12-31T10:57:17Z',
+  agent_uuid: 'agent-uuid-1'
+}
+%>
+
+<%=
+describe_sub_object 'Drain Mode Attributes Running Job', json: json, html_id: 'drain-mode-info-running-job' do
+	pipeline_name        'String',   'The name of the pipeline'
+  pipeline_counter   'Integer',    'The running pipeline instance counter'
+  stage_name         'String',     'The name of the stage'
+  stage_counter      'Integer',    'The running stage instance counter'
+  name               'String',     'The name of the job'
+  state              'String',     'The state of the running job. one_of: %w(Scheduled, Assigned, Preparing, Building, Completing, Completed, Rescheduled)'
+  scheduled_date     'Date',       'The job scheduled date'
+  agent_uuid         'String',     'The uuid of the agent on whichb the current job is running.'
+end
+%>

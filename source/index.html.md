@@ -49,6 +49,7 @@ includes:
   - 190-server-health-messages
   - 200-system-admins
   - 210-data-sharing
+  - 220-drain-mode
   - errors
 
 search: true
