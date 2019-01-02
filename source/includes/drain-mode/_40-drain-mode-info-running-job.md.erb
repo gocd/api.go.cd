@@ -13,13 +13,13 @@ json = {
 
 <%=
 describe_sub_object 'Drain Mode Attributes Running Job', json: json, html_id: 'drain-mode-info-running-job' do
-	pipeline_name        'String',   'The name of the pipeline'
+	pipeline_name      'String',     'The name of the pipeline'
   pipeline_counter   'Integer',    'The running pipeline instance counter'
   stage_name         'String',     'The name of the stage'
   stage_counter      'Integer',    'The running stage instance counter'
   name               'String',     'The name of the job'
   state              'String',     'The state of the running job. one_of: %w(Scheduled, Assigned, Preparing, Building, Completing, Completed, Rescheduled)'
-  scheduled_date     'Date',       'The job scheduled date'
+  scheduled_date     'Timestamp',  'The job scheduled date'
   agent_uuid         'String',     'The uuid of the agent on whichb the current job is running.'
 end
 %>
