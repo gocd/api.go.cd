@@ -2,14 +2,15 @@
 
 ```shell
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/myStages/instance/1/1' \
-      -u 'username:password'
+  -u 'username:password' \
+  -H 'Accept: <%= data.apis.versions.stage_instance %>'
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+Content-Type: <%= data.apis.versions.stage_instance %>;charset=utf-8
 ```
 
 ```json
@@ -58,7 +59,7 @@ Content-Type: application/json; charset=utf-8
       "pipeline_counter": null,
       "rerun": false,
       "pipeline_name": null,
-      "result": "Passed",
+      "result": "Cancelled",
       "state": "Completed",
       "id": 1,
       "stage_counter": null,
@@ -68,7 +69,8 @@ Content-Type: application/json; charset=utf-8
   "pipeline_counter": 1,
   "pipeline_name": "mypipeline",
   "approval_type": "success",
-  "result": "Passed",
+  "result": "Cancelled",
+  "cancelled_by": "user",
   "counter": 1,
   "id": 1,
   "rerun_of_counter": null,
@@ -79,7 +81,7 @@ Content-Type: application/json; charset=utf-8
 
 Gets stage instance object.
 
-<%= available_since('15.1.0') %>
+<%= available_since('19.1.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
