@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Middleman
-gem 'middleman', '~> 4.1.0'
+gem 'middleman', '~> 4.2.1'
 gem 'middleman-gh-pages', '~> 0.3.0'
 gem 'middleman-syntax', '~> 2.1.0'
 gem 'middleman-autoprefixer', '~> 2.7.0'
