@@ -2,6 +2,7 @@
 
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/drain_mode/disable' \
+-X POST \
 -u 'username:password' \
 -H 'X-GoCD-Confirm:true' \
 -H 'Accept: <%= data.apis.versions.drain_mode %>'

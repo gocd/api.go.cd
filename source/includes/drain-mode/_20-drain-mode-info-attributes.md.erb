@@ -1,9 +1,9 @@
 <%
 json = {
   attributes: {
-      is_completely_drained: true,
+      is_completely_drained: false,
       running_systems: {
-        mdu:[
+        material_update_in_progress:[
           {
             type: 'hg',
             mdu_start_time: '2018-12-10T04:19:31Z',
@@ -15,16 +15,28 @@ json = {
             }
           }
         ],
-        jobs:[
+        building_jobs:[
           {
             pipeline_name: 'up42',
             pipeline_counter: 5,
             stage_name: 'up42_stage',
             stage_counter: '1',
             name: 'up42_job',
-            state: 'Scheduled',
+            state: 'Building',
             scheduled_date: '2018-12-31T10:57:17Z',
             agent_uuid: 'agent-uuid-1'
+           }
+        ],
+        scheduled_jobs:[
+          {
+            pipeline_name: 'up42',
+            pipeline_counter: 5,
+            stage_name: 'up42_stage',
+            stage_counter: '1',
+            name: 'up42_job_2',
+            state: 'Scheduled',
+            scheduled_date: '2018-12-31T10:57:17Z',
+            agent_uuid: nil
            }
         ]
       }
