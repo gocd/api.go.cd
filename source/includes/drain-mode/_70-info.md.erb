@@ -1,0 +1,56 @@
+## Get Drain Mode Info
+
+```shell
+$ curl 'https://ci.example.com/go/api/drain_mode/info' \
+-u 'username:password' \
+-H 'Accept: <%= data.apis.versions.drain_mode %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.data_sharing %>; charset=utf-8
+ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/drain_mode/info"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#drain-mode-info"
+    }
+  },
+  "_embedded" : {
+    "is_drain_mode" : true,
+    "metadata" : {
+      "updated_by" : "admin",
+      "updated_on" : "2019-01-02T04:18:28Z"
+    },
+    "attributes" : {
+      "is_completely_drained" : true,
+      "running_systems" : {
+        "material_update_in_progress" : [ ],
+        "scheduled_jobs" : [ ],
+        "running_jobs" : [ ]
+      }
+    }
+  }
+}
+```
+
+Gets the server drain mode information.
+
+<%= available_since('19.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/drain_mode/info`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [drain mode info object](#the-drain-mode-info-object).
+

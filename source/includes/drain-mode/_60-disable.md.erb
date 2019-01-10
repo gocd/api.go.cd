@@ -1,0 +1,29 @@
+## Disable Drain Mode
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/drain_mode/disable' \
+-X POST \
+-u 'username:password' \
+-H 'X-GoCD-Confirm:true' \
+-H 'Accept: <%= data.apis.versions.drain_mode %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 204 No Content
+Content-Type: <%= data.apis.versions.drain_mode %>; charset=utf-8
+ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
+```
+
+Disables GoCD server drain mode.
+
+<%= available_since('19.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/drain_mode/disable`
+
+<p class='http-request-return-description'>Returns</p>
+No Content
+
