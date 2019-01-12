@@ -4852,8 +4852,13 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre>
 
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/dashboard?viewName=default'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+</code></pre>
+
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above commands return JSON structured like this:</p>
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
@@ -4953,6 +4958,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>Lists pipelines on Dashboard along with pipeline groups and environments information.</p>
 
+<p>You can pass a personalized view name as a query string to the url to get specific pipelines.</p>
+
 <p class='available-since'>
   Available since v18.12.0.
 </p>
@@ -4961,9 +4968,15 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p><code class="prettyprint">GET /go/api/dashboard</code></p>
 
+<p><code class="prettyprint">GET /go/api/dashboard?viewName=test</code></p>
+
 <p class='http-request-return-description'>Returns</p>
 
 <p>An array of pipelines on Dashboard.</p>
+
+<aside class="notice">
+  <strong>Note:</strong> Passing `viewName` will get you the instances for all the selected pipelines in that view regardless of their status (Building, Failed, Passed).
+</aside>
 
           <h1 id="encryption">Encryption</h1>
 
