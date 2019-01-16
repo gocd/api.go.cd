@@ -12,7 +12,6 @@ $   curl 'http://ci.example.com/go/api/admin/config_repos' \
       "type": "git",
       "attributes": {
         "url": "https://github.com/config-repo/gocd-json-config-example2.git",
-        "name": null,
         "branch": "master",
         "auto_update": true
       }
@@ -53,7 +52,6 @@ Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
     "type": "git",
     "attributes": {
       "url": "https://github.com/config-repo/gocd-json-config-example2.git",
-      "name": null,
       "branch": "master",
       "auto_update": true
     }
@@ -79,3 +77,5 @@ Create a config repo object.
 <p class='http-request-return-description'>Returns</p>
 
 A new [config-repo](#the-config-repo-object) object
+
+<strong>Note:</strong> since version 18.12.0, it is not possible anymore to provide a material name as redundant with the id.
