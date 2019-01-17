@@ -3,9 +3,8 @@ json = {
   stages: [{
     name: 'up42_stage',
     counter: '1',
-    status: 'Cancelled',
+    status: 'Building',
     approved_by: 'changes',
-    cancelled_by: 'ganesh',
     scheduled_at: '2018-11-21T09:43:07Z'
   }]
 }
@@ -17,7 +16,6 @@ describe_sub_object 'Dashboard pipeline\'s stage object', json: json, since: '18
   counter       'Number',     'The stage counter of the current stage instance.'
   status        'String',     'The status of the current stage instance.', one_of: %w(Building Cancelled Passed Failed)
   approved_by   'String',     'The approver of the current stage instance.'
-  cancelled_by  'String',     'Indicates who cancelled the stage if status is `Cancelled`.'
   scheduled_at  'Date',       'The schedule time of the current stage instance.'
 end
 %>
