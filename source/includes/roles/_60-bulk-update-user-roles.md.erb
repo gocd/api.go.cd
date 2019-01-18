@@ -1,0 +1,115 @@
+## Bulk Update User Roles
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.users %>' \
+      -H 'Content-Type: application/json' \
+      -X PATCH \
+      -d '{
+            "users": ["jez", "tez"],
+            "operations": {
+              "add": ["role1", "role2"]
+              "remove": ["role3"]
+            }
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.users %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/roles"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#roles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+    }
+  },
+  "_embedded": {
+    "roles": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/role1"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "role1",
+        "type": "gocd",
+        "attributes": {
+          "users": ["jez", "tez"]
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/role2"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "role2",
+        "type": "gocd",
+        "attributes": {
+          "users": ["jez", "tez"]
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/role3"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "role3",
+        "type": "gocd",
+        "attributes": {
+          "users": []
+        }
+      }
+    ]
+  }
+}
+```
+
+Add/Remove given users from roles.
+
+<aside class="notice">
+  <strong>Important:</strong> Only GoCD roles are supported.</code>
+</aside>
+
+<%=
+available_since('19.1.0')
+%>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PATCH /go/api/admin/security/roles`
+
+<p class='http-request-return-description'>Returns</p>
+
+The list of updated [role objects](#the-role-object)

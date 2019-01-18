@@ -1,0 +1,42 @@
+## Bulk Enable/Disable Users
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/operations/state' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.users %>' \
+      -H 'Content-Type: application/json' \
+      -X PATCH \
+      -d '{
+            "users": ["jez", "tez"],
+            "operations": {
+              "enable": true
+            }
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.users %>; charset=utf-8
+```
+
+```json
+{
+  "message": "Users '[\"jez\", \"tez\"]' were enabled successfully."
+}
+```
+
+Enables/Disables multiple users.
+
+<%=
+available_since('19.1.0')
+%>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PATCH /go/api/users/operations/state`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirming if the users were enabled/disabled.
