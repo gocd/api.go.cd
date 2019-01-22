@@ -1,0 +1,58 @@
+## Export pipeline config to config repo format
+
+```shell
+$   curl 'http://ci.example.com/go/api/admin/export/pipelines/pip1?pluginId=yaml.config.plugin' \
+  -u 'username:password' \
+  -H 'Accept: application/vnd.go.cd.v1+json' \
+
+```
+
+> The above command returns YML structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/x-yaml; charset=utf-8
+ETag: "92d3496403f7a3240fc0ba8895c5abfef24a72255360ebf1c04b4eb304a63eaa"
+Content-Disposition: attachment; filename="pip1.gocd.yaml"
+```
+
+```yaml
+format_version: 3
+pipelines:
+  pip1:
+    group: second
+    label_template: ${COUNT}
+    lock_behavior: none
+    materials:
+      git:
+        git: foo
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+    - defaultStage:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+        jobs:
+          defaultJob:
+            timeout: 0
+            tasks:
+            - nant:
+                run_if: passed
+```
+
+Exports pipeline configurations into a format consumable by the specified config repo plugin.
+
+
+<%= available_since('19.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/export/pipelines/:pipeline_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+The format and contents of the response as well as the `Content-Type` are determined by the specified config repo plugin.
