@@ -5,7 +5,7 @@ Update system admins and replace the system admins with roles and users in the r
 ```shell
 $ curl 'https://ci.example.com/go/api/admin/security/system_admins' \
       -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.roles %>' \
+      -H 'Accept: <%= data.apis.versions.system_admins %>' \
       -H 'Content-Type: application/json' \
       -H 'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"' \
       -X PUT \
@@ -59,4 +59,4 @@ ETag: "61406622382e51c2079c11dcbdb978fb"
 
 <p class='http-request-return-description'>Returns</p>
 
-An array of [system admins](#the-system-admins-object).
+The updated [system admins](#the-system-admins-object) object.
