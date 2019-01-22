@@ -6,5 +6,7 @@ describe_object 'The user object', since: '15.2.0' do
   email             'String',     "The user's email address"
   email_me          'Boolean',    "Boolean indicating if the user has signed up for email notifications"
   checkin_aliases   'Array',      "A list of SCM checkin aliases to map users to SCM commits"
+  admin             'Boolean',    "Boolean indicating if the user is an admin", since: '19.1.0'
+  roles             'Array',      "List of [user roles](#the-user-role-object) that the user has been assigned", since: '19.1.0'
 end
 %>
