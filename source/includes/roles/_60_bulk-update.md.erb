@@ -1,0 +1,147 @@
+## Bulk update roles
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>' \
+      -X PATCH \
+      -d '{
+      "operations": [
+        {
+          "role": "role1",
+          "users": {
+            "add": [
+              "user1",
+              "user2"
+            ],
+            "remove": [
+              "user3",
+              "user4"
+            ]
+          }
+        },
+        {
+          "role": "role2",
+          "users": {
+            "add": [
+              "user2"
+            ]
+          }
+        }
+      ]
+    }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/roles"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#roles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+    }
+  },
+  "_embedded": {
+    "roles": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/role1"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "role1",
+        "type": "gocd",
+        "attributes": {
+          "users": ["user3", "user4", "robin"]
+        }
+      },
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/role2"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "role2",
+        "type": "gocd",
+        "attributes": {
+          "users": ["alice", "user2"]
+        }
+      }
+    ]
+  }
+}
+```
+
+Bulk update roles.
+
+<%= available_since('19.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PATCH go/api/admin/security/roles`
+
+<%=
+  describe_object(nil) do
+    operations  'Array',  'The [bulk update operations](#the-role-update-operations) performed on the set of roles'
+  end
+ %>
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [role object](#the-role-object) of type 'gocd'.
+
+<%
+json = {
+  role: "role1",
+  users: {
+    add: %w(User1 User2),
+    remove: %w(User3 User4)
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The bulk update operation attributes', json: json, html_id: 'the-role-update-operations' do
+  role     'String',  'The role name which needs to be updated'
+  users    'Object',  'The [users to be added/removed](#the-users-to-update) for a given role'
+end
+%>
+
+<%
+json = {
+  add: %w(User1 User2),
+  remove: %w(User3 User4)
+}
+%>
+
+<%=
+describe_sub_object 'The users to be updated', json: json, html_id: 'the-users-to-update' do
+  add              'Array',   'The list of users that needs to be added to the role'
+  remove           'Array',   'The list of users that needs to be removed from the role'
+end
+%>
+
+
