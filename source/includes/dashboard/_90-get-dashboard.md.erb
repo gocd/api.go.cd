@@ -6,13 +6,7 @@ $ curl 'https://ci.example.com/go/api/dashboard' \
       -H 'Accept: <%= data.apis.versions.dashboard %>'
 ```
 
-```shell
-$ curl 'https://ci.example.com/go/api/dashboard?viewName=default' \
-      -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.dashboard %>'
-```
-
-> The above commands return JSON structured like this:
+> The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
@@ -113,19 +107,11 @@ Content-Type: <%= data.apis.versions.dashboard %>; charset=utf-8
 
 Lists pipelines on Dashboard along with pipeline groups and environments information.
 
-You can pass a personalized view name as a query string to the url to get specific pipelines.
-
 <%= available_since('18.12.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
 `GET /go/api/dashboard`
 
-`GET /go/api/dashboard?viewName=test`
-
 <p class='http-request-return-description'>Returns</p>
 An array of pipelines on Dashboard.
-
-<aside class="notice">
-  <strong>Note:</strong> Passing `viewName` will get you the instances for all the selected pipelines in that view regardless of their status (Building, Failed, Passed).
-</aside>
