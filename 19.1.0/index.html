@@ -8422,7 +8422,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <aside class="notice">
   <strong>Note:</strong> Please remember to save the value of the `ETag` header
   for conditional posts, see the
-  <a href='#edit-template-authorization'>edit template authorization</a>
+  <a href='#update-template-authorization'>update template authorization</a>
   documentation for more details.
 </aside>
 
@@ -15751,13 +15751,13 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>A <a href="#the-data-sharing-object">data sharing object</a>. There will also be an &ldquo;ETag&rdquo; header whose value is needed when updating the settings, further.</p>
 
-          <p><a name="server_drain_mode"></a></p>
+          <p><a name="server_maintenance_mode"></a></p>
 
-<h1 id="drain-mode">Drain Mode</h1>
+<h1 id="maintenance-mode">Maintenance Mode</h1>
 
-<p>The GoCD Server Drain mode API allows admin users to manage <a href="https://docs.gocd.org/advanced_usage/drain_mode.html">GoCD server drain mode</a>.</p>
+<p>The GoCD Server Maintenance mode API allows admin users to manage <a href="https://docs.gocd.org/advanced_usage/maintenance_mode.html">GoCD server maintenance mode</a>.</p>
 
-<h2 id="the-drain-mode-info-object">The Drain Mode Info Object</h2>
+<h2 id="the-maintenance-mode-info-object">The Maintenance Mode Info Object</h2>
 
 <p class='available-since'>
   Available since v19.1.0.
@@ -15773,25 +15773,25 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">is_drain_mode</code></td>
+<td><code class="prettyprint">is_maintenance_mode</code></td>
 <td>Boolean</td>
-<td>Whether the GoCD server is in drain state or not.</td>
+<td>Whether the GoCD server is in maintenance mode or not.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">metadata</code></td>
 <td>Object</td>
-<td>The GoCD server drain mode state <a href="#drain-mode-info-metadata">metadata</a>.</td>
+<td>The GoCD server maintenance mode state <a href="#maintenance-mode-info-metadata">metadata</a>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">attributes</code></td>
 <td>Object</td>
-<td>The GoCD server drain mode state <a href="#drain-mode-info-attributes">attributes</a>.</td>
+<td>The GoCD server maintenance mode state <a href="#maintenance-mode-info-attributes">attributes</a>.</td>
 </tr>
 </tbody></table>
 
-<p><a id='drain-mode-info-metadata'></a></p>
+<p><a id='maintenance-mode-info-metadata'></a></p>
 
-<h3 id="drain-mode-metadata">Drain Mode Metadata</h3>
+<h3 id="maintenance-mode-metadata">Maintenance Mode Metadata</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15813,22 +15813,22 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">updated_by</code></td>
 <td>String</td>
-<td>The administrator who updated drain mode state.</td>
+<td>The administrator who updated maintenance mode state.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">updated_on</code></td>
 <td>Timestamp</td>
-<td>The drain mode state last updated time.</td>
+<td>The maintenance mode state last updated time.</td>
 </tr>
 </tbody></table>
 
-<p><a id='drain-mode-info-attributes'></a></p>
+<p><a id='maintenance-mode-info-attributes'></a></p>
 
-<h3 id="drain-mode-attributes">Drain Mode Attributes</h3>
+<h3 id="maintenance-mode-attributes">Maintenance Mode Attributes</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"is_completely_drained"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"has_running_systems"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nt">"running_systems"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"material_update_in_progress"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -15881,20 +15881,20 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">is_completely_drained</code></td>
+<td><code class="prettyprint">has_running_systems</code></td>
 <td>Boolean</td>
-<td>Whether the GoCD system is completely drained.</td>
+<td>Whether there are any running subsystems in GoCD.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">running_systems</code></td>
 <td>Object</td>
-<td><a href="#drain-mode-info-running-systems">GoCD running sub-systems</a>.</td>
+<td><a href="#maintenance-mode-info-running-systems">GoCD running sub-systems</a>.</td>
 </tr>
 </tbody></table>
 
-<p><a id='drain-mode-info-running-systems'></a></p>
+<p><a id='maintenance-mode-info-running-systems'></a></p>
 
-<h3 id="drain-mode-attributes-running-systems">Drain Mode Attributes Running Systems</h3>
+<h3 id="maintenance-mode-attributes-running-systems">Maintenance Mode Attributes Running Systems</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"running_systems"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15955,18 +15955,18 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">building_jobs</code></td>
 <td>Array</td>
-<td>The list of currently building <a href="#drain-mode-info-running-job">jobs</a>. Building Jobs are the jobs which are currently running on an agent.</td>
+<td>The list of currently building <a href="#maintenance-mode-info-running-job">jobs</a>. Building Jobs are the jobs which are currently running on an agent.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">scheduled_jobs</code></td>
 <td>Array</td>
-<td>The list of currently scheduled <a href="#drain-mode-info-running-job">jobs</a>. Scheduled Jobs are the jobs which are waiting for an agent to run on.</td>
+<td>The list of currently scheduled <a href="#maintenance-mode-info-running-job">jobs</a>. Scheduled Jobs are the jobs which are waiting for an agent to run on.</td>
 </tr>
 </tbody></table>
 
-<p><a id='drain-mode-info-running-job'></a></p>
+<p><a id='maintenance-mode-info-running-job'></a></p>
 
-<h3 id="drain-mode-attributes-running-job">Drain Mode Attributes Running Job</h3>
+<h3 id="maintenance-mode-attributes-running-job">Maintenance Mode Attributes Running Job</h3>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
@@ -16031,9 +16031,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<h2 id="enable-drain-mode">Enable Drain Mode</h2>
+<h2 id="enable-maintenance-mode">Enable Maintenance Mode</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/drain_mode/enable'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/maintenance_mode/enable'</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 -u <span class="s1">'username:password'</span> <span class="se">\</span>
 -H <span class="s1">'X-GoCD-Confirm:true'</span> <span class="se">\</span>
@@ -16049,7 +16049,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre>
 
-<p>Enables GoCD server drain mode.</p>
+<p>Enables GoCD server maintenance mode.</p>
 
 <p class='available-since'>
   Available since v19.1.0.
@@ -16057,15 +16057,15 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/admin/drain_mode/enable</code></p>
+<p><code class="prettyprint">GET /go/api/admin/maintenance_mode/enable</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
 <p>No Content</p>
 
-<h2 id="disable-drain-mode">Disable Drain Mode</h2>
+<h2 id="disable-maintenance-mode">Disable Maintenance Mode</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/drain_mode/disable'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/maintenance_mode/disable'</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 -u <span class="s1">'username:password'</span> <span class="se">\</span>
 -H <span class="s1">'X-GoCD-Confirm:true'</span> <span class="se">\</span>
@@ -16081,7 +16081,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre>
 
-<p>Disables GoCD server drain mode.</p>
+<p>Disables GoCD server maintenance mode.</p>
 
 <p class='available-since'>
   Available since v19.1.0.
@@ -16089,15 +16089,15 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/admin/drain_mode/disable</code></p>
+<p><code class="prettyprint">GET /go/api/admin/maintenance_mode/disable</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
 <p>No Content</p>
 
-<h2 id="get-drain-mode-info">Get Drain Mode Info</h2>
+<h2 id="get-maintenance-mode-info">Get Maintenance Mode Info</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/drain_mode/info'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/maintenance_mode/info'</span> <span class="se">\</span>
 -u <span class="s1">'username:password'</span> <span class="se">\</span>
 -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre>
@@ -16114,20 +16114,20 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/drain_mode/info"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/maintenance_mode/info"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#drain-mode-info"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#maintenance-mode-info"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"is_drain_mode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_maintenance_mode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"metadata"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"updated_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"updated_on"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T04:18:28Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"is_completely_drained"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"has_running_systems"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"running_systems"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"material_update_in_progress"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
         </span><span class="nt">"scheduled_jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
@@ -16138,7 +16138,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Gets the server drain mode information.</p>
+<p>Gets the server maintenance mode information.</p>
 
 <p class='available-since'>
   Available since v19.1.0.
@@ -16146,11 +16146,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/drain_mode/info</code></p>
+<p><code class="prettyprint">GET /go/api/maintenance_mode/info</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A <a href="#the-drain-mode-info-object">drain mode info object</a>.</p>
+<p>A <a href="#the-maintenance-mode-info-object">maintenance mode info object</a>.</p>
 
           <h1 id="errors">Errors</h1>
 
