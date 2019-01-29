@@ -1,0 +1,7 @@
+<%=
+describe_object 'The Maintenance Mode Info Object', since: '19.1.0' do
+  is_maintenance_mode     'Boolean',    'Whether the GoCD server is in maintenance mode or not.'
+  metadata                'Object',     'The GoCD server maintenance mode state [metadata](#maintenance-mode-info-metadata)'
+  attributes              'Object',     'The GoCD server maintenance mode state [attributes](#maintenance-mode-info-attributes)'
+end
+%>

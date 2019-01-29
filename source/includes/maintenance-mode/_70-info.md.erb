@@ -1,9 +1,9 @@
-## Get Drain Mode Info
+## Get Maintenance Mode Info
 
 ```shell
-$ curl 'https://ci.example.com/go/api/drain_mode/info' \
+$ curl 'https://ci.example.com/go/api/maintenance_mode/info' \
 -u 'username:password' \
--H 'Accept: <%= data.apis.versions.drain_mode %>'
+-H 'Accept: <%= data.apis.versions.maintenance_mode %>'
 ```
 
 > The above command returns JSON structured like this:
@@ -18,20 +18,20 @@ ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
 {
   "_links" : {
     "self" : {
-      "href" : "https://ci.example.com/go/api/admin/drain_mode/info"
+      "href" : "https://ci.example.com/go/api/admin/maintenance_mode/info"
     },
     "doc" : {
-      "href" : "https://api.gocd.org/current/#drain-mode-info"
+      "href" : "https://api.gocd.org/current/#maintenance-mode-info"
     }
   },
   "_embedded" : {
-    "is_drain_mode" : true,
+    "is_maintenance_mode" : true,
     "metadata" : {
       "updated_by" : "admin",
       "updated_on" : "2019-01-02T04:18:28Z"
     },
     "attributes" : {
-      "is_completely_drained" : true,
+      "has_running_systems" : false,
       "running_systems" : {
         "material_update_in_progress" : [ ],
         "scheduled_jobs" : [ ],
@@ -42,15 +42,15 @@ ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
 }
 ```
 
-Gets the server drain mode information.
+Gets the server maintenance mode information.
 
 <%= available_since('19.1.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/drain_mode/info`
+`GET /go/api/maintenance_mode/info`
 
 <p class='http-request-return-description'>Returns</p>
 
-A [drain mode info object](#the-drain-mode-info-object).
+A [maintenance mode info object](#the-maintenance-mode-info-object).
 

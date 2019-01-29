@@ -1,28 +1,28 @@
-## Enable Drain Mode
+## Enable Maintenance Mode
 
 ```shell
-$ curl 'https://ci.example.com/go/api/admin/drain_mode/enable' \
+$ curl 'https://ci.example.com/go/api/admin/maintenance_mode/enable' \
 -X POST \
 -u 'username:password' \
 -H 'X-GoCD-Confirm:true' \
--H 'Accept: <%= data.apis.versions.drain_mode %>'
+-H 'Accept: <%= data.apis.versions.maintenance_mode %>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 204 No Content
-Content-Type: <%= data.apis.versions.drain_mode %>; charset=utf-8
+Content-Type: <%= data.apis.versions.maintenance_mode %>; charset=utf-8
 ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
 ```
 
-Enables GoCD server drain mode.
+Enables GoCD server maintenance mode.
 
 <%= available_since('19.1.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/admin/drain_mode/enable`
+`GET /go/api/admin/maintenance_mode/enable`
 
 <p class='http-request-return-description'>Returns</p>
 No Content

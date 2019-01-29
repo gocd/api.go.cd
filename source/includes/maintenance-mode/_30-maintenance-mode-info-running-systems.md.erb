@@ -42,9 +42,9 @@ json = {
 %>
 
 <%=
-describe_sub_object 'Drain Mode Attributes Running Systems', json: json, html_id: 'drain-mode-info-running-systems' do
+describe_sub_object 'Maintenance Mode Attributes Running Systems', json: json, html_id: 'maintenance-mode-info-running-systems' do
 	material_update_in_progress     'Array',   'The list of [materials](#pipeline-config-material-object) currently peforming MDU.'
-	building_jobs                   'Array',   'The list of currently building [jobs](#drain-mode-info-running-job). Building Jobs are the jobs which are currently running on an agent.'
-	scheduled_jobs                  'Array',   'The list of currently scheduled [jobs](#drain-mode-info-running-job). Scheduled Jobs are the jobs which are waiting for an agent to run on.'
+	building_jobs                   'Array',   'The list of currently building [jobs](#maintenance-mode-info-running-job). Building Jobs are the jobs which are currently running on an agent.'
+	scheduled_jobs                  'Array',   'The list of currently scheduled [jobs](#maintenance-mode-info-running-job). Scheduled Jobs are the jobs which are waiting for an agent to run on.'
 end
 %>
