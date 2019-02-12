@@ -1,4 +1,20 @@
 <%
+    config_repo_capabilities_json =  {
+      capabilities: {
+        supports_pipeline_export: true,
+        supports_parse_content: true
+      }
+}
+%>
+
+<%=
+describe_sub_object 'The Config Repo Capabilities object', json: config_repo_capabilities_json, html_id: 'config-repo-capabilites-object' do
+  supports_pipeline_export 'Boolean', 'Indicates if plugin supports pipeline configuration export.'
+  supports_parse_content   'Boolean', 'Indicates if plugin supports parse content.'
+end
+%>
+
+<%
     elastic_capabilities_json =  {
       capabilities: {
         supports_status_report: true,

@@ -80,6 +80,10 @@ end
           view: {
             template: "<div>Plugin view template</div>"
           }
+        },
+        capabilities: {
+          supports_pipeline_export: true,
+          supports_parse_content: true
         }
       }
     ]
@@ -89,6 +93,7 @@ end
 <%= describe_sub_object 'Extension information object: Config repo', json: config_repo_json, html_id: 'config-repo-extension-info' do
   type            'String', 'The type of the extension, which is `configrepo`'
   plugin_settings 'Object', 'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+  capabilities    'Object', 'The [capabilities](#config-repo-capabilites-object) object indicates the enhancements that a plugin provides.'
  end
  %>
 
