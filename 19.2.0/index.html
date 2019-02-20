@@ -3395,7 +3395,7 @@ File path/in/destination was created successfully
 <p>Example:</p>
 </blockquote>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>unzip -l /location/of/test.zip
+<pre class="highlight plaintext"><code>$ unzip -l /location/of/test.zip
 Archive:  location/of/test.zip
   Length      Date    Time    Name
 ---------  ---------- -----   ----
@@ -3406,21 +3406,21 @@ Archive:  location/of/test.zip
 ---------                     -------
        12                     4 files
 
-<span class="gp">$ </span><span class="nb">pwd</span>
+$ pwd
 /location/of/gocd/artifacts/pipelines/PipelineName/541/StageName/1/JobName
 
-<span class="gp">$ </span>ls
+$ ls
 cruise-output/
 
 
-<span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination'</span> <span class="se">\</span>
-      ... <span class="se">\</span>
-      -F <span class="s1">'zipfile=@/location/of/test.zip'</span>
+$ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination' \
+      ... \
+      -F 'zipfile=@/location/of/test.zip'
 
-<span class="gp">$ </span>ls
+$ ls
 cruise-output/   path/
 
-<span class="gp">$ </span>find path
+$ find path
 path
 path/in
 path/in/destination
@@ -9594,7 +9594,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Gets the current gocd server details</p>
+<p>Gets the current GoCD server details</p>
 
 <p class='available-since'>
   Available since v16.6.0.
@@ -14097,7 +14097,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
-<h2 id="the-gocd-role-attributes">The gocd role attributes</h2>
+<h2 id="the-gocd-role-attributes">The GoCD role attributes</h2>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -14226,7 +14226,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Lists all available roles which includes gocd role and plugin role.</p>
+<p>Lists all available roles which includes GoCD role and plugin role.</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -14359,7 +14359,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>An array of <a href="#the-role-object">role object</a>.</p>
 
-<h2 id="create-a-gocd-role">Create a gocd role</h2>
+<h2 id="create-a-gocd-role">Create a GoCD role</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
@@ -14403,7 +14403,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Create a gocd role. A gocd role is a group of users having same permissions in GoCD.</p>
+<p>Create a GoCD role. A GoCD role is a group of users having same permissions in GoCD.</p>
 
 <p class='available-since'>
   Available since v17.5.0.
