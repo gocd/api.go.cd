@@ -14,6 +14,7 @@ includes:
   - 020-authentication
   - 025-server-health
   - 030-agents
+  - 031-access-tokens
   - 035-agent-health
   - 040-users
   - 042-current-user

@@ -1,0 +1,57 @@
+## Create token for current user
+
+```shell
+$ curl 'https://ci.example.com/go/api/current_user/access_tokens' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.access_token %>' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "description": "my first token"
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.access_token %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/current_user/access_tokens/42"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/19.2.0/#access-token"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/current_user/access_tokens/:id"
+    }
+  },
+  "id" : 42,
+  "description" : "my first token",
+  "username" : "username",
+  "revoked" : true,
+  "revoke_cause" : null,
+  "revoked_by" : null,
+  "revoked_at" : null,
+  "created_at" : null,
+  "last_used_at" : null,
+  "token" : "30bd353a513ef3a2f72f46cc50d2a587b855fa04"
+}
+```
+
+Revokes a token so it cannot be reused again.
+
+<%= available_since('19.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/current_user/access_tokens/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+An [access token object](#the-access-token-object).

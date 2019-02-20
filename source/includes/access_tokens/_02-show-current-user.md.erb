@@ -1,0 +1,51 @@
+## Get one token for current user
+
+```shell
+$ curl 'https://ci.example.com/go/api/current_user/access_tokens/42' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.access_token %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.access_token %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/current_user/access_tokens/42"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/19.2.0/#access-token"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/current_user/access_tokens/:id"
+    }
+  },
+  "id" : 42,
+  "description" : "my first token",
+  "username" : "username",
+  "revoked" : false,
+  "revoke_cause" : null,
+  "revoked_by" : null,
+  "revoked_at" : null,
+  "created_at" : "2019-02-20T10:45:10Z",
+  "last_used_at" : null
+}
+```
+
+Gets a token by its unique identifier (id).
+
+<%= available_since('19.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/current_user/access_tokens/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+An [access token object](#the-access-token-object).

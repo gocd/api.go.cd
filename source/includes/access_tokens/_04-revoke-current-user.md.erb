@@ -1,0 +1,56 @@
+## Revoke token for current user
+
+```shell
+$ curl 'https://ci.example.com/go/api/current_user/access_tokens/42' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.access_token %>' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "revoke_cause": "token was compromised"
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.access_token %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/current_user/access_tokens/42"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/19.2.0/#access-token"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/current_user/access_tokens/:id"
+    }
+  },
+  "id" : 42,
+  "description" : "token was compromised",
+  "username" : "username",
+  "revoked" : true,
+  "revoke_cause" : "foo",
+  "revoked_by" : "jez",
+  "revoked_at" : "2019-02-20T11:25:03Z",
+  "created_at" : "2019-02-20T10:45:10Z",
+  "last_used_at" : null
+}
+```
+
+Revokes a token so it cannot be reused again.
+
+<%= available_since('19.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/current_user/access_tokens/:id/revoke`
+
+<p class='http-request-return-description'>Returns</p>
+
+An [access token object](#the-access-token-object).
