@@ -1,6 +1,6 @@
 # Errors
 
-Go CD uses the following HTTP status codes to indicate errors.
+GoCD uses the following HTTP status codes to indicate errors.
 
 Error Code | Meaning
 -----------|--------
