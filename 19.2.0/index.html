@@ -169,6 +169,7 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
+
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 <span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user'</span> <span class="se">\</span>
       -H <span class="s1">'Authentication: bearer YOUR_TOKEN'</span> <span class="se">\</span>
@@ -178,10 +179,12 @@
 <blockquote>
 <p>Make sure to replace the <code class="prettyprint">YOUR_TOKEN</code> the API token you use to access the GoCD server. The above command returns the following response:</p>
 </blockquote>
+
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
 </code></pre>
+
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -213,6 +216,7 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
+
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 <span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
@@ -222,10 +226,12 @@
 <blockquote>
 <p>Make sure to replace the <code class="prettyprint">username</code> and <code class="prettyprint">password</code> with the username and password that you use to access the GoCD server. The above command returns the following response:</p>
 </blockquote>
+
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
 </code></pre>
+
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -255,6 +261,7 @@
 <h2 id="cookie-session-authentication">Cookie/Session authentication</h2>
 
 <p>Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if GoCD is authenticating against an external source like LDAP.</p>
+
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 <span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user'</span> <span class="se">\</span>
       -b <span class="s1">'JSESSIONID=15kvus1kdrec46vk2a6jmtmo'</span> <span class="se">\</span>
@@ -264,10 +271,12 @@
 <blockquote>
 <p>The above command returns the following response</p>
 </blockquote>
+
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 <span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
 </code></pre>
+
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
