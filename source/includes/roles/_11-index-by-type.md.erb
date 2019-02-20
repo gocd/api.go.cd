@@ -1,0 +1,59 @@
+## Get all roles by type
+
+> Get all roles by type
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/security/roles?type=gocd' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.roles %>'
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/security/roles"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#roles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+    }
+  },
+  "_embedded": {
+    "roles": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/spacetiger"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#roles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/security/roles/:role_name"
+          }
+        },
+        "name": "spacetiger",
+        "type": "gocd",
+        "attributes": {
+          "users": ["alice", "bob", "robin"]
+        }
+      }
+    ]
+  }
+}
+```
+
+List all available roles of specified type.
+
+<%= available_since('17.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/security/roles?type=:role_type`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [role object](#the-role-object).
