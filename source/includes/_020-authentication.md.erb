@@ -1,0 +1,141 @@
+# Authentication
+
+All APIs require you to authenticate yourself using your username and password. Starting with version 19.2.0 of GoCD, users may also use a bearer token to authenticate. A cookie will also be returned as a result of the first authentication call. You may use this cookie for any further authentication attempts. If authentication fails, Go may return status codes `401`, `403` or `404`.
+
+## Bearer token authentication
+
+<%= available_since('19.2.0') %>
+
+> To authorize, use this code:
+
+```shell
+# With shell, you can just pass the correct header with each request
+$ curl 'https://ci.example.com/go/api/current_user' \
+      -H 'Authentication: bearer YOUR_TOKEN' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> Make sure to replace the `YOUR_TOKEN` the API token you use to access the go server. The above command returns the following response:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT
+```
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "https://api.gocd.org/#users"
+    },
+    "current_user": {
+      "href": "https://ci.example.com/go/api/current_user"
+    },
+    "self": {
+      "href": "https://ci.example.com/go/api/users/username"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/users/:login_name"
+    }
+  },
+  "login_name": "username",
+  "display_name": "username",
+  "enabled": true,
+  "email": "demo@example.com",
+  "email_me": true,
+  "checkin_aliases": []
+}
+```
+
+To generate an access token, navigate to `https://ci.example.com:8154/go/access_tokens`, or use the [access token API](#access-tokens).
+
+## Basic authentication
+
+> To authorize, use this code:
+
+```shell
+# With shell, you can just pass the correct header with each request
+$ curl 'https://ci.example.com/go/api/current_user' \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> Make sure to replace the `username` and `password` with the username and password that you use to access the go server. The above command returns the following response:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT
+```
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "https://api.gocd.org/#users"
+    },
+    "current_user": {
+      "href": "https://ci.example.com/go/api/current_user"
+    },
+    "self": {
+      "href": "https://ci.example.com/go/api/users/username"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/users/:login_name"
+    }
+  },
+  "login_name": "username",
+  "display_name": "username",
+  "enabled": true,
+  "email": "demo@example.com",
+  "email_me": true,
+  "checkin_aliases": []
+}
+```
+
+To use Basic Authentication with the Go API, simply send the username and password associated with the account.
+
+## Cookie/Session authentication
+
+Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if go is authenticating against an external source like LDAP.
+
+```shell
+# With shell, you can just pass the correct header with each request
+$ curl 'https://ci.example.com/go/api/current_user' \
+      -b 'JSESSIONID=15kvus1kdrec46vk2a6jmtmo' \
+      -H 'Accept: application/vnd.go.cd.v1+json'
+```
+
+> The above command returns the following response
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+Set-Cookie: JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT
+```
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "https://api.gocd.org/#users"
+    },
+    "current_user": {
+      "href": "https://ci.example.com/go/api/current_user"
+    },
+    "self": {
+      "href": "https://ci.example.com/go/api/users/username"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/users/:login_name"
+    }
+  },
+  "login_name": "username",
+  "display_name": "username",
+  "enabled": true,
+  "email": "demo@example.com",
+  "email_me": true,
+  "checkin_aliases": []
+}
+```
