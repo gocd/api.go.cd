@@ -158,21 +158,25 @@
 
           <h1 id="authentication">Authentication</h1>
 
-<p>All APIs require you to authenticate yourself using your username and password. A cookie will also be returned as a result of the first authentication call. You may use this cookie for any further authentication attempts. If authentication fails, Go may return status codes <code class="prettyprint">401</code>, <code class="prettyprint">403</code> or <code class="prettyprint">404</code>.</p>
+<p>All APIs require you to authenticate yourself using your username and password. Starting with version 19.2.0 of GoCD, users may also use a bearer token to authenticate. A cookie will also be returned as a result of the first authentication call. You may use this cookie for any further authentication attempts. If authentication fails, GoCD server may return status codes <code class="prettyprint">401</code>, <code class="prettyprint">403</code> or <code class="prettyprint">404</code>.</p>
 
-<h2 id="basic-authentication">Basic authentication</h2>
+<h2 id="bearer-token-authentication">Bearer token authentication</h2>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
 
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 <span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Authentication: bearer YOUR_TOKEN'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace the <code class="prettyprint">username</code> and <code class="prettyprint">password</code> with the username and password that you use to access the go server. The above command returns the following response:</p>
+<p>Make sure to replace the <code class="prettyprint">YOUR_TOKEN</code> the API token you use to access the GoCD server. The above command returns the following response:</p>
 </blockquote>
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
@@ -202,12 +206,57 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>To use Basic Authentication with the Go API, simply send the username and password associated with the account.</p>
+<p>To generate an access token, navigate to <code class="prettyprint">https://ci.example.com:8154/go/access_tokens</code>, or use the <a href="#access-tokens">access token API</a>.</p>
+
+<h2 id="basic-authentication">Basic authentication</h2>
+
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+<span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace the <code class="prettyprint">username</code> and <code class="prettyprint">password</code> with the username and password that you use to access the GoCD server. The above command returns the following response:</p>
+</blockquote>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#users"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"current_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/username"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/:login_name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"login_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_me"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"checkin_aliases"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To use Basic Authentication with the GoCD API, simply send the username and password associated with the account.</p>
 
 <h2 id="cookie-session-authentication">Cookie/Session authentication</h2>
 
-<p>Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if go is authenticating against an external source like LDAP.</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
+<p>Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if GoCD is authenticating against an external source like LDAP.</p>
+<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+<span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user'</span> <span class="se">\</span>
       -b <span class="s1">'JSESSIONID=15kvus1kdrec46vk2a6jmtmo'</span> <span class="se">\</span>
       -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre>
@@ -221,16 +270,25 @@
 </code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
     </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#agents"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#users"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"current_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/username"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/:login_name"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"login_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_me"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"checkin_aliases"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1025,6 +1083,487 @@
 <td>Name of the job the agent is building.</td>
 </tr>
 </tbody></table>
+
+          <h1 id="access-tokens">Access Tokens</h1>
+
+<p>Access tokens allow users to make API calls to GoCD using a bearer token instead of username and password.</p>
+
+<aside class="notice">
+  <strong>Important:</strong> Please note that this API requires using <code>v1</code> of the API using <code>application/vnd.go.cd.v1+json</code>
+</aside>
+
+<h2 id="the-access-token-object">The access token object</h2>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">description</code></td>
+<td>String</td>
+<td>The user provided description of the token.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">token</code></td>
+<td>String</td>
+<td>The value of the token. <strong>This will be rendered only once when the token is created</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The username of the user that created the token.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">revoked</code></td>
+<td>Boolean</td>
+<td>If the token has been revoked.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">revoke_cause</code></td>
+<td>String</td>
+<td>The reason why the token was revoked.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">revoked_at</code></td>
+<td>Timestamp</td>
+<td>The time when the token was revoked.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">created_at</code></td>
+<td>Timestamp</td>
+<td>The time when the token was created.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">last_used_at</code></td>
+<td>Timestamp</td>
+<td>The time when the token was last used to authenticate with the server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">revoked_because_user_deleted</code></td>
+<td>Boolean</td>
+<td>Indicates if the token was revoked because a system adminstrator deleted the user.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-tokens-for-current-user">Get all tokens for current user</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user/access_tokens'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"access_tokens"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/42"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/:id"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"my first token"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoke_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoked_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoked_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T10:45:10Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_used_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Lists all tokens belonging to a user.</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/current_user/access_tokens</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An array of <a href="#the-access-token-object">access token objects</a>.</p>
+
+<h2 id="get-one-token-for-current-user">Get one token for current user</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user/access_tokens/42'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/42"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"my first token"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoke_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T10:45:10Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_used_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Gets a token by its unique identifier (id).</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/current_user/access_tokens/:id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An <a href="#the-access-token-object">access token object</a>.</p>
+
+<h2 id="create-token-for-current-user">Create token for current user</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user/access_tokens'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -d <span class="s1">'{
+        "description": "my first token"
+      }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/42"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"my first token"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoke_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_used_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"30bd353a513ef3a2f72f46cc50d2a587b855fa04"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Revokes a token so it cannot be reused again.</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/current_user/access_tokens/:id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An <a href="#the-access-token-object">access token object</a>.</p>
+
+<h2 id="revoke-token-for-current-user">Revoke token for current user</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user/access_tokens/42'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -d <span class="s1">'{
+        "revoke_cause": "token was compromised"
+      }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/42"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user/access_tokens/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"token was compromised"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoke_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"jez"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T11:25:03Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T10:45:10Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_used_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Revokes a token so it cannot be reused again.</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/current_user/access_tokens/:id/revoke</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An <a href="#the-access-token-object">access token object</a>.</p>
+
+<h2 id="get-all-tokens-for-all-users">Get all tokens for all users</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/access_tokens'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/access_tokens"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"access_tokens"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/access_tokens/42"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/access_tokens/:id"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"my first token"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoke_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoked_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"revoked_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T10:45:10Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_used_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Allows system administrators to list tokens belonging to all users.</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/current_user/access_tokens</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An array of <a href="#the-access-token-object">access token objects</a>.</p>
+
+<h2 id="get-one-token-for-any-user">Get one token for any user</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/access_tokens/42'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/access_tokens/42"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/access_tokens/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"my first token"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoke_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T10:45:10Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_used_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Allows system administrators to view tokens belonging to any user.</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/access_tokens/:id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An <a href="#the-access-token-object">access token object</a>.</p>
+
+<h2 id="revoke-token-for-any-user">Revoke token for any user</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/access_tokens/42'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -d <span class="s1">'{
+        "revoke_cause": "token was compromised"
+      }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/access_tokens/42"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.2.0/#access-token"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/access_tokens/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"token was compromised"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoke_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"jez"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"revoked_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T11:25:03Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-20T10:45:10Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_used_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Allows system administrators to revoke a token belonging to any user so that the token cannot be reused again.</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/admin/access_tokens/:id/revoke</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An <a href="#the-access-token-object">access token object</a>.</p>
 
           <h1 id="agent-health">Agent Health</h1>
 
@@ -1991,7 +2530,7 @@ OK!
 
           <h1 id="materials">Materials</h1>
 
-<p>The materials API allows users to query and notify materials in the Go configuration.</p>
+<p>The materials API allows users to query and notify materials in the GoCD configuration.</p>
 
 <h2 id="the-material-object">The material object</h2>
 
@@ -2137,7 +2676,7 @@ OK!
 <pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
 </code></pre>
 
-<p>APIs that notify Go Server when a commit has been made in Version Control and Go needs to trigger relevant pipelines.</p>
+<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
     When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
@@ -2175,7 +2714,7 @@ OK!
 
 <h3 id="notification-script">Notification script</h3>
 
-<p>To notify Go via a SVN post commit hook, you may use the following post commit hook in your subversion repository.</p>
+<p>To notify GoCD via a SVN post commit hook, you may use the following post commit hook in your subversion repository.</p>
 
 <p>The post commit hook is located at <code class="prettyprint">/path/to/repository/hooks/post-commit</code>.</p>
 
@@ -2212,7 +2751,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 <pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
 </code></pre>
 
-<p>APIs that notify Go Server when a commit has been made in Version Control and Go needs to trigger relevant pipelines.</p>
+<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
     When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
@@ -2343,7 +2882,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 <pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
 </code></pre>
 
-<p>APIs that notify Go Server when a commit has been made in Version Control and Go needs to trigger relevant pipelines.</p>
+<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
     When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
@@ -2381,7 +2920,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 
 <h3 id="notification-script">Notification script</h3>
 
-<p>To notify Go via a Mercurial changegroup hook, you may use the following in your Mercurial repository.</p>
+<p>To notify GoCD via a Mercurial changegroup hook, you may use the following in your Mercurial repository.</p>
 
 <p>The hook goes into the <code class="prettyprint">hgrc</code> file, located at <code class="prettyprint">/path/to/hg/repository/.hg/hgrc</code>.</p>
 
@@ -2413,7 +2952,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 <pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
 </code></pre>
 
-<p>APIs that notify Go Server when a commit has been made in Version Control and Go needs to trigger relevant pipelines.</p>
+<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
     When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
@@ -2451,7 +2990,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 
           <h1 id="backups">Backups</h1>
 
-<p>The backups API allows users with administrator role to manage go server backups.</p>
+<p>The backups API allows users with administrator role to manage GoCD server backups.</p>
 
 <h2 id="the-backup-object">The backup object</h2>
 
@@ -6099,7 +6638,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">timeout</code></td>
 <td>Number</td>
-<td>The time period(in minute) after which the job will be terminated by go if it has not generated any output.</td>
+<td>The time period(in minute) after which the job will be terminated by GoCD if it has not generated any output.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">environment_variables</code></td>
@@ -6330,7 +6869,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">nant_path</code></td>
 <td>String</td>
-<td>This is the directory where the <code class="prettyprint">nant.exe</code> executable is located. By default Go will look for <code class="prettyprint">nant.exe</code> in the <code class="prettyprint">PATH</code>.</td>
+<td>This is the directory where the <code class="prettyprint">nant.exe</code> executable is located. By default GoCD will look for <code class="prettyprint">nant.exe</code> in the <code class="prettyprint">PATH</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">working_directory</code></td>
@@ -8924,7 +9463,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">PUT go/api/admin/pipeline_groups/:group_name</code></p>
+<p><code class="prettyprint">PUT /go/api/admin/pipeline_groups/:group_name</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -8963,7 +9502,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">DELETE go/api/admin/pipeline_groups/:group_name</code></p>
+<p><code class="prettyprint">DELETE /go/api/admin/pipeline_groups/:group_name</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -11242,7 +11781,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JSON Configuration Plugin"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"target_go_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16.1.0"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Configuration plugin that supports Go configuration in JSON"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Configuration plugin that supports GoCD configuration in JSON"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"target_operating_systems"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
 
           </span><span class="p">],</span><span class="w">
@@ -13470,7 +14009,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">PUT go/api/admin/security/auth_configs/:auth_config_id</code></p>
+<p><code class="prettyprint">PUT /go/api/admin/security/auth_configs/:auth_config_id</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -13505,7 +14044,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">DELETE go/api/admin/security/auth_configs/:auth_config_id</code></p>
+<p><code class="prettyprint">DELETE /go/api/admin/security/auth_configs/:auth_config_id</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -13855,7 +14394,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Create a gocd role. A gocd role is a group of users having same permissions in go.</p>
+<p>Create a gocd role. A gocd role is a group of users having same permissions in GoCD.</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -14021,7 +14560,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">PUT go/api/admin/security/roles/:role_name</code></p>
+<p><code class="prettyprint">PUT /go/api/admin/security/roles/:role_name</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -14056,7 +14595,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">DELETE go/api/admin/security/roles/:role_name</code></p>
+<p><code class="prettyprint">DELETE /go/api/admin/security/roles/:role_name</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -14166,7 +14705,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">PATCH go/api/admin/security/roles</code></p>
+<p><code class="prettyprint">PATCH /go/api/admin/security/roles</code></p>
 
 <p class='attributes-table-follows'></p>
 
@@ -15347,7 +15886,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">PUT go/api/admin/artifact_stores/:storeId</code></p>
+<p><code class="prettyprint">PUT /go/api/admin/artifact_stores/:storeId</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -15382,7 +15921,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">DELETE go/api/admin/artifact_stores/:storeId</code></p>
+<p><code class="prettyprint">DELETE /go/api/admin/artifact_stores/:storeId</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -15597,7 +16136,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">PUT go/api/admin/security/system_admins</code></p>
+<p><code class="prettyprint">PUT /go/api/admin/security/system_admins</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -16154,7 +16693,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
           <h1 id="errors">Errors</h1>
 
-<p>Go CD uses the following HTTP status codes to indicate errors.</p>
+<p>GoCD uses the following HTTP status codes to indicate errors.</p>
 
 <table><thead>
 <tr>
