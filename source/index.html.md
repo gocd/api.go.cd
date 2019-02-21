@@ -52,6 +52,7 @@ includes:
   - 210-data-sharing
   - 220-maintenance-mode
   - errors
+  - 999-changelog
 
 search: true
 current_api_version: application/vnd.go.cd.v1+json
