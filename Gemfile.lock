@@ -122,7 +122,7 @@ GEM
     rack (1.6.11)
     rack-livereload (0.3.16)
       rack
-    rake (10.4.2)
+    rake (12.3.2)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -156,7 +156,7 @@ DEPENDENCIES
   middleman-syntax (~> 2.1.0)
   mime-types
   parallel
-  rake (~> 10.4.2)
+  rake (~> 12.3.2)
   redcarpet (~> 3.3.4)
   rouge (~> 1.10.1)
 
