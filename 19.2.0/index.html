@@ -5253,7 +5253,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="nt">"pause_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"paused"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"paused_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"pause_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline Under Maintenance"</span><span class="w">
+    </span><span class="nt">"pause_reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline Under Maintenance"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"paused_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-03-01T06:43:38Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -5281,6 +5282,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">pause_reason</code></td>
 <td>String</td>
 <td>The pause cause of the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">paused_at</code></td>
+<td>String</td>
+<td>The pipeline paused at time.</td>
 </tr>
 </tbody></table>
 
@@ -5356,8 +5362,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cancelled"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cancelled_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"scheduled_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-21T09:43:07Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -5392,6 +5399,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">approved_by</code></td>
 <td>String</td>
 <td>The approver of the current stage instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">cancelled_by</code></td>
+<td>String</td>
+<td>Indicates who cancelled the stage if stage status is <code class="prettyprint">Cancelled</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">scheduled_at</code></td>
@@ -5490,7 +5502,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/dashboard'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre>
 
 <blockquote>
@@ -5498,7 +5510,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
