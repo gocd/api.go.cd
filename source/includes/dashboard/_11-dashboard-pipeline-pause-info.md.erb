@@ -3,7 +3,8 @@ json = {
   pause_info: {
       paused: true,
       paused_by: 'John',
-      pause_reason: 'Pipeline Under Maintenance'
+      pause_reason: 'Pipeline Under Maintenance',
+      paused_at: "2019-03-01T06:43:38Z"
   }
 }
 %>
@@ -13,5 +14,6 @@ describe_sub_object 'Dashboard pipeline pause information object', json: json, s
   paused        'Boolean',    'Whether the current pipeline instance is paused'
   paused_by     'String',     'The name of the user who paused the pipeline.'
   pause_reason  'String',     'The pause cause of the pipeline.'
+  paused_at     'String',     'The pipeline paused at time.'
 end
 %>
