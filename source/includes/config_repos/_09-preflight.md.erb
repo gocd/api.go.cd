@@ -1,0 +1,41 @@
+## Preflight check of config repo configurations
+
+```shell
+$ curl "https://ci.example.com/go/api/admin/config_repo_ops/preflight?pluginId=yaml.config.plugin&repoId=myExistingRepo" \
+      -u 'username:password' \
+      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -F 'files[]=@path/to/file1.gocd.yaml' \
+      -F 'files[]=@path/to/file2.gocd.yaml'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.go.cd.v1+json; charset=utf-8
+```
+
+```json
+{
+  "errors" : [ ],
+  "valid" : true
+}
+```
+
+Checks posted definition file(s) for syntax and merge errors without updating the current GoCD [configuration](https://docs.gocd.org/current/configuration/).
+
+<%= available_since('19.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+When validating definitions before the corresponding config repo configuration has been added to GoCD, do not supply a `repoId` parameter:
+
+`POST /go/api/admin/config_repo_ops/preflight?pluginId=:plugin_id`
+
+When validating definition updates to an existing config repo configuration, the `repoId` parameter is required:
+
+`POST /go/api/admin/config_repo_ops/preflight?pluginId=:plugin_id&repoId=:config_repo_id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A boolean indicating whether the content can be successfully merged and array of errors (if content isn't mergeable).
