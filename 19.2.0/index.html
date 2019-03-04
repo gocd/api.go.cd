@@ -15576,6 +15576,49 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>The format and contents of the response as well as the <code class="prettyprint">Content-Type</code> are determined by the specified config repo plugin.</p>
 
+<h2 id="preflight-check-of-config-repo-configurations">Preflight check of config repo configurations</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s2">"https://ci.example.com/go/api/admin/config_repo_ops/preflight?pluginId=yaml.config.plugin&amp;repoId=myExistingRepo"</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -F <span class="s1">'files[]=@path/to/file1.gocd.yaml'</span> <span class="se">\</span>
+      -F <span class="s1">'files[]=@path/to/file2.gocd.yaml'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errors"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"valid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Checks posted definition file(s) for syntax and merge errors without updating the current GoCD <a href="https://docs.gocd.org/current/configuration/">configuration</a>.</p>
+
+<p class='available-since'>
+  Available since v19.2.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p>When validating definitions before the corresponding config repo configuration has been added to GoCD, do not supply a <code class="prettyprint">repoId</code> parameter:</p>
+
+<p><code class="prettyprint">POST /go/api/admin/config_repo_ops/preflight?pluginId=:plugin_id</code></p>
+
+<p>When validating definition updates to an existing config repo configuration, the <code class="prettyprint">repoId</code> parameter is required:</p>
+
+<p><code class="prettyprint">POST /go/api/admin/config_repo_ops/preflight?pluginId=:plugin_id&amp;repoId=:config_repo_id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A boolean indicating whether the content can be successfully merged and array of errors (if content isn&rsquo;t mergeable).</p>
+
           <h1 id="artifact-store">Artifact Store</h1>
 
 <p>The artifact store API allows admin users to define and manage configuration of external artifact repository. The artifact plugin will use the artifact store config to upload artifact to an external repository.</p>
