@@ -6,6 +6,7 @@ describe_object 'The access token object', since: '19.2.0' do
   revoked                       'Boolean',    'If the token has been revoked'
   revoke_cause                  'String',     'The reason why the token was revoked'
   revoked_at                    'Timestamp',  'The time when the token was revoked'
+  revoked_by                    'String',     'The username of the user that revoked the token'
   created_at                    'Timestamp',  'The time when the token was created'
   last_used_at                  'Timestamp',  'The time when the token was last used to authenticate with the server'
   revoked_because_user_deleted  'Boolean',    'Indicates if the token was revoked because a system adminstrator deleted the user'
