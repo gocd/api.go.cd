@@ -1,7 +1,112 @@
 ## Get all tokens for all users
 
 ```shell
+$ curl 'https://ci.example.com/go/api/admin/access_tokens?filter=all' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.access_token %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.access_token %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/access_tokens"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/19.2.0/#access-token"
+    }
+  },
+  "_embedded" : {
+    "access_tokens" : [ {
+      "_links" : { ... },
+      "id" : 42,
+      "description" : "dummy access token",
+      "username" : "username",
+      "revoked" : false,
+      "revoke_cause" : null,
+      "revoked_by" : null,
+      "revoked_at" : null,
+      "created_at" : "2019-03-06T05:02:24Z",
+      "last_used_at" : null,
+      "revoked_because_user_deleted" : false
+    },
+    {
+      "_links" : { ... },
+      "id" : 43,
+      "description" : "another access token",
+      "username" : "username",
+      "revoked" : true,
+      "revoke_cause" : "revoke cause",
+      "revoked_by" : "username",
+      "revoked_at" : "2019-03-07T05:02:45Z",
+      "created_at" : "2019-03-06T05:02:34Z",
+      "last_used_at" : null,
+      "revoked_because_user_deleted" : false
+    }]
+  }
+}
+```
+
+```shell
 $ curl 'https://ci.example.com/go/api/admin/access_tokens' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.access_token %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.access_token %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/access_tokens"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/19.2.0/#access-token"
+    }
+  },
+  "_embedded" : {
+    "access_tokens" : [ {
+    "_links" : {
+      "self" : {
+          "href" : "https://ci.example.com/go/api/admin/access_tokens/42"
+        },
+        "doc" : {
+          "href" : "https://api.gocd.org/19.2.0/#access-token"
+        },
+        "find" : {
+          "href" : "https://ci.example.com/go/api/admin/access_tokens/:id"
+        }
+      },
+      "id" : 42,
+      "description" : "dummy access token",
+      "username" : "username",
+      "revoked" : false,
+      "revoke_cause" : null,
+      "revoked_by" : null,
+      "revoked_at" : null,
+      "created_at" : "2019-03-06T05:02:24Z",
+      "last_used_at" : null,
+      "revoked_because_user_deleted" : false
+    }]
+  }
+}
+```
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/access_tokens?filter=revoked' \
       -u 'username:password' \
       -H 'Accept: <%= data.apis.versions.access_token %>'
 ```
@@ -27,7 +132,7 @@ Content-Type: <%= data.apis.versions.access_token %>; charset=utf-8
     "access_tokens" : [ {
       "_links" : {
         "self" : {
-          "href" : "https://ci.example.com/go/api/admin/access_tokens/42"
+          "href" : "https://ci.example.com/go/api/admin/access_tokens/43"
         },
         "doc" : {
           "href" : "https://api.gocd.org/19.2.0/#access-token"
@@ -36,28 +141,39 @@ Content-Type: <%= data.apis.versions.access_token %>; charset=utf-8
           "href" : "https://ci.example.com/go/api/admin/access_tokens/:id"
         }
       },
-      "id" : 42,
-      "description" : "my first token",
+      "id" : 43,
+      "description" : "another access token",
       "username" : "username",
-      "revoked" : false,
-      "revoke_cause" : null,
-      "revoked_by" : null,
-      "revoked_at" : null,
-      "created_at" : "2019-02-20T10:45:10Z",
-      "last_used_at" : null
+      "revoked" : true,
+      "revoke_cause" : "revoke cause",
+      "revoked_by" : "username",
+      "revoked_at" : "2019-03-07T05:02:45Z",
+      "created_at" : "2019-03-06T05:02:34Z",
+      "last_used_at" : null,
+      "revoked_because_user_deleted" : false
     } ]
   }
 }
 ```
 
-Allows system administrators to list tokens belonging to all users.
+Allows system administrators to list the tokens belonging to all users.
 
 <%= available_since('19.2.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/current_user/access_tokens`
+`GET /go/api/admin/access_tokens`
 
 <p class='http-request-return-description'>Returns</p>
 
 An array of [access token objects](#the-access-token-object).
+
+The following filters are supported by the API. In case of no filter, only the active tokens will be send.
+
+<p class="attributes-table-follows"></p>
+
+| Query String 	| Description                                      |
+|--------------	|--------------------------------------------------|
+| all          	|returns all the tokens for all the users          |
+| active       	|returns only the active tokens for all the users  |
+| revoked      	|returns only the revoked tokens for all the users |
