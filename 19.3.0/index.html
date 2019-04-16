@@ -3134,10 +3134,10 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 
 <p>The backups API allows users with administrator role to manage GoCD server backups.</p>
 
-<h2 id="the-backup-object">The backup object</h2>
+<h2 id="the-backup-object">The Backup Object</h2>
 
 <p class='available-since'>
-  Available since v15.2.0.
+  Available since v19.3.0.
 </p>
 
 <p class='attributes-table-follows'></p>
@@ -3157,31 +3157,62 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 <tr>
 <td><code class="prettyprint">path</code></td>
 <td>String</td>
-<td>The filesystem location of the backup.</td>
+<td>The filesystem location where the backed up files are stored.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">user</code></td>
 <td>Object</td>
 <td>The user that performed this backup.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">status</code></td>
+<td>String</td>
+<td>Status of the backup. Possible values are COMPLETED, IN_PROGRESS, ERROR, ABORTED.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">progress_status</code></td>
+<td>String</td>
+<td>If the status of the backup is IN_PROGRESS, then this field gives more granular details about the back up in progress. Possible values are STARTING, CREATING_DIR, BACKUP_VERSION_FILE, BACKUP_CONFIG, BACKUP_CONFIG_REPO, BACKUP_DATABASE, POST_BACKUP_SCRIPT_START, POST_BACKUP_SCRIPT_COMPLETE.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">message</code></td>
+<td>String</td>
+<td>The detailed message corresponding to the &lsquo;status&rsquo; or &lsquo;progress_status&rsquo; fields.</td>
+</tr>
 </tbody></table>
 
-<h2 id="create-a-backup">Create a backup</h2>
+<h2 id="schedule-backup">Schedule Backup</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/backups'</span> <span class="se">\</span>
+      -i <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       -X POST
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns an empty response body with a response code of 202 (Accepted) to indicate that 
+request to backup is accepted and is scheduled asynchronously. It returns location header in the response 
+that can be used for polling the status of the backup.</p>
 </blockquote>
 
-<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">/go/api/backups/:backup_id</span>
+<span class="na">Retry-After</span><span class="p">:</span> <span class="s">5</span>
 </code></pre>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/backups/:backup_id'</span> <span class="se">\</span>
+      -i <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -X GET
+</code></pre>
+
+<blockquote>
+<p>The above command is used to poll the status of the backup that was scheduled previously. It returns JSON structured like this:</p>
+</blockquote>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3191,6 +3222,9 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-07T10:07:19.868Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/lib/go-server/serverBackups/backup_20150807-153719"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"progress_status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"BACKUP_DATABASE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Backup was generated successfully."</span><span class="p">,</span><span class="w">
   </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3201,6 +3235,9 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/:login_name"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"current_user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/current_user"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"login_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="w">
@@ -3208,24 +3245,18 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Create a server backup.</p>
-
 <aside class="warning">
   The server may be unavailable during the time that the backup is being taken.
 </aside>
 
-<aside class="notice">
-  The response from the call will not be received till the backup is complete
-  (synchronous). If the data to be backed up is a lot, this can take minutes
-  to complete.
-</aside>
-
 <p class='available-since'>
-  Available since v15.2.0.
+  Available since v19.3.0.
     <span
       data-popover
       data-title='Looking for older versions of this API?'
-      data-content='&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.gocd.org&#x2F;documentation&#x2F;user&#x2F;15.1.0&#x2F;api&#x2F;backup_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+      data-content='&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;api.gocd.org&#x2F;15.2.0&#x2F;#backups&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.2.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.gocd.org&#x2F;documentation&#x2F;user&#x2F;15.1.0&#x2F;api&#x2F;backup_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.gocd.org&#x2F;documentation&#x2F;user&#x2F;14.4.0&#x2F;api&#x2F;backup_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
 
@@ -3237,6 +3268,69 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 <p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">POST /go/api/backups</code></p>
+
+<p class='http-request-return-description'>
+  Returns an empty response body with a response code 202 (Accepted) and location header containing the link to be polled for checking the status of the backup.
+</p>
+
+<h2 id="get-backup">Get Backup</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/backups/:backup_id'</span> <span class="se">\</span>
+      -i <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -X GET
+</code></pre>
+
+<blockquote>
+<p>The above command is used to poll the status of the backup that was scheduled previously. It returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#backups"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-07T10:07:19.868Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/var/lib/go-server/serverBackups/backup_20150807-153719"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"progress_status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"BACKUP_DATABASE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Backup was generated successfully."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#users"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/username"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/:login_name"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"current_user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/current_user"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"login_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="warning">
+  The server may be unavailable during the time that the backup is being taken.
+</aside>
+
+<p class='available-since'>
+  Available since v19.3.0.
+</p>
+
+<p><code class="prettyprint">GET /go/api/backups/:backup_id</code></p>
+
+<aside class="notice">
+  <strong>Note:</strong>
+  You can use keyword &lsquo;running&rsquo; as a backup_id to know the details of a running backup.
+</aside>
 
 <p class='http-request-return-description'>Returns</p>
 
