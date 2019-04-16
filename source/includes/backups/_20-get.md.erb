@@ -1,24 +1,4 @@
-## Schedule Backup
-
-```shell
-$ curl 'https://ci.example.com/go/api/backups' \
-      -i \
-      -u 'username:password' \
-      -H 'X-GoCD-Confirm: true' \
-      -H 'Accept: <%= data.apis.versions.backup %>' \
-      -X POST
-```
-
-> The above command returns an empty response body with a response code of 202 (Accepted) to indicate that 
-request to backup is accepted and is scheduled asynchronously. It returns location header in the response 
-that can be used for polling the status of the backup.
-
-```http 
-HTTP/1.1 202 Accepted
-Content-Type: application/vnd.go.cd.v2+json;charset=utf-8
-Location: /go/api/backups/:backup_id
-Retry-After: 5
-```
+## Get Backup
 
 ```shell
 $ curl 'https://ci.example.com/go/api/backups/:backup_id' \
@@ -74,10 +54,12 @@ $ curl 'https://ci.example.com/go/api/backups/:backup_id' \
 end
 %>
 
-<p class='http-request-heading'>HTTP Request</p>
+`GET /go/api/backups/:backup_id`
 
-`POST /go/api/backups`
+<aside class="notice">
+  <strong>Note:</strong>
+  You can use keyword 'running' as a backup_id to know the details of a running backup.
+</aside>
 
-<p class='http-request-return-description'>
-  Returns an empty response body with a response code 202 (Accepted) and location header containing the link to be polled for checking the status of the backup.
-</p>
+<p class='http-request-return-description'>Returns</p>
+A new [backup object](#the-backup-object).
