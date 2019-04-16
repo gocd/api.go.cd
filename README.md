@@ -10,10 +10,10 @@ Checkout the live documentation at https://api.gocd.org
 $ bundle install --path .bundle --binstubs
 ```
 
-### Serve the documentation locally
+### Run the API documentation locally on http://localhost:4567
 
 ```
-$ ./bin/middleman server
+$ bundle exec ./bin/middleman server
 ```
 
 ### Generating the static website

@@ -1,0 +1,59 @@
+## Get Backup
+
+```shell
+$ curl 'https://ci.example.com/go/api/backups/:backup_id' \
+      -i \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.backup %>' \
+      -X GET
+```
+
+> The above command is used to poll the status of the backup that was scheduled previously. It returns JSON structured like this:
+
+```json
+{
+  "_links": {
+    "doc": {
+      "href": "https://api.gocd.org/#backups"
+    }
+  },
+  "time": "2015-08-07T10:07:19.868Z",
+  "path": "/var/lib/go-server/serverBackups/backup_20150807-153719",
+  "status" : "COMPLETED",
+  "progress_status" : "BACKUP_DATABASE",
+  "message" : "Backup was generated successfully.",
+  "user": {
+    "_links": {
+      "doc": {
+        "href": "https://api.gocd.org/#users"
+      },
+      "self": {
+        "href": "https://ci.example.com/go/api/users/username"
+      },
+      "find": {
+        "href": "https://ci.example.com/go/api/users/:login_name"
+      },
+      "current_user" : {
+        "href" : "https://ci.example.com/go/api/users/current_user"
+      }
+    },
+    "login_name": "username"
+  }
+}
+```
+
+<aside class="warning">
+  The server may be unavailable during the time that the backup is being taken.
+</aside>
+
+<%= available_since('19.3.0')%>
+
+`GET /go/api/backups/:backup_id`
+
+<aside class="notice">
+  <strong>Note:</strong>
+  You can use keyword 'running' as a backup_id to know the details of a running backup.
+</aside>
+
+<p class='http-request-return-description'>Returns</p>
+A new [backup object](#the-backup-object).
