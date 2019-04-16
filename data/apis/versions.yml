@@ -1,5 +1,5 @@
 agent: 'application/vnd.go.cd.v4+json'
-backup: 'application/vnd.go.cd.v1+json'
+backup: 'application/vnd.go.cd.v2+json'
 dashboard: 'application/vnd.go.cd.v3+json'
 elastic_profiles: 'application/vnd.go.cd.v1+json'
 environments: 'application/vnd.go.cd.v2+json'

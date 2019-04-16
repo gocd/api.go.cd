@@ -1,7 +1,10 @@
 <%=
-describe_object 'The backup object', since: '15.2.0' do
+describe_object 'The backup object', since: '19.3.0' do
   time              'DateTime',   'The time of the backup'
-  path              'String',     'The filesystem location of the backup'
+  path              'String',     'The filesystem location where the backed up files are stored'
   user              'Object',     'The user that performed this backup'
+  status            'String',     'Status of the backup. Possible values are COMPLETED, IN_PROGRESS, ERROR, ABORTED'
+  progress_status   'String',     'If the status of the backup is IN_PROGRESS, then this field gives more granular details about the back up in progress. Possible values are STARTING, CREATING_DIR, BACKUP_VERSION_FILE, BACKUP_CONFIG, BACKUP_CONFIG_REPO, BACKUP_DATABASE, POST_BACKUP_SCRIPT_START, POST_BACKUP_SCRIPT_COMPLETE'
+  message           'String',     'The detailed message corresponding to the \'status\' or \'progress_status\' fields'
 end
 %>
