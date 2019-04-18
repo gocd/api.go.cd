@@ -1,0 +1,33 @@
+## Delete a cluster profile
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/elastic/cluster_profiles/prod-cluster' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.cluster_profiles %>' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.cluster_profiles %>; charset=utf-8
+```
+
+```json
+{
+  "message": "Cluster profile 'prod-cluster' was deleted successfully."
+}
+```
+
+Deletes the cluster profile.
+
+<%= available_since('19.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/admin/elastic/cluster_profiles/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message if the cluster profile is deleted or not.

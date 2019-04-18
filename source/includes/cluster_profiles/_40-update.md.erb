@@ -1,0 +1,75 @@
+## Update a cluster profile
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/elastic/cluster_profiles/prod-cluster' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.cluster_profiles %>' \
+      -H 'Content-Type: application/json' \
+      -H 'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"' \
+      -X PUT \
+      -d '{
+        "plugin_id": "cd.go.contrib.elastic-agent.docker",
+        "properties": [
+          {
+            "key": "GoServerUrl",
+            "value": "https://ci.example.com/go"
+          }
+        ]
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.cluster_profiles %>; charset=utf-8
+ETag: "61406622382e51c2079c11dcbdb978fb"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles/prod-cluster"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#cluster-profiles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles/:id"
+    }
+  },
+  "id": "prod-cluster",
+  "plugin_id": "cd.go.contrib.elastic-agent.docker",
+  "properties": [
+    {
+      "key": "GoServerUrl",
+      "value": "https://ci.example.com/go"
+    }
+  ]
+}
+```
+
+Update some attributes of a cluster profile.
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update cluster profile API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  cluster resource.
+  <br/><br/>
+  This is required in order to avoid the "lost update" problem, where a client
+  `GET`s a resource's state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the cluster config, leading to a
+  conflict.
+</aside>
+
+<%= available_since('19.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/elastic/cluster_profiles/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [cluster profile object](#the-cluster-profile-object).
