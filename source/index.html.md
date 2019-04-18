@@ -51,6 +51,7 @@ includes:
   - 200-system-admins
   - 210-data-sharing
   - 220-maintenance-mode
+  - 230-cluster-profiles
   - errors
   - 999-changelog
 

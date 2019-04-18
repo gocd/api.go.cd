@@ -1,0 +1,68 @@
+## Get all cluster profiles
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/elastic/cluster_profiles' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.cluster_profiles %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.cluster_profiles %>; charset=utf-8
+ETag: "32628084ef10b0c82a55f8f2f867d8d0"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#cluster-profiles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles/:id"
+    }
+  },
+  "_embedded": {
+    "profiles": [
+      {
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles/prod-cluster"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#cluster-profiles"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles/:id"
+          }
+        },
+        "id": "prod-cluster",
+        "plugin_id": "cd.go.contrib.elastic-agent.docker",
+        "properties": [
+          {
+            "key": "GoServerUrl",
+            "value": "https://ci.example.com/go"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Lists all available cluster profiles.
+
+<%= available_since('19.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/elastic/cluster_profiles`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of [cluster profiles](#the-cluster-profile-object).

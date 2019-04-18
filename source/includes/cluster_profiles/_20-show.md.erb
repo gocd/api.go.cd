@@ -1,0 +1,55 @@
+## Get a cluster profile
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/elastic/cluster_profiles/prod-cluster' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.cluster_profiles %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.cluster_profiles %>; charset=utf-8
+ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles/prod-cluster"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#cluster-profiles"
+    },
+    "find": {
+      "href": "https://ci.example.com/go/api/admin/elastic/cluster_profiles/:id"
+    }
+  },
+  "id": "prod-cluster",
+  "plugin_id": "cd.go.contrib.elastic-agent.docker",
+  "properties": [
+    {
+      "key": "GoServerUrl",
+      "value": "https://ci.example.com/go"
+    }
+  ]
+}
+```
+
+Gets cluster profile config for specified profile id.
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-a-cluster-profile'>edit cluster profile</a> documentation for more details.
+</aside>
+
+<%= available_since('19.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/elastic/cluster_profiles/:id`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [cluster profile object](#the-cluster-profile-object).
