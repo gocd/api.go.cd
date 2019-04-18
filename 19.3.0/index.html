@@ -10685,7 +10685,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <h2 id="the-elastic-agent-profile-object">The elastic agent profile object</h2>
 
 <p class='available-since'>
-  Available since v16.11.0.
+  Available since v19.3.0.
 </p>
 
 <p class='attributes-table-follows'></p>
@@ -10708,6 +10708,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The plugin identifier of the elastic agent profile.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">cluster_profile_id</code></td>
+<td>String</td>
+<td>The identifier of the cluster profile to which current elastic agent profile belongs.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">properties</code></td>
 <td>Array</td>
 <td>The list of <a href="#the-configuration-property-object">configuration properties</a> that represent the configuration of this profile.</td>
@@ -10718,7 +10723,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/elastic/profiles'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre>
 
 <blockquote>
@@ -10726,7 +10731,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"32628084ef10b0c82a55f8f2f867d8d0"</span>
 </code></pre>
 
@@ -10758,6 +10763,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
@@ -10789,7 +10795,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>Lists all available elastic agent profiles.</p>
 
 <p class='available-since'>
-  Available since v16.11.0.
+  Available since v19.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -10804,7 +10810,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/elastic/profiles/unit-tests'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre>
 
 <blockquote>
@@ -10812,7 +10818,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre>
 
@@ -10830,6 +10836,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
@@ -10850,7 +10857,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Available since v16.11.0.
+  Available since v19.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -10865,11 +10872,12 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/elastic/profiles'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST -d <span class="s1">'{
         "id": "unit-tests",
         "plugin_id": "cd.go.contrib.elastic-agent.docker",
+        "cluster_profile_id": "prod-cluster",
         "properties": [
           {
             "key": "Image",
@@ -10888,7 +10896,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre>
 
@@ -10906,6 +10914,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
@@ -10922,7 +10931,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>Creates an elastic agent profile</p>
 
 <p class='available-since'>
-  Available since v16.11.0.
+  Available since v19.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -10937,11 +10946,12 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/elastic/profiles/unit-tests'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"'</span> <span class="se">\</span>
       -X PUT <span class="se">\</span>
       -d <span class="s1">'{
+        "cluster_profile_id": "prod-cluster",
         "plugin_id": "cd.go.contrib.elastic-agent.docker",
         "properties": [
           {
@@ -10962,7 +10972,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"61406622382e51c2079c11dcbdb978fb"</span>
 </code></pre>
 
@@ -10980,6 +10990,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Image"</span><span class="p">,</span><span class="w">
@@ -11008,7 +11019,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Available since v16.11.0.
+  Available since v19.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -11023,7 +11034,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/elastic/profiles/unit-tests'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       -X DELETE
 </code></pre>
 
@@ -11032,7 +11043,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -11043,7 +11054,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>Deletes the profile.</p>
 
 <p class='available-since'>
-  Available since v16.11.0.
+  Available since v19.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
