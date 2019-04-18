@@ -1,5 +1,5 @@
 <%=
-describe_object 'The plugin info object', since: '16.7.0' do
+describe_object 'The plugin info object', since: '19.3.0' do
   id                    'String',  'Plugin unique identifier'
   status                'Object',  'The [status](#plugin-status) of the plugin.'
   plugin_file_location  'String',  'The location where the plugin is installed'
@@ -97,21 +97,7 @@ end
     extensions: [
       {
         type: 'elastic',
-        plugin_settings: {
-          configurations: [
-            {
-              key: "InstanceType",
-              metadata: {
-                secure: false,
-                required: true
-              }
-            }
-          ],
-          view: {
-            template: "<div>Plugin view template</div>"
-          }
-        },
-        profile_settings: {
+        elastic_agent_profile_settings: {
           configurations: [
             {
               key: "Image",
@@ -122,11 +108,65 @@ end
             }
           ],
           view: {
-            template: "<div>Profile view template</div>"
+            template: "<div>Elastic agent profile template</div>"
+          }
+        },
+        supports_cluster_profiles: true,
+        cluster_profile_settings: {
+          configurations: [
+            {
+              key: "EfsDnsOrIP",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Cluster Profile view template</div>"
           }
         },
         capabilities: {
-          supports_status_report: true
+          supports_plugin_status_report: true,
+          supports_agent_status_report: true,
+          supports_cluster_status_report: true
+        }
+      },
+      {
+        type: 'elastic',
+        elastic_agent_profile_settings: {
+          configurations: [
+            {
+              key: "Image",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Elastic agent profile template</div>"
+          }
+        },
+        supports_cluster_profiles: false,
+        plugin_settings: {
+          configurations: [
+            {
+              key: "EfsDnsOrIP",
+              metadata: {
+                secure: false,
+                required: true
+              }
+            }
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
+          }
+        },
+        capabilities: {
+          supports_plugin_status_report: true,
+          supports_agent_status_report: true,
+          supports_cluster_status_report: false
         }
       }
     ]
@@ -134,10 +174,12 @@ end
  %>
 
 <%= describe_sub_object 'Extension information object: Elastic agent', json: elastic_agent_json, html_id: 'elastic-agent-extension-info' do
-    type              'String', 'The type of the extension, which is `elastic`'
-    plugin_settings   'Object',  'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
-    profile_settings  'Object',  'The [html view](#the-plugin-info-view-object) for the profile and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure a elastic profile.'
-    capabilities      'Object',  'The [capabilities](#elastic-agent-capabilites-object) object indicates the enhancements that a plugin provides.'
+    type                            'String',  'The type of the extension, which is `elastic`'
+    plugin_settings                 'Object',  'The [html view](#the-plugin-info-view-object) for the plugin and the list of [properties](#the-plugin-info-configurations-object) required to be configured. Present in case of plugin supports plugin settings. '
+    supports_cluster_profiles       'Boolean', 'Boolean indicating whether plugin supports defining cluster profiles.'
+    elastic_agent_profile_settings  'Object',  'The [html view](#the-plugin-info-view-object) for the elastic agent profile and the list of [properties](#the-plugin-info-configurations-object) required to be configured.'
+    cluster_profile_settings        'Object',  'The [html view](#the-plugin-info-view-object) for the cluster profile and the list of [properties](#the-plugin-info-configurations-object) required to be configured. Present in case of plugin supports defining cluster profiles.'
+    capabilities                    'Object',  'The [capabilities](#elastic-agent-capabilites-object) object indicates the enhancements that a plugin provides.'
  end
  %>
 

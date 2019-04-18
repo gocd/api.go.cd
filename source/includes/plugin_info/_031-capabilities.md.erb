@@ -1,16 +1,18 @@
 <%
     elastic_capabilities_json =  {
       capabilities: {
-        supports_status_report: true,
-        supports_agent_status_report: true
+        supports_plugin_status_report: true,
+        supports_agent_status_report: true,
+        supports_cluster_status_report: true
       }
 }
 %>
 
 <%=
 describe_sub_object 'The Elastic Agents Capabilities object', json: elastic_capabilities_json, html_id: 'elastic-agent-capabilites-object' do
-  supports_status_report       'Boolean', 'Indicates if plugin supports plugin level status report.'
-  supports_agent_status_report 'Boolean', 'Indicates if plugin supports status report for a specific agent.'
+  supports_plugin_status_report  'Boolean', 'Indicates if plugin supports plugin level status report.'
+  supports_agent_status_report   'Boolean', 'Indicates if plugin supports elastic agent status report for a specific agent.'
+  supports_cluster_status_report 'Boolean', 'Indicates if plugin supports cluster profile status report for a specific agent.'
 end
 %>
 
