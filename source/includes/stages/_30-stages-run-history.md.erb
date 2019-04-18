@@ -2,7 +2,8 @@
 
 ```shell
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/defaultStage/history' \
-      -u 'username:password'
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.stage_history %>'
 ```
 
 > The above command returns JSON structured like this:
@@ -18,6 +19,7 @@ Content-Type: application/json; charset=utf-8
     {
       "name": "defaultStage",
       "approved_by": "admin",
+      "cancelled_by": "GoCD",
       "jobs": [
         {
           "name": "defaultJob",
@@ -38,6 +40,7 @@ Content-Type: application/json; charset=utf-8
     {
       "name": "defaultStage",
       "approved_by": "admin",
+      "cancelled_by": "admin",
       "jobs": [
         {
           "name": "defaultJob",
@@ -86,7 +89,9 @@ Content-Type: application/json; charset=utf-8
 
 The stage history allows users to list stage instances of specified stage. Supports pagination using offset which tells the API how many instances to skip.
 
+<%= updated_to(1,'19.3.0') %>
 <%= available_since('14.3.0') %>
+
 
 <p class='http-request-heading'>HTTP Request</p>
 
