@@ -7,7 +7,6 @@ $ curl 'https://ci.example.com/go/api/elastic/profiles' \
       -H 'Content-Type: application/json' \
       -X POST -d '{
         "id": "unit-tests",
-        "plugin_id": "cd.go.contrib.elastic-agent.docker",
         "cluster_profile_id": "prod-cluster",
         "properties": [
           {
@@ -44,7 +43,6 @@ ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
     }
   },
   "id": "unit-tests",
-  "plugin_id": "cd.go.contrib.elastic-agent.docker",
   "cluster_profile_id": "prod-cluster",
   "properties": [
     {

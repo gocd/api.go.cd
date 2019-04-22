@@ -1,7 +1,6 @@
 <%=
 describe_object 'The elastic agent profile object', since: '19.3.0' do
   id                  'String',     "The identifier of the elastic agent profile"
-  plugin_id           'String',     "The plugin identifier of the elastic agent profile"
   cluster_profile_id  'String',     "The identifier of the cluster profile to which current elastic agent profile belongs"
   properties          'Array',      'The list of [configuration properties](#the-configuration-property-object) that represent the configuration of this profile.'
 end
