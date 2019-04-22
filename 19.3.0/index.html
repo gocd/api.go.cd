@@ -10703,11 +10703,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The identifier of the elastic agent profile.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">plugin_id</code></td>
-<td>String</td>
-<td>The plugin identifier of the elastic agent profile.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">cluster_profile_id</code></td>
 <td>String</td>
 <td>The identifier of the cluster profile to which current elastic agent profile belongs.</td>
@@ -10762,7 +10757,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
@@ -10835,7 +10829,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -10876,7 +10869,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST -d <span class="s1">'{
         "id": "unit-tests",
-        "plugin_id": "cd.go.contrib.elastic-agent.docker",
         "cluster_profile_id": "prod-cluster",
         "properties": [
           {
@@ -10913,7 +10905,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -10952,7 +10943,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       -X PUT <span class="se">\</span>
       -d <span class="s1">'{
         "cluster_profile_id": "prod-cluster",
-        "plugin_id": "cd.go.contrib.elastic-agent.docker",
         "properties": [
           {
             "key": "Image",
@@ -10989,7 +10979,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unit-tests"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.contrib.elastic-agent.docker"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"cluster_profile_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
