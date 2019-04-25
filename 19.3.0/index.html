@@ -4435,7 +4435,8 @@ File logs/operations.log was appended successfully
 <h2 id="get-stage-history">Get stage history</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/defaultStage/history'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre>
 
 <blockquote>
@@ -4451,6 +4452,7 @@ File logs/operations.log was appended successfully
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cancelled_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoCD"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
@@ -4471,6 +4473,7 @@ File logs/operations.log was appended successfully
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cancelled_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
@@ -4518,6 +4521,10 @@ File logs/operations.log was appended successfully
 </span></code></pre>
 
 <p>The stage history allows users to list stage instances of specified stage. Supports pagination using offset which tells the API how many instances to skip.</p>
+
+<p class='available-since'>
+  Updated to version v1 since v19.3.0.
+</p>
 
 <p class='available-since'>
   Available since v14.3.0.
