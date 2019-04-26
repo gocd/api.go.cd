@@ -43,20 +43,29 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
   "agent_config_state": "Enabled",
   "agent_state": "Idle",
   "resources": ["Java","Linux"],
-  "environments": ["Dev"],
+  "environments": [
+  {
+    "name": "Dev",
+    "origin": {
+      "type": "gocd",
+      "_links": {
+        "self": {
+          "href": "https://ci.example.com/go/admin/config_xml"
+        },
+        "doc": {
+          "href": "https://api.gocd.org/#get-configuration"
+        }
+      }
+    }
+  }],
   "build_state": "Idle"
 }
 ```
 
 Update some attributes of an agent.
 
-<%=
-available_since('15.2.0') do
-  in_version '15.1.0', url: 'https://docs.gocd.org/15.1.0/api/agent_api.html'
-  in_version '14.4.0', url: 'https://docs.gocd.org/14.4.0/api/agent_api.html'
-  in_version '14.3.0', url: 'https://docs.gocd.org/14.3.0/api/agent_api.html'
-end
-%>
+<%= updated_to(5,'19.3.0') %>
+<%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 

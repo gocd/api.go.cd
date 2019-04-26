@@ -35,7 +35,39 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
   "agent_config_state": "Enabled",
   "agent_state": "Building",
   "resources": ["java", "linux", "firefox"],
-  "environments": ["perf", "UAT"],
+  "environments": [
+    {
+      "name": "perf",
+      "origin": {
+        "type": "gocd",
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/admin/config_xml"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#get-configuration"
+          }
+        }
+      }
+    },
+    {
+      "name": "UAT",
+      "origin": {
+        "type": "config-repo",
+        "_links": {
+          "self": {
+            "href": "https://ci.example.com/go/api/admin/config_repos/foo"
+          },
+          "doc": {
+            "href": "https://api.gocd.org/#config-repos"
+          },
+          "find": {
+            "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+          }
+        }
+      }
+    }
+  ],
   "build_state": "Building",
   "build_details": {
     "_links": {
@@ -58,6 +90,7 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
 
 Gets an agent by its unique identifier (uuid)
 
+<%= updated_to(5,'19.3.0') %>
 <%= available_since('15.2.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

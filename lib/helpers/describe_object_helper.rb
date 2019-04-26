@@ -92,6 +92,11 @@ module DescribeObjectHelper
       original_description << ". **Since v#{property.options[:since]}**."
     end
 
+    if property.options[:updated_in]
+      original_description.gsub!(/\.$/, '')
+      original_description << ". **Updated in v#{property.options[:updated_in]}**."
+    end
+
     # append a trailing period
     original_description.gsub!(/\.$/, '')
     original_description << '.'
