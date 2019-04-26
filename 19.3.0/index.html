@@ -11257,6 +11257,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
         </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"supports_pipeline_export"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"supports_parse_content"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -11281,6 +11285,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">plugin_settings</code></td>
 <td>Object</td>
 <td>The <a href="#the-plugin-info-view-object">html view</a> for the plugin and the list of <a href="#the-plugin-info-configurations-object">properties</a> required to be configured.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">capabilities</code></td>
+<td>Object</td>
+<td>The <a href="#config-repo-capabilites-object">capabilities</a> object indicates the enhancements that a plugin provides.</td>
 </tr>
 </tbody></table>
 
@@ -12000,6 +12009,39 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">template</code></td>
 <td>String</td>
 <td>The plugin Angular.js view template.</td>
+</tr>
+</tbody></table>
+
+<p><a id='config-repo-capabilites-object'></a></p>
+
+<h3 id="the-config-repo-capabilities-object">The Config Repo Capabilities object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"supports_pipeline_export"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"supports_parse_content"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">supports_pipeline_export</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports pipeline configuration export.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">supports_parse_content</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports parse content.</td>
 </tr>
 </tbody></table>
 
@@ -16580,7 +16622,208 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>An array of <a href="#the-system-admins-object">system admins</a>.</p>
+<p>The updated <a href="#the-system-admins-object">system admins</a> object.</p>
+
+<h2 id="bulk-update-system-admins">Bulk update system admins</h2>
+
+<pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/admin/security/system_admins'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -X PATCH <span class="se">\</span>
+      -d <span class="s1">'{
+       "operations": {
+         "users": {
+           "add": ["user1", "user2"],
+           "remove": ["admin"]
+         },
+         "roles": {
+           "add": ["xyz"],
+           "remove": ["role1"]
+         }
+       }
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#system_admins"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8153/go/api/admin/security/system_admins"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"xyz"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"user1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user2"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Bulk update System Admins.</p>
+
+<p class='available-since'>
+  Available since v19.1.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">PATCH /go/api/admin/security/system_admins</code></p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">operations</code></td>
+<td>Object</td>
+<td>The <a href="#the-system-admin-update-operations">bulk update operation</a> performed on system admin.</td>
+</tr>
+</tbody></table>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The updated <a href="#the-system-admins-object">system admins</a> object.</p>
+
+<p><a id='the-role-update-operations'></a></p>
+
+<h3 id="the-bulk-update-operation-attributes">The bulk update operation attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"User1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"User2"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"User3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"User4"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"role1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role2"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"role3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role4"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">users</code></td>
+<td>Object</td>
+<td>The <a href="#the-users-to-update">users to be added/removed</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">roles</code></td>
+<td>Object</td>
+<td>The <a href="#the-roles-to-update">roles to be added/removed</a>.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-users-to-update'></a></p>
+
+<h3 id="the-users-to-be-updated">The users to be updated</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"User1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"User2"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"User3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"User4"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">add</code></td>
+<td>Array</td>
+<td>The list of users that needs to be made system admins.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">remove</code></td>
+<td>Array</td>
+<td>The list of users that needs to be revoked system admin access.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-roles-to-update'></a></p>
+
+<h3 id="the-roles-to-be-updated">The roles to be updated</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"role11"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"role2"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"role3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"role4"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">add</code></td>
+<td>Array</td>
+<td>The list of roles that needs to be made system admins.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">remove</code></td>
+<td>Array</td>
+<td>The list of roles that needs to be revoked system admin access.</td>
+</tr>
+</tbody></table>
 
           <p><a name="data_sharing_settings"></a></p>
 
