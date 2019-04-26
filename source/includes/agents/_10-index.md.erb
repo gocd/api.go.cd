@@ -45,8 +45,44 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
         "free_space": 84983328768,
         "agent_config_state": "Enabled",
         "agent_state": "Idle",
-        "resources": ["java", "linux", "firefox"],
-        "environments": ["perf", "UAT"],
+        "resources": [
+          "java",
+          "linux",
+          "firefox"
+        ],
+        "environments": [
+          {
+            "name": "perf",
+            "origin": {
+              "type": "gocd",
+              "_links": {
+                "self": {
+                  "href": "https://ci.example.com/go/admin/config_xml"
+                },
+                "doc": {
+                  "href": "https://api.gocd.org/#get-configuration"
+                }
+              }
+            }
+          },
+          {
+            "name": "UAT",
+            "origin": {
+              "type": "config-repo",
+              "_links": {
+                "self": {
+                  "href": "https://ci.example.com/go/api/admin/config_repos/foo"
+                },
+                "doc": {
+                  "href": "https://api.gocd.org/#config-repos"
+                },
+                "find": {
+                  "href": "https://ci.example.com/go/api/admin/config_repos/:id"
+                }
+              }
+            }
+          }
+        ],
         "build_state": "Idle"
       }
     ]
@@ -56,13 +92,9 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
 
 Lists all available agents, these are agents that are present in the `<agents/>` tag inside `cruise-config.xml` and also agents that are in `Pending` state awaiting registration.
 
-<%=
-available_since('15.2.0') do
-  in_version '15.1.0', url: 'https://docs.gocd.org/15.1.0/api/agent_api.html'
-  in_version '14.4.0', url: 'https://docs.gocd.org/14.4.0/api/agent_api.html'
-  in_version '14.3.0', url: 'https://docs.gocd.org/14.3.0/api/agent_api.html'
-end
-%>
+
+<%= updated_to(5,'19.3.0') %>
+<%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
