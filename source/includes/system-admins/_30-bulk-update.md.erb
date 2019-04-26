@@ -1,0 +1,114 @@
+## Bulk update system admins
+
+```shell
+curl 'https://ci.example.com/go/api/admin/security/system_admins' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.system_admins %>' \
+      -H 'Content-Type: application/json' \
+      -X PATCH \
+      -d '{
+       "operations": {
+         "users": {
+           "add": ["user1", "user2"],
+           "remove": ["admin"]
+         },
+         "roles": {
+           "add": ["xyz"],
+           "remove": ["role1"]
+         }
+       }
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.system_admins %>; charset=utf-8
+```
+
+```json
+{
+    "_links": {
+        "doc": {
+            "href": "https://api.gocd.org/#system_admins"
+        },
+        "self": {
+            "href": "http://localhost:8153/go/api/admin/security/system_admins"
+        }
+    },
+    "roles": [
+        "xyz"
+    ],
+    "users": [
+        "user1",
+        "user2"
+    ]
+}
+```
+
+Bulk update System Admins.
+
+<%= available_since('19.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PATCH /go/api/admin/security/system_admins`
+
+<%=
+  describe_object(nil) do
+    operations  'Object',  'The [bulk update operation](#the-system-admin-update-operations) performed on system admin'
+  end
+ %>
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [system admins](#the-system-admins-object) object.
+
+<%
+json = {
+  users: {
+    add: %w(User1 User2),
+    remove: %w(User3 User4)
+  },
+  roles: {
+    add: %w(role1 role2),
+    remove: %w(role3 role4)
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The bulk update operation attributes', json: json, html_id: 'the-role-update-operations' do
+  users    'Object',  'The [users to be added/removed](#the-users-to-update)'
+  roles    'Object',  'The [roles to be added/removed](#the-roles-to-update)'
+end
+%>
+
+<%
+json = {
+  add: %w(User1 User2),
+  remove: %w(User3 User4)
+}
+%>
+
+<%=
+describe_sub_object 'The users to be updated', json: json, html_id: 'the-users-to-update' do
+  add              'Array',   'The list of users that needs to be made system admins'
+  remove           'Array',   'The list of users that needs to be revoked system admin access'
+end
+%>
+
+<%
+json = {
+  add: %w(role11 role2),
+  remove: %w(role3 role4)
+}
+%>
+
+<%=
+describe_sub_object 'The roles to be updated', json: json, html_id: 'the-roles-to-update' do
+  add              'Array',   'The list of roles that needs to be made system admins'
+  remove           'Array',   'The list of roles that needs to be revoked system admin access'
+end
+%>
