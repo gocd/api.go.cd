@@ -336,7 +336,7 @@
 <p>The agents API allows users with administrator role to manage agents.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>application/vnd.go.cd.v4+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v5</code> of the API using <code>application/vnd.go.cd.v5+json</code>
 </aside>
 
 <h2 id="the-agent-object">The agent object</h2>
@@ -412,7 +412,7 @@
 <tr>
 <td><code class="prettyprint">environments</code></td>
 <td>Array</td>
-<td>The set of environments that this agent belongs to.</td>
+<td>The set of environments that this agent belongs to. <strong>Updated in v19.3.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">build_state</code></td>
@@ -426,11 +426,85 @@
 </tr>
 </tbody></table>
 
+<p><a id='the-agent-environments-object'></a></p>
+
+<h3 id="the-environment-object">The Environment object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://test.host/go/admin/config_xml"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.3.0/#get-configuration"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the environment.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">origin</code></td>
+<td>Object</td>
+<td>Where the environment was defined.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-agent-environments-origin-object'></a></p>
+
+<h3 id="the-environment-origin-object">The Environment Origin object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://test.host/go/admin/config_xml"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.3.0/#get-configuration"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The origin type of the environment. Can be one of <code class="prettyprint">gocd</code>, <code class="prettyprint">config-repo</code>.</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-all-agents">Get all agents</h2>
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
 </code></pre>
 
 <blockquote>
@@ -438,7 +512,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -472,8 +546,44 @@
         </span><span class="nt">"free_space"</span><span class="p">:</span><span class="w"> </span><span class="mi">84983328768</span><span class="p">,</span><span class="w">
         </span><span class="nt">"agent_config_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enabled"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"agent_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
-        </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">],</span><span class="w">
+        </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"java"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"linux"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"firefox"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"perf"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#get-configuration"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config-repo"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/config_repos/foo"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#config-repos"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/config_repos/:id"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
         </span><span class="nt">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -484,17 +594,11 @@
 <p>Lists all available agents, these are agents that are present in the <code class="prettyprint">&lt;agents/&gt;</code> tag inside <code class="prettyprint">cruise-config.xml</code> and also agents that are in <code class="prettyprint">Pending</code> state awaiting registration.</p>
 
 <p class='available-since'>
-  Available since v15.2.0.
-    <span
-      data-popover
-      data-title='Looking for older versions of this API?'
-      data-content='&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;15.1.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+  Updated to version v5 since v19.3.0.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;14.4.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;14.3.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
-'
-    ></span>
+<p class='available-since'>
+  Available since v14.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -509,7 +613,7 @@
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
 </code></pre>
 
 <blockquote>
@@ -517,7 +621,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -541,7 +645,39 @@
   </span><span class="nt">"agent_config_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enabled"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"agent_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"java"</span><span class="p">,</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w"> </span><span class="s2">"firefox"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"perf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"perf"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#get-configuration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config-repo"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/config_repos/foo"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#config-repos"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/config_repos/:id"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"build_details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -565,6 +701,10 @@
 <p>Gets an agent by its unique identifier (uuid)</p>
 
 <p class='available-since'>
+  Updated to version v5 since v19.3.0.
+</p>
+
+<p class='available-since'>
   Available since v15.2.0.
 </p>
 
@@ -580,7 +720,7 @@
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X PATCH <span class="se">\</span>
       -d <span class="s1">'{
@@ -596,7 +736,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -620,7 +760,21 @@
   </span><span class="nt">"agent_config_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enabled"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"agent_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Java"</span><span class="p">,</span><span class="s2">"Linux"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Dev"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dev"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#get-configuration"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
   </span><span class="nt">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -628,17 +782,11 @@
 <p>Update some attributes of an agent.</p>
 
 <p class='available-since'>
-  Available since v15.2.0.
-    <span
-      data-popover
-      data-title='Looking for older versions of this API?'
-      data-content='&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;15.1.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+  Updated to version v5 since v19.3.0.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;14.4.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;14.3.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
-'
-    ></span>
+<p class='available-since'>
+  Available since v14.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -686,7 +834,7 @@
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       -X DELETE
 </code></pre>
 
@@ -695,7 +843,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -711,17 +859,11 @@
 </aside>
 
 <p class='available-since'>
-  Available since v15.2.0.
-    <span
-      data-popover
-      data-title='Looking for older versions of this API?'
-      data-content='&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;15.1.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v15.1.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
+  Updated to version v5 since v19.3.0.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;14.4.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.4.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.gocd.org&#x2F;14.3.0&#x2F;api&#x2F;agent_api.html&quot;&gt;Click here&lt;&#x2F;a&gt; for &lt;strong&gt;v14.3.0&lt;&#x2F;strong&gt; of this API.&lt;&#x2F;p&gt;
-'
-    ></span>
+<p class='available-since'>
+  Available since v14.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -736,7 +878,7 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X PATCH <span class="se">\</span>
       -d <span class="s1">'{
@@ -763,7 +905,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -772,6 +914,10 @@
 </span></code></pre>
 
 <p>Updates a list of agents.</p>
+
+<p class='available-since'>
+  Updated to version v5 since v19.3.0.
+</p>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -931,7 +1077,7 @@
 
 <pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X DELETE <span class="se">\</span>
       -d <span class="s1">'{
@@ -947,7 +1093,7 @@
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -961,6 +1107,10 @@
   You must first <a href='#bulk-update-agents'>disable the agents</a> and ensure that their
   <a href='#get-all-agents'>status</a> is not <code>Building</code>, before attempting to deleting them.
 </aside>
+
+<p class='available-since'>
+  Updated to version v5 since v19.3.0.
+</p>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -1022,6 +1172,10 @@
 </span></code></pre>
 
 <p>Lists the jobs that have executed on an agent.</p>
+
+<p class='available-since'>
+  Updated to version v5 since v19.3.0.
+</p>
 
 <p class='available-since'>
   Available since v14.3.0.
