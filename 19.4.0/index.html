@@ -12021,6 +12021,54 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
+<p><a id='secrets-extension-info'></a></p>
+
+<h3 id="extension-information-object-secrets">Extension information object: Secrets</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secrets"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secret_config_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FilePath"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">secrets</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">secret_config_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> to configure the secret configs and the list of <a href="#the-plugin-info-configurations-object">properties</a> that can be used to configure the secret configs.</td>
+</tr>
+</tbody></table>
+
 <p><a id='plugin-info-configurations'></a></p>
 
 <h3 id="the-plugin-info-configurations-object">The plugin info configurations object</h3>
@@ -12326,7 +12374,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
 </code></pre>
 
 <blockquote>
@@ -12334,7 +12382,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"3924a894cf0e5bef02abe9de0df3bb84"</span>
 </code></pre>
 
@@ -12433,7 +12481,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info/my_plugin'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
 </code></pre>
 
 <blockquote>
@@ -12441,7 +12489,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre>
 
@@ -18362,11 +18410,16 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <ul>
 <li>Introduced version 1 of <a href="#secret-config">Secret Configs API</a>.</li>
+<li>Introduced version 6 of <a href="#plugin-info">Plugin Info API</a>.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
 
 <h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>The Plugin Info API version 5 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 6 of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h2 id="changes-in-19-3-0">Changes in 19.3.0</h2>
 
