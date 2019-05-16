@@ -52,7 +52,6 @@ includes:
   - 210-data-sharing
   - 220-maintenance-mode
   - 230-cluster-profiles
-  - 240-secret-configs
   - errors
   - 999-changelog
 
