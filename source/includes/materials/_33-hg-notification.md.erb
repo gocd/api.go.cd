@@ -1,33 +1,35 @@
 ## Notify Mercurial materials
 
 ```shell
-$ curl 'https://ci.example.com/go/api/material/notify/hg' \
+$ curl 'https://ci.example.com/go/api/admin/materials/hg/notify' \
       -u 'username:password' \
-      -H 'Confirm: true' \
+      -H 'Accept: <% data.apis.versions.materials %>' \
+      -H 'Content-Type: application/json %>' \
       -X POST \
-      -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
+      -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 202 Accepted
-Content-Type: text/plain; charset=UTF-8
+Content-Type: <%= data.apis.versions.materials %>; charset=UTF-8
 ```
 
-```plain
-The material is now scheduled for an update. Please check relevant pipeline(s) for status.
+```json
+{"message": "The material is now scheduled for an update. Please check relevant pipeline(s) for status."}
 ```
 
 <%= partial 'includes/shared/material_notify_header' %>
 
+<%= updated_to(1, '19.4.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`POST /go/api/material/notify/hg`
+`POST /go/api/admin/materials/hg/notify`
 
-The following post parameters must be specified.
+The following json payload must be specified.
 
 <%=
   describe_object(nil) do
@@ -37,7 +39,7 @@ The following post parameters must be specified.
 
 <p class='http-request-return-description'>Returns</p>
 
-A text confirmation.
+A confirmation message.
 
 ### Notification script
 
@@ -47,9 +49,10 @@ The hook goes into the `hgrc` file, located at `/path/to/hg/repository/.hg/hgrc`
 
 ```
 [hooks]
-changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
+changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify' \
     -u 'username:password' \
-    -H 'Confirm: true' \
+    -H 'Accept: <%= data.apis.versions.materials %>' \
+    -H 'Content-Type: application/json' \
     -X POST \
-    -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
+    -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
 ```

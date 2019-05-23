@@ -1,9 +1,9 @@
 ## Notify SVN materials
 
 ```shell
-$ curl 'https://ci.example.com/go/api/material/notify/svn' \
+$ curl 'https://ci.example.com/go/api/admin/materials/svn/notify' \
       -u 'username:password' \
-      -H 'Confirm: true' \
+      -H 'Accept: <%= data.apis.versions.materials %>' \
       -X POST \
       -d 'uuid=svn-repository-uuid'
 ```
@@ -12,23 +12,24 @@ $ curl 'https://ci.example.com/go/api/material/notify/svn' \
 
 ```http
 HTTP/1.1 202 Accepted
-Content-Type: text/plain; charset=UTF-8
+Content-Type: application/json; charset=UTF-8
 ```
 
-```plain
-The material is now scheduled for an update. Please check relevant pipeline(s) for status.
+```json
+{"message": "The material is now scheduled for an update. Please check relevant pipeline(s) for status."}
 ```
 
 <%= partial 'includes/shared/material_notify_header' %>
 
+<%= updated_to(1,'19.4.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`POST /go/api/material/notify/svn`
+`POST /go/api/admin/materials/svn/notify`
 
 
-The following post parameters must be specified.
+The following json payload must be specified.
 
 <%=
   describe_object(nil) do
@@ -38,7 +39,7 @@ The following post parameters must be specified.
 
 <p class='http-request-return-description'>Returns</p>
 
-A text confirmation.
+A confirmation message.
 
 ### Notification script
 
@@ -53,9 +54,10 @@ REPOS="$1"
 REV="$2"
 UUID=$(svnlook uuid $1)
 
-curl 'https://ci.example.com/go/api/material/notify/svn' \
+curl 'https://ci.example.com/go/api/admin/materials/svn/notify' \
     -u 'username:password' \
-    -H 'Confirm: true' \
+    -H 'Accept: <%= data.apis.versions.materials %>' \
+    -H 'Content-Type: application/json'
     -X POST \
-    -d "uuid=$UUID"
+    -d {"uuid": "$UUID"}
 ```
