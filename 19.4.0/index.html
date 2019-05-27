@@ -6066,7 +6066,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v6</code> of the API using <code>Accept: application/vnd.go.cd.v6+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v6</code> of the API using <code>Accept: application/vnd.go.cd.v7+json</code>
 </aside>
 
 <h2 id="the-pipeline-config-object">The pipeline config object</h2>
@@ -6268,6 +6268,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
         </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api.go.cd"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -6306,6 +6308,16 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The URL of the git repository.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">branch</code></td>
 <td>String</td>
 <td>The git branch to build.</td>
@@ -6341,6 +6353,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Clone with -n (&ndash;depth) option if set to true. <strong>Since v16.3.0</strong>.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for git materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>
 
 <p><a id='pipeline-config-svn-material'></a></p>
 
@@ -6437,7 +6453,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hg"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://username:password@hg.example.com/hg/api.go.cd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hg.example.com/hg/api.go.cd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdifgrrz6a="</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"feature"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api-docs"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -6468,6 +6487,26 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The URL of the mercurial repository.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">branch</code></td>
+<td>String</td>
+<td>The mercurial branch to build. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">destination</code></td>
 <td>String</td>
 <td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
@@ -6488,6 +6527,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Whether to poll for new changes or not.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for mercurial materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>
 
 <p><a id='pipeline-config-p4-material'></a></p>
 
@@ -7855,7 +7898,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v7+json'</span> <span class="se">\</span>
       -i
 </code></pre>
 
@@ -7864,7 +7907,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v7+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre>
 
@@ -8003,6 +8046,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
+  Updated to version v7 since v19.4.0.
+</p>
+
+<p class='available-since'>
   Available since v15.3.0.
 </p>
 
@@ -8018,7 +8065,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v7+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       -X PUT <span class="se">\</span>
@@ -8031,7 +8078,9 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
               {
                 "type": "git",
                 "attributes": {
-                  "url": "git@github.com:sample_repo/example.git",
+                  "url": "https://github.com:sample_repo/example.git",
+                  "username": "bob",
+                  "password": "pass",
                   "destination": "dest",
                   "filter": null,
                   "invert_filter": false,
@@ -8125,7 +8174,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v7+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre>
 
@@ -8162,6 +8211,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
       </span><span class="nt">"destination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"invert_filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -8269,6 +8320,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
+  Updated to version v7 since v19.4.0.
+</p>
+
+<p class='available-since'>
   Available since v15.3.0.
 </p>
 
@@ -8284,7 +8339,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v7+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST -d <span class="s1">'{ "group": "first",
                     "pipeline": {
@@ -8391,7 +8446,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v7+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -8522,6 +8577,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>Create a pipeline.</p>
 
 <p class='available-since'>
+  Updated to version v7 since v19.4.0.
+</p>
+
+<p class='available-since'>
   Available since v15.3.0.
 </p>
 
@@ -8537,7 +8596,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v7+json'</span> <span class="se">\</span>
       -X DELETE
 
 </code></pre>
@@ -8547,7 +8606,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v7+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -8560,6 +8619,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <aside class="warning">
   The history of the pipeline, that is, the data for each pipeline run will still be stored in the database. This data will not be removed.
 </aside>
+
+<p class='available-since'>
+  Updated to version v7 since v19.4.0.
+</p>
 
 <p class='available-since'>
   Available since v16.6.0.
@@ -15471,6 +15534,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
     </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -15492,6 +15557,21 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The URL of the git repository.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">branch</code></td>
 <td>String</td>
 <td>The git branch to build.</td>
@@ -15502,6 +15582,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>Whether to poll for new changes or not.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for git materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>
 
 <p><a id='config-repo-svn-material-attributes'></a></p>
 
@@ -15567,7 +15651,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hg"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://username:password@hg.example.com/hg/api.go.cd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hg.example.com/hg/api.go.cd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"feature"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -15588,11 +15675,35 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td>The URL of the mercurial repository.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">branch</code></td>
+<td>String</td>
+<td>The mercurial branch to build. <strong>Since v19.4.0</strong>.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">auto_update</code></td>
 <td>Boolean</td>
 <td>Whether to poll for new changes or not.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for mercurial materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>
 
 <p><a id='config-repo-p4-material-attributes'></a></p>
 
@@ -15751,7 +15862,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept:application/vnd.go.cd.v1+json'</span>
+      -H <span class="s1">'Accept:application/vnd.go.cd.v2+json'</span>
 </code></pre>
 
 <blockquote>
@@ -15788,6 +15899,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/gocd-json-config-example.git"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
             </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
           </span><span class="p">}</span><span class="w">
@@ -15801,6 +15914,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span></code></pre>
 
 <p>Lists all available config repos, these are config repositories that are present in the in <code class="prettyprint">cruise-config.xml</code>.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.4.0.
+</p>
 
 <p class='available-since'>
   Available since v17.12.0.
@@ -15818,7 +15935,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo1'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept:application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept:application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       -i
 </code></pre>
 
@@ -15827,7 +15944,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre>
@@ -15850,6 +15967,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/gocd-json-config-example.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
       </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -15867,6 +15986,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
+  Updated to version v2 since v19.4.0.
+</p>
+
+<p class='available-since'>
   Available since v17.12.0.
 </p>
 
@@ -15882,7 +16005,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$   </span>curl <span class="s1">'http://ci.example.com/go/api/admin/config_repos'</span> <span class="se">\</span>
   -u <span class="s1">'username:password'</span> <span class="se">\</span>
-  -H <span class="s1">'Accept:application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+  -H <span class="s1">'Accept:application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
   -H <span class="s1">'Content-Type:application/json'</span> <span class="se">\</span>
   -X POST -d <span class="s1">'{
     "id": "repo-2",
@@ -15891,6 +16014,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
       "type": "git",
       "attributes": {
         "url": "https://github.com/config-repo/gocd-json-config-example2.git",
+        "username": "bob",
+        "password": "pass",
         "branch": "master",
         "auto_update": true
       }
@@ -15909,7 +16034,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -15930,6 +16055,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/gocd-json-config-example2.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
       </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -15944,6 +16071,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span></code></pre>
 
 <p>Create a config repo object.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.4.0.
+</p>
 
 <p class='available-since'>
   Available since v17.12.0.
@@ -15963,7 +16094,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo-1'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -H <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       -X PUT <span class="se">\</span>
@@ -15974,6 +16105,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
               "type": "git",
               "attributes": {
                 "url": "https://github.com/config-repo/gocd-json-config-example2.git",
+                "username": "bob",
+                "password": "pass",
                 "branch": "master",
                 "auto_update": true
               }
@@ -15992,7 +16125,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre>
 
@@ -16014,6 +16147,8 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/config-repo/gocd-json-config-example2.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
       </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -16043,6 +16178,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
+  Updated to version v2 since v19.4.0.
+</p>
+
+<p class='available-since'>
   Available since v17.12.0.
 </p>
 
@@ -16058,7 +16197,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo-1'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       -X DELETE
 </code></pre>
 
@@ -16067,7 +16206,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -16076,6 +16215,10 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </span></code></pre>
 
 <p>Deletes the config repo.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.4.0.
+</p>
 
 <p class='available-since'>
   Available since v17.12.0.
@@ -17934,6 +18077,29 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
           <h1 id="api-changelog">API Changelog</h1>
 
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
+
+<h2 id="changes-in-19-4-0">Changes in 19.4.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 2 of <a href="#config-repo">Config Repo API</a>.</li>
+<li>Introduced version 7 of <a href="#pipeline-config">Pipeline Config API</a>.</li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<p>No removals this release.</p>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>Unversioned get stage history API has been deprecated in favor of get stage history API v1. This version will be removed in a release scheduled for July 2019.</li>
+<li>The Dashboard API version 2 has been deprecated. This version will be removed in a release scheduled for June 2019. Version 3 of the API is available, and users are encouraged to use it.</li>
+<li>The Plugin Info API version 4 has been deprecated. This version will be removed in a release scheduled for July 2019. Version 5 of the API is available, and users are encouraged to use it.</li>
+<li>The ConfigRepo API version 1 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 2 of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 6 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 7 of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h2 id="changes-in-19-3-0">Changes in 19.3.0</h2>
 
