@@ -35,6 +35,8 @@ ETag: "05548388f7ef5042cd39f7fe42e85735"
     "type": "git",
     "attributes": {
       "url": "https://github.com/config-repo/gocd-json-config-example.git",
+      "username": "bob",
+      "encrypted_password": "aSdiFgRRZ6A=",
       "branch": "master",
       "auto_update": true
     }
@@ -51,6 +53,7 @@ Gets the config repo object for a specified id.
   <strong>Note:</strong>Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#the-config-repo-object'>edit config repo</a> documentation for more details.
 </aside>
 
+<%= updated_to(2,'19.4.0') %>
 <%= available_since('17.12.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

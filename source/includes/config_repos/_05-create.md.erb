@@ -12,6 +12,8 @@ $   curl 'http://ci.example.com/go/api/admin/config_repos' \
       "type": "git",
       "attributes": {
         "url": "https://github.com/config-repo/gocd-json-config-example2.git",
+        "username": "bob",
+        "password": "pass",
         "branch": "master",
         "auto_update": true
       }
@@ -52,6 +54,8 @@ Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
     "type": "git",
     "attributes": {
       "url": "https://github.com/config-repo/gocd-json-config-example2.git",
+      "username": "bob",
+      "encrypted_password": "aSdiFgRRZ6A=",
       "branch": "master",
       "auto_update": true
     }
@@ -68,6 +72,7 @@ Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
 Create a config repo object.
 
 
+<%= updated_to(2,'19.4.0') %>
 <%= available_since('17.12.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
