@@ -5,7 +5,10 @@ json = {
       type: 'hg',
       attributes: {
         name: 'api-docs',
-        url: 'http://username:password@hg.example.com/hg/api.go.cd',
+        url: 'http://hg.example.com/hg/api.go.cd',
+        username: 'bob',
+        encrypted_password: 'asdifgrrz6a=',
+        branch: 'feature',
         destination: 'api-docs',
         filter: nil,
         invert_filter: true,
@@ -17,11 +20,19 @@ json = {
 %>
 <%=
 describe_sub_object 'The mercurial material attributes', json: json, html_id: 'pipeline-config-hg-material' do
-  name           'String',  'The name of this material.'
-  url            'String',  'The URL of the mercurial repository.'
-  destination    'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
-  filter         'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
-  invert_filter  'Boolean', 'Invert filter to enable whitelist', since: '16.7.0'
-  auto_update    'Boolean', 'Whether to poll for new changes or not.'
+  name                'String',  'The name of this material.'
+  url                 'String',  'The URL of the mercurial repository.'
+  username            'String',  'The user account for the remote repository.', since: '19.4.0'
+  password            'String',  'The password for the specified user.', since: '19.4.0'
+  encrypted_password  'String',  'The encrypted password for the specified user.', since: '19.4.0'
+  branch              'String',  'The mercurial branch to build.', since: '19.4.0'
+  destination         'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  filter              'Object',  'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  invert_filter       'Boolean', 'Invert filter to enable whitelist', since: '16.7.0'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
 end
 %>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for mercurial materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>

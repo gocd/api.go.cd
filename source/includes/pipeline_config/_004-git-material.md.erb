@@ -6,6 +6,8 @@ json = {
       attributes: {
         name: 'api-docs',
         url: 'https://github.com/gocd/api.go.cd',
+        username: 'bob',
+        encrypted_password: 'aSdiFgRRZ6A=',
         branch: 'master',
         destination: 'api.go.cd',
         auto_update: true,
@@ -25,6 +27,8 @@ json = {
 describe_sub_object 'The git material attributes', json: json, html_id: 'pipeline-config-git-material' do
   name             'String',  'The name of this material.'
   url              'String',  'The URL of the git repository.'
+  username         'String',  'The user account for the remote repository.', since: '19.4.0'
+  password         'String',  'The password for the specified user.', since: '19.4.0'
   branch           'String',  'The git branch to build.'
   destination      'String',  'The directory (relative to the pipeline directory) in which source code will be checked out.'
   auto_update      'Boolean', 'Whether to poll for new changes or not.'
@@ -34,3 +38,7 @@ describe_sub_object 'The git material attributes', json: json, html_id: 'pipelin
   shallow_clone    'Boolean', 'Clone with -n (--depth) option if set to true', since: '16.3.0'
 end
 %>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for git materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>

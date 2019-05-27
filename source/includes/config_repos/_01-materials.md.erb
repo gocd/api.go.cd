@@ -11,6 +11,8 @@ json = {
       type: 'git',
       attributes: {
         url: 'https://github.com/gocd/api.go.cd',
+        username: 'bob',
+        encrypted_password: 'aSdiFgRRZ6A=',
         branch: 'master',
         auto_update: true
       }
@@ -19,11 +21,18 @@ json = {
 
 <%=
 describe_sub_object 'The git material attributes', json: json, html_id: 'config-repo-git-material-attributes' do
-  url              'String',  'The URL of the git repository.'
-  branch           'String',  'The git branch to build.'
-  auto_update      'Boolean', 'Whether to poll for new changes or not.'
+  url                 'String',  'The URL of the git repository.'
+  username            'String',  'The user account for the remote repository.', since: '19.4.0'
+  password            'String',  'The password for the specified user.', since: '19.4.0'
+  encrypted_password  'String',  'The encrypted password for the specified user.', since: '19.4.0'
+  branch              'String',  'The git branch to build.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
 end
 %>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for git materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>
 
 <%
 json = {
@@ -53,17 +62,28 @@ end
 json = {
       type: 'hg',
       attributes: {
-        url: 'http://username:password@hg.example.com/hg/api.go.cd',
+        url: 'http://hg.example.com/hg/api.go.cd',
+        username: 'bob',
+        encrypted_password: 'aSdiFgRRZ6A=',
+        branch: 'feature',
         auto_update: true
       }
     }
 %>
 <%=
 describe_sub_object 'The mercurial material attributes', json: json, html_id: 'config-repo-hg-material-attributes' do
-  url            'String',  'The URL of the mercurial repository.'
-  auto_update    'Boolean', 'Whether to poll for new changes or not.'
+  url                 'String',  'The URL of the mercurial repository.'
+  username            'String',  'The user account for the remote repository.', since: '19.4.0'
+  password            'String',  'The password for the specified user.', since: '19.4.0'
+  encrypted_password  'String',  'The encrypted password for the specified user.', since: '19.4.0'
+  branch              'String',  'The mercurial branch to build.', since: '19.4.0'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
 end
 %>
+
+<aside class="notice">
+  <strong>Note:</strong> Credentials for mercurial materials can be provided either in <code>url</code> or in <code>username/password</code> attributes. For security reasons it is recommended to provide the credentials in <code>username/password</code> attributes.
+</aside>
 
 <%
 json = {
