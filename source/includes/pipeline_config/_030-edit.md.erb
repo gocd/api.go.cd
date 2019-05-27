@@ -16,7 +16,9 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline' \
               {
                 "type": "git",
                 "attributes": {
-                  "url": "git@github.com:sample_repo/example.git",
+                  "url": "https://github.com:sample_repo/example.git",
+                  "username": "bob",
+                  "password": "pass",
                   "destination": "dest",
                   "filter": null,
                   "invert_filter": false,
@@ -147,6 +149,8 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
     "type" : "git",
     "attributes" : {
       "url" : "git@github.com:sample_repo/example.git",
+      "username": "bob",
+      "encrypted_password": "aSdiFgRRZ6A=",
       "destination" : "dest",
       "filter" : null,
       "invert_filter" : false,
@@ -253,6 +257,7 @@ Update pipeline config for specified pipeline name.
   conflict.
 </aside>
 
+<%= updated_to(7,'19.4.0') %>
 <%= available_since('15.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
