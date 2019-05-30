@@ -1,5 +1,5 @@
 <%=
-describe_object 'The secret config object', since: '19.4.0' do
+describe_object 'The secret config object', since: '19.5.0' do
   id              'String', 'The identifier of the secret config'
   pluginId        'String', 'The identifier of the plugin to which current secret config belongs'
   configuration   'Array',  'The list of [configuration properties](#the-configuration-property-object) that represent the configuration of this secret config.'
@@ -9,10 +9,10 @@ end
 %>
 
 <%=
-describe_object 'The Rule object', since: '19.4.0'  do
+describe_object 'The Rule object', since: '19.5.0'  do
   directive   'String','The type of rule which can be either `allow` or `deny`'
   action      'String','The action that is being controlled via this rule. Only `refer` is supported as of now.'
-  type        'String','The type of entity that the rule is applied on. Currently `environment` and `pipeline-group` are supported.'
+  type        'String','The type of entity that the rule is applied on. Currently `environment` and `pipeline_group` are supported.'
   resource    'String','The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.'
 end
 %>
