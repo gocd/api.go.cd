@@ -1,0 +1,74 @@
+## Create a secret config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/secret_configs' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.secret_configs %>' \
+      -H 'Content-Type: application/json' \
+      -X POST -d '{
+        "id" : "demo",
+        "plugin_id" : "cd.go.secrets.file-based-plugin",
+        "description" : "",
+        "properties" : [ {
+          "key" : "SecretsFilePath",
+          "value" : "/path/to/secret/file.db"
+        }],
+        "rules":[
+          {
+            "directive":"allow",
+            "action":"refer",
+            "type":"pipeline_group",
+            "resource":"first"
+          }
+        ]
+      }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.secret_configs %>; charset=utf-8
+ETag: "f64e700e7d94e6bc36fc56539cfe993d"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/secret_configs/secret-test"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/19.5.0/#secret-configs"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/secret_configs/:config_id"
+    }
+  },
+  "id" : "secret-test",
+  "plugin_id" : "cd.go.secrets.file-based-plugin",
+  "description" : "",
+  "properties" : [ {
+    "key" : "SecretsFilePath",
+    "value" : "path/to/secret/file.db"
+  } ],
+  "rules" : [ {
+    "directive" : "allow",
+    "action" : "refer",
+    "type" : "pipeline_group",
+    "resource" : "first"
+  } ]
+}
+```
+
+Creates a secret config.
+
+<%= available_since('19.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/secret_configs`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [secret config](#the-secret-config-object) object.
