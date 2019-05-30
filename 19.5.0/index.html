@@ -12084,6 +12084,54 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </tr>
 </tbody></table>
 
+<p><a id='secrets-extension-info'></a></p>
+
+<h3 id="extension-information-object-secrets">Extension information object: Secrets</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secrets"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secret_config_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FilePath"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;Plugin view template&lt;/div&gt;"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of the extension, which is <code class="prettyprint">secrets</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">secret_config_settings</code></td>
+<td>Object</td>
+<td>The <a href="#the-plugin-info-view-object">html view</a> to configure the secret configs and the list of <a href="#the-plugin-info-configurations-object">properties</a> that can be used to configure the secret configs.</td>
+</tr>
+</tbody></table>
+
 <p><a id='plugin-info-configurations'></a></p>
 
 <h3 id="the-plugin-info-configurations-object">The plugin info configurations object</h3>
@@ -12389,7 +12437,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
 </code></pre>
 
 <blockquote>
@@ -12397,7 +12445,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"3924a894cf0e5bef02abe9de0df3bb84"</span>
 </code></pre>
 
@@ -12496,7 +12544,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info/my_plugin'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
 </code></pre>
 
 <blockquote>
@@ -12504,7 +12552,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre>
 
@@ -18010,6 +18058,427 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <p>A message if the cluster profile is deleted or not.</p>
 
+          <h1 id="secret-configs">Secret Configs</h1>
+
+<p>The secret configs API allows users with admin privileges to configure external Secret Managers to lookup for secrets.</p>
+
+<h2 id="the-secret-config-object">The secret config object</h2>
+
+<p class='available-since'>
+  Available since v19.5.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">id</code></td>
+<td>String</td>
+<td>The identifier of the secret config.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pluginId</code></td>
+<td>String</td>
+<td>The identifier of the plugin to which current secret config belongs.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">configuration</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-configuration-property-object">configuration properties</a> that represent the configuration of this secret config.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">rules</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-rule-object">rules</a>, which allows restricting the usage of the secret config. Referring to the secret config from other parts of configuration is denied by default, an explicit rule should be added to allow a specific resource to refer the secret config.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">description</code></td>
+<td>String</td>
+<td>The description for this secret config.</td>
+</tr>
+</tbody></table>
+
+<h2 id="the-rule-object">The Rule object</h2>
+
+<p class='available-since'>
+  Available since v19.5.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">directive</code></td>
+<td>String</td>
+<td>The type of rule which can be either <code class="prettyprint">allow</code> or <code class="prettyprint">deny</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">action</code></td>
+<td>String</td>
+<td>The action that is being controlled via this rule. Only <code class="prettyprint">refer</code> is supported as of now.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of entity that the rule is applied on. Currently <code class="prettyprint">environment</code> and <code class="prettyprint">pipeline_group</code> are supported.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">resource</code></td>
+<td>String</td>
+<td>The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-secret-configs">Get all secret configs</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"32628084ef10b0c82a55f8f2f867d8d0"</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.5.0/#secret-configs"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"secret_configs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/demo"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.5.0/#secret-configs"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"demo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plugin_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.secrets.file-based-plugin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"SecretsFilePath"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"path/to/secret/file.db"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"rules"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"directive"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_group"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"resource"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Lists all available secret configurations.</p>
+
+<p class='available-since'>
+  Available since v19.5.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/secret_configs</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An array of <a href="#the-secret-config-object">secret configs</a>.</p>
+
+<h2 id="get-a-secret-config">Get a secret config</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs/demo'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"465f3520fa02e65a05844a5a27f83393"</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/demo"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.5.0/#secret-configs"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"demo"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plugin_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.secrets.file-based-plugin"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"SecretsFilePath"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"path/to/secret/file.db"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"rules"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"directive"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"action"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_group"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Gets the secret config for the specified id.</p>
+
+<aside class="notice">
+  <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-a-secret-config'>edit secret config</a> documentation for more details.
+</aside>
+
+<p class='available-since'>
+  Available since v19.5.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/secret_configs/:id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The <a href="#the-secret-config-object">secret config</a> object.</p>
+
+<h2 id="create-a-secret-config">Create a secret config</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -X POST -d <span class="s1">'{
+        "id" : "demo",
+        "plugin_id" : "cd.go.secrets.file-based-plugin",
+        "description" : "",
+        "properties" : [ {
+          "key" : "SecretsFilePath",
+          "value" : "/path/to/secret/file.db"
+        }],
+        "rules":[
+          {
+            "directive":"allow",
+            "action":"refer",
+            "type":"pipeline_group",
+            "resource":"first"
+          }
+        ]
+      }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"f64e700e7d94e6bc36fc56539cfe993d"</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/secret-test"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.5.0/#secret-configs"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"secret-test"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plugin_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.secrets.file-based-plugin"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"SecretsFilePath"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"path/to/secret/file.db"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"rules"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"directive"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"action"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_group"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Creates a secret config.</p>
+
+<p class='available-since'>
+  Available since v19.5.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/admin/secret_configs</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The <a href="#the-secret-config-object">secret config</a> object.</p>
+
+<h2 id="update-a-secret-config">Update a secret config</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs/secret-test'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -H <span class="s1">'If-Match: "465f3520fa02e65a05844a5a27f83393"'</span> <span class="se">\</span>
+      -X PUT <span class="se">\</span>
+      -d <span class="s1">'{
+        "id":"secret-test"
+        "plugin_id":"cd.go.secrets.file-based-plugin",
+        "properties": [
+          {
+            "key": "SecretsFilePath",
+            "value": "updated/path/to/secret/file.db"
+          }
+        ],
+        "rules":[
+          {
+            "directive":"allow",
+            "action":"refer",
+            "type":"pipeline_group",
+            "resource":"first*"
+          }
+        ]
+      }'</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"3b55fd5294b16a55228de0f9eef98ecb"</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/secret-test"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.5.0/#secret-configs"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"secret-test"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plugin_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.secrets.file-based-plugin"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"SecretsFilePath"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"updated/path/to/secret/file.db"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"rules"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"directive"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"action"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_group"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"first*"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Update some attributes of a secret config.</p>
+
+<aside class="notice">
+  <strong>Note:</strong>
+  The update secret config API requires that you submit the <code>If-Match</code>
+  header with the latest ETag value that is representative of the current
+  secret config.
+  <br/><br/>
+  This is required in order to avoid the &ldquo;lost update&rdquo; problem, where a client
+  `GET`s a resource&rsquo;s state, modifies it and `PUT`s it back to the server, while
+  another user has modified the state of the secret config, leading to a
+  conflict.
+</aside>
+
+<p class='available-since'>
+  Available since v19.5.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">PUT /go/api/admin/secret_configs/:id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The updated <a href="#the-secret-config-object">secret_config</a> object.</p>
+
+<h2 id="delete-a-secret-config">Delete a secret config.</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs/secret-test'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -X DELETE
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Secret config with id 'secret-test' was deleted successfully!"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Deletes the config.</p>
+
+<p class='available-since'>
+  Available since v19.5.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">DELETE /go/api/admin/secret_configs/:id</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message if the secret config is deleted or not.</p>
+
           <h1 id="errors">Errors</h1>
 
 <p>GoCD uses the following HTTP status codes to indicate errors.</p>
@@ -18077,6 +18546,30 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
           <h1 id="api-changelog">API Changelog</h1>
 
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
+
+<h2 id="changes-in-19-5-0">Changes in 19.5.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 1 of <a href="#secret-config">Secret Configs API</a>.</li>
+<li>Introduced version 6 of <a href="#plugin-info">Plugin Info API</a>.</li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<p>No removals this release.</p>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>Unversioned get stage history API has been deprecated in favor of get stage history API v1. This version will be removed in a release scheduled for July 2019.</li>
+<li>The Dashboard API version 2 has been deprecated. This version will be removed in a release scheduled for June 2019. Version 3 of the API is available, and users are encouraged to use it.</li>
+<li>The Plugin Info API version 4 has been deprecated. This version will be removed in a release scheduled for July 2019. Version 5 of the API is available, and users are encouraged to use it.</li>
+<li>The ConfigRepo API version 1 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 2 of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 6 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 7 of the API is available, and users are encouraged to use it.</li>
+<li>The Plugin Info API version 5 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 6 of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h2 id="changes-in-19-4-0">Changes in 19.4.0</h2>
 
