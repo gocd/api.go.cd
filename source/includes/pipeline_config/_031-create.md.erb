@@ -5,6 +5,8 @@ $ curl 'https://ci.example.com/go/api/admin/pipelines' \
       -u 'username:password' \
       -H 'Accept: <%= data.apis.versions.pipeline %>' \
       -H 'Content-Type: application/json' \
+      -H 'X-pause-pipeline: true' \
+      -H 'X-pause-cause: "to have more control over when to start the pipeline after reviewing it"' \
       -X POST -d '{ "group": "first",
                     "pipeline": {
                     "label_template": "${COUNT}",
@@ -241,6 +243,12 @@ Content-Type: <%= data.apis.versions.pipeline %>; charset=utf-8
 
 Create a pipeline.
 
+<aside class="notice">
+  <strong>Note:</strong>
+  The create pipeline config API supports an optional header field <code>X-pause-pipeline</code>. This field, if set to true, will create
+  the pipeline in the paused state. The additional header field <code>X-pause-cause</code> may optionally contain the reason for pausing
+  the pipeline.
+</aside>
 
 <%= updated_to(7,'19.4.0') %>
 <%= available_since('15.3.0') %>
