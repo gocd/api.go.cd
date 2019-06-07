@@ -1,0 +1,198 @@
+<%
+json = {
+      type: 'git',
+      attributes: {
+        url: 'https://github.com/gocd/api.go.cd',
+        username: 'bob',
+        encrypted_password: 'aSdiFgRRZ6A=',
+        branch: 'master',
+        auto_update: true
+      }
+    }
+%>
+
+<%=
+describe_sub_object 'The git material attributes', json: json, html_id: 'materials-git-material-attributes' do
+  url                 'String',  'The URL of the git repository.'
+  username            'String',  'The user account for the remote repository.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+  branch              'String',  'The git branch to build.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+end
+%>
+
+<%
+json = {
+      type: 'svn',
+      attributes: {
+        url: 'svn://svn.example.com/myProject/trunk',
+        username: 'admin',
+        auto_update: true,
+        encrypted_password: 'aSdiFgRRZ6A=',
+        check_externals: true
+      }
+    }
+%>
+
+<%=
+describe_sub_object 'The svn material attributes', json: json, html_id: 'materials-svn-material-attributes' do
+  url                 'String',  'The URL of the subversion repository.'
+  username            'String',  'The user account for the remote repository.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  check_externals     'Boolean', 'Whether the changes o the externals will trigger the pipeline automatically or not.'
+end
+%>
+
+<%
+json = {
+      type: 'hg',
+      attributes: {
+        url: 'http://hg.example.com/hg/api.go.cd',
+        username: 'bob',
+        encrypted_password: 'aSdiFgRRZ6A=',
+        branch: 'feature',
+        auto_update: true
+      }
+    }
+%>
+<%=
+describe_sub_object 'The mercurial material attributes', json: json, html_id: 'materials-hg-material-attributes' do
+  url                 'String',  'The URL of the mercurial repository.'
+  username            'String',  'The user account for the remote repository.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+  branch              'String',  'The mercurial branch to build.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+end
+%>
+
+<%
+json = {
+  type: 'p4',
+  attributes: {
+    port: 'p4.example.com:8080',
+    use_tickets: true,
+    view: 'sample_view',
+    auto_update: true,
+    username: 'admin',
+    encrypted_password: 'aSdiFgRRZ6A='
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The perforce material attributes', json: json, html_id: 'materials-p4-material-attributes' do
+  port                'String',  'Perforce server connection to use (`[transport:]host:port`).'
+  use_tickets         'Boolean', 'Whether to work with the Perforce tickets or not.'
+  view                'String',  'The Perforce view.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  username            'String',  'The username to be used.'
+  password            'String',  'The password for the specified user.'
+  encrypted_password  'String',  'The encrypted password for the specified user.'
+end
+%>
+
+<%
+json = {
+  type: 'tfs',
+  attributes: {
+    url: 'http://tfs.exampe.com:8000/tfs',
+    project_path: '$/',
+    domain: 'corporate/domain',
+    username: 'admin',
+    encrypted_password: 'aSdiFgRRZ6A='
+  }
+}
+%>
+
+<%=
+describe_sub_object 'The tfs material attributes', json: json, html_id: 'materials-tfs-material-attributes' do
+  url                 'String',  'The URL for the Collection on the TFS Server.'
+  project_path        'String',  'The project path within the TFS collection.'
+  domain              'String',  'The domain name for TFS authentication credentials.'
+  auto_update         'Boolean', 'Whether to poll for new changes or not.'
+  username            'String',  'The username of the account to access the TFS collection'
+  password            'String',  'The password of the account to access the TFS collection.'
+  encrypted_password  'String',  'The encrypted password of the account to access the TFS collection.'
+end
+%>
+
+<%
+json = {
+  type: 'package',
+  attributes: {
+    ref: 'e289f497-057b-46bc-bb69-8043454f5c1b'
+  }
+}
+
+%>
+<%=
+describe_sub_object 'The package material attributes', json: json, html_id: 'materials-package-material' do
+  ref 'String', 'The unique package repository id.'
+end
+%>
+
+<%
+json = {
+  materials: [
+    {
+      type: 'dependency',
+      attributes: {
+        name: 'dependency',
+        pipeline: 'upstream',
+        stage: 'upstream_stage',
+        auto_update: true
+      }
+    }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The dependency material attributes', json: json, html_id: 'materials-dependency-material' do
+  name        'String',  'The name of this material.'
+  pipeline    'String',  'The name of a pipeline that this pipeline depends on.'
+  stage       'String',  'The name of a stage which will trigger this pipeline once it is successful.'
+  auto_update 'Boolean', 'Whether to poll for new changes or not.'
+end
+%>
+
+<%
+json = {
+  materials: [
+    {
+      type: 'plugin',
+      attributes: {
+        ref: '5e3612f7-6aa1-4d75-a9b7-6aeb52d98012',
+        filter: nil,
+        invert_filter: true
+      }
+    }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The plugin material attributes', json: json, html_id: 'materials-plugin-material' do
+  ref            'String', 'The unique scm plugin repository id.'
+  destination    'String', 'The directory (relative to the pipeline directory) in which source code will be checked out.'
+  filter         'Object', 'The [filter](#materials-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
+  invert_filter  'Boolean', 'Invert filter to enable whitelist'
+end
+%>
+
+<%
+json = {
+  filter: {
+    ignore: %w(README.md docs/**.html)
+  }
+}
+%>
+<%=
+describe_sub_object 'The filter object', json: json, html_id: 'materials-filter-object' do
+  ignore               'String',         'The pattern for the files to be ignored.'
+end
+%>

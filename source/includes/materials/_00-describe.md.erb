@@ -1,7 +1,7 @@
 <%=
-describe_object 'The material object', since: '19.4.0' do
-  description 'String', 'The description of the material'
+describe_object 'The material object', since: '19.5.0' do
+  type        'String', 'The type of a material.', one_of: %w(git hg svn p4 tfs dependency package plugin)
   fingerprint 'String', 'The fingerprint of the material'
-  type        'String', 'The type of a material.', one_of: %w(Git Mercurial Perforce Subversion Tfs Pipeline SCM)
+  attributes  'Object',  'The [attributes](#materials-git-material-attributes) for each material type.'
 end
 %>

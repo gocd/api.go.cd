@@ -5,7 +5,7 @@ $ curl 'https://ci.example.com/go/api/admin/materials/svn/notify' \
       -u 'username:password' \
       -H 'Accept: <%= data.apis.versions.materials %>' \
       -X POST \
-      -d 'uuid=svn-repository-uuid'
+      -d {"repository_url": "http://svn.example.com/test-repo"}
 ```
 
 > The above command returns the following response:
@@ -21,7 +21,7 @@ Content-Type: application/json; charset=UTF-8
 
 <%= partial 'includes/shared/material_notify_header' %>
 
-<%= updated_to(1,'19.4.0') %>
+<%= updated_to(1,'19.5.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -33,7 +33,7 @@ The following json payload must be specified.
 
 <%=
   describe_object(nil) do
-    uuid  'String',            'The subversion repository UUID'
+    repository_url  'String', 'The git repository url as defined in `cruise-config.xml` or a Config Repo'
   end
  %>
 
@@ -50,14 +50,10 @@ The post commit hook is located at `/path/to/repository/hooks/post-commit`.
 ```bash
 #!/bin/sh
 
-REPOS="$1"
-REV="$2"
-UUID=$(svnlook uuid $1)
-
 curl 'https://ci.example.com/go/api/admin/materials/svn/notify' \
     -u 'username:password' \
     -H 'Accept: <%= data.apis.versions.materials %>' \
     -H 'Content-Type: application/json'
     -X POST \
-    -d {"uuid": "$UUID"}
+    -d {"repository_url": "http://svn.example.com/test-repo"}
 ```
