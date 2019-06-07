@@ -1,7 +1,7 @@
 ## Get all materials
 
 ```shell
-$ curl 'https://ci.example.com/go/api/materials' \
+$ curl 'https://ci.example.com/go/api/config/materials' \
       -u 'username:password'
       -H 'Accept: <%= data.apis.versions.materials %>'
 ```
@@ -20,15 +20,63 @@ Content-Type: application/json; charset=utf-8
       "href": "https://api.gocd.org/#materials"
     },
     "self": {
-      "href": "https://ci.example.com/go/api/materials"
+      "href": "https://ci.example.com/go/api/config/materials"
     }
   },
   "_embedded": {
     "materials": [
       {
-        "description": "URL: https://github.com/gocd/gocd, Branch: master",
-        "fingerprint": "03c8d2a131154436b6ef2d621c6f773837481aaea8c5c1bb9c0cb9b5bc64a2f1",
-        "type": "Git"
+        "type": "git",
+        "fingerprint": "458ce82419bdbe41a4007ad713a730e5e467ed4fbefb421bf58aeff3e9c36e4b",
+        "attributes": {
+          "url": "https://github.com/gocd/gocd",
+          "destination": null,
+          "filter": null,
+          "invert_filter": false,
+          "name": null,
+          "auto_update": false,
+          "branch": "master",
+          "submodule_folder": null,
+          "shallow_clone": false
+        }
+      },
+      {
+        "type": "svn",
+        "fingerprint": "6b0cd6b9181434866c555f3c3bb780e950389a456764c876d804c848efbad554",
+        "attributes": {
+          "url": "https://github.com/gocd/gocd",
+          "destination": "test",
+          "filter": null,
+          "invert_filter": false,
+          "name": null,
+          "auto_update": false,
+          "username": "admin",
+          "encrypted_password": "AES:lTFKwi5NvrlqmQ3LOQ5UQA==:Ebggz5N27w54NrhSXKIbng==",
+          "check_externals": false
+        }
+      },
+      {
+        "type": "hg",
+        "fingerprint": "f6b61bc6b33e524c2a94c5be4a4661e5f1d2b74ca089418de20de10b282e39e9",
+        "attributes": {
+          "url": "ssh://hg@bitbucket.org/example/gocd-hg",
+          "destination": "test",
+          "filter": null,
+          "invert_filter": false,
+          "name": null,
+          "auto_update": false,
+          "branch": ""
+        }
+      },
+      {
+        "type": "dependency",
+        "fingerprint": "21f7963a8eca6cced5b4f20b57b4e9cb8edaed29d683c83621a77dfb499c553d",
+        "attributes": {
+          "pipeline": "up42",
+          "stage": "up42_stage",
+          "name": "up42_material",
+          "auto_update": true
+        }
       }
     ]
   }
@@ -37,12 +85,12 @@ Content-Type: application/json; charset=utf-8
 
 Lists all available materials, these are materials that are present in the in `cruise-config.xml` or Config Repos.
 
-<%= updated_to(1,'19.4.0') %>
+<%= updated_to(1,'19.5.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/materials`
+`GET /go/api/config/materials`
 
 <p class='http-request-return-description'>Returns</p>
 

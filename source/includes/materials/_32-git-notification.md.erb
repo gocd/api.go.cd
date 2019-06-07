@@ -22,7 +22,7 @@ Content-Type: <%= data.apis.versions.materials %>; charset=UTF-8
 
 <%= partial 'includes/shared/material_notify_header' %>
 
-<%= updated_to(1, '19.4.0') %>
+<%= updated_to(1, '19.5.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -33,7 +33,7 @@ The following json payload must be specified.
 
 <%=
   describe_object(nil) do
-    repository_url  'String',            'The git repository url as defined in `cruise-config.xml` or a Config Repo'
+    repository_url  'String', 'The git repository url as defined in `cruise-config.xml` or a Config Repo'
   end
  %>
 
