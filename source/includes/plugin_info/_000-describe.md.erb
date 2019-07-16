@@ -480,3 +480,34 @@ end
     fetch_artifact_settings  'Object',  'The [html view](#the-plugin-info-view-object) to configure the fetch artifact config and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure fetch artifact config.'
  end
  %>
+
+
+ <%
+  secrets_json = {
+    extensions: [
+      {
+        type: 'secrets',
+        secret_config_settings: {
+          configurations: [
+            {
+                key: "FilePath",
+                metadata: {
+                  secure: false,
+                  required: true
+                }
+            }
+          ],
+          view: {
+            template: "<div>Plugin view template</div>"
+          }
+        }
+      }
+    ]
+  }
+%>
+
+<%= describe_sub_object 'Extension information object: Secrets', json: secrets_json, html_id: 'secrets-extension-info' do
+    type              'String', 'The type of the extension, which is `secrets`'
+    secret_config_settings    'Object',  'The [html view](#the-plugin-info-view-object) to configure the secret configs and the list of [properties](#the-plugin-info-configurations-object) that can be used to configure the secret configs.'
+ end
+ %>
