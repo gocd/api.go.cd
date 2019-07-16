@@ -48,6 +48,7 @@ Content-Type: application/json; charset=utf-8
 
 Get material modifications by fingerprint
 
+<%= updated_to(1,'19.6.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -58,7 +59,10 @@ Get material modifications by fingerprint
 
 `GET /go/api/materials/:fingerprint/modifications[/:offset]`
 
-<%= partial 'includes/shared/pagination_offset' %>
+<aside class="notice">
+  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of modifications to be skipped.
+</aside>
+
 
 <p class='http-request-return-description'>Returns</p>
 
