@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.17.1')
+  abort "Bundler version >= 1.17.1 is required"
+end
+
 # Middleman
 gem 'middleman', '~> 4.1.0'
 gem 'middleman-gh-pages', '~> 0.3.0'
