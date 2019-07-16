@@ -2,6 +2,7 @@
 
 ```shell
 $ curl 'https://ci.example.com/go/api/server_health_messages' \
+    -u 'username:password' \
     -H 'Accept: <%= data.apis.versions.server_health %>'
 ```
 
