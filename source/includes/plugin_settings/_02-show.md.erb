@@ -51,11 +51,12 @@ ETag: "05548388f7ef5042cd39f7fe42e85735"
 }
 ```
 
-Gets the stored plugin settings for the specified plugin id.
+Gets the stored plugin settings for the specified plugin id. Be aware that a settings object is created on demand and may not be availble!
 
 <aside class="notice">
   <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-plugin-settings'>update plugin settings</a> documentation for more details.
 </aside>
+
 
 <%= available_since('17.9.0') %>
 
@@ -65,4 +66,4 @@ Gets the stored plugin settings for the specified plugin id.
 
 <p class='http-request-return-description'>Returns</p>
 
-A [Plugin Settings](#the-plugin-settings-object) object
+A [Plugin Settings](#the-plugin-settings-object) object or an error 404 if the plugin was not yet configured.
