@@ -3,6 +3,7 @@ require_relative "lib/helpers"
 helpers RenderAllSubTopics
 helpers DescribeObjectHelper
 helpers AvailableSinceHelper
+helpers ShortVersion
 
 # Markdown
 set :markdown_engine, :redcarpet
