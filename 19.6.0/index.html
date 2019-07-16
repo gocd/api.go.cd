@@ -2831,7 +2831,7 @@ OK!
 <h2 id="the-material-object">The material object</h2>
 
 <p class='available-since'>
-  Available since v14.3.0.
+  Available since v19.6.0.
 </p>
 
 <p class='attributes-table-follows'></p>
@@ -2844,9 +2844,9 @@ OK!
 </tr>
 </thead><tbody>
 <tr>
-<td><code class="prettyprint">description</code></td>
+<td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The description of the material.</td>
+<td>The type of a material. Can be one of <code class="prettyprint">git</code>, <code class="prettyprint">hg</code>, <code class="prettyprint">svn</code>, <code class="prettyprint">p4</code>, <code class="prettyprint">tfs</code>, <code class="prettyprint">dependency</code>, <code class="prettyprint">package</code>, <code class="prettyprint">plugin</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">fingerprint</code></td>
@@ -2854,9 +2854,462 @@ OK!
 <td>The fingerprint of the material.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">type</code></td>
+<td><code class="prettyprint">attributes</code></td>
+<td>Object</td>
+<td>The <a href="#materials-git-material-attributes">attributes</a> for each material type.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-git-material-attributes'></a></p>
+
+<h3 id="the-git-material-attributes">The git material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/api.go.cd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">url</code></td>
 <td>String</td>
-<td>The type of a material. Can be one of <code class="prettyprint">Git</code>, <code class="prettyprint">Mercurial</code>, <code class="prettyprint">Perforce</code>, <code class="prettyprint">Subversion</code>, <code class="prettyprint">Tfs</code>, <code class="prettyprint">Pipeline</code>, <code class="prettyprint">SCM</code>.</td>
+<td>The URL of the git repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">branch</code></td>
+<td>String</td>
+<td>The git branch to build.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-svn-material-attributes'></a></p>
+
+<h3 id="the-svn-material-attributes">The svn material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"svn"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"svn://svn.example.com/myProject/trunk"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"check_externals"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>The URL of the subversion repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">check_externals</code></td>
+<td>Boolean</td>
+<td>Whether the changes o the externals will trigger the pipeline automatically or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-hg-material-attributes'></a></p>
+
+<h3 id="the-mercurial-material-attributes">The mercurial material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://hg.example.com/hg/api.go.cd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"feature"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>The URL of the mercurial repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The user account for the remote repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">branch</code></td>
+<td>String</td>
+<td>The mercurial branch to build.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-p4-material-attributes'></a></p>
+
+<h3 id="the-perforce-material-attributes">The perforce material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p4.example.com:8080"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"use_tickets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"view"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_view"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">port</code></td>
+<td>String</td>
+<td>Perforce server connection to use (<code class="prettyprint">[transport:]host:port</code>).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">use_tickets</code></td>
+<td>Boolean</td>
+<td>Whether to work with the Perforce tickets or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">view</code></td>
+<td>String</td>
+<td>The Perforce view.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The username to be used.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password for the specified user.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password for the specified user.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-tfs-material-attributes'></a></p>
+
+<h3 id="the-tfs-material-attributes">The tfs material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tfs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://tfs.exampe.com:8000/tfs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"project_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"corporate/domain"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">url</code></td>
+<td>String</td>
+<td>The URL for the Collection on the TFS Server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">project_path</code></td>
+<td>String</td>
+<td>The project path within the TFS collection.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">domain</code></td>
+<td>String</td>
+<td>The domain name for TFS authentication credentials.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The username of the account to access the TFS collection.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password of the account to access the TFS collection.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The encrypted password of the account to access the TFS collection.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-package-material'></a></p>
+
+<h3 id="the-package-material-attributes">The package material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e289f497-057b-46bc-bb69-8043454f5c1b"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ref</code></td>
+<td>String</td>
+<td>The unique package repository id.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-dependency-material'></a></p>
+
+<h3 id="the-dependency-material-attributes">The dependency material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of this material.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipeline</code></td>
+<td>String</td>
+<td>The name of a pipeline that this pipeline depends on.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stage</code></td>
+<td>String</td>
+<td>The name of a stage which will trigger this pipeline once it is successful.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">auto_update</code></td>
+<td>Boolean</td>
+<td>Whether to poll for new changes or not.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-plugin-material'></a></p>
+
+<h3 id="the-plugin-material-attributes">The plugin material attributes</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plugin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5e3612f7-6aa1-4d75-a9b7-6aeb52d98012"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ref</code></td>
+<td>String</td>
+<td>The unique scm plugin repository id.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">destination</code></td>
+<td>String</td>
+<td>The directory (relative to the pipeline directory) in which source code will be checked out.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">filter</code></td>
+<td>Object</td>
+<td>The <a href="#materials-filter-object">filter</a> specifies files in changesets that should not trigger a pipeline automatically.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">invert_filter</code></td>
+<td>Boolean</td>
+<td>Invert filter to enable whitelist.</td>
+</tr>
+</tbody></table>
+
+<p><a id='materials-filter-object'></a></p>
+
+<h3 id="the-filter-object">The filter object</h3>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ignore"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"README.md"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"docs/**.html"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ignore</code></td>
+<td>String</td>
+<td>The pattern for the files to be ignored.</td>
 </tr>
 </tbody></table>
 
@@ -2864,6 +3317,7 @@ OK!
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/materials'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre>
 
 <blockquote>
@@ -2874,16 +3328,80 @@ OK!
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
 </code></pre>
 
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"03c8d2a131154436b6ef2d621c6f773837481aaea8c5c1bb9c0cb9b5bc64a2f1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#materials"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/config/materials"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"458ce82419bdbe41a4007ad713a730e5e467ed4fbefb421bf58aeff3e9c36e4b"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/gocd"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"submodule_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"shallow_clone"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"svn"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6b0cd6b9181434866c555f3c3bb780e950389a456764c876d804c848efbad554"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/gocd"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AES:lTFKwi5NvrlqmQ3LOQ5UQA==:Ebggz5N27w54NrhSXKIbng=="</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"check_externals"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hg"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6b61bc6b33e524c2a94c5be4a4661e5f1d2b74ca089418de20de10b282e39e9"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh://hg@bitbucket.org/example/gocd-hg"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"invert_filter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21f7963a8eca6cced5b4f20b57b4e9cb8edaed29d683c83621a77dfb499c553d"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_material"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Lists all available materials, these are materials that are present in the in <code class="prettyprint">cruise-config.xml</code>.</p>
+<p>Lists all available materials, these are materials that are present in the <code class="prettyprint">cruise-config.xml</code> or Config Repos.</p>
+
+<p class='available-since'>
+  Updated to version v1 since v19.6.0.
+</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -2901,6 +3419,7 @@ OK!
 
 <pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/materials/03c8d2a131154436b6ef2d621c6f773837481aaea8c5c1bb9c0cb9b5bc64a2f1/modifications'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre>
 
 <blockquote>
@@ -2912,20 +3431,33 @@ OK!
 </code></pre>
 
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"modifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7225</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1435728005000</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my hola mundo changes"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a788f1876e2e1f6e5a1e91006e75cd1d467a0edb"</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/materials/03c8d2a131154436b6ef2d621c6f773837481aaea8c5c1bb9c0cb9b5bc64a2f1/modifications"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#materials"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/materials/:fingerprint/modifications/{offset}"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1070</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"page_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"modifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7225</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1435728005000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my hola mundo changes"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a788f1876e2e1f6e5a1e91006e75cd1d467a0edb"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1070</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"page_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2954,11 +3486,11 @@ OK!
 
 <h2 id="notify-svn-materials">Notify SVN materials</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
       -X POST <span class="se">\</span>
-      -d <span class="s1">'uuid=svn-repository-uuid'</span>
+      -d <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"http://svn.example.com/test-repo"</span><span class="o">}</span>
 </code></pre>
 
 <blockquote>
@@ -2966,11 +3498,11 @@ OK!
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=UTF-8</span>
 </code></pre>
 
-<pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
 
@@ -2979,79 +3511,8 @@ OK!
 </aside>
 
 <p class='available-since'>
-  Available since v14.3.0.
+  Updated to version v1 since v19.6.0.
 </p>
-
-<p class='http-request-heading'>HTTP Request</p>
-
-<p><code class="prettyprint">POST /go/api/material/notify/svn</code></p>
-
-<p>The following post parameters must be specified.</p>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">uuid</code></td>
-<td>String</td>
-<td>The subversion repository UUID.</td>
-</tr>
-</tbody></table>
-
-<p class='http-request-return-description'>Returns</p>
-
-<p>A text confirmation.</p>
-
-<h3 id="notification-script">Notification script</h3>
-
-<p>To notify GoCD via a SVN post commit hook, you may use the following post commit hook in your subversion repository.</p>
-
-<p>The post commit hook is located at <code class="prettyprint">/path/to/repository/hooks/post-commit</code>.</p>
-
-<pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
-
-<span class="nv">REPOS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
-<span class="nv">REV</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
-<span class="nv">UUID</span><span class="o">=</span><span class="k">$(</span>svnlook uuid <span class="nv">$1</span><span class="k">)</span>
-
-curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span> <span class="se">\</span>
-    -u <span class="s1">'username:password'</span> <span class="se">\</span>
-    -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
-    -X POST <span class="se">\</span>
-    -d <span class="s2">"uuid=</span><span class="nv">$UUID</span><span class="s2">"</span>
-</code></pre>
-
-<h2 id="notify-git-materials">Notify git materials</h2>
-
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span> <span class="se">\</span>
-      -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
-      -X POST <span class="se">\</span>
-      -d <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns the following response:</p>
-</blockquote>
-
-<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
-</code></pre>
-
-<pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
-</code></pre>
-
-<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
-
-<aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
-</aside>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -3059,9 +3520,9 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">POST /go/api/material/notify/git</code></p>
+<p><code class="prettyprint">POST /go/api/admin/materials/svn/notify</code></p>
 
-<p>The following post parameters must be specified.</p>
+<p>The following json payload must be specified.</p>
 
 <p class='attributes-table-follows'></p>
 
@@ -3075,13 +3536,90 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 <tr>
 <td><code class="prettyprint">repository_url</code></td>
 <td>String</td>
-<td>The git repository url as defined in <code class="prettyprint">cruise-config.xml</code>.</td>
+<td>The git repository url as defined in <code class="prettyprint">cruise-config.xml</code> or a Config Repo.</td>
 </tr>
 </tbody></table>
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A text confirmation.</p>
+<p>A confirmation message.</p>
+
+<h3 id="notification-script">Notification script</h3>
+
+<p>To notify GoCD via a SVN post commit hook, you may use the following post commit hook in your subversion repository.</p>
+
+<p>The post commit hook is located at <code class="prettyprint">/path/to/repository/hooks/post-commit</code>.</p>
+
+<pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
+
+curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'</span> <span class="se">\</span>
+    -u <span class="s1">'username:password'</span> <span class="se">\</span>
+    -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/json'</span>
+    -X POST <span class="se">\</span>
+    -d <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"http://svn.example.com/test-repo"</span><span class="o">}</span>
+</code></pre>
+
+<h2 id="notify-git-materials">Notify git materials</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/git/notify'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span>
+      -X POST <span class="se">\</span>
+      -d <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"git://git.example.com/git/funky-widgets.git"</span><span class="o">}</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=UTF-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
+
+<aside class="notice">
+    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+</aside>
+
+<p class='available-since'>
+  Updated to version v1 since v19.6.0.
+</p>
+
+<p class='available-since'>
+  Available since v14.3.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/admin/materials/git/notify</code></p>
+
+<p>The following json payload must be specified.</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">repository_url</code></td>
+<td>String</td>
+<td>The git repository url as defined in <code class="prettyprint">cruise-config.xml</code> or a Config Repo.</td>
+</tr>
+</tbody></table>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A confirmation message.</p>
 
 <h3 id="notification-script">Notification script</h3>
 
@@ -3091,9 +3629,10 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 
 <pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
 
-curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span> <span class="se">\</span>
+curl <span class="s1">'https://ci.example.com/go/api/admin/materials/notify/git'</span> <span class="se">\</span>
     -u <span class="s1">'username:password'</span> <span class="se">\</span>
-    -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+    -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
     -X POST <span class="se">\</span>
     -d <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
 </code></pre>
@@ -3160,11 +3699,12 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 
 <h2 id="notify-mercurial-materials">Notify Mercurial materials</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/material/notify/hg'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/hg/notify'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: '</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json %&gt;'</span> <span class="se">\</span>
       -X POST <span class="se">\</span>
-      -d <span class="s2">"repository_url=ssh://hg.example.com//hg/repos/funky-widgets"</span>
+      -d <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"ssh://hg.example.com/hg/repos/funky-widgets"</span><span class="o">}</span>
 </code></pre>
 
 <blockquote>
@@ -3172,11 +3712,11 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=UTF-8</span>
 </code></pre>
 
-<pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
 
@@ -3185,14 +3725,18 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 </aside>
 
 <p class='available-since'>
+  Updated to version v1 since v19.6.0.
+</p>
+
+<p class='available-since'>
   Available since v14.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">POST /go/api/material/notify/hg</code></p>
+<p><code class="prettyprint">POST /go/api/admin/materials/hg/notify</code></p>
 
-<p>The following post parameters must be specified.</p>
+<p>The following json payload must be specified.</p>
 
 <p class='attributes-table-follows'></p>
 
@@ -3206,13 +3750,13 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 <tr>
 <td><code class="prettyprint">repository_url</code></td>
 <td>String</td>
-<td>The Mercurial repository URL as defined in <code class="prettyprint">cruise-config.xml</code>.</td>
+<td>The Mercurial repository URL as defined in <code class="prettyprint">cruise-config.xml</code> or a Config Repo.</td>
 </tr>
 </tbody></table>
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A text confirmation.</p>
+<p>A confirmation message.</p>
 
 <h3 id="notification-script">Notification script</h3>
 
@@ -3221,20 +3765,22 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/git'</span>
 <p>The hook goes into the <code class="prettyprint">hgrc</code> file, located at <code class="prettyprint">/path/to/hg/repository/.hg/hgrc</code>.</p>
 
 <pre class="highlight plaintext"><code>[hooks]
-changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
+changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify' \
     -u 'username:password' \
-    -H 'Confirm: true' \
+    -H 'Accept: application/vnd.go.cd.v1+json' \
+    -H 'Content-Type: application/json' \
     -X POST \
-    -d "repository_url=ssh://hg.example.com//hg/repos/funky-widgets"
+    -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
 </code></pre>
 
 <h2 id="notify-other-scm-materials">Notify other scm materials</h2>
 
-<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/material/notify/scm'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/scm/notify'</span> <span class="se">\</span>
       -u <span class="s1">'username:password'</span> <span class="se">\</span>
-      -H <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       -X POST <span class="se">\</span>
-      -d <span class="s2">"scm_name=material_name"</span>
+      -d <span class="o">{</span><span class="s2">"scm_name"</span>: <span class="s2">"material_name"</span><span class="o">}</span>
 </code></pre>
 
 <blockquote>
@@ -3242,11 +3788,11 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 </blockquote>
 
 <pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">text/plain; charset=UTF-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=UTF-8</span>
 </code></pre>
 
-<pre class="highlight plaintext"><code>The material is now scheduled for an update. Please check relevant pipeline(s) for status.
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
 
@@ -3255,14 +3801,18 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 </aside>
 
 <p class='available-since'>
+  Updated to version v1 since v19.6.0.
+</p>
+
+<p class='available-since'>
   Available since v14.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">POST /go/api/material/notify/scm</code></p>
+<p><code class="prettyprint">POST /go/api/admin/materials/scm/notify</code></p>
 
-<p>The following post parameters must be specified.</p>
+<p>The following json payload must be specified.</p>
 
 <p class='attributes-table-follows'></p>
 
@@ -3282,7 +3832,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/material/notify/hg' \
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A text confirmation.</p>
+<p>A confirmation message.</p>
 
           <h1 id="backups">Backups</h1>
 
@@ -6826,7 +7376,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <tr>
 <td><code class="prettyprint">ref</code></td>
 <td>String</td>
-<td>The unique svn plugin repository id.</td>
+<td>The unique scm plugin repository id.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">destination</code></td>
@@ -18086,6 +18636,28 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
           <h1 id="api-changelog">API Changelog</h1>
 
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
+
+<h2 id="changes-in-19-6-0">Changes in 19.6.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 1 of <a href="#materials">Materials API</a>.</li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<p>No removals this release.</p>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>Unversioned Materials API has been deprecated in favor of Materials API v1. This version will be removed in a release scheduled for December 2019.</li>
+</ul>
+
+<h2 id="changes-in-19-5-0">Changes in 19.5.0</h2>
+
+<p>No changes.</p>
 
 <h2 id="changes-in-19-4-0">Changes in 19.4.0</h2>
 
