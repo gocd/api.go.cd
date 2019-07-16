@@ -3834,6 +3834,171 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>A confirmation message.</p>
 
+          <h1 id="backup-config">Backup Config</h1>
+
+<p>The Backup Config API allows users to configure backup settings for the GoCD server.</p>
+
+<h2 id="the-backup-config-object">The Backup Config Object</h2>
+
+<p class='available-since'>
+  Available since v19.6.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">schedule</code></td>
+<td>String</td>
+<td>The backup schedule. See the <a href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html">quartz documentation</a> for syntax and examples.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">post_backup_script</code></td>
+<td>String</td>
+<td>The script that will be executed once the backup finishes. See the <a href="https://docs.gocd.org/19.6.0/advanced_usage/cron_backup.html">gocd documentation</a> for details.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">email_on_failure</code></td>
+<td>Boolean</td>
+<td>If set to <code class="prettyprint">true</code>, an email will be sent when backup fails.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">email_on_success</code></td>
+<td>Boolean</td>
+<td>If set to <code class="prettyprint">true</code>, an email will be sent when backup completes successfully.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-backup-config">Get Backup Config</h2>
+
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/backup'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/config/backup"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#backup-config"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"email_on_failure"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_on_success"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"post_backup_script"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/bin/copy-gocd-backup-to-s3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"schedule"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0 0 2 * * ?"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='available-since'>
+  Available since v19.6.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/config/backup</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-backup-config-object">backup config object</a>.</p>
+
+<h2 id="create-or-update-backup-config">Create or Update Backup Config</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/backup'</span> <span class="se">\</span>
+      -u <span class="s1">'username:password'</span> <span class="se">\</span>
+      -H <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      -X POST <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -d <span class="s1">'{
+            "email_on_failure" : false,
+            "email_on_success" : false,
+            "post_backup_script" : "/usr/local/bin/copy-gocd-backup-to-s3",
+            "schedule" : "0 0 2 * * ?"
+          }'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/config/backup"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#backup-config"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"email_on_failure"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_on_success"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"post_backup_script"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/bin/copy-gocd-backup-to-s3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"schedule"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0 0 2 * * ?"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='available-since'>
+  Available since v19.6.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/config/backup</code></p>
+
+<p><code class="prettyprint">PUT /go/api/config/backup</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-backup-config-object">backup config object</a>.
+<h2 id="delete-backup-config">Delete Backup Config</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl <span class="s1">&#39;https://ci.example.com/go/api/config/backup&#39;</span> <span class="se">&lt;/span&gt;
+      -u <span class="s1">&#39;username:password&#39;</span> <span class="se">&lt;/span&gt;
+      -H <span class="s1">&#39;Accept: application/vnd.go.cd.v1+json&#39;</span> <span class="se">&lt;/span&gt;
+      -X DELETE
+</code></pre></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Backup config was deleted successfully!"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p class='available-since'>
+  Available since v19.6.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">DELETE /go/api/config/backup</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message confirmation if the backup config was deleted.</p>
+
           <h1 id="backups">Backups</h1>
 
 <p>The backups API allows users with administrator role to manage GoCD server backups.</p>
@@ -19114,6 +19279,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <li>Introduced version 1 of <a href="#materials">Materials API</a>.</li>
 <li>Introduced version 1 of <a href="#secret-config">Secret Configs API</a>.</li>
 <li>Introduced version 6 of <a href="#plugin-info">Plugin Info API</a>.</li>
+<li>Introduced version 1 of (Backup Config API)[#backup-config].</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
