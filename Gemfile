@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.17.1')
-  abort "Bundler version >= 1.17.1 is required"
+if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.13.7')
+  abort "Bundler version >= 1.13.7 is required"
 end
 
 # Middleman
