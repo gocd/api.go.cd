@@ -1,0 +1,13 @@
+
+<%=
+describe_object 'The Mailserver Config Object', since: '19.8.0' do
+  hostname              'String',     'The SMTP server hostname (or IP address).'
+  port                  'Integer',    'The SMTP server port.'
+  username              'String',     'The username required to authenticate with the SMTP server.'
+  password              'String',     'The password required to authenticate with the SMTP server.'
+  encrypted_password    'String',     'The [encrypted password](#encryption) required to authenticate with the SMTP server.'
+  tls                   'Boolean',    'Whether the SMTP server connection should should use SSL/TLS.'
+  sender_email          'Boolean',    'The email address of the sender. All emails sent by the GoCD server will use this email address in the `Form` field.'
+  admin_email           'Boolean',    'The email address of the server administrator. Any emails that require attention from adminstrators will be sent to this email address.'
+end
+%>

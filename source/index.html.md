@@ -20,6 +20,7 @@ includes:
   - 042-current-user
   - 044-notification-filters
   - 050-materials
+  - 051-mailserver-config
   - 055-backup-config
   - 060-backups
   - 070-pipeline-groups

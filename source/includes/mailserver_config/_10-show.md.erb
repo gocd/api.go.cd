@@ -1,0 +1,44 @@
+## Get Mailserver Config
+
+```shell
+$ curl 'https://ci.example.com/go/api/config/mailserver' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.mailserver_config %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.mailserver_config %>; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://ci.example.com/go/api/config/mailserver"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#mailserver-config"
+    }
+  },
+  "hostname" : "smtp.example.com",
+  "port" : 465,
+  "username" : "user@example.com",
+  "encrypted_password" : "AES:lzcCuNSe4vUx+CsWgN11Uw==:Q2OlnqIf9S++yMPqSCx8qg==",
+  "tls" : true,
+  "sender_email" : "no-reply@example.com",
+  "admin_email" : "gocd-admins@example.com"
+}
+```
+
+<%= available_since('19.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/config/mailserver`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [mailserver config object](#the-mailserver-config-object).

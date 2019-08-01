@@ -1,0 +1,31 @@
+## Delete Mailserver Config
+
+```shell
+$ curl 'https://ci.example.com/go/api/config/mailserver' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.mailserver_config %>' \
+      -X DELETE
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.mailserver_config %>; charset=utf-8
+```
+
+```json
+{
+"message" : "Mailserver config was deleted successfully!"
+}
+```
+
+<%= available_since('19.8.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`DELETE /go/api/config/mailserver`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirmation if the mailserver config was deleted.
