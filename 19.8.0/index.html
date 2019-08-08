@@ -3748,6 +3748,190 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>A confirmation message.</p>
 
+          <h1 id="mailserver-config">Mailserver Config</h1>
+
+<p>The mailserver config API allows admins to setup the SMTP server configuration, so GoCD can send emails.</p>
+
+<h2 id="the-mailserver-config-object">The Mailserver Config Object</h2>
+
+<p class='available-since'>
+  Available since v19.8.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">hostname</code></td>
+<td>String</td>
+<td>The SMTP server hostname (or IP address).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">port</code></td>
+<td>Integer</td>
+<td>The SMTP server port.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">username</code></td>
+<td>String</td>
+<td>The username required to authenticate with the SMTP server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">password</code></td>
+<td>String</td>
+<td>The password required to authenticate with the SMTP server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_password</code></td>
+<td>String</td>
+<td>The <a href="#encryption">encrypted password</a> required to authenticate with the SMTP server.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">tls</code></td>
+<td>Boolean</td>
+<td>Whether the SMTP server connection should should use SSL/TLS.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sender_email</code></td>
+<td>Boolean</td>
+<td>The email address of the sender. All emails sent by the GoCD server will use this email address in the <code class="prettyprint">Form</code> field.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">admin_email</code></td>
+<td>Boolean</td>
+<td>The email address of the server administrator. Any emails that require attention from adminstrators will be sent to this email address.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-mailserver-config">Get Mailserver Config</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/mailserver'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/config/mailserver"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#mailserver-config"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"hostname"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"user@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"encrypted_password"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AES:lzcCuNSe4vUx+CsWgN11Uw==:Q2OlnqIf9S++yMPqSCx8qg=="</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tls"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"no-reply@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"admin_email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd-admins@example.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='available-since'>
+  Available since v19.8.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/config/mailserver</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-mailserver-config-object">mailserver config object</a>.</p>
+
+<h2 id="create-or-update-mailserver-config">Create or Update Mailserver Config</h2>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/mailserver'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-X</span> POST <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      <span class="nt">-d</span> <span class="s1">'{
+            "hostname" : "smtp.example.com",
+            "port" : 465,
+            "username" : "user@example.com",
+            "password" : "p@ssw0rd",
+            "tls" : true,
+            "sender_email" : "no-reply@example.com",
+            "admin_email" : "gocd-admins@example.com"
+          }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/config/mailserver"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#mailserver-config"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"hostname"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"user@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"encrypted_password"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AES:lzcCuNSe4vUx+CsWgN11Uw==:Q2OlnqIf9S++yMPqSCx8qg=="</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tls"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"no-reply@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"admin_email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd-admins@example.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p class='available-since'>
+  Available since v19.8.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/config/mailserver</code></p>
+
+<p><code class="prettyprint">PUT /go/api/config/mailserver</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-mailserver-config-object">mailserver config object</a>.
+<h2 id="delete-mailserver-config">Delete Mailserver Config</h2>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">&#39;https://ci.example.com/go/api/config/mailserver&#39;</span> <span class="se">&lt;/span&gt;
+      <span class="nt">-u</span> <span class="s1">&#39;username:password&#39;</span> <span class="se">&lt;/span&gt;
+      <span class="nt">-H</span> <span class="s1">&#39;Accept: application/vnd.go.cd.v1+json&#39;</span> <span class="se">&lt;/span&gt;
+      <span class="nt">-X</span> DELETE
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="s2">&quot;message&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mailserver config was deleted successfully!&quot;</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p class='available-since'>
+  Available since v19.8.0.
+</p></p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">DELETE /go/api/config/mailserver</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message confirmation if the mailserver config was deleted.</p>
+
           <h1 id="backup-config">Backup Config</h1>
 
 <p>The Backup Config API allows users to configure backup settings for the GoCD server.</p>
@@ -18942,6 +19126,12 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
 
 <h2 id="changes-in-19-8-0">Changes in 19.8.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 1 of <a href="#mailserver-config">Mailserver Config API</a></li>
+</ul>
 
 <h3 id="removed">Removed</h3>
 
