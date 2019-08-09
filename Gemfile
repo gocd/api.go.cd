@@ -5,7 +5,7 @@ if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.13.7')
 end
 
 # Middleman
-gem 'middleman', '~> 4.1.0'
+gem 'middleman', '~> 4.3.4'
 gem 'middleman-gh-pages', '~> 0.3.0'
 gem 'middleman-syntax', '~> 3.2.0'
 gem 'middleman-autoprefixer', '~> 2.10.1'
