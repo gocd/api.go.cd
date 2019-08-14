@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('1.13.7')
+  abort "Bundler version >= 1.13.7 is required"
+end
+
+gem 'nokogiri'
+gem 'html-proofer'
+
 # Middleman
 gem 'middleman', '~> 4.1.0'
 gem 'middleman-gh-pages', '~> 0.3.0'

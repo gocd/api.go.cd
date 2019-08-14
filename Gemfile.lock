@@ -40,6 +40,8 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
+    ethon (0.12.0)
+      ffi (>= 1.3.0)
     eventmachine (1.0.9.1)
     execjs (2.7.0)
     fast_blank (1.0.0)
@@ -51,6 +53,15 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     hashie (3.4.4)
+    html-proofer (3.11.1)
+      activesupport (>= 4.2, < 6.0)
+      addressable (~> 2.3)
+      mercenary (~> 0.3.2)
+      nokogiri (~> 1.9)
+      parallel (~> 1.3)
+      rainbow (~> 3.0)
+      typhoeus (~> 1.3)
+      yell (~> 2.0)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     jmespath (1.4.0)
@@ -60,6 +71,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     memoist (0.14.0)
+    mercenary (0.3.6)
     middleman (4.1.9)
       coffee-script (~> 2.2)
       compass-import-once (= 1.0.5)
@@ -111,7 +123,10 @@ GEM
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
+    mini_portile2 (2.4.0)
     minitest (5.9.0)
+    nokogiri (1.10.4)
+      mini_portile2 (~> 2.4.0)
     padrino-helpers (0.13.2)
       i18n (~> 0.6, >= 0.6.7)
       padrino-support (= 0.13.2)
@@ -122,6 +137,7 @@ GEM
     rack (1.6.4)
     rack-livereload (0.3.16)
       rack
+    rainbow (3.0.0)
     rake (10.4.2)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
@@ -136,10 +152,13 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    typhoeus (1.3.1)
+      ethon (>= 0.9.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    yell (2.2.0)
 
 PLATFORMS
   ruby
@@ -147,6 +166,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk-s3
+  html-proofer
   listen (= 3.0.8)
   middleman (~> 4.1.0)
   middleman-autoprefixer (~> 2.7.0)
@@ -155,6 +175,7 @@ DEPENDENCIES
   middleman-sprockets (~> 4.0.0)
   middleman-syntax (~> 2.1.0)
   mime-types
+  nokogiri
   parallel
   rake (~> 10.4.2)
   redcarpet (~> 3.3.4)
