@@ -162,7 +162,7 @@
 
           <h1 id="authentication">Authentication</h1>
 
-<p>All APIs require you to authenticate yourself using your username and password. Starting with version 19.2.0 of GoCD, users may also use a bearer token to authenticate. A cookie will also be returned as a result of the first authentication call. You may use this cookie for any further authentication attempts. If authentication fails, GoCD server may return status codes <code class="prettyprint">401</code>, <code class="prettyprint">403</code> or <code class="prettyprint">404</code>.</p>
+<p>All APIs require you to authenticate yourself using your username and password. Starting with version 19.2.0 of GoCD, users may also use a bearer token to authenticate. If authentication fails, GoCD server may return status codes <code class="prettyprint">401</code>, <code class="prettyprint">403</code> or <code class="prettyprint">404</code>.</p>
 
 <h2 id="bearer-token-authentication">Bearer token authentication</h2>
 
@@ -186,7 +186,6 @@
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
-<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -231,7 +230,6 @@
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
-<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -257,47 +255,6 @@
 </span></code></pre></div>
 
 <p>To use Basic Authentication with the GoCD API, simply send the username and password associated with the account.</p>
-
-<h2 id="cookie-session-authentication">Cookie/Session authentication</h2>
-
-<p>Using the cookie/session returned from the previous API call, one can make further API calls. Using a cookie will dramatically improve performance of API calls especially if GoCD is authenticating against an external source like LDAP.</p>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-<span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/current_user'</span> <span class="se">\</span>
-      <span class="nt">-b</span> <span class="s1">'JSESSIONID=15kvus1kdrec46vk2a6jmtmo'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
-</code></pre></div>
-
-<blockquote>
-<p>The above command returns the following response</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
-<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">JSESSIONID=15kvus1kdrec46vk2a6jmtmo;Path=/go;Expires=Mon, 15-Jun-2015 10:16:20 GMT</span>
-</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#users"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"current_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/current_user"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/username"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/users/:login_name"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"login_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"email_me"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"checkin_aliases"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
 
           <h1 id="server-health">Server Health</h1>
 
@@ -19143,6 +19100,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <ul>
 <li>The Pipeline Config API version 6 has been removed. <a href="#pipeline-config">Version 8</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Config Repo API version 1 has been removed. <a href="#config-repo">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>Cookie/Session authentication should no longer be used for API authentication. Users should either use Basic Authentication or Token based authentication for any API requests going forward.</li>
 </ul>
 
 <h2 id="changes-in-19-7-0">Changes in 19.7.0</h2>
