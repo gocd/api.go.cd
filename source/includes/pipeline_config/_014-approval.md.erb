@@ -2,6 +2,7 @@
 json = {
   approval: {
     type: 'success',
+    allow_only_on_success: true,
     authorization: {
       roles: [],
       users: []
@@ -12,6 +13,7 @@ json = {
 <%=
 describe_sub_object 'The approval object', json: json, html_id: 'pipeline-config-approval-object' do
   type          'String', 'The type of the approval on which stage will trigger.', one_of: %w(success manual)
+  allow_only_on_success  'Boolean',  'Setting this attribute to `true` will ensure that the stage can triggered only if the previous stage (if any) has succeeded. Default is `false`.', since: '19.8.0'
   authorization 'Object', 'The [authorization](#pipeline-config-approval-authorization) under an approval with a `manual` or `success` type to specify who can approve this stage.'
 end
 %>
