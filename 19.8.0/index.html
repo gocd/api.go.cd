@@ -6773,7 +6773,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v8</code> of the API using <code>Accept: application/vnd.go.cd.v8+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v9</code> of the API using <code>Accept: application/vnd.go.cd.v9+json</code>
 </aside>
 
 <h2 id="the-pipeline-config-object">The pipeline config object</h2>
@@ -7668,6 +7668,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"approval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"allow_only_on_success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nl">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
 
@@ -7693,6 +7694,11 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
 <td>The type of the approval on which stage will trigger. Can be one of <code class="prettyprint">success</code>, <code class="prettyprint">manual</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">allow_only_on_success</code></td>
+<td>Boolean</td>
+<td>Setting this attribute to <code class="prettyprint">true</code> will ensure that the stage can triggered only if the previous stage (if any) has succeeded. Default is <code class="prettyprint">false</code>. <strong>Since v19.8.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">authorization</code></td>
@@ -8605,7 +8611,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v8+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -8614,7 +8620,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v8+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8751,7 +8757,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Updated to version v8 since v19.6.0.
+  Updated to version v9 since v19.8.0.
 </p>
 
 <p class='available-since'>
@@ -8770,7 +8776,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v8+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -8879,7 +8885,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v8+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9023,7 +9029,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Updated to version v8 since v19.6.0.
+  Updated to version v9 since v19.8.0.
 </p>
 
 <p class='available-since'>
@@ -9042,7 +9048,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v8+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-pause-pipeline: true'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-pause-cause: "to have more control over when to start the pipeline after reviewing it"'</span> <span class="se">\</span>
@@ -9151,7 +9157,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v8+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9287,7 +9293,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Updated to version v8 since v19.6.0.
+  Updated to version v9 since v19.8.0.
 </p>
 
 <p class='available-since'>
@@ -9306,7 +9312,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v8+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 
 </code></pre></div>
@@ -9316,7 +9322,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v8+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline 'my_pipeline' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -9329,7 +9335,7 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 </aside>
 
 <p class='available-since'>
-  Updated to version v8 since v19.6.0.
+  Updated to version v9 since v19.8.0.
 </p>
 
 <p class='available-since'>
@@ -19092,13 +19098,20 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <ul>
 <li>Introduced version 1 of <a href="#mailserver-config">Mailserver Config API</a></li>
+<li>Introduced version 9 of <a href="#pipeline-config">Pipeline Config API</a>.</li>
 <li>It is now possible to omit the version number by specifying <code class="prettyprint">Accept: application/vnd.go.cd+json</code>. This will render the latest version of the API endpoint being invoked.</li>
+</ul>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>The Pipeline Config API version 8 has been deprecated. This version will be removed in a release scheduled for Nov 2019. <a href="#pipeline-config">Version 9</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
 
 <ul>
-<li>The Pipeline Config API version 6 has been removed. <a href="#pipeline-config">Version 8</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 6 has been removed. <a href="#pipeline-config">Version 9</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Config Repo API version 1 has been removed. <a href="#config-repo">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 <li>Cookie/Session authentication should no longer be used for API authentication. Users should either use Basic Authentication or Token based authentication for any API requests going forward.</li>
 </ul>
