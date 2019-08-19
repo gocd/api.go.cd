@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-selected-jobs' \
       -u 'username:password' \
       -H 'Content-Type: application/json' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: <%= data.apis.versions.stage_operations %>'
       -X POST \
       -d '{
             jobs: ["job1", "job2"]
@@ -15,7 +15,7 @@ $ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myS
 
 ```http
 HTTP/1.1 202 Accepted
-Content-Type: application/vnd.go.cd.v1+json;charset=utf-8
+Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 ```
 
 ```json
@@ -42,4 +42,4 @@ Following property must be specified:
 
 <p class='http-request-return-description'>Returns</p>
 
-A text confirmation.
+A message confirmation if the request to rerun selected jobs was accepted.

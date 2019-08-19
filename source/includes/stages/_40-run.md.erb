@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStages/run' \
       -u 'username:password' \
       -H 'X-GoCD-Confirm: true' \
-      -H 'Accept: application/vnd.go.cd.v1+json' \
+      -H 'Accept: <%= data.apis.versions.stage_operations %>' \
       -X POST
 ```
 
@@ -12,7 +12,7 @@ $ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myS
 
 ```http
 HTTP/1.1 202 Accepted
-Content-Type: application/vnd.go.cd.v1+json;charset=utf-8
+Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 ```
 
 ```
@@ -31,4 +31,4 @@ Runs a specified stage.
 
 <p class='http-request-return-description'>Returns</p>
 
-A text confirmation.
+A message confirmation if the request to schedule stage was accepted.
