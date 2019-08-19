@@ -1,9 +1,10 @@
 ## Cancel stage
 
 ```shell
-$ curl 'https://ci.example.com/go/api/stages/myPipeline/myStages/cancel' \
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/42/myStages/13/cancel' \
       -u 'username:password' \
-      -H 'Confirm: true' \
+      -H 'X-GoCD-Confirm: true' \
+      -H 'Accept: <%= data.apis.versions.stage_operations %>' \
       -X POST
 ```
 
@@ -11,21 +12,25 @@ $ curl 'https://ci.example.com/go/api/stages/myPipeline/myStages/cancel' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
+Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 ```
 
-```
-Stage cancelled successfully.
+```json
+{
+  "message" : "Stage cancelled successfully."
+}
 ```
 
 Cancel an active stage of a specified stage.
 
+<%= updated_to(1, '19.8.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`POST /go/api/stages/:pipeline_name/:stage_name/cancel`
+`POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/cancel`
 
 <p class='http-request-return-description'>Returns</p>
 
-A text confirmation.
+A message confirmation if the stage was cancelled.
+

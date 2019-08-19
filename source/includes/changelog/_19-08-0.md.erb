@@ -5,10 +5,12 @@
 - Introduced version 1 of [Mailserver Config API](#mailserver-config)
 - Introduced version 9 of [Pipeline Config API](#pipeline-config).
 - It is now possible to omit the version number by specifying `Accept: application/vnd.go.cd+json`. This will render the latest version of the API endpoint being invoked.
+- Introduced version 1 of [Stage Cancel](#stage-cancel) API.
 
 ### Deprecations
 
 - <%= deprecated_api_message({api_name: 'Pipeline Config', old_api_version: 8, new_api_version: 9, api_section: 'pipeline-config', removal_date_and_year: 'Nov 2019'}) %>
+- <%= deprecated_api_message({api_name: 'Cancel Stage', new_api_version: 1, api_section: 'cancel-stage', removal_date_and_year: 'Nov 2019'}) %>
 
 ### Removed
 
