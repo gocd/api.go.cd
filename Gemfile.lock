@@ -146,7 +146,7 @@ GEM
     rouge (3.9.0)
     sass (3.4.25)
     servolux (0.13.0)
-    sprockets (3.6.2)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     temple (0.8.1)
