@@ -19146,13 +19146,6 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <li>Introduced version 1 of <a href="#delete-a-pluggable-scm-material">Delete Pluggable SCM</a> API.</li>
 </ul>
 
-<h3 id="deprecations">Deprecations</h3>
-
-<ul>
-<li>The Pipeline Config API version 8 has been deprecated. This version will be removed in a release scheduled for Nov 2019. <a href="#pipeline-config">Version 9</a> of the API is available, and users are encouraged to use it.</li>
-<li>The unversioned Cancel Stage API has been deprecated. This version will be removed in a release scheduled for Nov 2019. <a href="#cancel-stage">Version 1</a> of the API is available, and users are encouraged to use it.</li>
-</ul>
-
 <h3 id="removed">Removed</h3>
 
 <ul>
@@ -19161,9 +19154,29 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 <li>Cookie/Session authentication should no longer be used for API authentication. Users should either use Basic Authentication or Token based authentication for any API requests going forward.</li>
 </ul>
 
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>The Plugin Info API version 5 has been deprecated in GoCD 19.7.0. This version will be removed in a release scheduled for Oct 2019. <a href="#plugin-info">Version 6</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 7 has been deprecated in GoCD 19.7.0. This version will be removed in a release scheduled for Oct 2019. <a href="#pipeline-config">Version 9</a> of the API is available, and users are encouraged to use it.</li>
+<li>Unversioned get all materials API has been deprecated in favor of get all materials API v1. This version will be removed in a release scheduled for Oct 2019.</li>
+<li>The Pipeline Config API version 8 has been deprecated in GoCD 19.8.0. This version will be removed in a release scheduled for Nov 2019. <a href="#pipeline-config">Version 9</a> of the API is available, and users are encouraged to use it.</li>
+<li>The unversioned Cancel Stage API has been deprecated in GoCD 19.8.0. This version will be removed in a release scheduled for Nov 2019. <a href="#cancel-stage">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
+
 <h2 id="changes-in-19-7-0">Changes in 19.7.0</h2>
 
 <p>No changes. 19.7.0 was primarily a bugfix release.</p>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>The Pipeline Config API version 6 has been deprecated in GoCD 19.6.0. This version will be removed in a release scheduled for Aug 2019. <a href="#pipeline-config">Version 8</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Config Repo API version 1 has been deprecated in GoCD 19.6.0. This version will be removed in a release scheduled for Aug 2019. <a href="#config-repo">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Plugin Info API version 5 has been deprecated in GoCD 19.7.0. This version will be removed in a release scheduled for Sep 2019. <a href="#plugin-info">Version 6</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 7 has been deprecated in GoCD 19.7.0. This version will be removed in a release scheduled for Oct 2019. <a href="#pipeline-config">Version 8</a> of the API is available, and users are encouraged to use it.</li>
+<li>Unversioned get all materials API has been deprecated in favor of get all materials API v1. This version will be removed in a release scheduled for Oct 2019.</li>
+</ul>
 
 <h2 id="changes-in-19-6-0">Changes in 19.6.0</h2>
 
@@ -19178,14 +19191,17 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <h3 id="removed">Removed</h3>
 
-<p>No removals this release.</p>
+<ul>
+<li>The Stage History unversioned API has been removed. Version 1 of the API is available, and users are encouraged to use it.</li>
+<li>The Plugin Info API version 4 has been removed. Version 6 of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h3 id="deprecations">Deprecations</h3>
 
 <ul>
-<li>Unversioned Materials API has been deprecated in favor of Materials API v1. This version will be removed in a release scheduled for December 2019.</li>
-<li>The Pipeline Config API version 7 has been deprecated. This version will be removed in a release scheduled for August 2019. <a href="#pipeline-config">Version 8</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 6 has been deprecated. This version will be removed in a release scheduled for August 2019. <a href="#pipeline-config">Version 8</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Plugin Info API version 5 has been deprecated. This version will be removed in a release scheduled for August 2019. <a href="#plugin-info">Version 6</a> of the API is available, and users are encouraged to use it.</li>
+<li>Unversioned Materials API has been deprecated in favor of Materials API v1. This version will be removed in a release scheduled for October 2019.</li>
 </ul>
 
 <h2 id="changes-in-19-5-0">Changes in 19.5.0</h2>
@@ -19194,6 +19210,15 @@ myLocalAgent,0,14,Passed,9,4f9e580347b2e259fe030a775771359cdc984346,1,2015-07-07
 
 <ul>
 <li>The Dashboard API version 2 has been removed. <a href="#dashboard">Version 3</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>Unversioned get stage history API has been deprecated in favor of get stage history API v1. This version will be removed in a release scheduled for July 2019.</li>
+<li>The Plugin Info API version 4 has been deprecated. This version will be removed in a release scheduled for July 2019. Version 5 of the API is available, and users are encouraged to use it.</li>
+<li>The ConfigRepo API version 1 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 2 of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 6 has been deprecated. This version will be removed in a release scheduled for August 2019. Version 7 of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-19-4-0">Changes in 19.4.0</h2>
