@@ -8,13 +8,16 @@
 - Introduced version 1 of [Stage Cancel](#cancel-stage) API.
 - Introduced version 1 of [Delete Pluggable SCM](#delete-a-pluggable-scm-material) API.
 
-### Deprecations
-
-- <%= deprecated_api_message({api_name: 'Pipeline Config', old_api_version: 8, new_api_version: 9, api_section: 'pipeline-config', removal_date_and_year: 'Nov 2019'}) %>
-- <%= deprecated_api_message({api_name: 'Cancel Stage', new_api_version: 1, api_section: 'cancel-stage', removal_date_and_year: 'Nov 2019'}) %>
-
 ### Removed
 
 - <%= removed_api_message({api_name: 'Pipeline Config', old_api_version: 6, new_api_version: 9, api_section: 'pipeline-config'}) %>
 - <%= removed_api_message({api_name: 'Config Repo', old_api_version: 1, new_api_version: 2, api_section: 'config-repo'}) %>
 - Cookie/Session authentication should no longer be used for API authentication. Users should either use Basic Authentication or Token based authentication for any API requests going forward.
+
+### Deprecations
+
+- <%= deprecated_api_message({api_name: 'Plugin Info', deprecated_in_release: '19.7.0', old_api_version: 5, new_api_version: 6, api_section: 'plugin-info', removal_date_and_year: 'Oct 2019'}) %>
+- <%= deprecated_api_message({api_name: 'Pipeline Config', deprecated_in_release: '19.7.0', old_api_version: 7, new_api_version: 9, api_section: 'pipeline-config', removal_date_and_year: 'Oct 2019'}) %>
+- Unversioned get all materials API has been deprecated in favor of get all materials API v1. This version will be removed in a release scheduled for Oct 2019.
+- <%= deprecated_api_message({api_name: 'Pipeline Config', deprecated_in_release: '19.8.0', old_api_version: 8, new_api_version: 9, api_section: 'pipeline-config', removal_date_and_year: 'Nov 2019'}) %>
+- <%= deprecated_api_message({api_name: 'Cancel Stage', deprecated_in_release: '19.8.0', new_api_version: 1, api_section: 'cancel-stage', removal_date_and_year: 'Nov 2019'}) %>
