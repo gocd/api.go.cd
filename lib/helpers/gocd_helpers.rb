@@ -5,9 +5,9 @@ module GoCDHelpers
 
   def deprecated_api_message(opts = {})
     if [nil, 'unversioned'].include?(opts[:old_api_version])
-      concat_content("The unversioned #{opts[:api_name]} API has been deprecated. ")
+      concat_content("The unversioned #{opts[:api_name]} API has been deprecated in GoCD #{opts[:deprecated_release]}. ")
     else
-      concat_content("The #{opts[:api_name]} API version #{opts[:old_api_version]} has been deprecated. ")
+      concat_content("The #{opts[:api_name]} API version #{opts[:old_api_version]} has been deprecated in GoCD #{opts[:deprecated_release]}. ")
     end
     concat_content("This version will be removed in a release scheduled for #{opts[:removal_date_and_year]}. ")
     concat_content(link_to_versioned_api(opts[:api_section], "Version #{opts[:new_api_version]}"))
