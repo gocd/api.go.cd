@@ -2,6 +2,10 @@
   padding-top: 0;
 }
 
+blockquote + div.highlight > pre.highlight, div.highlight + div.highlight > pre.highlight {
+  padding-top: 0;
+}
+
 .highlight + blockquote {
   padding-top: 0;
 }
@@ -12,6 +16,15 @@ blockquote + .highlight {
 
 .tocify-wrapper > img {
     margin: 10px;
+}
+
+div.highlight {
+  float: right;
+  width: 50%;
+}
+
+pre.highlight {
+  width: 100%;
 }
 
 
