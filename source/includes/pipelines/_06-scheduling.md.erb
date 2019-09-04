@@ -66,7 +66,7 @@ The following properties may be specified.
   describe_object(nil) do
     environment_variables              'Array',   'A list of [environment variables](#the-environment-variable-object) that can be overridden while scheduling the pipeline'
     materials                          'Array',   'A list of [materials](#the-scheduling-material-object) that must be used to trigger a new instance of the pipeline.', defaults_to: 'triggering with the latest revision of all pipelines'
-    update_materials_before_scheduling 'Boolean', 'Whether a material update should be updated before scheduling.', defaults_to: true
+    update_materials_before_scheduling 'Boolean', 'Whether a material update should be updated before scheduling. See [more information about this flag below](#update-materials-before-scheduling-flag).', defaults_to: true
   end
 %>
 
@@ -86,6 +86,69 @@ json = {
   ]
 }
 %>
+
+<a name="update-materials-before-scheduling-flag"></a>
+
+### The `update_materials_before_scheduling` flag
+
+When the `update_materials_before_scheduling` flag is `false`, then GoCD does not run a material update before scheduling the pipeline.
+
+When the `update_materials_before_scheduling` flag is `true` (as it is by default), then a material update is run before the pipeline is scheduled. This can cause new commits to be seen for the materials of the pipeline, causing GoCD to use those commits for scheduling the pipeline.
+
+#### Scenario 1:
+
+Given:
+
+- `update_materials_before_scheduling`: `false`
+- `materials`: empty list
+
+What happens:
+
+- No material update happens.
+- The latest known revisions of all the materials of the pipeline are used.
+
+#### Scenario 2:
+
+Given:
+
+- `update_materials_before_scheduling`: `false`
+- `materials`: non-empty list
+
+What happens:
+
+- No material update happens.
+- The specified revisions of the materials will be used.
+- The latest known revisions of all other (unspecified) materials will be used.
+- If any of the revisions cannot be found, the pipeline will fail to be triggered.
+
+#### Scenario 3:
+
+Given:
+
+- `update_materials_before_scheduling`: `true`
+- `materials`: empty list
+
+What happens:
+
+- Material update happens.
+- The latest known revisions of all the materials of the pipeline are used. Any new revisions found during the material update will be used.
+
+#### Scenario 4:
+
+Given:
+
+- `update_materials_before_scheduling`: `true`
+- `materials`: non-empty list
+
+What happens:
+
+- Material update happens.
+- The specified revisions of the materials will be used.
+- The latest known revisions of all other (unspecified) materials will be used. These might be new revisions found during the material update.
+- If any of the revisions cannot be found, the pipeline will fail to be triggered.
+
+Please see [GitHub issue #4319](https://github.com/gocd/gocd/issues/4319) for more information and details.
+
 
 <%=
 describe_sub_object 'The scheduling material object', json: json, html_id: 'the-scheduling-material-object' do
