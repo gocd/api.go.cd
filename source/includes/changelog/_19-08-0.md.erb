@@ -13,6 +13,7 @@
 - <%= removed_api_message({api_name: 'Pipeline Config', old_api_version: 6, new_api_version: 9, api_section: 'pipeline-config'}) %>
 - <%= removed_api_message({api_name: 'Config Repo', old_api_version: 1, new_api_version: 2, api_section: 'config-repo'}) %>
 - Cookie/Session authentication should no longer be used for API authentication. Users should either use Basic Authentication or Token based authentication for any API requests going forward.
+- Removed support for the Properties API. See [this pull request](https://github.com/gocd/gocd/pull/6887) for details.
 
 ### Deprecations
 

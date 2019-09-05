@@ -28,7 +28,6 @@ includes:
   - 090-pipelines
   - 100-stages
   - 110-jobs
-  - 120-properties
   - 130-configuration
   - 135-config-repository
   - 140-feeds
