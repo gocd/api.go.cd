@@ -5140,7 +5140,7 @@ File logs/operations.log was appended successfully
 <tr>
 <td><code class="prettyprint">update_materials_before_scheduling</code></td>
 <td>Boolean</td>
-<td>Whether a material update should be updated before scheduling. Defaults to true.</td>
+<td>Whether a material update should be updated before scheduling. See <a href="#update-materials-before-scheduling-flag">more information about this flag below</a>. Defaults to true.</td>
 </tr>
 </tbody></table>
 
@@ -5151,6 +5151,84 @@ File logs/operations.log was appended successfully
 <p class='http-request-return-description'>Returns</p>
 
 <p>A message indicating if the request was accepted.</p>
+
+<p><a name="update-materials-before-scheduling-flag"></a></p>
+
+<h3 id="the-update_materials_before_scheduling-flag">The <code class="prettyprint">update_materials_before_scheduling</code> flag</h3>
+
+<p>When the <code class="prettyprint">update_materials_before_scheduling</code> flag is <code class="prettyprint">false</code>, then GoCD does not run a material update before scheduling the pipeline.</p>
+
+<p>When the <code class="prettyprint">update_materials_before_scheduling</code> flag is <code class="prettyprint">true</code> (as it is by default), then a material update is run before the pipeline is scheduled. This can cause new commits to be seen for the materials of the pipeline, causing GoCD to use those commits for scheduling the pipeline.</p>
+
+<h4 id="scenario-1">Scenario 1:</h4>
+
+<p>Given:</p>
+
+<ul>
+<li><code class="prettyprint">update_materials_before_scheduling</code>: <code class="prettyprint">false</code></li>
+<li><code class="prettyprint">materials</code>: empty list</li>
+</ul>
+
+<p>What happens:</p>
+
+<ul>
+<li>No material update happens.</li>
+<li>The latest known revisions of all the materials of the pipeline are used.</li>
+</ul>
+
+<h4 id="scenario-2">Scenario 2:</h4>
+
+<p>Given:</p>
+
+<ul>
+<li><code class="prettyprint">update_materials_before_scheduling</code>: <code class="prettyprint">false</code></li>
+<li><code class="prettyprint">materials</code>: non-empty list</li>
+</ul>
+
+<p>What happens:</p>
+
+<ul>
+<li>No material update happens.</li>
+<li>The specified revisions of the materials will be used.</li>
+<li>The latest known revisions of all other (unspecified) materials will be used.</li>
+<li>If any of the revisions cannot be found, the pipeline will fail to be triggered.</li>
+</ul>
+
+<h4 id="scenario-3">Scenario 3:</h4>
+
+<p>Given:</p>
+
+<ul>
+<li><code class="prettyprint">update_materials_before_scheduling</code>: <code class="prettyprint">true</code></li>
+<li><code class="prettyprint">materials</code>: empty list</li>
+</ul>
+
+<p>What happens:</p>
+
+<ul>
+<li>Material update happens.</li>
+<li>The latest known revisions of all the materials of the pipeline are used. Any new revisions found during the material update will be used.</li>
+</ul>
+
+<h4 id="scenario-4">Scenario 4:</h4>
+
+<p>Given:</p>
+
+<ul>
+<li><code class="prettyprint">update_materials_before_scheduling</code>: <code class="prettyprint">true</code></li>
+<li><code class="prettyprint">materials</code>: non-empty list</li>
+</ul>
+
+<p>What happens:</p>
+
+<ul>
+<li>Material update happens.</li>
+<li>The specified revisions of the materials will be used.</li>
+<li>The latest known revisions of all other (unspecified) materials will be used. These might be new revisions found during the material update.</li>
+<li>If any of the revisions cannot be found, the pipeline will fail to be triggered.</li>
+</ul>
+
+<p>Please see <a href="https://github.com/gocd/gocd/issues/4319">GitHub issue #4319</a> for more information and details.</p>
 
 <p><a id='the-scheduling-material-object'></a></p>
 
