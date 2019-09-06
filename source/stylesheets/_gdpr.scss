@@ -3,7 +3,7 @@
   background: #fff;
   padding: 10px 66px;
   width: 100%;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 100;
 
@@ -48,8 +48,4 @@
     &:before { transform: rotate(45deg); }
     &:after { transform: rotate(-45deg); }
   }
-}
-
-.gdpr-banner ~ * {
-  transform: translateY(36px);
 }
