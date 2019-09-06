@@ -6,11 +6,11 @@
       setCookie();
 
       var banner = el("div", {class: "gdpr-banner"}, [
-        on(el("i", {class: "gdpr-close"}), "click", hide),
         el("p", {}, [
           "Our site uses ", link("cookies", "https://www.thoughtworks.com/privacy-policy#cookie-section"),
           " for analytics. If you're unsure about it, take a look at our ",
-          link("privacy policy", "https://www.thoughtworks.com/privacy-policy"), "."
+          link("privacy policy", "https://www.thoughtworks.com/privacy-policy"), ".",
+          on(el("i", {class: "gdpr-close"}), "click", hide),
           ])
         ]);
 
