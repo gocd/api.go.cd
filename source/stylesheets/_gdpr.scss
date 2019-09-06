@@ -3,15 +3,22 @@
   background: #fff;
   padding: 10px 66px;
   width: 100%;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 100;
 
   box-shadow: 0 3px 5px 0 rgba(0,0,0,.1);
 
-  text-align: center;
   font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
   font-size: 14px;
+
+  @media (min-width: $tablet-width + $nav-width) {
+    text-align: center;
+  }
+  @media (max-width: $tablet-width + $nav-width) {
+    text-align: left;
+  }
+
 
   p { margin: 0; padding: 0; }
 
@@ -31,9 +38,9 @@
     position: absolute;
     width: 16px;
     height: 16px;
-    top: 50%;
-    right: 40px;
+    bottom: 10px;
     margin-top: -8px;
+    margin-left: 10px;
     cursor: pointer;
 
     &:before, &:after {
