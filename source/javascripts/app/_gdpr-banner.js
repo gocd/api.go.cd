@@ -14,12 +14,14 @@
           ])
         ]);
 
+      var pageWrapperElement = document.querySelector(".page-wrapper");
+
       function hide() {
         setCookie();
-        document.body.removeChild(banner);
+        pageWrapperElement.removeChild(banner);
       }
 
-      document.body.insertBefore(banner, document.body.firstChild);
+      pageWrapperElement.insertBefore(banner, pageWrapperElement.firstChild);
     }
   }
 
