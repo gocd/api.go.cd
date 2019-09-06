@@ -49,3 +49,7 @@
     &:after { transform: rotate(-45deg); }
   }
 }
+
+.gdpr-banner ~ * {
+  transform: translateY(36px);
+}

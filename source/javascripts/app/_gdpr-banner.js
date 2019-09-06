@@ -22,6 +22,9 @@
       }
 
       pageWrapperElement.insertBefore(banner, pageWrapperElement.firstChild);
+      setTimeout(function() {
+        window.scrollBy(0, -36);
+      }, 500);
     }
   }
 
