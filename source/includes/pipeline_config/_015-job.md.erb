@@ -31,7 +31,6 @@ describe_sub_object 'The job object', json: json, html_id: 'pipeline-config-jobs
   tasks                 'Array',         'The list of [tasks](#pipeline-config-task) that will run as part of the job.'
   tabs                  'Array',         'The list of [tabs](#the-tab-object) which let you add custom tabs within the job details page.'
   artifacts             'Array',         'The list of [artifacts](#the-pipeline-config-artifact-object) specifies what files the agent will publish to the server.'
-  properties            'Array',         'The list of [properties](#the-property-object) of the build from XML files or artifacts created during your build.'
   elastic_profile_id    'String',        'The id of the elastic profile, specifying this attribute would run the job on an elastic agent asociated with this profile. MUST NOT be specified along with `resources`', since: '16.10.0'
 end
 %>
