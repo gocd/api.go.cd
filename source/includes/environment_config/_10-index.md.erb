@@ -55,22 +55,6 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
             "name": "up42"
           }
         ],
-        "agents": [
-          {
-            "_links": {
-              "self": {
-                "href": "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"
-              },
-              "doc": {
-                "href": "https://api.gocd.org/#agents"
-              },
-              "find": {
-                "href": "https://ci.example.com/go/api/agents/:uuid"
-              }
-            },
-            "uuid": "12345678-e2f6-4c78-123456789012"
-          }
-        ],
         "environment_variables": [
           {
             "secure": false,
@@ -90,7 +74,7 @@ ETag: "3924a894cf0e5bef02abe9de0df3bb84"
 ```
 
 Lists all available environments.
-
+<%= updated_to(3,'19.9.0') %>
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

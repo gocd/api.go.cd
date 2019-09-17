@@ -12,11 +12,6 @@ $ curl 'https://ci.example.com/go/api/admin/environments' \
           "name" : "up2"
           }
         ],
-        "agents" : [
-          {
-            "uuid" : "12345678-e2f6-4c78-123456789012"
-          }
-        ],
         "environment_variables" : [
           {
             "name" : "username",
@@ -65,22 +60,6 @@ ETag: "d3b07384d113edec49eaa6238ad5ff00"
       "name": "up42"
     }
   ],
-  "agents": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://ci.example.com/go/api/agents/12345678-e2f6-4c78-123456789012"
-        },
-        "doc": {
-          "href": "https://api.gocd.org/#agents"
-        },
-        "find": {
-          "href": "https://ci.example.com/go/api/agents/:uuid"
-        }
-      },
-      "uuid": "12345678-e2f6-4c78-123456789012"
-    }
-  ],
   "environment_variables": [
     {
       "secure": false,
@@ -98,6 +77,7 @@ ETag: "d3b07384d113edec49eaa6238ad5ff00"
 
 Creates an environment
 
+<%= updated_to(3,'19.9.0') %>
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -110,7 +90,6 @@ The following properties may be specified:
   describe_object nil do
   name                      'String',  'The environment config name'
   pipelines                 'Array',   'The list of pipeline names that belongs to the specified environment'
-  agents                    'Array',   'The list of agent uuids that belongs to the specified environment'
   environment_variables     'Array',   'The list of [environment variables](#the-environment-variable-object) that will be passed to all tasks (commands) that are part of this environment.'
   end
 %>

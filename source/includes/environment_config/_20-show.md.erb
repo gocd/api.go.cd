@@ -44,22 +44,6 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
       "name": "up42"
     }
   ],
-  "agents": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"
-        },
-        "doc": {
-          "href": "https://api.gocd.org/#agents"
-        },
-        "find": {
-          "href": "https://ci.example.com/go/api/agents/:uuid"
-        }
-      },
-      "uuid": "12345678-e2f6-4c78-123456789012"
-    }
-  ],
   "environment_variables": [
     {
       "secure": false,
@@ -83,7 +67,7 @@ Gets environment config for specified environment name.
   <a href='#update-an-environment'>edit environment config</a>
   documentation for more details.
 </aside>
-
+<%= updated_to(3,'19.9.0') %>
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
