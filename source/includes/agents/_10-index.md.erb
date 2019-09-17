@@ -81,6 +81,12 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
                 }
               }
             }
+          },
+          {
+            "name": "test",
+            "origin": {
+              "type": "unknown"
+            }
           }
         ],
         "build_state": "Idle"
@@ -90,10 +96,10 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
 }
 ```
 
-Lists all available agents, these are agents that are present in the `<agents/>` tag inside `cruise-config.xml` and also agents that are in `Pending` state awaiting registration.
+Lists all available agents, registered as well as agents that are in `Pending` state awaiting registration.
 
 
-<%= updated_to(5,'19.3.0') %>
+<%= updated_to(6,'19.9.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

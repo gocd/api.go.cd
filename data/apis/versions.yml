@@ -1,4 +1,4 @@
-agent: 'application/vnd.go.cd.v5+json'
+agent: 'application/vnd.go.cd.v6+json'
 backup: 'application/vnd.go.cd.v2+json'
 dashboard: 'application/vnd.go.cd.v3+json'
 cluster_profiles: 'application/vnd.go.cd.v1+json'
