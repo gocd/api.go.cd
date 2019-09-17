@@ -57,6 +57,10 @@ end
 
 <%=
 describe_sub_object 'The Environment Origin object', json: origin_json, html_id: 'the-agent-environments-origin-object' do
-  type             'String',  'The origin type of the environment.', one_of: %w(gocd config-repo unknown)
+  type             'String',  'The origin type of the environment.', list: [
+  '<strong>gocd</strong> : The environment is defined in <code>cruise-config.xml</code>',
+  '<strong>config-repo</strong>: The environment is defined via <code>config-repo</code>',
+  '<strong>unknown</strong>: The environment is neither defined in <code>cruise-config.xml</code> nor via <code>config-repo</code>'
+  ]
 end
 %>

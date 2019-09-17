@@ -77,7 +77,7 @@ Atleast one of the following properties must be specified, not specifying the pr
   describe_object(nil) do
     hostname              'String',             'The new hostname'
     resources             ['String', 'Array'],  'A comma separated strings of resources, or an array of string resources. Updating of resources is **NOT** supported by elastic agents.'
-    environments          ['String', 'Array'],  'A comma separated strings of environments, or an array of string environments'
+    environments          ['String', 'Array'],  'A comma separated strings of environments, or an array of string environments. If the given enviornment is present, the agent will be mapped to it.'
     agent_config_state    'String',             'Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents.', one_of: %w(Enabled Disabled)
   end
  %>
