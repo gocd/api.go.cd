@@ -291,7 +291,7 @@
 <p>The agents API allows users with administrator role to manage agents.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v5</code> of the API using <code>application/vnd.go.cd.v5+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v6</code> of the API using <code>application/vnd.go.cd.v6+json</code>
 </aside>
 
 <h2 id="the-agent-object">The agent object</h2>
@@ -367,7 +367,7 @@
 <tr>
 <td><code class="prettyprint">environments</code></td>
 <td>Array</td>
-<td>The set of environments that this agent belongs to. <strong>Updated in v19.3.0</strong>.</td>
+<td>The set of environments that this agent belongs to. <strong>Updated in v19.9.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">build_state</code></td>
@@ -451,7 +451,7 @@
 <tr>
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The origin type of the environment. Can be one of <code class="prettyprint">gocd</code>, <code class="prettyprint">config-repo</code>.</td>
+<td>The origin type of the environment:<ul><li><strong>gocd</strong> : The environment is defined in GoCD <code>cruise-config.xml</code>.</li><li><strong>config-repo</strong>: The environment is defined via an external <code>config-repo</code>.</li><li><strong>unknown</strong>: The environment is neither defined in <code>cruise-config.xml</code> nor via <code>config-repo</code>.</li></ul>.</td>
 </tr>
 </tbody></table>
 
@@ -459,7 +459,7 @@
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -467,7 +467,7 @@
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -535,6 +535,12 @@
                 </span><span class="p">}</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
         </span><span class="nl">"build_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idle"</span><span class="w">
@@ -544,10 +550,10 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
-<p>Lists all available agents, these are agents that are present in the <code class="prettyprint">&lt;agents/&gt;</code> tag inside <code class="prettyprint">cruise-config.xml</code> and also agents that are in <code class="prettyprint">Pending</code> state awaiting registration.</p>
+<p>Lists all available agents, registered as well as agents that are in <code class="prettyprint">Pending</code> state awaiting registration.</p>
 
 <p class='available-since'>
-  Updated to version v5 since v19.3.0.
+  Updated to version v6 since v19.9.0.
 </p>
 
 <p class='available-since'>
@@ -566,7 +572,7 @@
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -574,7 +580,7 @@
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -652,7 +658,7 @@
 <p>Gets an agent by its unique identifier (uuid)</p>
 
 <p class='available-since'>
-  Updated to version v5 since v19.3.0.
+  Updated to version v6 since v19.9.0.
 </p>
 
 <p class='available-since'>
@@ -671,7 +677,7 @@
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> PATCH <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
@@ -687,7 +693,7 @@
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -731,7 +737,7 @@
 <p>Update some attributes of an agent.</p>
 
 <p class='available-since'>
-  Updated to version v5 since v19.3.0.
+  Updated to version v6 since v19.9.0.
 </p>
 
 <p class='available-since'>
@@ -766,7 +772,7 @@
 <tr>
 <td><code class="prettyprint">environments</code></td>
 <td><code class="prettyprint">String</code> &#124; <code class="prettyprint">Array</code></td>
-<td>A comma separated strings of environments, or an array of string environments.</td>
+<td>A comma separated strings of environments, or an array of string environments. The agent will be associated to an environment only if an environment exists in GoCD for the given name, else will be ignored.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">agent_config_state</code></td>
@@ -783,7 +789,7 @@
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -792,7 +798,7 @@
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deleted 1 agent(s)."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -806,7 +812,7 @@
 </aside>
 
 <p class='available-since'>
-  Updated to version v5 since v19.3.0.
+  Updated to version v6 since v19.9.0.
 </p>
 
 <p class='available-since'>
@@ -825,7 +831,7 @@
 
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> PATCH <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
@@ -852,7 +858,7 @@
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated agent(s) with uuid(s): [adb9540a-b954-4571-9d9b-2f330739d4da, adb528b2-b954-1234-9d9b-b27ag4h568e1]."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -861,7 +867,7 @@
 <p>Updates a list of agents.</p>
 
 <p class='available-since'>
-  Updated to version v5 since v19.3.0.
+  Updated to version v6 since v19.9.0.
 </p>
 
 <p class='available-since'>
@@ -937,12 +943,12 @@
 <tr>
 <td><code class="prettyprint">environments</code></td>
 <td>Object</td>
-<td>The <a href="#the-agent-environments-update-operation">environments update operation</a> to be performed on the set of agents. Updating of resources is <strong>NOT</strong> supported by elastic agents.</td>
+<td>The <a href="#the-agent-environments-update-operation">environments update operation</a> to be performed on the set of agents.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">resources</code></td>
 <td>Object</td>
-<td>The <a href="#the-agent-resources-update-operation">resources update operation</a> to be performed on the set of agents.</td>
+<td>The <a href="#the-agent-resources-update-operation">resources update operation</a> to be performed on the set of agents. Updating of resources is <strong>NOT</strong> supported by elastic agents.</td>
 </tr>
 </tbody></table>
 
@@ -973,7 +979,7 @@
 <tr>
 <td><code class="prettyprint">add</code></td>
 <td>Array</td>
-<td>The list of environments to which the specified agents needs to be added.</td>
+<td>The list of environments to which the specified agents needs to be added. If the said environment is present, the agent will be mapped to the same.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">remove</code></td>
@@ -1022,7 +1028,7 @@
 
 <div class="highlight"><pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/agents'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
@@ -1038,7 +1044,7 @@
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deleted 2 agent(s)."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1052,7 +1058,7 @@
 </aside>
 
 <p class='available-since'>
-  Updated to version v5 since v19.3.0.
+  Updated to version v6 since v19.9.0.
 </p>
 
 <p class='available-since'>
@@ -1113,10 +1119,6 @@
 </span></code></pre></div>
 
 <p>Lists the jobs that have executed on an agent.</p>
-
-<p class='available-since'>
-  Updated to version v5 since v19.3.0.
-</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -10722,11 +10724,6 @@ File logs/operations.log was appended successfully
 <td>List of pipeline names that should be added to this environment.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">agents</code></td>
-<td>Array</td>
-<td>List of agent uuids that should be added to this environment.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">environment_variables</code></td>
 <td>Array</td>
 <td>The list of <a href="#pipeline-config-environment-variables">environment variables</a> that will be passed to all tasks (commands) that are part of this environment.</td>
@@ -10737,7 +10734,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/environments'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -10745,7 +10742,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"3924a894cf0e5bef02abe9de0df3bb84"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -10787,22 +10784,6 @@ File logs/operations.log was appended successfully
             </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#agents"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="nl">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678-e2f6-4c78-123456789012"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
         </span><span class="nl">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nl">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -10821,7 +10802,10 @@ File logs/operations.log was appended successfully
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
-<p>Lists all available environments.</p>
+<p>Lists all available environments.
+<p class='available-since'>
+  Updated to version v3 since v19.9.0.
+</p></p>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -10839,7 +10823,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/environments/my_environment'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -10847,7 +10831,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -10878,22 +10862,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#agents"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678-e2f6-4c78-123456789012"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="nl">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -10919,6 +10887,10 @@ File logs/operations.log was appended successfully
 </aside>
 
 <p class='available-since'>
+  Updated to version v3 since v19.9.0.
+</p>
+
+<p class='available-since'>
   Available since v16.7.0.
 </p>
 
@@ -10934,18 +10906,13 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/environments'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
         "name" : "new_environment",
         "pipelines" : [
           {
           "name" : "up2"
-          }
-        ],
-        "agents" : [
-          {
-            "uuid" : "12345678-e2f6-4c78-123456789012"
           }
         ],
         "environment_variables" : [
@@ -10963,7 +10930,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"d3b07384d113edec49eaa6238ad5ff00"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -10994,22 +10961,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/12345678-e2f6-4c78-123456789012"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#agents"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678-e2f6-4c78-123456789012"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="nl">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -11026,6 +10977,10 @@ File logs/operations.log was appended successfully
 </span></code></pre></div>
 
 <p>Creates an environment</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.9.0.
+</p>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -11057,11 +11012,6 @@ File logs/operations.log was appended successfully
 <td>The list of pipeline names that belongs to the specified environment.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">agents</code></td>
-<td>Array</td>
-<td>The list of agent uuids that belongs to the specified environment.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">environment_variables</code></td>
 <td>Array</td>
 <td>The list of <a href="#the-environment-variable-object">environment variables</a> that will be passed to all tasks (commands) that are part of this environment.</td>
@@ -11076,7 +11026,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/environments/new_environment'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "26b227605daf6f2d7768c8edaf61b861"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -11092,7 +11042,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -11123,9 +11073,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-  </span><span class="p">],</span><span class="w">
   </span><span class="nl">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
 
   </span><span class="p">]</span><span class="w">
@@ -11146,6 +11093,10 @@ File logs/operations.log was appended successfully
   another user has modified the state of the environment config, leading to a
   conflict.
 </aside>
+
+<p class='available-since'>
+  Updated to version v3 since v19.9.0.
+</p>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -11177,11 +11128,6 @@ File logs/operations.log was appended successfully
 <td>List of pipeline names that should be part of this environment.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">agents</code></td>
-<td>Array</td>
-<td>List of agent uuids that should be part of this environment.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">environment_variables</code></td>
 <td>Array</td>
 <td>The list of <a href="#pipeline-config-environment-variables">environment variables</a> that will be passed to all tasks (commands) that are part of this environment.</td>
@@ -11196,17 +11142,13 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/environments/new_environment'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> PATCH <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
       "pipelines": {
         "add": ["up42"],
         "remove": ["sample"]
-      },
-      "agents": {
-        "add": ["12345678-e2f6-4c78-123456789012"],
-        "remove": ["87654321-e2f6-4c78-123456789012"]
       },
       "environment_variables": {
           "add": [
@@ -11226,7 +11168,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -11257,22 +11199,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#agents"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"find"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678-e2f6-4c78-123456789012"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="nl">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GO_SERVER_URL"</span><span class="p">,</span><span class="w">
@@ -11285,6 +11211,10 @@ File logs/operations.log was appended successfully
 </span></code></pre></div>
 
 <p>Update some attributes of an environment.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.9.0.
+</p>
 
 <p class='available-since'>
   Available since v16.10.0.
@@ -11308,15 +11238,6 @@ File logs/operations.log was appended successfully
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"Production"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"agents"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"agent05"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"agent02"</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"agent01"</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"environment_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -11346,11 +11267,6 @@ File logs/operations.log was appended successfully
 <td><code class="prettyprint">pipelines</code></td>
 <td>Object</td>
 <td>The <a href="#the-environments-pipeline-update-operation">pipelines update operation</a> to be performed on the set of pipelines.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">agents</code></td>
-<td>Object</td>
-<td>The <a href="#the-environments-agent-update-operation">agents update operation</a> to be performed on the set of agents.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">environment_variables</code></td>
@@ -11392,42 +11308,6 @@ File logs/operations.log was appended successfully
 <td><code class="prettyprint">remove</code></td>
 <td>Array</td>
 <td>The list of pipelines which needs to be removed to the specified environment.</td>
-</tr>
-</tbody></table>
-
-<p><a id='the-environments-agent-update-operation'></a></p>
-
-<h3 id="the-environments-agent-update-operation-attributes">The environments agent-update operation attributes</h3>
-
-<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"agent05"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"agent02"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"remove"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"agent01"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">add</code></td>
-<td>Array</td>
-<td>The list of agents which needs to be added to the specified environment.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">remove</code></td>
-<td>Array</td>
-<td>The list of agents which needs to be removed to the specified environment.</td>
 </tr>
 </tbody></table>
 
@@ -11482,7 +11362,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/environments/my_environment'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -11491,13 +11371,17 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Environment 'my_environment' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Deletes an environment.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.9.0.
+</p>
 
 <p class='available-since'>
   Available since v16.7.0.
@@ -19078,7 +18962,34 @@ File logs/operations.log was appended successfully
 
 <h2 id="changes-in-19-9-0">Changes in 19.9.0</h2>
 
-<h3 id="no-changes">No changes</h3>
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 3 of <a href="#environment-config">Environment Config API</a></li>
+<li>Introduced version 6 of <a href="#agents">Agents API</a></li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<ul>
+<li>We have removed the following APIs as a part of <a href="https://github.com/gocd/gocd/pull/6271">this pull request</a>
+
+<ul>
+<li>The Environment Config API version 2 has been removed. <a href="#environment-config">Version 3</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Agents API version 4 has been removed. <a href="#agents">Version 6</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Agents API version 5 has been removed. <a href="#agents">Version 6</a> of the API is available, and users are encouraged to use it.</li>
+</ul></li>
+</ul>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>The Plugin Info API version 5 has been deprecated in GoCD 19.7.0. This version will be removed in a release scheduled for Oct 2019. <a href="#plugin-info">Version 6</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 7 has been deprecated in GoCD 19.7.0. This version will be removed in a release scheduled for Oct 2019. <a href="#pipeline-config">Version 9</a> of the API is available, and users are encouraged to use it.</li>
+<li>Unversioned get all materials API has been deprecated in favor of get all materials API v1. This version will be removed in a release scheduled for Oct 2019.</li>
+<li>The Pipeline Config API version 8 has been deprecated in GoCD 19.8.0. This version will be removed in a release scheduled for Nov 2019. <a href="#pipeline-config">Version 9</a> of the API is available, and users are encouraged to use it.</li>
+<li>The unversioned Cancel Stage API has been deprecated in GoCD 19.8.0. This version will be removed in a release scheduled for Nov 2019. <a href="#cancel-stage">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h2 id="changes-in-19-8-0">Changes in 19.8.0</h2>
 
