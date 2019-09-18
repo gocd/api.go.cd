@@ -52,9 +52,6 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
       "name": "up42"
     }
   ],
-  "agents": [
-
-  ],
   "environment_variables": [
 
   ]
@@ -76,6 +73,7 @@ Update some attributes of an environment.
   conflict.
 </aside>
 
+<%= updated_to(3,'19.9.0') %>
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -88,7 +86,6 @@ All of the following properties must be specified. Not specifying a property wil
   describe_object nil do
   name                      'String',  'The name of environment'
   pipelines                 'Array',   'List of pipeline names that should be part of this environment'
-  agents                    'Array',   'List of agent uuids that should be part of this environment'
   environment_variables     'Array',   'The list of [environment variables](#pipeline-config-environment-variables) that will be passed to all tasks (commands) that are part of this environment.'
   end
  %>

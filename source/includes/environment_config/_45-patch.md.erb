@@ -11,10 +11,6 @@ $ curl 'https://ci.example.com/go/api/admin/environments/new_environment' \
         "add": ["up42"],
         "remove": ["sample"]
       },
-      "agents": {
-        "add": ["12345678-e2f6-4c78-123456789012"],
-        "remove": ["87654321-e2f6-4c78-123456789012"]
-      },
       "environment_variables": {
           "add": [
             {
@@ -66,22 +62,6 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
       "name": "up42"
     }
   ],
-  "agents": [
-    {
-      "_links": {
-        "self": {
-          "href": "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da"
-        },
-        "doc": {
-          "href": "https://api.gocd.org/#agents"
-        },
-        "find": {
-          "href": "https://ci.example.com/go/api/agents/:uuid"
-        }
-      },
-      "uuid": "12345678-e2f6-4c78-123456789012"
-    }
-  ],
   "environment_variables": [
     {
       "name": "GO_SERVER_URL",
@@ -95,6 +75,7 @@ ETag: "4167e3ec81fdac0fb29d854b36ceb981"
 
 Update some attributes of an environment.
 
+<%= updated_to(3,'19.9.0') %>
 <%= available_since('16.10.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -109,10 +90,6 @@ json = {
   pipelines: {
     add: %w(Dev Test),
     remove: ['Production']
-  },
-  agents: {
-    add: %w(agent05 agent02),
-    remove: ['agent01']
   },
   environment_variables: {
     add: [
@@ -129,7 +106,6 @@ json = {
 <%=
 describe_sub_object 'The environments patch operation attributes', json: json, html_id: 'the-environments-patch-operations' do
     pipelines                 'Object',  'The [pipelines update operation](#the-environments-pipeline-update-operation) to be performed on the set of pipelines.'
-    agents                    'Object',  'The [agents update operation](#the-environments-agent-update-operation) to be performed on the set of agents'
     environment_variables     'Object',  'The [environment variables update operation](#the-environments-environment-variables-update-operation) to be performed on the set of environment variables'
   end
  %>
@@ -145,20 +121,6 @@ json = {
 describe_sub_object 'The environments pipeline-update operation attributes', json: json, html_id: 'the-environments-pipeline-update-operation' do
   add              'Array',   'The list of pipelines which needs to be added to the specified environment'
   remove           'Array',   'The list of pipelines which needs to be removed to the specified environment'
-end
-%>
-
-<%
-json = {
-  add: %w(agent05 agent02),
-  remove: ['agent01']
-}
-%>
-
-<%=
-describe_sub_object 'The environments agent-update operation attributes', json: json, html_id: 'the-environments-agent-update-operation' do
-  add              'Array',   'The list of agents which needs to be added to the specified environment'
-  remove           'Array',   'The list of agents which needs to be removed to the specified environment'
 end
 %>
 

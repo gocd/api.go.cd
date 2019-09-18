@@ -40,7 +40,7 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
 
 Updates a list of agents.
 
-<%= updated_to(5,'19.3.0') %>
+<%= updated_to(6,'19.9.0') %>
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -76,8 +76,8 @@ json = {
 
 <%=
 describe_sub_object 'The bulk update operation attributes', json: json, html_id: 'the-agent-update-operations' do
-  environments     'Object',  'The [environments update operation](#the-agent-environments-update-operation) to be performed on the set of agents. Updating of resources is **NOT** supported by elastic agents.'
-  resources        'Object',  'The [resources update operation](#the-agent-resources-update-operation) to be performed on the set of agents'
+  environments     'Object',  'The [environments update operation](#the-agent-environments-update-operation) to be performed on the set of agents'
+  resources        'Object',  'The [resources update operation](#the-agent-resources-update-operation) to be performed on the set of agents. Updating of resources is **NOT** supported by elastic agents.'
 end
 %>
 
@@ -90,7 +90,7 @@ json = {
 
 <%=
 describe_sub_object 'The environment update operation attributes', json: json, html_id: 'the-agent-environments-update-operation' do
-  add              'Array',   'The list of environments to which the specified agents needs to be added'
+  add              'Array',   'The list of environments to which the specified agents needs to be added. If the said environment is present, the agent will be mapped to the same.'
   remove           'Array',   'The list of environments from which the specified agents needs to be removed'
 end
 %>

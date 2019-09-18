@@ -64,7 +64,7 @@ Content-Type: <%= data.apis.versions.agent %>; charset=utf-8
 
 Update some attributes of an agent.
 
-<%= updated_to(5,'19.3.0') %>
+<%= updated_to(6,'19.9.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -77,7 +77,7 @@ Atleast one of the following properties must be specified, not specifying the pr
   describe_object(nil) do
     hostname              'String',             'The new hostname'
     resources             ['String', 'Array'],  'A comma separated strings of resources, or an array of string resources. Updating of resources is **NOT** supported by elastic agents.'
-    environments          ['String', 'Array'],  'A comma separated strings of environments, or an array of string environments'
+    environments          ['String', 'Array'],  'A comma separated strings of environments, or an array of string environments. The agent will be associated to an environment only if an environment exists in GoCD for the given name, else will be ignored.'
     agent_config_state    'String',             'Whether an agent should be enabled. In case of agents awaiting approval, setting this will approve the agents.', one_of: %w(Enabled Disabled)
   end
  %>

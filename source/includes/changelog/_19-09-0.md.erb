@@ -1,3 +1,21 @@
 ## Changes in 19.9.0
 
-### No changes
+### Added
+
+- Introduced version 3 of [Environment Config API](#environment-config)
+- Introduced version 6 of [Agents API](#agents)
+
+### Removed
+
+- We have removed the following APIs as a part of [this pull request](https://github.com/gocd/gocd/pull/6271)
+  - <%= removed_api_message({api_name: 'Environment Config', old_api_version: 2, new_api_version: 3, api_section: 'environment-config'}) %>
+  - <%= removed_api_message({api_name: 'Agents', old_api_version: 4, new_api_version: 6, api_section: 'agents'}) %>
+  - <%= removed_api_message({api_name: 'Agents', old_api_version: 5, new_api_version: 6, api_section: 'agents'}) %>
+
+### Deprecations
+
+- <%= deprecated_api_message({api_name: 'Plugin Info', deprecated_in_release: '19.7.0', old_api_version: 5, new_api_version: 6, api_section: 'plugin-info', removal_date_and_year: 'Oct 2019'}) %>
+- <%= deprecated_api_message({api_name: 'Pipeline Config', deprecated_in_release: '19.7.0', old_api_version: 7, new_api_version: 9, api_section: 'pipeline-config', removal_date_and_year: 'Oct 2019'}) %>
+- Unversioned get all materials API has been deprecated in favor of get all materials API v1. This version will be removed in a release scheduled for Oct 2019.
+- <%= deprecated_api_message({api_name: 'Pipeline Config', deprecated_in_release: '19.8.0', old_api_version: 8, new_api_version: 9, api_section: 'pipeline-config', removal_date_and_year: 'Nov 2019'}) %>
+- <%= deprecated_api_message({api_name: 'Cancel Stage', deprecated_in_release: '19.8.0', new_api_version: 1, api_section: 'cancel-stage', removal_date_and_year: 'Nov 2019'}) %>

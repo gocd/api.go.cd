@@ -11,7 +11,7 @@ describe_object 'The agent object', since: '15.2.0' do
   agent_config_state 'String',  'Whether an agent is enabled or not', one_of: %w(Pending Enabled Disabled), since: '15.3.0'
   agent_state        'String',  'The state an agent is in.', one_of: %w(Idle Building LostContact Missing Building Unknown), since: '15.3.0'
   resources          'Array',   'The set of resources that this agent is tagged with. This attribute is only available if the agent is **NOT** an elastic agent.'
-  environments       'Array',   'The set of environments that this agent belongs to', updated_in: '19.3.0'
+  environments       'Array',   'The set of environments that this agent belongs to', updated_in: '19.9.0'
   build_state        'String',  'If the agent is running a build, the state of the build on the agent.', one_of: %w(Idle Building Cancelled Unknown), since: '15.3.0'
   build_details      'Object',  'The [build details](#agent-config-build-details-object) provides information like pipeline, stage and job if the build_state of the agent is `Building`', since: '16.10.0'
 end
@@ -57,6 +57,10 @@ end
 
 <%=
 describe_sub_object 'The Environment Origin object', json: origin_json, html_id: 'the-agent-environments-origin-object' do
-  type             'String',  'The origin type of the environment.', one_of: %w(gocd config-repo)
+  type             'String',  'The origin type of the environment.', list: [
+  '<strong>gocd</strong> : The environment is defined in GoCD <code>cruise-config.xml</code>',
+  '<strong>config-repo</strong>: The environment is defined via an external <code>config-repo</code>',
+  '<strong>unknown</strong>: The environment is neither defined in <code>cruise-config.xml</code> nor via <code>config-repo</code>'
+  ]
 end
 %>
