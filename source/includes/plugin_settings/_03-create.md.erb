@@ -72,7 +72,10 @@ Content-Type: <%= data.apis.versions.plugin_settings %>; charset=utf-8
 
 ```
 
-Create plugin settings for a plugin based on user inputs.
+Create plugin settings for a plugin based on user inputs. The keys are
+dependent on the plugin to be configured. Use the result of
+[Get plugin info](#get-plugin-info) to find the possible keys under
+`extensions`/`plugin_settings`/`configurations`.
 
 
 <%= available_since('17.9.0') %>
