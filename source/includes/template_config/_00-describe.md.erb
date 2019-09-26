@@ -1,7 +1,7 @@
 <%=
-describe_object 'The template config object', since: '19.9.0' do
+describe_object 'The template config object', since: '16.10.0' do
   name                      'String',  'The name of the template.'
-  parameters                'Array',   'The list of [parameters](#pipeline-config-parameters) referenced in the template.'
+  parameters                'Array',   'The list of [parameters](#pipeline-config-parameters) referenced in the template.', since: '19.9.0'
   stages                    'Array',   'The list of [stages](#pipeline-config-stage-object). You MUST specify atleast one stage in `stages`, or `template`.'
 end
 %>
