@@ -75,7 +75,8 @@ Content-Type: application/json; charset=utf-8
           "pipeline": "up42",
           "stage": "up42_stage",
           "name": "up42_material",
-          "auto_update": true
+          "auto_update": true,
+          "ignore_for_scheduling": false
         }
       }
     ]
@@ -85,7 +86,7 @@ Content-Type: application/json; charset=utf-8
 
 Lists all available materials, these are materials that are present in the `cruise-config.xml` or Config Repos.
 
-<%= updated_to(1,'19.6.0') %>
+<%= updated_to(2,'19.10.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
