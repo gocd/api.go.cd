@@ -21,7 +21,7 @@ Content-Type: application/json; charset=UTF-8
 
 <%= partial 'includes/shared/material_notify_header' %>
 
-<%= updated_to(1,'19.6.0') %>
+<%= updated_to(2,'19.10.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -29,11 +29,12 @@ Content-Type: application/json; charset=UTF-8
 `POST /go/api/admin/materials/svn/notify`
 
 
-The following json payload must be specified.
+One of the following properties must be specified in the json payload.
 
 <%=
   describe_object(nil) do
     repository_url  'String', 'The svn repository url as defined in `cruise-config.xml` or a Config Repo'
+    uuid            'String', 'The subversion repository UUID'
   end
  %>
 
@@ -56,4 +57,16 @@ curl 'https://ci.example.com/go/api/admin/materials/svn/notify' \
     -H 'Content-Type: application/json'
     -X POST \
     -d {"repository_url": "http://svn.example.com/test-repo"}
+
+# -- or using UUID --
+
+REPOS="$1"
+REV="$2"
+UUID=$(svnlook uuid $1)
+
+curl 'https://ci.example.com/go/api/material/notify/svn' \
+    -u 'username:password' \
+    -H 'Confirm: true' \
+    -X POST \
+    -d {"uuid": "$UUID"}
 ```
