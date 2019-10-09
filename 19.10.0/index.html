@@ -6708,7 +6708,7 @@ File logs/operations.log was appended successfully
 <p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v9</code> of the API using <code>Accept: application/vnd.go.cd.v9+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v10</code> of the API using <code>Accept: application/vnd.go.cd.v10+json</code>
 </aside>
 
 <h2 id="the-pipeline-config-object">The pipeline config object</h2>
@@ -7766,11 +7766,6 @@ File logs/operations.log was appended successfully
 <td>The list of <a href="#the-pipeline-config-artifact-object">artifacts</a> specifies what files the agent will publish to the server.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">properties</code></td>
-<td>Array</td>
-<td>The list of <a href="#the-property-object">properties</a> of the build from XML files or artifacts created during your build.</td>
-</tr>
-<tr>
 <td><code class="prettyprint">elastic_profile_id</code></td>
 <td>String</td>
 <td>The id of the elastic profile, specifying this attribute would run the job on an elastic agent asociated with this profile. MUST NOT be specified along with <code class="prettyprint">resources</code>. <strong>Since v16.10.0</strong>.</td>
@@ -8318,47 +8313,6 @@ File logs/operations.log was appended successfully
 </tr>
 </tbody></table>
 
-<p><a id='pipeline-config-job-property'></a></p>
-
-<h3 id="the-property-object">The property object</h3>
-
-<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coverage.class"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"target/emma/coverage.xml"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"xpath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"substring-before(//report/data/all/coverage[starts-with(@type,'class')]/@value, '%')"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">name</code></td>
-<td>String</td>
-<td>The name of the property.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">source</code></td>
-<td>String</td>
-<td>The relative path to the XML file containing the data that you want to use to create the property.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">xpath</code></td>
-<td>String</td>
-<td>The xpath that will be used to create property.</td>
-</tr>
-</tbody></table>
-
 <p><a id='pipeline-config-timer-object'></a></p>
 
 <h3 id="the-timer-object">The timer object</h3>
@@ -8419,12 +8373,12 @@ File logs/operations.log was appended successfully
 <tr>
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The type of the tracking tool. Can be one of <code class="prettyprint">mingle</code>, <code class="prettyprint">generic</code>.</td>
+<td>The type of the tracking tool is generic.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">attributes</code></td>
 <td>Object</td>
-<td>The attributes of the tracking tool. See attributes for <a href="#pipeline-config-tracking-tool-generic">generic</a> and <a href="#pipeline-config-tracking-tool-mingle">mingle</a> tracking tools.</td>
+<td>The attributes of the tracking tool. See attributes for <a href="#pipeline-config-tracking-tool-generic">generic</a>.</td>
 </tr>
 </tbody></table>
 
@@ -8458,45 +8412,6 @@ File logs/operations.log was appended successfully
 <td><code class="prettyprint">regex</code></td>
 <td>String</td>
 <td>In generic tracking tool, the regular expression to identify card or bug numbers from your checkin comments.</td>
-</tr>
-</tbody></table>
-
-<p><a id='pipeline-config-tracking-tool-mingle'></a></p>
-
-<h3 id="the-mingle-tracking-tool-object">The mingle tracking tool object</h3>
-
-<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mingle.example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"project_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar_widgets"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"mql_grouping_conditions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"status &gt; 'In Dev'"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">base_url</code></td>
-<td>String</td>
-<td>The base URL of the Mingle server.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">project_identifier</code></td>
-<td>String</td>
-<td>The project identfier can be found under the mingle project&rsquo;s <strong>Project admin</strong> tab in the section titled <strong>Basic Information</strong>.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">mql_grouping_conditions</code></td>
-<td>String</td>
-<td>The MQL string that determines the &lsquo;passing criteria&rsquo; for cards displayed.</td>
 </tr>
 </tbody></table>
 
@@ -8546,7 +8461,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -8555,7 +8470,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8639,8 +8554,7 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
         </span><span class="p">}]</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
@@ -8673,8 +8587,7 @@ File logs/operations.log was appended successfully
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
       </span><span class="nl">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
   </span><span class="nl">"tracking_tool"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -8692,7 +8605,7 @@ File logs/operations.log was appended successfully
 </aside>
 
 <p class='available-since'>
-  Updated to version v9 since v19.8.0.
+  Updated to version v10 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -8711,7 +8624,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -8820,7 +8733,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8906,8 +8819,7 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
         </span><span class="p">}]</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
@@ -8940,8 +8852,7 @@ File logs/operations.log was appended successfully
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
       </span><span class="nl">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
   </span><span class="nl">"tracking_tool"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -8964,7 +8875,7 @@ File logs/operations.log was appended successfully
 </aside>
 
 <p class='available-since'>
-  Updated to version v9 since v19.8.0.
+  Updated to version v10 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -8983,7 +8894,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-pause-pipeline: true'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-pause-cause: "to have more control over when to start the pipeline after reviewing it"'</span> <span class="se">\</span>
@@ -9092,7 +9003,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9175,8 +9086,7 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
         </span><span class="p">}]</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
@@ -9209,8 +9119,7 @@ File logs/operations.log was appended successfully
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
       </span><span class="nl">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
   </span><span class="nl">"tracking_tool"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -9228,7 +9137,7 @@ File logs/operations.log was appended successfully
 </aside>
 
 <p class='available-since'>
-  Updated to version v9 since v19.8.0.
+  Updated to version v10 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -9247,7 +9156,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v9+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 
 </code></pre></div>
@@ -9257,7 +9166,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v9+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline 'my_pipeline' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -9270,7 +9179,7 @@ File logs/operations.log was appended successfully
 </aside>
 
 <p class='available-since'>
-  Updated to version v9 since v19.8.0.
+  Updated to version v10 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -9290,7 +9199,7 @@ File logs/operations.log was appended successfully
 <p>The template config API allows users with administrator role to manage template config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>Accept: application/vnd.go.cd.v4+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>Accept: application/vnd.go.cd.v5+json</code>
 </aside>
 
 <h2 id="the-template-config-object">The template config object</h2>
@@ -9393,7 +9302,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -9471,7 +9380,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template.name'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -9480,7 +9389,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -9535,8 +9444,7 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
         </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
@@ -9569,8 +9477,7 @@ File logs/operations.log was appended successfully
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
       </span><span class="nl">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -9601,7 +9508,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>  curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
         "name": "template",
@@ -9681,7 +9588,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9734,8 +9641,7 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
         </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
@@ -9768,8 +9674,7 @@ File logs/operations.log was appended successfully
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
       </span><span class="nl">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -9794,7 +9699,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "05548388f7ef5042cd39f7fe42e85735"'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="nt">-d</span> <span class="s1">'{
@@ -9875,7 +9780,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9929,8 +9834,7 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v${GO_PIPELINE_LABEL}"</span><span class="w">
         </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"s2"</span><span class="p">,</span><span class="w">
@@ -9963,8 +9867,7 @@ File logs/operations.log was appended successfully
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
       </span><span class="nl">"tabs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"artifacts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -10000,7 +9903,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template_name'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 
 </code></pre></div>
@@ -10010,7 +9913,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The template 'template_name' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -18962,6 +18865,32 @@ dependent on the plugin to be configured. Use the result of
           <h1 id="api-changelog">API Changelog</h1>
 
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
+
+<h2 id="changes-in-19-10-0">Changes in 19.10.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 10 of <a href="#pipeline-config">Pipeline Config API</a>. This was done to remove support for <code class="prettyprint">properties</code> object in the pipeline config.</li>
+<li>Introduced version 5 of <a href="#template-config">Template Config API</a>. This was done to remove support for <code class="prettyprint">properties</code> object in the template config.</li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<ul>
+<li>The Plugin Info API version 5 has been removed. <a href="#plugin-info">Version 6</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 7 has been removed. <a href="#pipeline-config">Version 10</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 8 has been removed. <a href="#pipeline-config">Version 10</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Config API version 9 has been removed. <a href="#pipeline-config">Version 10</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Template Config API version 4 has been removed. <a href="#template-config">Version 5</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>Unversioned get all materials API has been deprecated in favor of get all materials API v1. This version will be removed in a release scheduled for Oct 2019.</li>
+<li>The unversioned Cancel Stage API has been deprecated in GoCD 19.8.0. This version will be removed in a release scheduled for Nov 2019. <a href="#cancel-stage">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h2 id="changes-in-19-9-0">Changes in 19.9.0</h2>
 
