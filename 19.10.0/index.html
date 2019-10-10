@@ -3093,7 +3093,8 @@ OK!
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ignore_for_scheduling"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -3128,6 +3129,11 @@ OK!
 <td><code class="prettyprint">auto_update</code></td>
 <td>Boolean</td>
 <td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">ignore_for_scheduling</code></td>
+<td>Boolean</td>
+<td>Whether the pipeline should be triggered when there are changes in this material. <strong>Since v19.10.0</strong>.</td>
 </tr>
 </tbody></table>
 
@@ -3214,7 +3220,7 @@ OK!
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/materials'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -3284,7 +3290,8 @@ OK!
           </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_material"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"ignore_for_scheduling"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -3295,7 +3302,7 @@ OK!
 <p>Lists all available materials, these are materials that are present in the <code class="prettyprint">cruise-config.xml</code> or Config Repos.</p>
 
 <p class='available-since'>
-  Updated to version v1 since v19.6.0.
+  Updated to version v2 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -3314,7 +3321,7 @@ OK!
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/materials/03c8d2a131154436b6ef2d621c6f773837481aaea8c5c1bb9c0cb9b5bc64a2f1/modifications'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -3358,7 +3365,7 @@ OK!
 <p>Get material modifications by fingerprint</p>
 
 <p class='available-since'>
-  Updated to version v1 since v19.6.0.
+  Updated to version v2 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -3385,7 +3392,7 @@ OK!
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
       <span class="nt">-d</span> <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"http://svn.example.com/test-repo"</span><span class="o">}</span>
 </code></pre></div>
@@ -3406,7 +3413,7 @@ OK!
 </aside>
 
 <p class='available-since'>
-  Updated to version v1 since v19.6.0.
+  Updated to version v2 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -3417,7 +3424,7 @@ OK!
 
 <p><code class="prettyprint">POST /go/api/admin/materials/svn/notify</code></p>
 
-<p>The following json payload must be specified.</p>
+<p>One of the following properties must be specified in the json payload.</p>
 
 <p class='attributes-table-follows'></p>
 
@@ -3432,6 +3439,11 @@ OK!
 <td><code class="prettyprint">repository_url</code></td>
 <td>String</td>
 <td>The svn repository url as defined in <code class="prettyprint">cruise-config.xml</code> or a Config Repo.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">uuid</code></td>
+<td>String</td>
+<td>The subversion repository UUID.</td>
 </tr>
 </tbody></table>
 
@@ -3449,14 +3461,26 @@ OK!
 
 curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'</span> <span class="se">\</span>
     <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"http://svn.example.com/test-repo"</span><span class="o">}</span>
+
+<span class="c"># -- or using UUID --</span>
+
+<span class="nv">REPOS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="nv">REV</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="nv">UUID</span><span class="o">=</span><span class="si">$(</span>svnlook uuid <span class="nv">$1</span><span class="si">)</span>
+
+curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span> <span class="se">\</span>
+    <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+    <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-d</span> <span class="o">{</span><span class="s2">"uuid"</span>: <span class="s2">"</span><span class="nv">$UUID</span><span class="s2">"</span><span class="o">}</span>
 </code></pre></div><h2 id="notify-git-materials">Notify git materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/git/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
       <span class="nt">-d</span> <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"git://git.example.com/git/funky-widgets.git"</span><span class="o">}</span>
@@ -3467,7 +3491,7 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=UTF-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=UTF-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -3478,7 +3502,7 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'
 </aside>
 
 <p class='available-since'>
-  Updated to version v1 since v19.6.0.
+  Updated to version v2 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -3521,7 +3545,7 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'
 
 curl <span class="s1">'https://ci.example.com/go/api/admin/materials/notify/git'</span> <span class="se">\</span>
     <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
@@ -3596,7 +3620,7 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/notify/git'
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=UTF-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=UTF-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -3607,7 +3631,7 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/notify/git'
 </aside>
 
 <p class='available-since'>
-  Updated to version v1 since v19.6.0.
+  Updated to version v2 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -3649,14 +3673,14 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/notify/git'
 <div class="highlight"><pre class="highlight plaintext"><code>[hooks]
 changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify' \
     -u 'username:password' \
-    -H 'Accept: application/vnd.go.cd.v1+json' \
+    -H 'Accept: application/vnd.go.cd.v2+json' \
     -H 'Content-Type: application/json' \
     -X POST \
     -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
 </code></pre></div><h2 id="notify-other-scm-materials">Notify other scm materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/scm/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
       <span class="nt">-d</span> <span class="o">{</span><span class="s2">"scm_name"</span>: <span class="s2">"material_name"</span><span class="o">}</span>
@@ -3667,7 +3691,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=UTF-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=UTF-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -3678,7 +3702,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 </aside>
 
 <p class='available-since'>
-  Updated to version v1 since v19.6.0.
+  Updated to version v2 since v19.10.0.
 </p>
 
 <p class='available-since'>
@@ -7368,7 +7392,8 @@ File logs/operations.log was appended successfully
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ignore_for_scheduling"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -7403,6 +7428,11 @@ File logs/operations.log was appended successfully
 <td><code class="prettyprint">auto_update</code></td>
 <td>Boolean</td>
 <td>Whether to poll for new changes or not.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">ignore_for_scheduling</code></td>
+<td>Boolean</td>
+<td>Whether the pipeline should be triggered when there are changes in this material. <strong>Since v19.10.0</strong>.</td>
 </tr>
 </tbody></table>
 
@@ -18871,8 +18901,9 @@ dependent on the plugin to be configured. Use the result of
 <h3 id="added">Added</h3>
 
 <ul>
-<li>Introduced version 10 of <a href="#pipeline-config">Pipeline Config API</a>. This was done to remove support for <code class="prettyprint">properties</code> object in the pipeline config.</li>
+<li>Introduced version 10 of <a href="#pipeline-config">Pipeline Config API</a>. This was done to remove support for <code class="prettyprint">properties</code> object in the pipeline config, and add the <code class="prettyprint">ignore_for_scheduling</code> flag for dependency materials.</li>
 <li>Introduced version 5 of <a href="#template-config">Template Config API</a>. This was done to remove support for <code class="prettyprint">properties</code> object in the template config.</li>
+<li>Introduced version 2 of the <a href="#materials">Materials API</a>. This was done to re-enable support for the <code class="prettyprint">uuid</code> parameter for Notifying SVN materials, and add the <code class="prettyprint">ignore_for_scheduling</code> flag for dependency materials.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -18888,8 +18919,8 @@ dependent on the plugin to be configured. Use the result of
 <h3 id="deprecations">Deprecations</h3>
 
 <ul>
-<li>Unversioned get all materials API has been deprecated in favor of get all materials API v1. This version will be removed in a release scheduled for Oct 2019.</li>
 <li>The unversioned Cancel Stage API has been deprecated in GoCD 19.8.0. This version will be removed in a release scheduled for Nov 2019. <a href="#cancel-stage">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Materials API version 1 has been deprecated in GoCD 19.10.0. This version will be removed in a release scheduled for Apr 2019. <a href="#materials">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-19-9-0">Changes in 19.9.0</h2>
@@ -18911,6 +18942,7 @@ dependent on the plugin to be configured. Use the result of
 <li>The Agents API version 4 has been removed. <a href="#agents">Version 6</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Agents API version 5 has been removed. <a href="#agents">Version 6</a> of the API is available, and users are encouraged to use it.</li>
 </ul></li>
+<li>The unversioned Materials API has been removed. <a href="#materials">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h3 id="deprecations">Deprecations</h3>
