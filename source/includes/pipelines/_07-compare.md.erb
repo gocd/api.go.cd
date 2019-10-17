@@ -1,0 +1,115 @@
+## Compare pipeline instances
+
+```shell
+
+$ curl 'http://ci.example.com/go/api/pipelines/pipeline1/compare/1/3' \
+       -u 'username:password' \
+       -H 'Accept: <%= data.apis.versions.latest %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://ci.example.com/go/api/pipelines/:pipeline_name/compare/:from_counter/:to_counter"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#compare-pipeline-instances"
+    }
+  },
+  "pipeline_name" : "pipeline1",
+  "from_counter" : 1,
+  "to_counter" : 3,
+  "is_bisect" : false,
+  "changes" : [ {
+    "material" : {
+      "type" : "git",
+      "attributes" : {
+        "destination" : null,
+        "filter" : null,
+        "invert_filter" : false,
+        "name" : null,
+        "auto_update" : true,
+        "url" : "git@github.com:sample_repo/example.git",
+        "branch" : "master",
+        "submodule_folder" : null,
+        "shallow_clone" : false
+      }
+    },
+    "revision" : [ {
+      "revision_sha" : "some-random-sha",
+      "modified_by" : "username <username@github.com>",
+      "modified_at" : "2019-10-15T12:32:37Z",
+      "commit_message" : "some commit message"
+    } ]
+  },  {
+    "material" : {
+      "type" : "dependency",
+      "attributes" : {
+        "pipeline" : "upstream",
+        "stage" : "upstream_stage",
+        "name" : "upstream_material",
+        "auto_update" : true
+      }
+    },
+    "revision" : [ {
+      "revision" : "upstream/1/upstream_stage/1",
+      "pipeline_counter" : "1",
+      "completed_at" : "2019-10-17T06:55:07Z"
+    } ]
+  } ]
+}
+```
+
+The compare pipeline API allows users to find the difference in the materials between the two instance.
+
+<%= available_since('19.10.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/pipelines/:pipeline_name/compare/:from_counter/:to_counter`
+
+<p class='http-request-return-description'>Returns</p>
+
+The [comparsion result object](#the-comparison-result-object).
+
+<%=
+describe_object 'The comparison result object', since: '19.10.0' do
+ pipeline_name 'String', 'The name of the pipeline.'
+ from_counter  'Integer', 'The instance count which is being compared'
+ to_counter    'Integer', 'The instance count to which the above instance is compared'
+ is_bisect     'Boolean', 'States whether or not either one of the instance is a bisect. Meaning, the instance counter was trigggered with an older revision.'
+ changes       'Array', 'The list of all the [changes](#the-changes-object) in terms of materials and upstream dependencies'
+end
+ %>
+
+<%=
+describe_object 'The changes object', since: '19.10.0' do
+ material 'Object', 'The [material config](#pipeline-config-material-object)'
+ revision 'Array', 'The list of all the [material revisions](#the-material-revision-object) or [dependency revision](#the-dependency-revision-object) which were used in the pipeline instance'
+end
+ %>
+
+ <%=
+describe_object 'The material revision object', since: '19.10.0' do
+ revision_sha   'String', 'The revision SHA.'
+ modified_by    'String', 'The username who added the revision'
+ modified_at    'String', 'The time at which the revision was added'
+ commit_message 'String', 'The revision message added'
+end
+%>
+
+ <%=
+describe_object 'The dependency revision object', since: '19.10.0' do
+ revision         'String', 'The upstream pipeline label'
+ pipeline_counter 'Integer', 'The upstream pipeline counter which was used as material in the instance'
+ completed_at     'String', 'The time at which the upstream pipeline completed'
+end
+%>
