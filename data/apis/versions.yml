@@ -1,3 +1,4 @@
+latest: 'application/vnd.go.cd+json'
 agent: 'application/vnd.go.cd.v6+json'
 backup: 'application/vnd.go.cd.v2+json'
 dashboard: 'application/vnd.go.cd.v3+json'
