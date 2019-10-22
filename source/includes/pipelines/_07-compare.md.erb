@@ -85,7 +85,7 @@ describe_object 'The comparison result object', since: '19.10.0' do
  pipeline_name 'String', 'The name of the pipeline.'
  from_counter  'Integer', 'The instance count which is being compared'
  to_counter    'Integer', 'The instance count to which the above instance is compared'
- is_bisect     'Boolean', 'States whether or not either one of the instance is a bisect. Meaning, the instance counter was trigggered with an older revision.'
+ is_bisect     'Boolean', 'States whether or not either one of the instances is a bisection. If true, it means that the instances are not directly comparable, since at least one of them was manually triggered with older revisions of materials and the comparison might not make sense because of the chosen revisions.'
  changes       'Array', 'The list of all the [changes](#the-changes-object) in terms of materials and upstream dependencies'
 end
  %>
