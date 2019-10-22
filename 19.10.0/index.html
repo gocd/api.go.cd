@@ -5303,6 +5303,225 @@ File logs/operations.log was appended successfully
 </tr>
 </tbody></table>
 
+<h2 id="compare-pipeline-instances">Compare pipeline instances</h2>
+
+<div class="highlight"><pre class="highlight shell"><code>
+<span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/compare/1/3'</span> <span class="se">\</span>
+       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/pipelines/:pipeline_name/compare/:from_counter/:to_counter"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#compare-pipeline-instances"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"pipeline_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"from_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"to_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_bisect"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"changes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"material"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"destination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"invert_filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"auto_update"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"branch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"submodule_folder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"shallow_clone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"revision"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"revision_sha"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"some-random-sha"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"modified_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"username &lt;username@github.com&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"modified_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-15T12:32:37Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"commit_message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"some commit message"</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"material"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_material"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"auto_update"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"revision"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"revision"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream/1/upstream_stage/1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pipeline_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"completed_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-17T06:55:07Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>The compare pipeline API allows users to find the difference in the materials between the two instance.</p>
+
+<p class='available-since'>
+  Available since v19.10.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/compare/:from_counter/:to_counter</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The <a href="#the-comparison-result-object">comparsion result object</a>.</p>
+
+<h2 id="the-comparison-result-object">The comparison result object</h2>
+
+<p class='available-since'>
+  Available since v19.10.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">pipeline_name</code></td>
+<td>String</td>
+<td>The name of the pipeline.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">from_counter</code></td>
+<td>Integer</td>
+<td>The instance count which is being compared.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">to_counter</code></td>
+<td>Integer</td>
+<td>The instance count to which the above instance is compared.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">is_bisect</code></td>
+<td>Boolean</td>
+<td>States whether or not either one of the instances is a bisection. If true, it means that the instances are not directly comparable, since at least one of them was manually triggered with older revisions of materials and the comparison might not make sense because of the chosen revisions.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">changes</code></td>
+<td>Array</td>
+<td>The list of all the <a href="#the-changes-object">changes</a> in terms of materials and upstream dependencies.</td>
+</tr>
+</tbody></table>
+
+<h2 id="the-changes-object">The changes object</h2>
+
+<p class='available-since'>
+  Available since v19.10.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">material</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-material-object">material config</a>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">revision</code></td>
+<td>Array</td>
+<td>The list of all the <a href="#the-material-revision-object">material revisions</a> or <a href="#the-dependency-revision-object">dependency revision</a> which were used in the pipeline instance.</td>
+</tr>
+</tbody></table>
+
+<p><h2 id="the-material-revision-object">The material revision object</h2></p>
+
+<p class='available-since'>
+  Available since v19.10.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">revision_sha</code></td>
+<td>String</td>
+<td>The revision SHA.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">modified_by</code></td>
+<td>String</td>
+<td>The username who added the revision.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">modified_at</code></td>
+<td>String</td>
+<td>The time at which the revision was added.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">commit_message</code></td>
+<td>String</td>
+<td>The revision message added.</td>
+</tr>
+</tbody></table>
+
+<p><h2 id="the-dependency-revision-object">The dependency revision object</h2></p>
+
+<p class='available-since'>
+  Available since v19.10.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">revision</code></td>
+<td>String</td>
+<td>The upstream pipeline label.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipeline_counter</code></td>
+<td>Integer</td>
+<td>The upstream pipeline counter which was used as material in the instance.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">completed_at</code></td>
+<td>String</td>
+<td>The time at which the upstream pipeline completed.</td>
+</tr>
+</tbody></table>
+
           <h1 id="stages">Stages</h1>
 
 <p>The stages API allows users to view stage information and operate on it.</p>
