@@ -4,7 +4,7 @@
 
 $ curl 'http://ci.example.com/go/api/pipelines/pipeline1/compare/1/3' \
        -u 'username:password' \
-       -H 'Accept: <%= data.apis.versions.latest %>'
+       -H 'Accept: <%= data.apis.versions.pipeline_operations %>'
 ```
 
 > The above command returns JSON structured like this:
@@ -78,38 +78,6 @@ The compare pipeline API allows users to find the difference in the materials be
 
 <p class='http-request-return-description'>Returns</p>
 
-The [comparsion result object](#the-comparison-result-object).
+The [comparsion result object](#comparison-result-object).
 
-<%=
-describe_object 'The comparison result object', since: '19.10.0' do
- pipeline_name 'String', 'The name of the pipeline.'
- from_counter  'Integer', 'The instance count which is being compared'
- to_counter    'Integer', 'The instance count to which the above instance is compared'
- is_bisect     'Boolean', 'States whether or not either one of the instances is a bisection. If true, it means that the instances are not directly comparable, since at least one of them was manually triggered with older revisions of materials and the comparison might not make sense because of the chosen revisions.'
- changes       'Array', 'The list of all the [changes](#the-changes-object) in terms of materials and upstream dependencies'
-end
- %>
 
-<%=
-describe_object 'The changes object', since: '19.10.0' do
- material 'Object', 'The [material config](#pipeline-config-material-object)'
- revision 'Array', 'The list of all the [material revisions](#the-material-revision-object) or [dependency revision](#the-dependency-revision-object) which were used in the pipeline instance'
-end
- %>
-
- <%=
-describe_object 'The material revision object', since: '19.10.0' do
- revision_sha   'String', 'The revision SHA.'
- modified_by    'String', 'The username who added the revision'
- modified_at    'String', 'The time at which the revision was added'
- commit_message 'String', 'The revision message added'
-end
-%>
-
- <%=
-describe_object 'The dependency revision object', since: '19.10.0' do
- revision         'String', 'The upstream pipeline label'
- pipeline_counter 'Integer', 'The upstream pipeline counter which was used as material in the instance'
- completed_at     'String', 'The time at which the upstream pipeline completed'
-end
-%>
