@@ -3,6 +3,7 @@ describe_object 'The pipeline config object', since: '15.3.0' do
   label_template            'String',  'The label template to customise the pipeline instance label. Both of material names and `${COUNT}` are available in the `label_template`.', defaults_to: "`${COUNT}`"
   lock_behavior             'String',  'Define the pipeline lock behavior. Can be one of `lockOnFailure`, `unlockWhenFinished` or `none` (default).', since: '17.12.0'
   name                      'String',  'The name of the pipeline.'
+  group                     'String', 'The name of the pipeline group to which this pipeline belongs to.', since: '19.10.0'
   template                  'String',  'The name of the template used by pipeline. You MUST specify atleast one stage in `stages`, or `template`.'
   origin                    'Object',  'The [origin](#pipeline-config-origin-object) of the pipeline. Can be either `gocd` origin for pipelines defined in cruise-config.xml or `config_repo` origin for pipelines defined remotely in config repository.', since: '17.4.0'
   parameters                'Array',   'The list of [parameters](#pipeline-config-parameters) to be used for substitution in a pipeline or pipeline template.'
