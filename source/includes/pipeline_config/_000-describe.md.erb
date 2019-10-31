@@ -1,5 +1,6 @@
 <%=
 describe_object 'The pipeline config object', since: '15.3.0' do
+  group                     'String',  'The name of the pipeline group to which this pipeline belongs.', since: '19.10.0'
   label_template            'String',  'The label template to customise the pipeline instance label. Both of material names and `${COUNT}` are available in the `label_template`.', defaults_to: "`${COUNT}`"
   lock_behavior             'String',  'Define the pipeline lock behavior. Can be one of `lockOnFailure`, `unlockWhenFinished` or `none` (default).', since: '17.12.0'
   name                      'String',  'The name of the pipeline.'
