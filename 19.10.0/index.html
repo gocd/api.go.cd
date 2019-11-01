@@ -5382,7 +5382,7 @@ File logs/operations.log was appended successfully
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>The <a href="#comparison-result-object">comparsion result object</a>.</p>
+<p>The <a href="#comparison-result-object">comparison result object</a>.</p>
 
 <p><a id='comparison-result-object'></a></p>
 
@@ -8734,6 +8734,7 @@ File logs/operations.log was appended successfully
   </span><span class="nl">"lock_behavior"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lockOnFailure"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_group"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8879,7 +8880,7 @@ File logs/operations.log was appended successfully
             "lock_behavior": "unlockWhenFinished",
             "name": "my_pipeline",
             "template": null,
-            "group": "new_group"
+            "group": "new_group",
             "materials": [
               {
                 "type": "git",
@@ -8998,6 +8999,7 @@ File logs/operations.log was appended successfully
   </span><span class="nl">"lock_behavior"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lockOnFailure"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_group"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9267,6 +9269,7 @@ File logs/operations.log was appended successfully
   </span><span class="nl">"lock_behavior"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lockOnFailure"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"new_pipeline"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_group"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -19138,7 +19141,7 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>The unversioned Cancel Stage API has been deprecated in GoCD 19.8.0. This version will be removed in a release scheduled for Nov 2019. <a href="#cancel-stage">Version 1</a> of the API is available, and users are encouraged to use it.</li>
-<li>The Materials API version 1 has been deprecated in GoCD 19.10.0. This version will be removed in a release scheduled for Apr 2019. <a href="#materials">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Materials API version 1 has been deprecated in GoCD 19.10.0. This version will be removed in a release scheduled for Apr 2020. <a href="#materials">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-19-9-0">Changes in 19.9.0</h2>
