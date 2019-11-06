@@ -1,0 +1,14 @@
+
+<%=
+describe_object 'The Artifacts Config Object', since: '19.11.0' do
+    artifacts_dir         'String',     'This directory is where GoCD will store its information, including artifacts published by jobs. You can use an absolute path or a relative path which will take the server installed directory as the root.'
+    purge_settings 'Object', 'The attributes for [purge settings](#the-purge-settings-object)'
+end
+%>
+
+<%=
+describe_object 'The Purge Settings Object', since: '19.11.0' do
+    purge_start_disk_space   'Number',  'Purge artifacts when disk space is lower than `purge_start_disk_space` GB.'
+    purge_upto_disk_space    'Number', 'Purge artifacts till available disk space is greater than `purge_upto_disk_space` GB. This attribute must be defined if `purge_start_disk_space` is defined.'
+end
+%>
