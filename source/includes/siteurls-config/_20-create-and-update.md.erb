@@ -1,0 +1,47 @@
+## Create or Update siteUrls Config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/config/server/site_urls' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.siteurls_config %>' \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "site_url" : "http://siteUrl.com",
+            "secure_site_url" : "https://secureSiteUrl.com"
+          }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.siteurls_config %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#siteurls-config"
+    },
+    "self" : {
+      "href" : "http://ci.example.com/go/api/admin/config/server/site_urls"
+    }
+  },
+  "site_url" : "http://siteUrl.com",
+  "secure_site_url" : "https://secureSiteUrl.com"
+}
+```
+
+<%= available_since('19.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/config/server/site_urls`
+
+`PUT /go/api/admin/config/server/site_urls`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [siteurls config object](#the-site-urls-config-object).

@@ -1,0 +1,38 @@
+## Get JobTimeout Config
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/config/server/default_job_timeout' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.job_timeout %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.job_timeout %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "doc" : {
+      "href" : "https://api.gocd.org/current/#default-job-timeout"
+    },
+    "self" : {
+      "href" : "http://ci.example.com/go/api/admin/config/server/default_job_timeout"
+    }
+  },
+  "default_job_timeout" : "0"
+}
+```
+
+<%= available_since('19.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/config/server/default_job_timeout`
+
+<p class='http-request-return-description'>Returns</p>
+
+A [job-timeout object](#the-job-timeout-config-object).

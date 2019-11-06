@@ -21,6 +21,9 @@ includes:
   - 044-notification-filters
   - 050-materials
   - 051-mailserver-config
+  - 052-siteurls-config
+  - 053-artifacts-config
+  - 054-default-job-timeout
   - 055-backup-config
   - 060-backups
   - 070-pipeline-groups
