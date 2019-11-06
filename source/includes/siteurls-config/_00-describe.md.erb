@@ -1,0 +1,7 @@
+
+<%=
+describe_object 'The Site Urls Config Object', since: '19.11.0' do
+  siteUrl               'String',     'The site URL will be used by GoCD Server to generate links for emails, feeds, etc. Format: [protocol]://[host]:[port].The protocol can be HTTP ot HTTPs.You need to define the [port] in case GoCD uses a non-standard port.'
+  secureSiteUrl         'String',     'If you wish that your primary site URL be HTTP, but still want to have HTTPS endpoints for the features that require SSL, you can specify this attribute with a value of the base HTTPS URL. Format: https://[host]:[port].'
+end
+%>

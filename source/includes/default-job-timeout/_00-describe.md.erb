@@ -1,0 +1,6 @@
+
+<%=
+describe_object 'The Job Timeout Config Object', since: '19.11.0' do
+    default_job_timeout         'String',     'This entry will be used as the default timeout value in `minutes` for hung jobs. A job is considered as hung if it does not generate any console output for `default_job_timeout` minutes.'
+end
+%>
