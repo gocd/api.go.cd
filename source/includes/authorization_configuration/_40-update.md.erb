@@ -9,6 +9,7 @@ $ curl 'https://ci.example.com/go/api/admin/security/auth_configs/ldap' \
       -X PUT \
       -d '{
         "plugin_id": "cd.go.authentication.ldap",
+        "allow_only_known_users_to_login": false,
         "properties": [
           {
             "key": "Url",
@@ -51,6 +52,7 @@ ETag: "61406622382e51c2079c11dcbdb978fb"
   },
   "id": "ldap",
   "plugin_id": "cd.go.authentication.ldap",
+  "allow_only_known_users_to_login": false,
   "properties": [
     {
       "key": "Url",
@@ -98,6 +100,7 @@ Update some attributes of an authorization configuration.
   conflict.
 </aside>
 
+<%= updated_to(2,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

@@ -1,7 +1,8 @@
 <%=
 describe_object 'The authorization configuration object', since: '17.5.0' do
-  id         'String',     'The identifier of the authorization configuration'
-  plugin_id  'String',     'The plugin identifier of the authorization plugin'
-  properties 'Array',      'The list of [configuration properties](#the-configuration-property-object) that represent the configuration of this authorization configuration.'
+  id                               'String',     'The identifier of the authorization configuration'
+  plugin_id                        'String',     'The plugin identifier of the authorization plugin'
+  allow_only_known_users_to_login  'String',     'Allow only those users to login who have explicitly been added by an administrator.'
+  properties                       'Array',      'The list of [configuration properties](#the-configuration-property-object) that represent the configuration of this authorization configuration.'
 end
 %>

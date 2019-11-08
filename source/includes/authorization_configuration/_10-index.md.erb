@@ -42,6 +42,7 @@ Content-Type: <%= data.apis.versions.authorization_configurations %>; charset=ut
         },
         "id": "ldap",
         "plugin_id": "cd.go.authentication.ldap",
+        "allow_only_known_users_to_login": false,
         "properties": [
           {
             "key": "Url",
@@ -56,6 +57,7 @@ Content-Type: <%= data.apis.versions.authorization_configurations %>; charset=ut
 
 Lists all available authorization configurations.
 
+<%= updated_to(2,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
