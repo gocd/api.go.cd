@@ -15015,6 +15015,11 @@ dependent on the plugin to be configured. Use the result of
 <td>The plugin identifier of the authorization plugin.</td>
 </tr>
 <tr>
+<td><code class="prettyprint">allow_only_known_users_to_login</code></td>
+<td>String</td>
+<td>Allow only those users to login who have explicitly been added by an administrator.</td>
+</tr>
+<tr>
 <td><code class="prettyprint">properties</code></td>
 <td>Array</td>
 <td>The list of <a href="#the-configuration-property-object">configuration properties</a> that represent the configuration of this authorization configuration.</td>
@@ -15025,7 +15030,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/auth_configs'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -15033,7 +15038,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15062,6 +15067,7 @@ dependent on the plugin to be configured. Use the result of
         </span><span class="p">},</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ldap"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.authentication.ldap"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"allow_only_known_users_to_login"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Url"</span><span class="p">,</span><span class="w">
@@ -15075,6 +15081,10 @@ dependent on the plugin to be configured. Use the result of
 </span></code></pre></div>
 
 <p>Lists all available authorization configurations.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15092,7 +15102,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/auth_configs/ldap'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -15100,7 +15110,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15116,6 +15126,7 @@ dependent on the plugin to be configured. Use the result of
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ldap"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.authentication.ldap"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_only_known_users_to_login"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Url"</span><span class="p">,</span><span class="w">
@@ -15156,6 +15167,10 @@ dependent on the plugin to be configured. Use the result of
 </aside>
 
 <p class='available-since'>
+  Updated to version v2 since v19.11.0.
+</p>
+
+<p class='available-since'>
   Available since v17.5.0.
 </p>
 
@@ -15171,11 +15186,12 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/auth_configs'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
         "id": "ldap",
         "plugin_id": "cd.go.authentication.ldap",
+        "allow_only_known_users_to_login": false,
         "properties": [
           {
             "key": "Url",
@@ -15191,7 +15207,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15207,6 +15223,7 @@ dependent on the plugin to be configured. Use the result of
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ldap"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.authentication.ldap"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_only_known_users_to_login"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Url"</span><span class="p">,</span><span class="w">
@@ -15243,6 +15260,10 @@ dependent on the plugin to be configured. Use the result of
 <p>Creates an authorization configuration</p>
 
 <p class='available-since'>
+  Updated to version v2 since v19.11.0.
+</p>
+
+<p class='available-since'>
   Available since v17.5.0.
 </p>
 
@@ -15258,12 +15279,13 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/auth_configs/ldap'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
         "plugin_id": "cd.go.authentication.ldap",
+        "allow_only_known_users_to_login": false,
         "properties": [
           {
             "key": "Url",
@@ -15288,7 +15310,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"61406622382e51c2079c11dcbdb978fb"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15304,6 +15326,7 @@ dependent on the plugin to be configured. Use the result of
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ldap"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"plugin_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd.go.authentication.ldap"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"allow_only_known_users_to_login"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Url"</span><span class="p">,</span><span class="w">
@@ -15352,6 +15375,10 @@ dependent on the plugin to be configured. Use the result of
 </aside>
 
 <p class='available-since'>
+  Updated to version v2 since v19.11.0.
+</p>
+
+<p class='available-since'>
   Available since v17.5.0.
 </p>
 
@@ -15367,7 +15394,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/auth_configs/ldap'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -15376,13 +15403,17 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The security auth config 'ldap' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Deletes the authorization configuration.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
