@@ -39,7 +39,14 @@ $ curl 'https://ci.example.com/go/api/admin/security/roles?type=gocd' \
         "type": "gocd",
         "attributes": {
           "users": ["alice", "bob", "robin"]
-        }
+        },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A_*"
+          }]
       }
     ]
   }
@@ -48,6 +55,7 @@ $ curl 'https://ci.example.com/go/api/admin/security/roles?type=gocd' \
 
 List all available roles of specified type.
 
+<%= updated_to(3,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
