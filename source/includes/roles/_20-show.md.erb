@@ -34,7 +34,14 @@ ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
       "key": "MemberOf",
       "value": "ou=blackbird,ou=area51,dc=example,dc=com"
     }
-  ]
+  ],
+  "policy": [
+    {
+      "permission":"allow",
+      "action":"view",
+      "type":"environment",
+      "resource":"env_A_*"
+    }]
 }
 ```
 
@@ -44,6 +51,7 @@ Gets role for specified role name.
   <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-a-role'>edit role</a> documentation for more details.
 </aside>
 
+<%= updated_to(3,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

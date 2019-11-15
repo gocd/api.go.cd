@@ -20,7 +20,14 @@ $ curl 'https://ci.example.com/go/api/admin/security/roles' \
               "value": "ou=devs,ou=groups,ou=system,dc=example,dc=com"
             }
           ]
-        }
+        },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A_*"
+          }]
       }'
 ```
 
@@ -59,7 +66,14 @@ ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
         "value": "ou=admins,ou=groups,ou=system,dc=example,dc=com"
       }
     ]
-  }
+  },
+  "policy": [
+    {
+      "permission":"allow",
+      "action":"view",
+      "type":"environment",
+      "resource":"env_A_*"
+    }]
 }
 ```
 
@@ -70,6 +84,7 @@ Prerequisite to create plugin role,
 1. Install authorization plugin with `can_authorize` [capability](https://plugin-api.gocd.org/current/authorization/#get-plugin-capabilities).
 2. Create [authorization configuration](#authorization-configuration).
 
+<%= updated_to(3,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

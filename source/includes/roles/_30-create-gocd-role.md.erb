@@ -10,7 +10,14 @@ $ curl 'https://ci.example.com/go/api/admin/security/roles' \
          "type": "gocd",
          "attributes" : {
           "users": ["bob"]
-         }
+         },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A_*"
+          }]
         }'
 ```
 
@@ -39,12 +46,20 @@ ETag: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"
   "type": "gocd",
   "attributes": {
     "users": ["bob"]
-  }
+  },
+  "policy": [
+    {
+      "permission":"allow",
+      "action":"view",
+      "type":"environment",
+      "resource":"env_A_*"
+    }]
 }
 ```
 
 Create a GoCD role. A GoCD role is a group of users having same permissions in GoCD.
 
+<%= updated_to(3,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

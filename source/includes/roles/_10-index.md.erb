@@ -44,7 +44,14 @@ Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
         "type": "gocd",
         "attributes": {
           "users": ["alice", "bob", "robin"]
-        }
+        },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A_*"
+          }]
       },
       {
         "_links": {
@@ -72,7 +79,14 @@ Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
               "value": "ou=admins,ou=groups,ou=system,dc=example,dc=com"
             }
           ]
-        }
+        },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_B_*"
+          }]
       }
     ]
   }
@@ -81,6 +95,7 @@ Content-Type: <%= data.apis.versions.roles %>; charset=utf-8
 
 Lists all available roles which includes GoCD role and plugin role.
 
+<%= updated_to(3,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

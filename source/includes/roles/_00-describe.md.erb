@@ -3,6 +3,16 @@ describe_object 'The role object', since: '17.5.0' do
   name         'String',     'The name of the role.'
   type         'String',     'Type of the role. Use `gocd` to create core role and `plugin` to create plugin role.'
   attributes   'Object',     'Attributes are used to describes the configuration for [gocd role](#the-gocd-role-attributes) or [plugin role](#the-plugin-role-attributes).'
+  policy       'Object',     'Policy is fine-grained [permissions](#permission_object) attached to the users belonging to the current role.', since: '19.11.0'
+end
+%>
+
+<%=
+describe_sub_object 'The permission object',since: '19.11.0', html_id: 'permission_object' do
+  permission  'String',   'The type of permission which can be either `allow` or `deny`'
+  action      'String',   'The action that is being controlled via this rule.', one_of: %w(* view administer)
+  type        'String',   'The type of entity that the rule is applied on.', one_of: %w(* environment)
+  resource    'String',   'The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.'
 end
 %>
 

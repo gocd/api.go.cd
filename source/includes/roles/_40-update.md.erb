@@ -14,7 +14,14 @@ $ curl 'https://ci.example.com/go/api/admin/security/roles/spacetiger' \
         "type": "gocd",
         "attributes": {
           "users": ["alice"]
-        }
+        },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A*"
+          }]
       }'
 
 ```
@@ -44,7 +51,14 @@ ETag: "61406622382e51c2079c11dcbdb978fb"
   "type": "gocd",
   "attributes": {
     "users": [ "alice" ]
-  }
+  },
+  "policy": [
+    {
+      "permission":"allow",
+      "action":"view",
+      "type":"environment",
+      "resource":"env_A*"
+    }]
 }
 ```
 
@@ -60,6 +74,7 @@ ETag: "61406622382e51c2079c11dcbdb978fb"
   conflict.
 </aside>
 
+<%= updated_to(3,'19.11.0') %>
 <%= available_since('17.5.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
