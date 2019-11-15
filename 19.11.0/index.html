@@ -15468,6 +15468,46 @@ dependent on the plugin to be configured. Use the result of
 <td>Object</td>
 <td>Attributes are used to describes the configuration for <a href="#the-gocd-role-attributes">gocd role</a> or <a href="#the-plugin-role-attributes">plugin role</a>.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">policy</code></td>
+<td>Object</td>
+<td>Policy is fine-grained <a href="#permission_object">permissions</a> attached to the users belonging to the current role. <strong>Since v19.11.0</strong>.</td>
+</tr>
+</tbody></table>
+
+<p><a id='permission_object'></a></p>
+
+<h3 id="the-permission-object">The permission object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">permission</code></td>
+<td>String</td>
+<td>The type of permission which can be either <code class="prettyprint">allow</code> or <code class="prettyprint">deny</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">action</code></td>
+<td>String</td>
+<td>The action that is being controlled via this rule. Can be one of <code class="prettyprint">*</code>, <code class="prettyprint">view</code>, <code class="prettyprint">administer</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of entity that the rule is applied on. Can be one of <code class="prettyprint">*</code>, <code class="prettyprint">environment</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">resource</code></td>
+<td>String</td>
+<td>The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.</td>
+</tr>
 </tbody></table>
 
 <h2 id="the-gocd-role-attributes">The GoCD role attributes</h2>
@@ -15523,7 +15563,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -15531,7 +15571,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15562,7 +15602,14 @@ dependent on the plugin to be configured. Use the result of
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"alice"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w"> </span><span class="s2">"robin"</span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"permission"</span><span class="p">:</span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"resource"</span><span class="p">:</span><span class="s2">"env_A_*"</span><span class="w">
+          </span><span class="p">}]</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15590,7 +15637,14 @@ dependent on the plugin to be configured. Use the result of
               </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ou=admins,ou=groups,ou=system,dc=example,dc=com"</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"permission"</span><span class="p">:</span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"resource"</span><span class="p">:</span><span class="s2">"env_B_*"</span><span class="w">
+          </span><span class="p">}]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -15598,6 +15652,10 @@ dependent on the plugin to be configured. Use the result of
 </span></code></pre></div>
 
 <p>Lists all available roles which includes GoCD role and plugin role.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15619,7 +15677,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles?type=gocd'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15650,7 +15708,14 @@ dependent on the plugin to be configured. Use the result of
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"alice"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w"> </span><span class="s2">"robin"</span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"permission"</span><span class="p">:</span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"resource"</span><span class="p">:</span><span class="s2">"env_A_*"</span><span class="w">
+          </span><span class="p">}]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -15658,6 +15723,10 @@ dependent on the plugin to be configured. Use the result of
 </span></code></pre></div>
 
 <p>List all available roles of specified type.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15675,7 +15744,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles/blackbird'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -15683,7 +15752,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15704,7 +15773,14 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MemberOf"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ou=blackbird,ou=area51,dc=example,dc=com"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"permission"</span><span class="p">:</span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"resource"</span><span class="p">:</span><span class="s2">"env_A_*"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -15713,6 +15789,10 @@ dependent on the plugin to be configured. Use the result of
 <aside class="notice">
   <strong>Note:</strong> Please remember to save the value of the `ETag` header for conditional posts, see the <a href='#update-a-role'>edit role</a> documentation for more details.
 </aside>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15730,14 +15810,21 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
          "name": "new-role",
          "type": "gocd",
          "attributes" : {
           "users": ["bob"]
-         }
+         },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A_*"
+          }]
         }'</span>
 </code></pre></div>
 
@@ -15746,7 +15833,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15764,11 +15851,22 @@ dependent on the plugin to be configured. Use the result of
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"bob"</span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"permission"</span><span class="p">:</span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"resource"</span><span class="p">:</span><span class="s2">"env_A_*"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Create a GoCD role. A GoCD role is a group of users having same permissions in GoCD.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15786,7 +15884,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
         "name": "new-plugin-role",
@@ -15803,7 +15901,14 @@ dependent on the plugin to be configured. Use the result of
               "value": "ou=devs,ou=groups,ou=system,dc=example,dc=com"
             }
           ]
-        }
+        },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A_*"
+          }]
       }'</span>
 </code></pre></div>
 
@@ -15812,7 +15917,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"cbc5f2d5b9c13a2cc1b1efb3d8a6155d"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15840,7 +15945,14 @@ dependent on the plugin to be configured. Use the result of
         </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ou=admins,ou=groups,ou=system,dc=example,dc=com"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"permission"</span><span class="p">:</span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"resource"</span><span class="p">:</span><span class="s2">"env_A_*"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -15852,6 +15964,10 @@ dependent on the plugin to be configured. Use the result of
 <li>Install authorization plugin with <code class="prettyprint">can_authorize</code> <a href="https://plugin-api.gocd.org/current/authorization/#get-plugin-capabilities">capability</a>.</li>
 <li>Create <a href="#authorization-configuration">authorization configuration</a>.</li>
 </ol>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15871,7 +15987,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles/spacetiger'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "cbc5f2d5b9c13a2cc1b1efb3d8a6155d"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -15880,7 +15996,14 @@ dependent on the plugin to be configured. Use the result of
         "type": "gocd",
         "attributes": {
           "users": ["alice"]
-        }
+        },
+        "policy": [
+          {
+            "permission":"allow",
+            "action":"view",
+            "type":"environment",
+            "resource":"env_A*"
+          }]
       }'</span>
 
 </code></pre></div>
@@ -15890,7 +16013,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"61406622382e51c2079c11dcbdb978fb"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -15908,7 +16031,14 @@ dependent on the plugin to be configured. Use the result of
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"alice"</span><span class="w"> </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"permission"</span><span class="p">:</span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"view"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"resource"</span><span class="p">:</span><span class="s2">"env_A*"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -15923,6 +16053,10 @@ dependent on the plugin to be configured. Use the result of
   another user has modified the state of the elastic agent config, leading to a
   conflict.
 </aside>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15940,7 +16074,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles/blackbird'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -15949,13 +16083,17 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The plugin role config 'blackbird' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Deletes the role.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -15973,7 +16111,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/security/roles'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> PATCH <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
       "operations": [
@@ -16007,7 +16145,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -16064,6 +16202,10 @@ dependent on the plugin to be configured. Use the result of
 </span></code></pre></div>
 
 <p>Bulk update roles.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v19.11.0.
+</p>
 
 <p class='available-since'>
   Available since v19.1.0.
@@ -17562,7 +17704,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"61406622382e51c2079c11dcbdb978fb"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -19157,6 +19299,7 @@ dependent on the plugin to be configured. Use the result of
 <h3 id="added">Added</h3>
 
 <ul>
+<li>Introduced version 3 of the <a href="#roles">Role Config API</a>.</li>
 <li>Introduced version 2 of the <a href="#authorization-configuration">Auth Config API</a>.</li>
 <li>Introduced version 1 of the <a href="#get-pipeline-instance">Pipeline Instance API</a>.</li>
 </ul>
@@ -19172,6 +19315,7 @@ dependent on the plugin to be configured. Use the result of
 <ul>
 <li>The unversioned Pipeline Instance API has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#get-pipeline-instance">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Auth Config API version 1 has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#authorization-configuration">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Role Config API version 2 has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#roles">Version 3</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-19-10-0">Changes in 19.10.0</h2>
