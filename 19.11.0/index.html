@@ -4666,8 +4666,7 @@ File logs/operations.log was appended successfully
 <h2 id="get-pipeline-instance">Get pipeline instance</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/PipelineName/instance/1'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span>  <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span>
 </code></pre></div>
 
 <blockquote>
@@ -4677,71 +4676,67 @@ File logs/operations.log was appended successfully
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"natural_order"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"preparing_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"build_cause"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"trigger_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Forced by anonymous"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"trigger_forced"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"approver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anonymous"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"approver"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"material_revisions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"changed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-repo"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de08b060ebfc1fb988b6683bf21"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
         </span><span class="nl">"modifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11932fecb6d3f7ec22e1b0cb3a88553a"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-07T09:09:43Z"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dummyuser &lt;user@users.noreply.github.com&gt;"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some comment"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+             </span><span class="nl">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7225</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1435728005000</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my hola mundo changes"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a788f1876e2e1f6e5a1e91006e75cd1d467a0edb"</span><span class="w">
           </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61e2da369d0207a7ef61f326eed837f964471b35072340a03f8f55d993afe01d"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"changed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"trigger_forced"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modified by Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PipelineName"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"natural_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"scheduled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"operate_permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_job"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-01T10:37:17Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jsunit"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1398332981981</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"operate_permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scheduled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"preparing_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.1.0.1-b14a81825d081411993853ea5ea45266ced578b4"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Gets pipeline instance object.</p>
-
-<p class='available-since'>
-  Updated to version v1 since v19.11.0.
-</p>
 
 <p class='available-since'>
   Available since v15.1.0.
@@ -19301,7 +19296,6 @@ dependent on the plugin to be configured. Use the result of
 <ul>
 <li>Introduced version 3 of the <a href="#roles">Role Config API</a>.</li>
 <li>Introduced version 2 of the <a href="#authorization-configuration">Auth Config API</a>.</li>
-<li>Introduced version 1 of the <a href="#get-pipeline-instance">Pipeline Instance API</a>.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -19313,7 +19307,6 @@ dependent on the plugin to be configured. Use the result of
 <h3 id="deprecations">Deprecations</h3>
 
 <ul>
-<li>The unversioned Pipeline Instance API has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#get-pipeline-instance">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Auth Config API version 1 has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#authorization-configuration">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Role Config API version 2 has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#roles">Version 3</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
