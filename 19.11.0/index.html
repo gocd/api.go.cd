@@ -9444,6 +9444,91 @@ File logs/operations.log was appended successfully
 
 <p>A message confirmation if the pipeline was deleted.</p>
 
+<h2 id="extract-tempate-from-pipeline">Extract tempate from pipeline</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline/extract_to_template'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      <span class="nt">-X</span> PUT <span class="se">\</span>
+      <span class="nt">-d</span> <span class="s1">'{
+        "template_name": "new-template-name"
+       }'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
+<span class="na">ETag</span><span class="p">:</span> <span class="s">"d4fe83677faaddcbf69c580ffb7409f7"</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/clone1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#pipeline-config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:pipeline_name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"label_template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lock_behavior"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"template"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"new-template-name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"group"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"group"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#get-configuration"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"parameters"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"environment_variables"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"materials"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:sample_repo/example.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"encrypted_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aSdiFgRRZ6A="</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dest"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"invert_filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"auto_update"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"branch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"submodule_folder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"shallow_clone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tracking_tool"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>The Extract Template API will create a new template out of the given pipeline and update the pipeline to use the same template.</p>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">PUT /go/api/admin/pipelines/:pipeline_name/extract_to_template</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>The updated <a href="#the-pipeline-config-object">pipeline config object</a>.</p>
+
           <h1 id="template-config">Template Config</h1>
 
 <p>The template config API allows users with administrator role to manage template config.</p>
@@ -19296,6 +19381,7 @@ dependent on the plugin to be configured. Use the result of
 <ul>
 <li>Introduced version 3 of the <a href="#roles">Role Config API</a>.</li>
 <li>Introduced version 2 of the <a href="#authorization-configuration">Auth Config API</a>.</li>
+<li>Introduced <a href="#extract-tempate-from-pipeline">Extract Template API</a>.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
