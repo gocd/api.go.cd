@@ -1,0 +1,85 @@
+## Extract tempate from pipeline
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/pipelines/my_pipeline/extract_to_template' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.pipeline %>' \
+      -H 'Content-Type: application/json' \
+      -X PUT \
+      -d '{
+        "template_name": "new-template-name"
+       }'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.pipeline %>; charset=utf-8
+ETag: "d4fe83677faaddcbf69c580ffb7409f7"
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/admin/pipelines/clone1"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/#pipeline-config"
+    },
+    "find" : {
+      "href" : "https://ci.example.com/go/api/admin/pipelines/:pipeline_name"
+    }
+  },
+  "label_template" : "${COUNT}",
+  "lock_behavior" : "none",
+  "name" : "my_pipeline",
+  "template" : "new-template-name",
+  "group" : "group",
+  "origin" : {
+    "_links" : {
+      "self" : {
+        "href" : "https://ci.example.com/go/admin/config_xml"
+      },
+      "doc" : {
+        "href" : "https://api.gocd.org/#get-configuration"
+      }
+    },
+    "type" : "gocd"
+  },
+  "parameters" : [ ],
+  "environment_variables" : [ ],
+  "materials" : [ {
+    "type" : "git",
+    "attributes" : {
+      "url" : "git@github.com:sample_repo/example.git",
+      "username": "bob",
+      "encrypted_password": "aSdiFgRRZ6A=",
+      "destination" : "dest",
+      "filter" : null,
+      "invert_filter" : false,
+      "name" : null,
+      "auto_update" : true,
+      "branch" : "master",
+      "submodule_folder" : null,
+      "shallow_clone" : false
+    }
+  } ],
+  "stages" : null,
+  "tracking_tool" : null,
+  "timer" : null
+}
+```
+
+The Extract Template API will create a new template out of the given pipeline and update the pipeline to use the same template.
+
+<%= available_since('19.11.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`PUT /go/api/admin/pipelines/:pipeline_name/extract_to_template`
+
+<p class='http-request-return-description'>Returns</p>
+
+The updated [pipeline config object](#the-pipeline-config-object).
