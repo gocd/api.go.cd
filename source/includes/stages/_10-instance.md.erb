@@ -3,14 +3,14 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/myStages/instance/1/1' \
   -u 'username:password' \
-  -H 'Accept: <%= data.apis.versions.stage_instance %>'
+  -H 'Accept: <%= data.apis.versions.stage_operations %>'
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.stage_instance %>;charset=utf-8
+Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 ```
 
 ```json
