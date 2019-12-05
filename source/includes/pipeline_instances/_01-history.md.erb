@@ -1,0 +1,106 @@
+## Get pipeline history
+
+```shell
+
+$ curl 'http://ci.example.com/go/api/pipelines/pipeline1/history' \
+       -u 'username:password' \
+       -H 'Accept: <%= data.apis.versions.pipeline_operations %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "next": {
+      "href": "http://ci.example.com/go/api/pipelines/pipeline1/history?after=35"
+    },
+    "previous": {
+      "href": "http://ci.example.com/go/api/pipelines/pipeline1/history?before=9"
+    }
+  },
+  "pipelines": [
+    {
+      "name": "pipeline1",
+      "counter": 13,
+      "label": "13",
+      "natural_order": 13.0,
+      "can_run": true,
+      "preparing_to_schedule": false,
+      "comment": null,
+      "build_cause": {
+        "trigger_message": "modified by user <user@users.noreply.github.com>",
+        "trigger_forced": false,
+        "approver": "",
+        "material_revisions": [
+          {
+            "changed": false,
+            "material": {
+              "name": "https://github.com/gocd/gocd",
+              "fingerprint": "de08b34d116a1cfc1fb988b6683bf21",
+              "type": "Git",
+              "description": "URL: https://github.com/gocd/gocd, Branch: master"
+            },
+            "modifications": [
+              {
+                "revision": "40f0a7ba43df37794cfc78b158483b",
+                "modified_time": "2019-12-04T09:20:20Z",
+                "user_name": "user <user@users.noreply.github.com>",
+                "comment": "some commit message.",
+                "email_address": null
+              }
+            ]
+          }
+        ]
+      },
+      "stages": [
+        {
+          "result": "Failed",
+          "rerun_of_counter": null,
+          "name": "pipeline1_stage",
+          "counter": "1",
+          "scheduled": true,
+          "approval_type": "success",
+          "approved_by": "changes",
+          "operate_permission": true,
+          "can_run": true,
+          "jobs": [
+            {
+              "name": "pipeline1_job",
+              "scheduled_date": "2019-12-05T07:36:27Z",
+              "state": "Completed",
+              "result": "Failed"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+The pipeline history allows users to list pipeline instances. Supports cursor based pagination. The json output provides the `next` link which needs to be followed for the next set of records (if present). It also provides a `previous` which can be followed to get the previous page (if there is one).
+
+The API supports the following query params:
+
+| Param Name  | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| `page_size` | The number of records per page. Can be between 10 and 100. Defaults to `10` |
+| `after`     | The cursor value for fetching the next set of records                       |
+| `before`    | The cursor value for fetching the previous set of records                   |
+
+<%= updated_to(1,'19.12.0') %>
+<%= available_since('14.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/pipelines/:pipeline_name/history`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of pipeline instances.
