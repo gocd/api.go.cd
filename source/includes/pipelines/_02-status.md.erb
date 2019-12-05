@@ -11,7 +11,7 @@ $ curl 'http://ci.example.com/go/api/pipelines/pipeline1/status' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+Content-Type: <%= data.apis.versions.pipeline_operations %>; charset=utf-8
 ```
 
 ```json

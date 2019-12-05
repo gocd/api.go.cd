@@ -11,7 +11,7 @@ $ curl 'http://ci.example.com/go/api/pipelines/pipeline1/history' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+Content-Type: <%= data.apis.versions.pipeline_operations %>; charset=utf-8
 ```
 
 ```json
@@ -49,7 +49,7 @@ Content-Type: application/json; charset=utf-8
             "modifications": [
               {
                 "revision": "40f0a7ba43df37794cfc78b158483b",
-                "modified_time": "2019-12-04T09:20:20Z",
+                "modified_time": 1436519914378,
                 "user_name": "user <user@users.noreply.github.com>",
                 "comment": "some commit message.",
                 "email_address": null
@@ -72,7 +72,7 @@ Content-Type: application/json; charset=utf-8
           "jobs": [
             {
               "name": "pipeline1_job",
-              "scheduled_date": "2019-12-05T07:36:27Z",
+              "scheduled_date": 1436582744378,
               "state": "Completed",
               "result": "Failed"
             }
