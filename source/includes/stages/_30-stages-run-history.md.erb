@@ -10,7 +10,7 @@ $ curl 'https://ci.example.com/go/api/stages/myPipeline/defaultStage/history' \
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+Content-Type: <%= data.apis.versions.stage_history %>; charset=utf-8
 ```
 
 ```json
