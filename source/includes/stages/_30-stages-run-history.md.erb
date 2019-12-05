@@ -1,4 +1,4 @@
-## Get stage history
+## Get Stage History
 
 ```shell
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/defaultStage/history' \
@@ -25,7 +25,6 @@ Content-Type: application/json; charset=utf-8
           "name": "defaultJob",
           "result": "Cancelled",
           "state": "Completed",
-          "id": 3,
           "scheduled_date": 1436509881002
         }
       ],
@@ -33,7 +32,6 @@ Content-Type: application/json; charset=utf-8
       "pipeline_name": "mypipeline",
       "result": "Cancelled",
       "approval_type": "success",
-      "id": 3,
       "counter": "1",
       "rerun_of_counter": null
     },
@@ -46,7 +44,6 @@ Content-Type: application/json; charset=utf-8
           "name": "defaultJob",
           "result": "Cancelled",
           "state": "Completed",
-          "id": 2,
           "scheduled_date": 1436509783931
         }
       ],
@@ -54,7 +51,6 @@ Content-Type: application/json; charset=utf-8
       "pipeline_name": "mypipeline",
       "result": "Cancelled",
       "approval_type": "success",
-      "id": 2,
       "counter": "1",
       "rerun_of_counter": null
     },
@@ -66,7 +62,6 @@ Content-Type: application/json; charset=utf-8
           "name": "defaultJob",
           "result": "Passed",
           "state": "Completed",
-          "id": 1,
           "scheduled_date": 1436509518752
         }
       ],
@@ -74,7 +69,6 @@ Content-Type: application/json; charset=utf-8
       "pipeline_name": "mypipeline",
       "result": "Passed",
       "approval_type": "success",
-      "id": 1,
       "counter": "1",
       "rerun_of_counter": null
     }
@@ -89,7 +83,12 @@ Content-Type: application/json; charset=utf-8
 
 The stage history allows users to list stage instances of specified stage. Supports pagination using offset which tells the API how many instances to skip.
 
-<%= updated_to(1,'19.3.0') %>
+| Param Name  | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| `page_size` | The number of records per page. Can be between 10 and 100. Defaults to `10` |
+| `offset`    | The number of records which needs to be skipped. Defaults to `0`            |
+
+<%= updated_to(2,'19.12.0') %>
 <%= available_since('14.3.0') %>
 
 
@@ -97,13 +96,6 @@ The stage history allows users to list stage instances of specified stage. Suppo
 
 `GET /go/api/stages/:pipeline_name/:stage_name/history`
 
-**With pagination**
-
-`GET /go/api/stages/:pipeline_name/:stage_name/history[/:offset]`
-
-<aside class="notice">
-  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of stages to be skipped.
-</aside>
 <p class='http-request-return-description'>Returns</p>
 
 An array of stage instances.
