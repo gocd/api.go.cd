@@ -1076,7 +1076,8 @@
 <h2 id="agent-job-run-history">Agent job run history</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da/job_run_history'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -1084,41 +1085,58 @@
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"agent_uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5c5c318f-e6d3-4299-9120-7faff6e6030b"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upload"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"job_state_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1435631497131</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">539906</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1435631497131</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"original_job_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"pipeline_counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">251</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"rerun"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"distributions-all"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100129</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upload-installers"</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.11.0/#agent-job-run-history"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da/job_run_history"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/agents/:uuid"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1292</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"page_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"uuid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"adb9540a-b954-4571-9d9b-2f330739d4da"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"job_state_transitions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-12T00:20:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-12T00:21:06Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Assigned"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-12T00:21:17Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Preparing"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-12T00:22:19Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-12T00:37:42Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Rescheduled"</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"job_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"jasmine"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stage_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"build-non-server"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stage_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pipeline_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"build-windows-PR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pipeline_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">5282</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"result"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rerun"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"pagination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"page_size"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"offset"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">812</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">813</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Lists the jobs that have executed on an agent.</p>
+
+<p class='available-since'>
+  Updated to version v1 since v19.12.0.
+</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -1130,11 +1148,40 @@
 
 <p><strong>With pagination</strong></p>
 
-<p><code class="prettyprint">GET /go/api/agents/:uuid/job_run_history[/:offset]</code></p>
+<p><code class="prettyprint">GET /go/api/agents/:uuid/job_run_history?offset=:offset&amp;page_size=:page_size&amp;sort_column=:sort_column&amp;sort_order=:sort_order</code></p>
 
-<aside class="notice">
-  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
-</aside>
+<p>The following query string parameters are supported by the API.</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">offset</code></td>
+<td>Number</td>
+<td>The number of records to skip.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">page_size</code></td>
+<td>Number</td>
+<td>The number of records per page of this response. Must be between <code class="prettyprint">10</code> and <code class="prettyprint">100</code>. Defaults to 50.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sort_column</code></td>
+<td>String</td>
+<td>The sort order of records. Can be one of <code class="prettyprint">pipeline</code>, <code class="prettyprint">stage</code>, <code class="prettyprint">job</code>, <code class="prettyprint">result</code>, <code class="prettyprint">completed</code>. Defaults to <code class="prettyprint">completed</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">sort_order</code></td>
+<td>String</td>
+<td>The order of sorting of the column specified by <code class="prettyprint">sort_column</code>. Can be one of <code class="prettyprint">ASC</code>, <code class="prettyprint">DESC</code>. Defaults to <code class="prettyprint">DESC</code>.</td>
+</tr>
+</tbody></table>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -19752,6 +19799,26 @@ dependent on the plugin to be configured. Use the result of
           <h1 id="api-changelog">API Changelog</h1>
 
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
+
+<h2 id="changes-in-19-12-0">Changes in 19.12.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 1 of the <a href="#agent-job-run-history">Agent Job History API</a>.</li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<ul>
+<li>The unversioned Cancel Stage API has been removed. <a href="#cancel-stage">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>The unversioned Agent Job History API API has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for Mar 2020. <a href="#agent-job-run-history">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h2 id="changes-in-19-11-0">Changes in 19.11.0</h2>
 
