@@ -3919,6 +3919,385 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>A message confirmation if the mailserver config was deleted.</p>
 
+          <h1 id="siteurls-config">Siteurls Config</h1>
+
+<p>The site urls config API allows admins to setup the server site URL and secure server site URL.</p>
+
+<h2 id="the-site-urls-config-object">The Site Urls Config Object</h2>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">siteUrl</code></td>
+<td>String</td>
+<td>The site URL will be used by GoCD Server to generate links for emails, feeds, etc. Format: [protocol]://[host]:[port].The protocol can be HTTP ot HTTPs.You need to define the [port] in case GoCD uses a non-standard port.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">secureSiteUrl</code></td>
+<td>String</td>
+<td>If you wish that your primary site URL be HTTP, but still want to have HTTPS endpoints for the features that require SSL, you can specify this attribute with a value of the base HTTPS URL. Format: https://[host]:[port].</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-siteurls-config">Get SiteUrls Config</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/server/site_urls'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#siteurls-config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/admin/config/server/site_urls"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"site_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://foo.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"secure_site_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://foo.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/config/server/site_urls</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-site-urls-config-object">siteurls config object</a>.</p>
+
+<h2 id="create-or-update-siteurls-config">Create or Update siteUrls Config</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/server/site_urls'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-X</span> POST <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      <span class="nt">-d</span> <span class="s1">'{
+            "site_url" : "http://siteUrl.com",
+            "secure_site_url" : "https://secureSiteUrl.com"
+          }'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#siteurls-config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/admin/config/server/site_urls"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"site_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://siteUrl.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"secure_site_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://secureSiteUrl.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/admin/config/server/site_urls</code></p>
+
+<p><code class="prettyprint">PUT /go/api/admin/config/server/site_urls</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-site-urls-config-object">siteurls config object</a>.</p>
+
+          <h1 id="artifacts-config">Artifacts Config</h1>
+
+<p>The artifacts config API allows admins to configure the artifacts directory and purge settings.</p>
+
+<h2 id="the-artifacts-config-object">The Artifacts Config Object</h2>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">artifacts_dir</code></td>
+<td>String</td>
+<td>This directory is where GoCD will store its information, including artifacts published by jobs. You can use an absolute path or a relative path which will take the server installed directory as the root.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">purge_settings</code></td>
+<td>Object</td>
+<td>The attributes for <a href="#the-purge-settings-object">purge settings</a>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="the-purge-settings-object">The Purge Settings Object</h2>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">purge_start_disk_space</code></td>
+<td>Number</td>
+<td>Purge artifacts when disk space is lower than <code class="prettyprint">purge_start_disk_space</code> GB.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">purge_upto_disk_space</code></td>
+<td>Number</td>
+<td>Purge artifacts till available disk space is greater than <code class="prettyprint">purge_upto_disk_space</code> GB. This attribute must be defined if <code class="prettyprint">purge_start_disk_space</code> is defined.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-artifacts-config">Get artifacts Config</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/server/artifact_config'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Etag</span><span class="p">:</span> <span class="s">"17f5a9edf150884e5fc4315b4a7814cd"</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#artifacts-config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/admin/config/server/artifact_config"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"artifacts_dir"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"purge_settings"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"purge_start_disk_space"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"purge_upto_disk_space"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">20.0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/config/server/artifact_config</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-artifacts-config-object">artifacts config object</a>.</p>
+
+<h2 id="update-artifacts-config">Update artifacts Config</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/server/artifact_config'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'If-Match: "17f5a9edf150884e5fc4315b4a7814cd"'</span> <span class="se">\</span>
+      <span class="nt">-X</span> PUT <span class="se">\</span>
+      <span class="nt">-d</span> <span class="s1">'{
+            "artifacts_dir": "foobar",
+            "purge_settings":{
+              "purge_start_disk_space": 30,
+              "purge_upto_disk_space": 60
+            }
+          }'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#artifacts-config"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/admin/config/server/artifact_config"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"artifacts_dir"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"purge_settings"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"purge_start_disk_space"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">30.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"purge_upto_disk_space"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">60.0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">PUT /go/api/admin/config/server/artifact_config</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-artifacts-config-object">artifacts config object</a>.</p>
+
+          <h1 id="default-job-timeout">Default Job Timeout</h1>
+
+<p>The job timeout API allows to set default timeout value for hung jobs.</p>
+
+<h2 id="the-job-timeout-config-object">The Job Timeout Config Object</h2>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">default_job_timeout</code></td>
+<td>String</td>
+<td>This entry will be used as the default timeout value in <code class="prettyprint">minutes</code> for hung jobs. A job is considered as hung if it does not generate any console output for <code class="prettyprint">default_job_timeout</code> minutes.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-jobtimeout-config">Get JobTimeout Config</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/server/default_job_timeout'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#default-job-timeout"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/admin/config/server/default_job_timeout"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"default_job_timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/config/server/default_job_timeout</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-job-timeout-config-object">job-timeout object</a>.</p>
+
+<h2 id="update-job-timeout-config">Update job Timeout Config</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config/server/default_job_timeout'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      <span class="nt">-X</span> POST <span class="se">\</span>
+      <span class="nt">-d</span> <span class="s1">'{
+            "default_job_timeout" : "10"
+          }'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#default-job-timeout"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8153/go/api/admin/config/server/default_job_timeout"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"default_job_timeout"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='available-since'>
+  Available since v19.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/admin/config/server/default_job_timeout</code></p>
+
+<p><code class="prettyprint">PUT /go/api/admin/config/server/default_job_timeout</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A <a href="#the-job-timeout-config-object">job timeout object</a>.</p>
+
           <h1 id="backup-config">Backup Config</h1>
 
 <p>The Backup Config API allows users to configure backup settings for the GoCD server.</p>
@@ -19382,6 +19761,9 @@ dependent on the plugin to be configured. Use the result of
 <li>Introduced version 3 of the <a href="#roles">Role Config API</a>.</li>
 <li>Introduced version 2 of the <a href="#authorization-configuration">Auth Config API</a>.</li>
 <li>Introduced <a href="#extract-tempate-from-pipeline">Extract Template API</a>.</li>
+<li>Introduced version 1 of <a href="#siteurls-config">Site urls API</a>.</li>
+<li>Introduced version 1 of <a href="#artifacts-config">Artifact Config API</a>.</li>
+<li>Introduced version 1 of <a href="#default-job-timeout">Default Job Timeout API</a>.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
