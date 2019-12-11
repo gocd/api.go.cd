@@ -1,7 +1,7 @@
 ## Get Stage Instance
 
 ```shell
-$ curl 'https://ci.example.com/go/api/stages/myPipeline/myStages/instance/1/1' \
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/1/myStages/1' \
   -u 'username:password' \
   -H 'Accept: <%= data.apis.versions.stage_operations %>'
 ```
@@ -78,7 +78,7 @@ Gets stage instance object.
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/stages/:pipeline_name/:stage_name/instance/:pipeline_counter/:stage_counter`
+`GET /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter`
 
 <p class='http-request-return-description'>Returns</p>
 

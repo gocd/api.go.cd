@@ -1,7 +1,7 @@
 ## Get pipeline instance
 
 ```shell
-$ curl 'http://ci.example.com/go/api/pipelines/PipelineName/instance/1' \
+$ curl 'http://ci.example.com/go/api/pipelines/PipelineName/1' \
       -u 'username:password' \
       -H 'Accept: <%= data.apis.versions.pipeline_instance %>'
 ```
@@ -70,7 +70,7 @@ Gets pipeline instance object.
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/pipelines/:pipeline_name/instance/:pipeline_counter`
+`GET /go/api/pipelines/:pipeline_name/:pipeline_counter`
 
 <p class='http-request-return-description'>Returns</p>
 
