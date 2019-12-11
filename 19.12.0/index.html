@@ -5089,262 +5089,12 @@ File logs/operations.log was appended successfully
 
 <p>The pipelines API allows users to view pipeline information and operate on it.</p>
 
-<h2 id="get-pipeline-instance">Get pipeline instance</h2>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/PipelineName/instance/1'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span>
-</code></pre></div>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"build_cause"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"approver"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"material_revisions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"modifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-             </span><span class="nl">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7225</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1435728005000</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my hola mundo changes"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a788f1876e2e1f6e5a1e91006e75cd1d467a0edb"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61e2da369d0207a7ef61f326eed837f964471b35072340a03f8f55d993afe01d"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"changed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"trigger_forced"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"trigger_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modified by Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PipelineName"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"natural_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage1"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jsunit"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1398332981981</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"operate_permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"scheduled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"preparing_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.1.0.1-b14a81825d081411993853ea5ea45266ced578b4"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p>Gets pipeline instance object.</p>
-
-<p class='available-since'>
-  Available since v15.1.0.
-</p>
-
-<p class='http-request-heading'>HTTP Request</p>
-
-<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/instance/:pipeline_counter</code></p>
-
-<p class='http-request-return-description'>Returns</p>
-
-<p>A pipeline instance object.</p>
-
-<h2 id="get-pipeline-history">Get pipeline history</h2>
-
-<div class="highlight"><pre class="highlight shell"><code>
-<span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/history/0'</span> <span class="se">\</span>
-       <span class="nt">-u</span> <span class="s1">'username:password'</span>
-</code></pre></div>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"build_cause"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"approver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anonymous"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"material_revisions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"modifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1434957613000</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my hola mundo changes"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c194b49db102b705ebc13e604e490ae13ac92d96"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nl">"material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6e7a3899c55e1682ffb00383bdf8f882bcee2141e79a8728254190a1fddcf4f"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"changed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"trigger_forced"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"trigger_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Forced by anonymous"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline1"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"natural_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage1"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job1"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436172201081</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"operate_permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"scheduled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"preparing_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"build_cause"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"approver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anonymous"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"material_revisions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"modifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1434957613000</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pick E Reader &lt;pick.e.reader@example.com&gt;"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my hola mundo changes"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c194b49db102b705ebc13e604e490ae13ac92d96"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nl">"material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f6e7a3899c55e1682ffb00383bdf8f882bcee2141e79a8728254190a1fddcf4f"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"changed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"trigger_forced"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"trigger_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Forced by anonymous"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline1"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"natural_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage1"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job1"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436172122024</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"operate_permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"scheduled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"preparing_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"page_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p>The pipeline history allows users to list pipeline instances. Supports pagination using offset which tells the API how many instances to skip.</p>
-
-<p class='available-since'>
-  Available since v14.3.0.
-</p>
-
-<p class='http-request-heading'>HTTP Request</p>
-
-<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/history</code></p>
-
-<p><strong>With pagination</strong></p>
-
-<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/history[/:offset]</code></p>
-
-<aside class="notice">
-  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of pipeline instances to be skipped.
-</aside>
-
-<p class='http-request-return-description'>Returns</p>
-
-<p>An array of pipeline instances.</p>
-
 <h2 id="get-pipeline-status">Get pipeline status</h2>
 
 <div class="highlight"><pre class="highlight shell"><code>
 <span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/status'</span> <span class="se">\</span>
-       <span class="nt">-u</span> <span class="s1">'username:password'</span>
+       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -5352,17 +5102,21 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"pausedCause"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reason for pausing this pipeline"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pausedBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"paused"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"schedulable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="nl">"paused_cause"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reason for pausing this pipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paused_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schedulable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>The pipeline status allows users to check if the pipeline is paused, locked and schedulable.</p>
+
+<p class='available-since'>
+  Updated to version v1 since v19.12.0.
+</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -5940,6 +5694,213 @@ File logs/operations.log was appended successfully
 </tr>
 </tbody></table>
 
+          <h1 id="pipeline-instances">Pipeline Instances</h1>
+
+<p>The Pipeline Instances API allows users to view Pipeline Instance information.</p>
+
+<h2 id="get-pipeline-instance">Get pipeline instance</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/PipelineName/1'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"PipelineName"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"label"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"natural_order"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"can_run"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"preparing_to_schedule"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"comment"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"build_cause"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"trigger_message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"modified by user &lt;user@users.noreply.github.com&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger_forced"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"approver"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"material_revisions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"changed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"material"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/gocd"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fingerprint"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"de08b34d116a1c0cf57cd76683bf21"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"modifications"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"revision"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"40f0a7ef224a0a2fba438b158483b"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"modified_time"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1436519914378</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"user &lt;user@users.noreply.github.com&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"comment"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"some commit message."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"email_address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"stages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"result"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rerun_of_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"stage"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scheduled"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"approval_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"approved_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"operate_permission"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"can_run"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"jobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"job"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"scheduled_date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1436782534378</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"result"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Gets pipeline instance object.</p>
+
+<p class='available-since'>
+  Updated to version v1 since v19.12.0.
+</p>
+
+<p class='available-since'>
+  Available since v15.1.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/:pipeline_counter</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A pipeline instance object.</p>
+
+<h2 id="get-pipeline-history">Get pipeline history</h2>
+
+<div class="highlight"><pre class="highlight shell"><code>
+<span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/history'</span> <span class="se">\</span>
+       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/pipelines/pipeline1/history?after=35"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"previous"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ci.example.com/go/api/pipelines/pipeline1/history?before=9"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"natural_order"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"preparing_to_schedule"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"build_cause"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"trigger_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"modified by user &lt;user@users.noreply.github.com&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"trigger_forced"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"approver"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"material_revisions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"changed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"material"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/gocd/gocd"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de08b34d116a1cfc1fb988b6683bf21"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"modifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40f0a7ba43df37794cfc78b158483b"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"modified_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436519914378</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user &lt;user@users.noreply.github.com&gt;"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some commit message."</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"email_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline1_stage"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"scheduled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"operate_permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"can_run"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline1_job"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436582744378</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>The pipeline history allows users to list pipeline instances. Supports cursor based pagination. The json output provides the <code class="prettyprint">next</code> link which needs to be followed for the next set of records (if present). It also provides a <code class="prettyprint">previous</code> which can be followed to get the previous page (if there is one).</p>
+
+<p>The API supports the following query params:</p>
+
+<table><thead>
+<tr>
+<th>Param Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">page_size</code></td>
+<td>The number of records per page. Can be between 10 and 100. Defaults to <code class="prettyprint">10</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">after</code></td>
+<td>The cursor value for fetching the next set of records</td>
+</tr>
+<tr>
+<td><code class="prettyprint">before</code></td>
+<td>The cursor value for fetching the previous set of records</td>
+</tr>
+</tbody></table>
+
+<p class='available-since'>
+  Updated to version v1 since v19.12.0.
+</p>
+
+<p class='available-since'>
+  Available since v14.3.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/history</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An array of pipeline instances.</p>
+
           <h1 id="stages">Stages</h1>
 
 <p>The stages API allows users to view stage information and operate on it.</p>
@@ -5949,7 +5910,7 @@ File logs/operations.log was appended successfully
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/42/myStages/13/cancel'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST
 </code></pre></div>
 
@@ -5958,7 +5919,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Stage cancelled successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -5967,7 +5928,7 @@ File logs/operations.log was appended successfully
 <p>Cancel an active stage of a specified stage.</p>
 
 <p class='available-since'>
-  Updated to version v1 since v19.8.0.
+  Updated to version v2 since v19.12.0.
 </p>
 
 <p class='available-since'>
@@ -5982,11 +5943,11 @@ File logs/operations.log was appended successfully
 
 <p>A message confirmation if the stage was cancelled.</p>
 
-<h2 id="get-stage-instance">Get stage Instance</h2>
+<h2 id="get-stage-instance">Get Stage Instance</h2>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myStages/instance/1/1'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/1/myStages/1'</span> <span class="se">\</span>
   <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -5994,7 +5955,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"clean_working_directory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -6006,32 +5967,26 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"job_state_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509518752</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509524491</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Assigned"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509534639</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Preparing"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509542522</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509642582</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completing"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509642631</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
@@ -6042,7 +5997,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cancelled"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -6053,7 +6007,6 @@ File logs/operations.log was appended successfully
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cancelled"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"cancelled_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"artifacts_deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
@@ -6063,22 +6016,26 @@ File logs/operations.log was appended successfully
 <p>Gets stage instance object.</p>
 
 <p class='available-since'>
+  Updated to version v2 since v19.12.0.
+</p>
+
+<p class='available-since'>
   Available since v19.1.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:stage_name/instance/:pipeline_counter/:stage_counter</code></p>
+<p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
 <p>A stage instance object.</p>
 
-<h2 id="get-stage-history">Get stage history</h2>
+<h2 id="get-stage-history">Get Stage History</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/defaultStage/history'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -6086,7 +6043,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -6098,7 +6055,6 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cancelled"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
           </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509881002</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
@@ -6106,7 +6062,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypipeline"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cancelled"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -6119,7 +6074,6 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cancelled"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
           </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509783931</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
@@ -6127,7 +6081,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypipeline"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cancelled"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
       </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -6139,7 +6092,6 @@ File logs/operations.log was appended successfully
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultJob"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
           </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509518752</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
@@ -6147,7 +6099,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypipeline"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -6162,8 +6113,24 @@ File logs/operations.log was appended successfully
 
 <p>The stage history allows users to list stage instances of specified stage. Supports pagination using offset which tells the API how many instances to skip.</p>
 
+<table><thead>
+<tr>
+<th>Param Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">page_size</code></td>
+<td>The number of records per page. Can be between 10 and 100. Defaults to <code class="prettyprint">10</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">offset</code></td>
+<td>The number of records which needs to be skipped. Defaults to <code class="prettyprint">0</code></td>
+</tr>
+</tbody></table>
+
 <p class='available-since'>
-  Updated to version v1 since v19.3.0.
+  Updated to version v2 since v19.12.0.
 </p>
 
 <p class='available-since'>
@@ -6174,14 +6141,6 @@ File logs/operations.log was appended successfully
 
 <p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:stage_name/history</code></p>
 
-<p><strong>With pagination</strong></p>
-
-<p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:stage_name/history[/:offset]</code></p>
-
-<aside class="notice">
-  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of stages to be skipped.
-</aside>
-
 <p class='http-request-return-description'>Returns</p>
 
 <p>An array of stage instances.</p>
@@ -6191,7 +6150,7 @@ File logs/operations.log was appended successfully
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStages/run'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST
 </code></pre></div>
 
@@ -6200,13 +6159,17 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>{
   "message" : "Request to schedule stage testAPI/1/defaultStage accepted"
 }
 </code></pre></div>
 
 <p>Runs a specified stage.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.12.0.
+</p>
 
 <p class='available-since'>
   Available since v18.11.0.
@@ -6225,7 +6188,7 @@ File logs/operations.log was appended successfully
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-failed-jobs'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST
 </code></pre></div>
 
@@ -6234,13 +6197,17 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Request to rerun jobs accepted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Runs failed jobs in a completed stage.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.12.0.
+</p>
 
 <p class='available-since'>
   Available since v18.11.0.
@@ -6259,7 +6226,7 @@ File logs/operations.log was appended successfully
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-selected-jobs'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
             jobs: ["job1", "job2"]
@@ -6271,13 +6238,17 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Request to rerun jobs accepted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Runs specified jobs in a completed stage.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v19.12.0.
+</p>
 
 <p class='available-since'>
   Available since v18.11.0.
@@ -6351,10 +6322,54 @@ File logs/operations.log was appended successfully
 
 <p>An array of scheduled job instances.</p>
 
-<h2 id="get-job-history">Get job history</h2>
+<h2 id="get-job-instance">Get Job Instance</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/jobs/myPipeline/1/myStages/1/myJob'</span> <span class="se">\</span>
+  <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json;charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"myJob"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"original_job_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scheduled_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436519914378</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rerun"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"agent_uuid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"b74d88d-d8823765f63c"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pipeline_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"myPipeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pipeline_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stage_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"myStages"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stage_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"job_state_transitions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Gets stage instance object.</p>
+
+<p class='available-since'>
+  Available since v19.12.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A job instance object.</p>
+
+<h2 id="get-job-history">Get Job History</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/jobs/mypipeline/defaultStage/job1/history'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -6362,7 +6377,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -6376,7 +6391,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypipeline"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -6391,7 +6405,6 @@ File logs/operations.log was appended successfully
       </span><span class="nl">"pipeline_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypipeline"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -6406,6 +6419,26 @@ File logs/operations.log was appended successfully
 
 <p>The job history allows users to list job instances of specified job. Supports pagination using offset which tells the API how many instances to skip.</p>
 
+<table><thead>
+<tr>
+<th>Param Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">page_size</code></td>
+<td>The number of records per page. Can be between 10 and 100. Defaults to <code class="prettyprint">10</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">offset</code></td>
+<td>The number of records which needs to be skipped. Defaults to <code class="prettyprint">0</code></td>
+</tr>
+</tbody></table>
+
+<p class='available-since'>
+  Updated to version v1 since v19.12.0.
+</p>
+
 <p class='available-since'>
   Available since v14.3.0.
 </p>
@@ -6413,14 +6446,6 @@ File logs/operations.log was appended successfully
 <p class='http-request-heading'>HTTP Request</p>
 
 <p><code class="prettyprint">GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history</code></p>
-
-<p><strong>With pagination</strong></p>
-
-<p><code class="prettyprint">GET /go/api/jobs/:pipeline_name/:stage_name/:job_name/history[/:offset]</code></p>
-
-<aside class="notice">
-  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
-</aside>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -19806,6 +19831,11 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>Introduced version 1 of the <a href="#agent-job-run-history">Agent Job History API</a>.</li>
+<li>Introduced version 1 of <a href="#pipeline-instances">Pipeline Instance APIs</a>.</li>
+<li>Introduced version 1 of <a href="#get-pipeline-status">Pipeline Status API</a>.</li>
+<li>Introduced version 2 of the <a href="#stages">Stage API</a>.</li>
+<li>Introduced version 1 of the <a href="#get-job-history">Job History API</a>.</li>
+<li>Introduced version 1 of the <a href="#get-job-instance">Job Instance API</a>.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -19818,6 +19848,12 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>The unversioned Agent Job History API API has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for Mar 2020. <a href="#agent-job-run-history">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+<li>The unversioned Pipeline Instance API has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for March 2020. <a href="#pipeline-instances">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+<li>The unversioned Pipeline Status API has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for March 2020. <a href="#get-pipeline-status">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Stage API version 1 has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for March 2020. <a href="#stages">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The unversioned Job History API has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for March 2020. <a href="#get-job-history">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Auth Config API version 1 has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#authorization-configuration">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Role Config API version 2 has been deprecated in GoCD 19.11.0. This version will be removed in a release scheduled for Jan 2020. <a href="#roles">Version 3</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-19-11-0">Changes in 19.11.0</h2>
