@@ -10,8 +10,11 @@ module GoCDHelpers
       concat_content("The #{opts[:api_name]} API version #{opts[:old_api_version]} has been deprecated in GoCD #{opts[:deprecated_in_release]}. ")
     end
     concat_content("This version will be removed in a release scheduled for #{opts[:removal_date_and_year]}. ")
-    concat_content(link_to_versioned_api(opts[:api_section], "Version #{opts[:new_api_version]}"))
-    concat_content(" of the API is available, and users are encouraged to use it.")
+
+    unless [nil].include?(opts[:new_api_version])
+      concat_content(link_to_versioned_api(opts[:api_section], "Version #{opts[:new_api_version]}"))
+      concat_content(" of the API is available, and users are encouraged to use it.")
+    end
   end
 
   def removed_api_message(opts = {})
