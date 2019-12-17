@@ -1,0 +1,37 @@
+## Trigger update of config repository
+
+```shell
+$ curl "https://ci.example.com/go/api/admin/config_repos/config_repo_id/trigger_update" \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.config_repos %>' \
+      -H 'X-GoCD-Confirm: true'\
+      -X POST
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 201 Created
+Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
+```
+
+```json
+{
+  "message": "OK"
+}
+```
+
+Triggers the update for config repository to get latest revisions.
+
+<%= available_since('20.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/admin/config_repos/:config_repo_id/trigger_update`
+
+<p class='http-request-return-description'>Returns</p>
+
+one of -
+
+ * "OK" message indicating that update for config repository is scheduled.
+ * "Update already in progress." message with status code `409` indicating update is already in progress

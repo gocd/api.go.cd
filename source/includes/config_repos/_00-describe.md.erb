@@ -6,3 +6,29 @@ describe_object 'The config repo object', since: '17.12.0' do
   configuration     'Object',   'The list of [properties](#pluggable-scm-configuration) (key-value pairs) to be provided for using the plugin'
 end
 %>
+
+<%=
+describe_object 'The config repo definition object', since: '20.1.0' do
+  environments      'Array',   'The list of [environments](#the-config-repo-environment-definition-object) defined in config repository.'
+  groups            'Array',   'The list of [pipeline groups](#config-repo-pipeline-group-definition-object) defined in config repository.'
+end
+%>
+
+<%=
+describe_sub_object 'The config repo environment definition object', since: '20.1.0', html_id: 'the-config-repo-environment-definition-object' do
+  name              'String',   'The name of an environment'
+end
+%>
+
+<%=
+describe_sub_object 'The config repo pipeline groups definition object', since: '20.1.0', html_id: 'config-repo-pipeline-group-definition-object' do
+  name              'String',   'The name of a pipeline group'
+  pipelines         'Array',    'The list of [pipeline information](#config-repo-pipeline-definition-object) defined in config repository.'
+end
+%>
+
+<%=
+describe_sub_object 'The config repo pipeline definition object', since: '20.1.0', html_id: 'config-repo-pipeline-definition-object' do
+  name              'String',   'The name of a pipeline'
+end
+%>

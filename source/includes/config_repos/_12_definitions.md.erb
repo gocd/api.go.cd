@@ -1,0 +1,42 @@
+## Definitions defined in config repo
+
+```shell
+$ curl "https://ci.example.com/go/api/admin/config_repos/config_repo_id/definitions" \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.config_repos %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
+```
+
+```json
+{
+  "environments": [{
+      "name": "dev"
+  }],
+  "groups": [{
+      "name": "config-repo-group",
+      "pipelines": [{
+          "name": "up43"
+        }]
+  }]
+}
+
+```
+
+Get the entities defined in config repository.
+
+<%= available_since('20.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/config_repos/:config_repo_id/definitions`
+
+<p class='http-request-return-description'>Returns</p>
+
+[The  config repository definition object](#the-config-repo-definition-object)
+
