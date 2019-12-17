@@ -1,0 +1,38 @@
+## Comment on pipeline instance
+
+```shell
+
+$ curl 'https://ci.example.com/go/api/pipelines/pipeline1/1/comment' \
+       -u 'username:password' \
+       -H 'Accept: <%= data.apis.versions.pipeline_operations %>' \
+       -H 'Content-Type: application/json' \
+       -X POST -d '{"comment": "Failed bacause of flaky tests"}'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.pipeline_operations %>; charset=utf-8
+```
+
+```json
+{
+  "message" : "Comment successfully updated."
+}
+```
+
+The api allows users to comment on the pipeline instance. This can be used to share additional information like reason
+of failure or cancellation etc. The API requires user to have operate permissions on the pipeline.
+
+<%= available_since('19.12.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/pipelines/:pipeline_name/:pipeline_counter/comment`
+
+<p class='http-request-return-description'>Returns</p>
+
+A message confirming that the comment is updated on pipeline instance.
+
+
