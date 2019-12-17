@@ -1,0 +1,32 @@
+## Status of config repository update
+
+```shell
+$ curl "https://ci.example.com/go/api/admin/config_repos/config_repo_id/status" \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.config_repos %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.config_repos %>; charset=utf-8
+```
+
+```json
+{
+  "in_progress": false
+}
+```
+
+Get the status of config repository update operation.
+
+<%= available_since('20.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/config_repos/:config_repo_id/status`
+
+<p class='http-request-return-description'>Returns</p>
+
+Boolean which indicates that the update of config repository is in progress or not.
