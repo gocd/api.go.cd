@@ -1,68 +1,54 @@
 ## Agent job run history
 
+
 ```shell
 $ curl 'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da/job_run_history' \
-      -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.agent_job_run_history %>'
+      -u 'username:password'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.agent_job_run_history %>; charset=utf-8
+Content-Type: application/json; charset=utf-8
 ```
 
 ```json
 {
-  "_links" : {
-    "doc" : {
-      "href" : "https://api.gocd.org/19.11.0/#agent-job-run-history"
-    },
-    "self" : {
-      "href" : "https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da/job_run_history"
-    },
-    "find" : {
-      "href" : "https://ci.example.com/go/api/agents/:uuid"
+  "jobs": [
+    {
+      "agent_uuid": "5c5c318f-e6d3-4299-9120-7faff6e6030b",
+      "name": "upload",
+      "job_state_transitions": [
+        {
+          "state_change_time": 1435631497131,
+          "id": 539906,
+          "state": "Scheduled"
+        },
+        ...
+      ],
+      "scheduled_date": 1435631497131,
+      "original_job_id": null,
+      "pipeline_counter": 251,
+      "rerun": false,
+      "pipeline_name": "distributions-all",
+      "result": "Passed",
+      "state": "Completed",
+      "id": 100129,
+      "stage_counter": "1",
+      "stage_name": "upload-installers"
     }
-  },
-  "uuid" : "adb9540a-b954-4571-9d9b-2f330739d4da",
-  "jobs" : [ {
-    "job_state_transitions" : [ {
-      "state_change_time" : "2019-11-12T00:20:56Z",
-      "state" : "Scheduled"
-    }, {
-      "state_change_time" : "2019-11-12T00:21:06Z",
-      "state" : "Assigned"
-    }, {
-      "state_change_time" : "2019-11-12T00:21:17Z",
-      "state" : "Preparing"
-    }, {
-      "state_change_time" : "2019-11-12T00:22:19Z",
-      "state" : "Building"
-    }, {
-      "state_change_time" : "2019-11-12T00:37:42Z",
-      "state" : "Rescheduled"
-    } ],
-    "job_name" : "jasmine",
-    "stage_name" : "build-non-server",
-    "stage_counter" : "1",
-    "pipeline_name" : "build-windows-PR",
-    "pipeline_counter" : 5282,
-    "result" : "Unknown",
-    "rerun" : false
-  } ],
-  "pagination" : {
-    "page_size" : 50,
-    "offset" : 812,
-    "total" : 813
+  ],
+  "pagination": {
+    "offset": 0,
+    "total": 1292,
+    "page_size": 10
   }
 }
 ```
 
 Lists the jobs that have executed on an agent.
 
-<%= updated_to(1, '19.12.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -71,19 +57,11 @@ Lists the jobs that have executed on an agent.
 
 **With pagination**
 
-`GET /go/api/agents/:uuid/job_run_history?offset=:offset&page_size=:page_size&sort_column=:sort_column&sort_order=:sort_order`
+`GET /go/api/agents/:uuid/job_run_history[/:offset]`
 
-The following query string parameters are supported by the API.
-
-<%=
-  describe_object(nil) do
-    offset       'Number',  'The number of records to skip'
-    page_size    'Number',  'The number of records per page of this response. Must be between `10` and `100`.', defaults_to: '50'
-    sort_column  'String',  'The sort order of records', one_of: %w(pipeline stage job result completed), defaults_to: '`completed`'
-    sort_order   'String',  'The order of sorting of the column specified by `sort_column`', one_of: %w(ASC DESC), defaults_to: '`DESC`'
-  end
- %>
-
+<aside class="notice">
+  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of jobs to be skipped.
+</aside>
 <p class='http-request-return-description'>Returns</p>
 
 An array of job objects along with the job transitions.
