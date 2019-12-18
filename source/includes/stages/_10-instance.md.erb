@@ -1,16 +1,16 @@
-## Get Stage Instance
+## Get stage Instance
 
 ```shell
-$ curl 'https://ci.example.com/go/api/stages/myPipeline/1/myStages/1' \
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/myStages/instance/1/1' \
   -u 'username:password' \
-  -H 'Accept: <%= data.apis.versions.stage_operations %>'
+  -H 'Accept: <%= data.apis.versions.stage_instance %>'
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
+Content-Type: <%= data.apis.versions.stage_instance %>;charset=utf-8
 ```
 
 ```json
@@ -25,26 +25,32 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
       "job_state_transitions": [
         {
           "state_change_time": 1436509518752,
+          "id": 1,
           "state": "Scheduled"
         },
         {
           "state_change_time": 1436509524491,
+          "id": 2,
           "state": "Assigned"
         },
         {
           "state_change_time": 1436509534639,
+          "id": 3,
           "state": "Preparing"
         },
         {
           "state_change_time": 1436509542522,
+          "id": 4,
           "state": "Building"
         },
         {
           "state_change_time": 1436509642582,
+          "id": 5,
           "state": "Completing"
         },
         {
           "state_change_time": 1436509642631,
+          "id": 6,
           "state": "Completed"
         }
       ],
@@ -55,6 +61,7 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
       "pipeline_name": null,
       "result": "Cancelled",
       "state": "Completed",
+      "id": 1,
       "stage_counter": null,
       "stage_name": null
     }
@@ -65,6 +72,7 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
   "result": "Cancelled",
   "cancelled_by": "user",
   "counter": 1,
+  "id": 1,
   "rerun_of_counter": null,
   "fetch_materials": true,
   "artifacts_deleted": false
@@ -73,12 +81,11 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 
 Gets stage instance object.
 
-<%= updated_to(2,'19.12.0') %>
 <%= available_since('19.1.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter`
+`GET /go/api/stages/:pipeline_name/:stage_name/instance/:pipeline_counter/:stage_counter`
 
 <p class='http-request-return-description'>Returns</p>
 

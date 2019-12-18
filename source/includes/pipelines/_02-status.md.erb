@@ -3,30 +3,28 @@
 ```shell
 
 $ curl 'http://ci.example.com/go/api/pipelines/pipeline1/status' \
-       -u 'username:password' \
-       -H 'Accept: <%= data.apis.versions.pipeline_operations %>'
+       -u 'username:password'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.pipeline_operations %>; charset=utf-8
+Content-Type: application/json; charset=utf-8
 ```
 
 ```json
 {
+  "pausedCause": "Reason for pausing this pipeline",
+  "pausedBy": "admin",
   "paused": true,
-  "paused_cause": "Reason for pausing this pipeline",
-  "paused_by": "admin",
-  "locked": false,
-  "schedulable": false
+  "schedulable": false,
+  "locked": false
 }
 ```
 
 The pipeline status allows users to check if the pipeline is paused, locked and schedulable.
 
-<%= updated_to(1,'19.12.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
