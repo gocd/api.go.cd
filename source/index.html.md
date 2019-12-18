@@ -29,6 +29,7 @@ includes:
   - 070-pipeline-groups
   - 080-artifacts
   - 090-pipelines
+  - 091-pipeline-instances
   - 100-stages
   - 110-jobs
   - 130-configuration
