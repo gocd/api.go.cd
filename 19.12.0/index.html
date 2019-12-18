@@ -9985,8 +9985,72 @@ File logs/operations.log was appended successfully
 <p>The template config API allows users with administrator role to manage template config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>Accept: application/vnd.go.cd.v5+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>Accept: application/vnd.go.cd.v6+json</code>
 </aside>
+
+<h2 id="the-shallow-template-config-object">The shallow template config object</h2>
+
+<p class='available-since'>
+  Available since v16.10.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the template.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_edit</code></td>
+<td>Boolean</td>
+<td>This property specifies whether the current user can edit the template configuration.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_administer</code></td>
+<td>Boolean</td>
+<td>This property specifies whether the current user can administer the template.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipelines</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-shallow-pipeline-config-object">pipelines</a> using the current template.</td>
+</tr>
+</tbody></table>
+
+<h2 id="the-shallow-pipeline-config-object">The shallow pipeline config object</h2>
+
+<p class='available-since'>
+  Available since v16.10.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of the pipeline using the current template.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">can_administer</code></td>
+<td>Boolean</td>
+<td>This property specifies whether the current user can administer the pipeline.</td>
+</tr>
+</tbody></table>
 
 <h2 id="the-template-config-object">The template config object</h2>
 
@@ -10088,7 +10152,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -10124,6 +10188,8 @@ File logs/operations.log was appended successfully
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"can_edit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"can_administer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nl">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
@@ -10138,7 +10204,8 @@ File logs/operations.log was appended successfully
                   </span><span class="nl">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/pipelines/:pipeline_name"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
               </span><span class="p">},</span><span class="w">
-              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"can_administer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -10151,6 +10218,10 @@ File logs/operations.log was appended successfully
 <p>Lists all available templates with the associated pipelines&rsquo; names.</p>
 
 <p class='available-since'>
+  Updated to version v6 since v19.12.0.
+</p>
+
+<p class='available-since'>
   Available since v16.10.0.
 </p>
 
@@ -10160,13 +10231,13 @@ File logs/operations.log was appended successfully
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A list of <a href="#the-template-config-object">template</a> objects</p>
+<p>A list of <a href="#the-shallow-template-config-object">template</a> objects</p>
 
 <h2 id="get-template-config">Get template config</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template.name'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -10175,7 +10246,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -10279,6 +10350,10 @@ File logs/operations.log was appended successfully
 </aside>
 
 <p class='available-since'>
+  Updated to version v6 since v19.12.0.
+</p>
+
+<p class='available-since'>
   Available since v16.10.0.
 </p>
 
@@ -10294,7 +10369,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>  curl <span class="s1">'https://ci.example.com/go/api/admin/templates'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
         "name": "template",
@@ -10374,7 +10449,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -10470,6 +10545,10 @@ File logs/operations.log was appended successfully
 <p>Creates a template config object.</p>
 
 <p class='available-since'>
+  Updated to version v6 since v19.12.0.
+</p>
+
+<p class='available-since'>
   Available since v16.10.0.
 </p>
 
@@ -10485,7 +10564,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "05548388f7ef5042cd39f7fe42e85735"'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="nt">-d</span> <span class="s1">'{
@@ -10566,7 +10645,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -10674,6 +10753,10 @@ File logs/operations.log was appended successfully
 </aside>
 
 <p class='available-since'>
+  Updated to version v6 since v19.12.0.
+</p>
+
+<p class='available-since'>
   Available since v16.10.0.
 </p>
 
@@ -10689,7 +10772,7 @@ File logs/operations.log was appended successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/templates/template_name'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v5+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 
 </code></pre></div>
@@ -10699,13 +10782,17 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v5+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The template 'template_name' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Deletes a template from the config XML if it is not associated with any pipeline.</p>
+
+<p class='available-since'>
+  Updated to version v6 since v19.12.0.
+</p>
 
 <p class='available-since'>
   Available since v16.10.0.
