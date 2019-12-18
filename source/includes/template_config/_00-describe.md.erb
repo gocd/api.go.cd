@@ -1,4 +1,20 @@
 <%=
+describe_object 'The shallow template config object', since: '16.10.0' do
+  name           'String',   'The name of the template.'
+  can_edit       'Boolean',  'This property specifies whether the current user can edit the template configuration.'
+  can_administer 'Boolean',  'This property specifies whether the current user can administer the template.'
+  pipelines      'Array',    'The list of [pipelines](#the-shallow-pipeline-config-object) using the current template.'
+end
+%>
+
+<%=
+describe_object 'The shallow pipeline config object', since: '16.10.0' do
+  name           'String',   'The name of the pipeline using the current template.'
+  can_administer 'Boolean',  'This property specifies whether the current user can administer the pipeline.'
+end
+%>
+
+<%=
 describe_object 'The template config object', since: '16.10.0' do
   name                      'String',  'The name of the template.'
   stages                    'Array',   'The list of [stages](#pipeline-config-stage-object). You MUST specify atleast one stage in `stages`, or `template`.'
