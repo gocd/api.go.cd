@@ -2,4 +2,14 @@
 
 The notification filters API allows the authenticated user to manage their notification filters.
 
+> The API depends on the
+[SMTP settings](https://docs.gocd.org/current/configuration/admin_mailhost_info.html) and without it, the API will fail with
+following message.
+
+```json
+{
+  "message": "SMTP settings are currently not configured. Ask your administrator to configure SMTP settings."
+}
+```
+
 <%= render_all_sub_topics("notification-filters") %>

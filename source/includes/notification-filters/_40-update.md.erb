@@ -1,16 +1,16 @@
-## Create a notification filter
+## Update a notification filter
 
 ```shell
-$ curl 'https://ci.example.com/go/api/notification_filters' \
+curl 'https://ci.example.com/go/api/notification_filters/1' \
   -u 'username:password' \
   -H 'Accept: <%= data.apis.versions.notification_filters %>' \
   -H 'Content-Type: application/json' \
-  -X POST \
+  -X PATCH \
   -d '{
-        "pipeline": "my_pipeline",
-        "stage": "my_stage",
-        "event": "Breaks",
-        "match_commits": true
+        "pipeline": "up42",
+        "stage": "up42_stage",
+        "event": "All",
+        "match_commits": false
       }'
 ```
 
@@ -28,7 +28,7 @@ Content-Type: <%= data.apis.versions.notification_filters %>; charset=utf-8
       "href" : "https://ci.example.com/go/api/notification_filters/1"
     },
     "doc" : {
-      "href" : "https://api.gocd.org/#notification-filters"
+      "href" : "https://api.gocd.org/20.1.0/#notification-filters"
     },
     "find" : {
       "href" : "https://ci.example.com/go/api/notification_filters/:id"
@@ -37,19 +37,19 @@ Content-Type: <%= data.apis.versions.notification_filters %>; charset=utf-8
   "id" : 1,
   "pipeline" : "up42",
   "stage" : "up42_stage",
-  "event" : "Fails",
+  "event" : "All",
   "match_commits" : false
 }
 ```
 
-Creates a notification filter for the authenticated user.
+Update a existing notification filter for the authenticated user.
 
 <%= updated_to(2,'20.1.0') %>
 <%= available_since("17.5.0") %>
 
 <p class="http-request-heading">HTTP Request</p>
 
-`POST /go/api/notification_filters`
+`PATCH /go/api/notification_filters/:id`
 
 The following properties may be specified:
 
@@ -64,4 +64,4 @@ end
 
 <p class="http-request-return-description">Returns</p>
 
-A newly created [notification filter object](#the-notification-filter-object) for the user.
+An updated [notification filter object](#the-notification-filter-object) for the user.

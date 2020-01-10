@@ -1,10 +1,10 @@
 ## Delete a notification filter
 
 ```shell
-$ curl 'https://ci.example.com/go/api/notification_filters/10' \
-      -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.notification_filters %>' \
-      -X DELETE
+$ curl 'https://ci.example.com/go/api/notification_filters/1' \
+  -u 'username:password' \
+  -H 'Accept: <%= data.apis.versions.notification_filters %>' \
+  -X DELETE
 ```
 
 > The above command returns JSON structured like this:
@@ -16,13 +16,13 @@ Content-Type: <%= data.apis.versions.notification_filters %>; charset=utf-8
 
 ```json
 {
-  "filters": [
-  ]
+  "message" : "Notification filter is successfully deleted!"
 }
 ```
 
 Deletes a notification filter for the authenticated user.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since("17.5.0") %>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -31,4 +31,4 @@ Deletes a notification filter for the authenticated user.
 
 <p class='http-request-return-description'>Returns</p>
 
-An array of [notification filter objects](#the-notification-filter-object) representing the user's remaining notification filters.
+A message if the notification filter is deleted or not.

@@ -2,8 +2,8 @@
 
 ```shell
 $ curl 'https://ci.example.com/go/api/notification_filters' \
-      -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.notification_filters %>'
+  -u 'username:password' \
+  -H 'Accept: <%= data.apis.versions.notification_filters %>'
 ```
 
 > The above command returns JSON structured like this:
@@ -15,20 +15,31 @@ Content-Type: <%= data.apis.versions.notification_filters %>; charset=utf-8
 
 ```json
 {
-  "filters": [
-    {
-      "id": 10,
-      "pipeline": "my_pipeline",
-      "stage": "[Any Stage]",
-      "event": "Breaks",
-      "match_commits": true
+  "_links" : {
+    "self" : {
+      "href" : "https://ci.example.com/go/api/notification_filters"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/20.1.0/#notification-filters"
     }
-  ]
+  },
+  "_embedded" : {
+    "filters" : [
+      {
+        "id": 10,
+        "pipeline": "my_pipeline",
+        "stage": "[Any Stage]",
+        "event": "Breaks",
+        "match_commits": true
+      }
+    ]
+  }
 }
 ```
 
 Lists all notification filters for the authenticated user.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since("17.5.0") %>
 
 <p class="http-request-heading">HTTP Request</p>

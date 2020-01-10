@@ -1,17 +1,9 @@
-## Create a notification filter
+## Get a notification filter
 
 ```shell
-$ curl 'https://ci.example.com/go/api/notification_filters' \
+$ curl 'https://ci.example.com/go/api/notification_filters/1' \
   -u 'username:password' \
-  -H 'Accept: <%= data.apis.versions.notification_filters %>' \
-  -H 'Content-Type: application/json' \
-  -X POST \
-  -d '{
-        "pipeline": "my_pipeline",
-        "stage": "my_stage",
-        "event": "Breaks",
-        "match_commits": true
-      }'
+  -H 'Accept: <%= data.apis.versions.notification_filters %>'
 ```
 
 > The above command returns JSON structured like this:
@@ -42,14 +34,14 @@ Content-Type: <%= data.apis.versions.notification_filters %>; charset=utf-8
 }
 ```
 
-Creates a notification filter for the authenticated user.
+Get a notification filter for the authenticated user.
 
 <%= updated_to(2,'20.1.0') %>
 <%= available_since("17.5.0") %>
 
 <p class="http-request-heading">HTTP Request</p>
 
-`POST /go/api/notification_filters`
+`GET /go/api/notification_filters/:id`
 
 The following properties may be specified:
 
