@@ -1,91 +1,83 @@
-## Get stage Instance
+## Get stage instance
 
 ```shell
-$ curl 'https://ci.example.com/go/api/stages/myPipeline/myStages/instance/1/1' \
+$ curl 'https://ci.example.com/go/api/stages/myPipeline/1/myStages/1' \
   -u 'username:password' \
-  -H 'Accept: <%= data.apis.versions.stage_instance %>'
+  -H 'Accept: <%= data.apis.versions.stage_operations %>'
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.stage_instance %>;charset=utf-8
+Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 ```
 
 ```json
 {
-  "name": "defaultStage",
-  "clean_working_directory": false,
-  "approved_by": "changes",
-  "jobs": [
-    {
-      "agent_uuid": "278fb0b6-d3b8-47e1-9443-67f26bfb5c15",
-      "name": "defaultJob",
-      "job_state_transitions": [
-        {
-          "state_change_time": 1436509518752,
-          "id": 1,
-          "state": "Scheduled"
-        },
-        {
-          "state_change_time": 1436509524491,
-          "id": 2,
-          "state": "Assigned"
-        },
-        {
-          "state_change_time": 1436509534639,
-          "id": 3,
-          "state": "Preparing"
-        },
-        {
-          "state_change_time": 1436509542522,
-          "id": 4,
-          "state": "Building"
-        },
-        {
-          "state_change_time": 1436509642582,
-          "id": 5,
-          "state": "Completing"
-        },
-        {
-          "state_change_time": 1436509642631,
-          "id": 6,
-          "state": "Completed"
-        }
-      ],
-      "scheduled_date": 1436509518752,
-      "original_job_id": null,
-      "pipeline_counter": null,
-      "rerun": false,
-      "pipeline_name": null,
-      "result": "Cancelled",
-      "state": "Completed",
-      "id": 1,
-      "stage_counter": null,
-      "stage_name": null
-    }
-  ],
-  "pipeline_counter": 1,
-  "pipeline_name": "mypipeline",
-  "approval_type": "success",
-  "result": "Cancelled",
-  "cancelled_by": "user",
+  "name": "default_stage",
   "counter": 1,
-  "id": 1,
+  "approval_type": "success",
+  "approved_by": "changes",
+  "result": "Unknown",
   "rerun_of_counter": null,
   "fetch_materials": true,
-  "artifacts_deleted": false
+  "clean_working_directory": false,
+  "artifacts_deleted": false,
+  "pipeline_name": "default",
+  "pipeline_counter": 1,
+  "jobs": [
+    {
+      "name": "default_job",
+      "state": "Scheduled",
+      "result": "Unknown",
+      "scheduled_date": 1578891141997,
+      "rerun": false,
+      "original_job_id": null,
+      "agent_uuid": null,
+      "pipeline_name": null,
+      "pipeline_counter": null,
+      "stage_name": null,
+      "stage_counter": null,
+      "job_state_transitions": [
+        {
+          "state": "Scheduled",
+          "state_change_time": 1578891141997
+        },
+        {
+          "state": "Assigned",
+          "state_change_time": 1436509524491
+        },
+        {
+          "state": "Preparing",
+          "state_change_time": 1436509534639
+        },
+        {
+          "state": "Building",
+          "state_change_time": 1436509542522
+        },
+        {
+          "state": "Completing",
+          "state_change_time": 1436509642582
+        },
+        {
+          "state": "Completed",
+          "state_change_time": 1436509642631
+        }
+      ]
+    }
+  ]
 }
 ```
 
 Gets stage instance object.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since('19.1.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/stages/:pipeline_name/:stage_name/instance/:pipeline_counter/:stage_counter`
+`GET /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter`
 
 <p class='http-request-return-description'>Returns</p>
 

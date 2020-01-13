@@ -2,162 +2,106 @@
 
 ```shell
 
-$ curl 'http://ci.example.com/go/api/pipelines/pipeline1/history/0' \
-       -u 'username:password'
+$ curl 'http://ci.example.com/go/api/pipelines/pipeline1/history' \
+       -u 'username:password' \
+       -H 'Accept: <%= data.apis.versions.pipeline_operations %>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+Content-Type: <%= data.apis.versions.pipeline_operations %>; charset=utf-8
 ```
 
 ```json
 {
+  "_links": {
+    "next": {
+      "href": "http://ci.example.com/go/api/pipelines/pipeline1/history?after=35"
+    },
+    "previous": {
+      "href": "http://ci.example.com/go/api/pipelines/pipeline1/history?before=9"
+    }
+  },
   "pipelines": [
     {
+      "name": "pipeline1",
+      "counter": 13,
+      "label": "13",
+      "natural_order": 13.0,
+      "can_run": true,
+      "preparing_to_schedule": false,
+      "comment": null,
+      "scheduled_date" : 1436519914578,
       "build_cause": {
-        "approver": "anonymous",
+        "trigger_message": "modified by user <user@users.noreply.github.com>",
+        "trigger_forced": false,
+        "approver": "",
         "material_revisions": [
           {
+            "changed": false,
+            "material": {
+              "name": "https://github.com/gocd/gocd",
+              "fingerprint": "de08b34d116a1cfc1fb988b6683bf21",
+              "type": "Git",
+              "description": "URL: https://github.com/gocd/gocd, Branch: master"
+            },
             "modifications": [
               {
-                "email_address": null,
-                "id": 1,
-                "modified_time": 1434957613000,
-                "user_name": "Pick E Reader <pick.e.reader@example.com>",
-                "comment": "my hola mundo changes",
-                "revision": "c194b49db102b705ebc13e604e490ae13ac92d96"
+                "revision": "40f0a7ba43df37794cfc78b158483b",
+                "modified_time": 1436519914378,
+                "user_name": "user <user@users.noreply.github.com>",
+                "comment": "some commit message.",
+                "email_address": null
               }
-            ],
-            "material": {
-              "description": "URL: https://github.com/gocd/gocd, Branch: master",
-              "fingerprint": "f6e7a3899c55e1682ffb00383bdf8f882bcee2141e79a8728254190a1fddcf4f",
-              "type": "Git",
-              "id": 1
-            },
-            "changed": false
+            ]
           }
-        ],
-        "trigger_forced": true,
-        "trigger_message": "Forced by anonymous"
+        ]
       },
-      "name": "pipeline1",
-      "natural_order": 11,
-      "can_run": true,
-      "comment": null,
       "stages": [
         {
-          "name": "stage1",
-          "approved_by": "admin",
-          "jobs": [
-            {
-              "name": "job1",
-              "result": "Failed",
-              "state": "Completed",
-              "id": 13,
-              "scheduled_date": 1436172201081
-            }
-          ],
-          "can_run": true,
           "result": "Failed",
-          "approval_type": "success",
-          "counter": "1",
-          "id": 13,
-          "operate_permission": true,
+          "status" : "Completed",
           "rerun_of_counter": null,
-          "scheduled": true
-        }
-      ],
-      "counter": 11,
-      "id": 13,
-      "preparing_to_schedule": false,
-      "label": "11"
-    },
-    {
-      "build_cause": {
-        "approver": "anonymous",
-        "material_revisions": [
-          {
-            "modifications": [
-              {
-                "email_address": null,
-                "id": 1,
-                "modified_time": 1434957613000,
-                "user_name": "Pick E Reader <pick.e.reader@example.com>",
-                "comment": "my hola mundo changes",
-                "revision": "c194b49db102b705ebc13e604e490ae13ac92d96"
-              }
-            ],
-            "material": {
-              "description": "URL: https://github.com/gocd/gocd, Branch: master",
-              "fingerprint": "f6e7a3899c55e1682ffb00383bdf8f882bcee2141e79a8728254190a1fddcf4f",
-              "type": "Git",
-              "id": 1
-            },
-            "changed": false
-          }
-        ],
-        "trigger_forced": true,
-        "trigger_message": "Forced by anonymous"
-      },
-      "name": "pipeline1",
-      "natural_order": 10,
-      "can_run": true,
-      "comment": null,
-      "stages": [
-        {
-          "name": "stage1",
-          "approved_by": "admin",
+          "name": "pipeline1_stage",
+          "counter": "1",
+          "scheduled": true,
+          "approval_type": "success",
+          "approved_by": "changes",
+          "operate_permission": true,
+          "can_run": true,
           "jobs": [
             {
-              "name": "job1",
-              "result": "Passed",
+              "name": "pipeline1_job",
+              "scheduled_date": 1436582744378,
               "state": "Completed",
-              "id": 12,
-              "scheduled_date": 1436172122024
+              "result": "Failed"
             }
-          ],
-          "can_run": true,
-          "result": "Passed",
-          "approval_type": "success",
-          "counter": "1",
-          "id": 12,
-          "operate_permission": true,
-          "rerun_of_counter": null,
-          "scheduled": true
+          ]
         }
-      ],
-      "counter": 10,
-      "id": 12,
-      "preparing_to_schedule": false,
-      "label": "10"
+      ]
     }
-  ],
-  "pagination": {
-    "offset": 0,
-    "total": 2,
-    "page_size": 10
-  }
+  ]
 }
 ```
 
-The pipeline history allows users to list pipeline instances. Supports pagination using offset which tells the API how many instances to skip.
+The pipeline history allows users to list pipeline instances. Supports cursor based pagination. The json output provides the `next` link which needs to be followed for the next set of records (if present). It also provides a `previous` which can be followed to get the previous page (if there is one).
 
+The API supports the following query params:
+
+| Param Name  | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| `page_size` | The number of records per page. Can be between 10 and 100. Defaults to `10` |
+| `after`     | The cursor value for fetching the next set of records                       |
+| `before`    | The cursor value for fetching the previous set of records                   |
+
+<%= updated_to(1,'20.1.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
 `GET /go/api/pipelines/:pipeline_name/history`
-
-**With pagination**
-
-`GET /go/api/pipelines/:pipeline_name/history[/:offset]`
-
-<aside class="notice">
-  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of pipeline instances to be skipped.
-</aside>
 
 <p class='http-request-return-description'>Returns</p>
 
