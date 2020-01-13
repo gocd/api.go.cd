@@ -1,20 +1,28 @@
 ## Get stage history
 
 ```shell
-$ curl 'https://ci.example.com/go/api/stages/myPipeline/defaultStage/history' \
+$ curl 'https://ci.example.com/go/api/stages/mypipeline/defaultStage/history' \
       -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.stage_instance %>'
+      -H 'Accept: <%= data.apis.versions.stage_operations %>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.stage_instance %>; charset=utf-8
+Content-Type: <%= data.apis.versions.stage_operations %>; charset=utf-8
 ```
 
 ```json
 {
+  "_links": {
+    "next": {
+      "href": "http://ci.example.com/go/api/stages/mypipeline/defaultStage/history?after=38"
+    },
+    "previous": {
+      "href": "http://ci.example.com/go/api/stages/mypipeline/defaultStage/history?before=4"
+    }
+  },
   "stages": [
     {
       "name": "defaultStage",
@@ -25,7 +33,6 @@ Content-Type: <%= data.apis.versions.stage_instance %>; charset=utf-8
           "name": "defaultJob",
           "result": "Cancelled",
           "state": "Completed",
-          "id": 3,
           "scheduled_date": 1436509881002
         }
       ],
@@ -33,7 +40,6 @@ Content-Type: <%= data.apis.versions.stage_instance %>; charset=utf-8
       "pipeline_name": "mypipeline",
       "result": "Cancelled",
       "approval_type": "success",
-      "id": 3,
       "counter": "1",
       "rerun_of_counter": null
     },
@@ -46,7 +52,6 @@ Content-Type: <%= data.apis.versions.stage_instance %>; charset=utf-8
           "name": "defaultJob",
           "result": "Cancelled",
           "state": "Completed",
-          "id": 2,
           "scheduled_date": 1436509783931
         }
       ],
@@ -54,7 +59,6 @@ Content-Type: <%= data.apis.versions.stage_instance %>; charset=utf-8
       "pipeline_name": "mypipeline",
       "result": "Cancelled",
       "approval_type": "success",
-      "id": 2,
       "counter": "1",
       "rerun_of_counter": null
     },
@@ -66,7 +70,6 @@ Content-Type: <%= data.apis.versions.stage_instance %>; charset=utf-8
           "name": "defaultJob",
           "result": "Passed",
           "state": "Completed",
-          "id": 1,
           "scheduled_date": 1436509518752
         }
       ],
@@ -74,22 +77,24 @@ Content-Type: <%= data.apis.versions.stage_instance %>; charset=utf-8
       "pipeline_name": "mypipeline",
       "result": "Passed",
       "approval_type": "success",
-      "id": 1,
       "counter": "1",
       "rerun_of_counter": null
     }
-  ],
-  "pagination": {
-    "offset": 0,
-    "total": 3,
-    "page_size": 10
-  }
+  ]
 }
 ```
 
-The stage history allows users to list stage instances of specified stage. Supports pagination using offset which tells the API how many instances to skip.
+The stage history allows users to list stage instances of specified stage. Supports cursor based pagination. The json output provides the `next` link which needs to be followed for the next set of records (if present). It also provides a `previous` which can be followed to get the previous page (if there is one).
 
-<%= updated_to(1,'19.3.0') %>
+The API supports the following query params:
+
+| Param Name  | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| `page_size` | The number of records per page. Can be between 10 and 100. Defaults to `10` |
+| `after`     | The cursor value for fetching the next set of records                       |
+| `before`    | The cursor value for fetching the previous set of records                   |
+
+<%= updated_to(2,'20.1.0') %>
 <%= available_since('14.3.0') %>
 
 
@@ -97,13 +102,6 @@ The stage history allows users to list stage instances of specified stage. Suppo
 
 `GET /go/api/stages/:pipeline_name/:stage_name/history`
 
-**With pagination**
-
-`GET /go/api/stages/:pipeline_name/:stage_name/history[/:offset]`
-
-<aside class="notice">
-  <strong>Note:</strong> <code>:offset</code> is an optional parameter indicating the number of stages to be skipped.
-</aside>
 <p class='http-request-return-description'>Returns</p>
 
 An array of stage instances.

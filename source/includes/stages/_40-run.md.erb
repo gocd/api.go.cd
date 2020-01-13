@@ -15,7 +15,7 @@ HTTP/1.1 202 Accepted
 Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 ```
 
-```
+```json
 {
   "message" : "Request to schedule stage testAPI/1/defaultStage accepted"
 }
@@ -23,6 +23,7 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 
 Runs a specified stage.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since('18.11.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

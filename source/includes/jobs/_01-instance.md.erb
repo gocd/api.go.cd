@@ -1,0 +1,43 @@
+## Get job instance
+
+```shell
+$ curl 'https://ci.example.com/go/api/jobs/myPipeline/1/myStages/1/myJob' \
+  -u 'username:password' \
+  -H 'Accept: <%= data.apis.versions.job_instance %>'
+```
+
+> The above command returns the following response:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.job_instance %>;charset=utf-8
+```
+
+```json
+{
+  "name" : "myJob",
+  "state" : "Completed",
+  "result" : "Passed",
+  "original_job_id" : null,
+  "scheduled_date": 1436519914378,
+  "rerun" : false,
+  "agent_uuid" : "b74d88d-d8823765f63c",
+  "pipeline_name" : "myPipeline",
+  "pipeline_counter" : 1,
+  "stage_name" : "myStages",
+  "stage_counter" : "1",
+  "job_state_transitions" : [ ]
+}
+```
+
+Gets job instance object.
+
+<%= available_since('20.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/jobs/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name`
+
+<p class='http-request-return-description'>Returns</p>
+
+A job instance object.
