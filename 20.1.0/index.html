@@ -2516,6 +2516,15 @@ OK!
 
 <p>The notification filters API allows the authenticated user to manage their notification filters.</p>
 
+<blockquote>
+<p>The API depends on the
+<a href="https://docs.gocd.org/current/configuration/admin_mailhost_info.html">SMTP settings</a> and without it, the API will fail with
+following message.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SMTP settings are currently not configured. Ask your administrator to configure SMTP settings."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <h2 id="the-notification-filter-object">The notification filter object</h2>
 
 <p class='available-since'>
@@ -2539,17 +2548,17 @@ OK!
 <tr>
 <td><code class="prettyprint">pipeline</code></td>
 <td>String</td>
-<td>The pipeline name to which the notification filter should match.</td>
+<td>The name of the pipeline to get notification for. Can also be <code class="prettyprint">[Any Pipeline]</code> to get notification for any pipeline. This attribute MUST be specified.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">stage</code></td>
 <td>String</td>
-<td>The stage name to which the notification filter should match.</td>
+<td>The name of the stage to get notification for. Can also be <code class="prettyprint">[Any Stage]</code> to get notification for any stage. This attribute MUST be specified.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">event</code></td>
 <td>String</td>
-<td>The event to which the notification filter should match.</td>
+<td>The name of event to get notificaton for. Can be one of: <code class="prettyprint">All</code>, <code class="prettyprint">Passes</code>, <code class="prettyprint">Fails</code>, <code class="prettyprint">Breaks</code>, <code class="prettyprint">Fixed</code>, <code class="prettyprint">Cancelled</code>. This attribute MUST be specified.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">match_commits</code></td>
@@ -2561,8 +2570,8 @@ OK!
 <h2 id="show-all-notification-filters">Show all notification filters</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/notification_filters'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+  <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -2570,21 +2579,35 @@ OK!
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[Any Stage]"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Breaks"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"match_commits"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/notification_filters"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/20.1.0/#notification-filters"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"_embedded"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"filters"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[Any Stage]"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Breaks"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"match_commits"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Lists all notification filters for the authenticated user.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -2601,17 +2624,16 @@ OK!
 <h2 id="create-a-notification-filter">Create a notification filter</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/notification_filters'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-      <span class="nt">-X</span> POST <span class="se">\</span>
-      <span class="nt">-d</span> <span class="s1">'{
-            "pipeline": "my_pipeline",
-            "stage": "my_stage",
-            "event": "Breaks",
-            "match_commits": true
-          }'</span>
-
+  <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-X</span> POST <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+        "pipeline": "my_pipeline",
+        "stage": "my_stage",
+        "event": "Breaks",
+        "match_commits": true
+      }'</span>
 </code></pre></div>
 
 <blockquote>
@@ -2619,28 +2641,32 @@ OK!
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"already_existed"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[Any Stage]"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"All"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"match_commits"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/notification_filters/1"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_pipeline"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_stage"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Breaks"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"match_commits"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#notification-filters"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/notification_filters/:id"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"event"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Fails"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"match_commits"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Creates a notification filter for the authenticated user.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -2664,35 +2690,34 @@ OK!
 <tr>
 <td><code class="prettyprint">pipeline</code></td>
 <td>String</td>
-<td>The pipeline name to match. Can also be &ldquo;[Any Pipeline]&rdquo;. This attribute MUST be specified.</td>
+<td>The name of the pipeline to get notification for. Can also be <code class="prettyprint">[Any Pipeline]</code> to get notification for any pipeline. This attribute MUST be specified.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">stage</code></td>
 <td>String</td>
-<td>The stage name to match. Can also be &ldquo;[Any Stage]&rdquo;. This attribute MUST be specified.</td>
+<td>The name of the stage to get notification for. Can also be <code class="prettyprint">[Any Stage]</code> to get notification for any stage. This attribute MUST be specified.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">event</code></td>
 <td>String</td>
-<td>The event to match. Can be one of: &ldquo;All&rdquo;, &ldquo;Passes&rdquo;, &ldquo;Fails&rdquo;, &ldquo;Breaks&rdquo;, &ldquo;Fixed&rdquo;, &ldquo;Cancelled&rdquo;. This attribute MUST be specified.</td>
+<td>The name of event to get notificaton for. Can be one of: <code class="prettyprint">All</code>, <code class="prettyprint">Passes</code>, <code class="prettyprint">Fails</code>, <code class="prettyprint">Breaks</code>, <code class="prettyprint">Fixed</code>, <code class="prettyprint">Cancelled</code>. This attribute MUST be specified.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">match_commits</code></td>
 <td>Boolean</td>
-<td>Should the filter only match the user&rsquo;s commits?.</td>
+<td>Boolean indicating if the notification filter should match only the user&rsquo;s commits (true) or all commits (false).</td>
 </tr>
 </tbody></table>
 
 <p class="http-request-return-description">Returns</p>
 
-<p>An array of <a href="#the-notification-filter-object">notification filter objects</a> representing the current set the user&rsquo;s notification filters.</p>
+<p>A newly created <a href="#the-notification-filter-object">notification filter object</a> for the user.</p>
 
-<h2 id="delete-a-notification-filter">Delete a notification filter</h2>
+<h2 id="get-a-notification-filter">Get a notification filter</h2>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/notification_filters/10'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
-      <span class="nt">-X</span> DELETE
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/notification_filters/1'</span> <span class="se">\</span>
+  <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -2700,14 +2725,194 @@ OK!
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/notification_filters/1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#notification-filters"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/notification_filters/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"event"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Fails"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"match_commits"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Get a notification filter for the authenticated user.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
+
+<p class='available-since'>
+  Available since v17.5.0.
+</p>
+
+<p class="http-request-heading">HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/notification_filters/:id</code></p>
+
+<p>The following properties may be specified:</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">pipeline</code></td>
+<td>String</td>
+<td>The name of the pipeline to get notification for. Can also be <code class="prettyprint">[Any Pipeline]</code> to get notification for any pipeline. This attribute MUST be specified.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stage</code></td>
+<td>String</td>
+<td>The name of the stage to get notification for. Can also be <code class="prettyprint">[Any Stage]</code> to get notification for any stage. This attribute MUST be specified.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">event</code></td>
+<td>String</td>
+<td>The name of event to get notificaton for. Can be one of: <code class="prettyprint">All</code>, <code class="prettyprint">Passes</code>, <code class="prettyprint">Fails</code>, <code class="prettyprint">Breaks</code>, <code class="prettyprint">Fixed</code>, <code class="prettyprint">Cancelled</code>. This attribute MUST be specified.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">match_commits</code></td>
+<td>Boolean</td>
+<td>Boolean indicating if the notification filter should match only the user&rsquo;s commits (true) or all commits (false).</td>
+</tr>
+</tbody></table>
+
+<p class="http-request-return-description">Returns</p>
+
+<p>A newly created <a href="#the-notification-filter-object">notification filter object</a> for the user.</p>
+
+<h2 id="update-a-notification-filter">Update a notification filter</h2>
+
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="s1">'https://ci.example.com/go/api/notification_filters/1'</span> <span class="se">\</span>
+  <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-X</span> PATCH <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+        "pipeline": "up42",
+        "stage": "up42_stage",
+        "event": "All",
+        "match_commits": false
+      }'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/notification_filters/1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/20.1.0/#notification-filters"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/notification_filters/:id"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"event"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"All"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"match_commits"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Update a existing notification filter for the authenticated user.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
+
+<p class='available-since'>
+  Available since v17.5.0.
+</p>
+
+<p class="http-request-heading">HTTP Request</p>
+
+<p><code class="prettyprint">PATCH /go/api/notification_filters/:id</code></p>
+
+<p>The following properties may be specified:</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">pipeline</code></td>
+<td>String</td>
+<td>The name of the pipeline to get notification for. Can also be <code class="prettyprint">[Any Pipeline]</code> to get notification for any pipeline. This attribute MUST be specified.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">stage</code></td>
+<td>String</td>
+<td>The name of the stage to get notification for. Can also be <code class="prettyprint">[Any Stage]</code> to get notification for any stage. This attribute MUST be specified.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">event</code></td>
+<td>String</td>
+<td>The name of event to get notificaton for. Can be one of: <code class="prettyprint">All</code>, <code class="prettyprint">Passes</code>, <code class="prettyprint">Fails</code>, <code class="prettyprint">Breaks</code>, <code class="prettyprint">Fixed</code>, <code class="prettyprint">Cancelled</code>. This attribute MUST be specified.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">match_commits</code></td>
+<td>Boolean</td>
+<td>Boolean indicating if the notification filter should match only the user&rsquo;s commits (true) or all commits (false).</td>
+</tr>
+</tbody></table>
+
+<p class="http-request-return-description">Returns</p>
+
+<p>An updated <a href="#the-notification-filter-object">notification filter object</a> for the user.</p>
+
+<h2 id="delete-a-notification-filter">Delete a notification filter</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/notification_filters/1'</span> <span class="se">\</span>
+  <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+  <span class="nt">-X</span> DELETE
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Notification filter is successfully deleted!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Deletes a notification filter for the authenticated user.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
 
 <p class='available-since'>
   Available since v17.5.0.
@@ -2719,7 +2924,7 @@ OK!
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>An array of <a href="#the-notification-filter-object">notification filter objects</a> representing the user&rsquo;s remaining notification filters.</p>
+<p>A message if the notification filter is deleted or not.</p>
 
           <h1 id="materials">Materials</h1>
 
@@ -19879,6 +20084,22 @@ dependent on the plugin to be configured. Use the result of
           <h1 id="api-changelog">API Changelog</h1>
 
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
+
+<h2 id="changes-in-20-1-0">Changes in 20.1.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>Introduced version 2 of the <a href="#notification-filters">Notification Filter API</a>.</li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>The Notification Filter API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for Mar 2020. <a href="#notification-filters">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+</ul>
 
 <h2 id="changes-in-19-12-0">Changes in 19.12.0</h2>
 
