@@ -13,25 +13,31 @@ Content-Type: application/xml; charset=utf-8
 ```
 
 ```xml
-<pipeline name="mypipeline" counter="1" label="1">
-  <link rel="self" href="https://ci.example.com/go/api/pipelines/mypipeline/1.xml"/>
-  <id><![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:1]]></id>
-  <scheduleTime>2015-07-10T11:55:18+05:30</scheduleTime>
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline name="mypipeline" counter="4683">
+  <link rel="self" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4683.xml"/>
+  <id><![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:4683]]></id>
+  <scheduleTime>2020-01-11T13:02:39Z</scheduleTime>
+  <link rel="insertedAfter" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/120064.xml"/>
   <materials>
-    <material materialUri="https://ci.example.com/go/api/materials/405.xml" type="GitMaterial" url="URL: https://github.com/gocd/gocd" branch="master">
-      <modifications>
-        <changeset changesetUri="https://ci.example.com/go/api/materials/405/changeset/c194b49db102b705ebc13e604e490ae13ac92d96.xml">
-          <user><![CDATA[Pick E Reader <pick.e.reader@example.com>]]></user>
-          <checkinTime>2015-06-22T12:50:13+05:30</checkinTime>
-          <revision><![CDATA[c194b49db102b705ebc13e604e490ae13ac92d96]]></revision>
-          <message><![CDATA[Update README]]></message>
-          <file name="README" action="modified"/>
-        </changeset>
-      </modifications>
+    <material>
+      <material materialUri="https://ci.example.com/go/api/feed/materials/mypipeline/4683/2724d1969830c35097dcfd76b712d0a63d1cd636c8c9793ee1c3922421841d4a.xml" type="GitMaterial" url="https://git.gocd.io/git/gocd/gocd" branch="master" shallowClone="true">
+        <modifications>
+          <changeset>
+            <user><![CDATA[Pick E Reader <pick.e.reader@example.com>]]></user>
+            <checkinTime>2020-01-11T12:45:32Z</checkinTime>
+            <revision><![CDATA[6e6a8e2e174c708b1f3f4dd798b90c2cc5f1bb49]]></revision>
+            <message><![CDATA[Updated readme]]></message>
+            <file name="server/src/main/webapp/WEB-INF/rails/package.json" action="modified"/>
+            <file name="server/src/main/webapp/WEB-INF/rails/yarn.lock" action="modified"/>
+          </changeset>
+        </modifications>
+      </material>
     </material>
   </materials>
   <stages>
-    <stage href="https://ci.example.com/go/api/stages/1.xml"/>
+    <stage href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/build-non-server/1.xml"/>
+    <stage href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/build-server/2.xml"/>
   </stages>
   <approvedBy><![CDATA[changes]]></approvedBy>
 </pipeline>
@@ -39,12 +45,13 @@ Content-Type: application/xml; charset=utf-8
 
 Gets XML representation of pipeline.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/pipelines/:pipeline_name/:pipeline_id.xml`
+`GET  /go/api/pipelines:pipeline_name/:pipeline_counter.xml`
 
 <p class='http-request-return-description'>Returns</p>
 
-A pipeline object.
+A xml representation of pipeline run.

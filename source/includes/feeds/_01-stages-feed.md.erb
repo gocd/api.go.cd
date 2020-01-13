@@ -1,7 +1,7 @@
-## Get feed of all stages
+## Get feed of all stages in a pipeline
 
 ```shell
-$ curl 'https://ci.example.com/go/api/pipelines/mypipeline/stages.xml' \
+$ curl 'https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml' \
       -u 'username:password'
 ```
 
@@ -13,62 +13,57 @@ Content-Type: application/xml; charset=utf-8
 ```
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:go="http://www.thoughtworks-studios.com/ns/go">
-    <title><![CDATA[mypipeline]]></title>
-    <id>https://ci.example.com/go/api/pipelines/mypipeline/stages.xml</id>
+  <title><![CDATA[mypipeline]]></title>
+  <id>https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml</id>
+  <author>
+    <name>Go</name>
+  </author>
+  <updated>2020-01-11T13:09:57Z</updated>
+  <link rel="self" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml"/>
+  <link rel="next" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml?before=4672"/>
+  <entry>
+    <title><![CDATA[mypipeline(4684) stage defaultStage(1) Cancelled]]></title>
+    <updated>2020-01-11T13:09:57Z</updated>
+    <id>https://ci.example.com/go/pipelines/mypipeline/4684/defaultStage/1</id>
     <author>
-        <name>Go</name>
+      <name><![CDATA[Pick E Reader <pick.e.reader@example.com>]]></name>
     </author>
-    <updated>2015-07-13T10:59:49+05:30</updated>
-    <link rel="self" href="https://ci.example.com/go/api/pipelines/mypipeline/stages.xml"/>
-        <link rel="next" href="https://ci.example.com/go/api/pipelines/mypipeline/stages.xml?before=6"/>
-
-        <entry>
-            <title><![CDATA[mypipeline(2) stage defaultStage(1) Cancelled]]></title>
-            <updated>2015-07-10T12:00:04+05:30</updated>
-            <id>https://ci.example.com/go/pipelines/mypipeline/2/defaultStage/1</id>
-
-            <author>
-                <name><![CDATA[Pick E Reader <pick.e.reader@example.com>]]></name>
-            </author>
-
-            <link title="defaultStage Stage Detail" href="https://ci.example.com/go/api/stages/2.xml" rel="alternate" type="application/vnd.go+xml"/>
-            <link title="defaultStage Stage Detail" href="https://ci.example.com/go/pipelines/mypipeline/2/defaultStage/1" rel="alternate" type="text/html"/>
-            <link title="mypipeline Pipeline Detail" href="https://ci.example.com/go/api/pipelines/mypipeline/2.xml" rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" type="application/vnd.go+xml"/>
-            <link title="mypipeline Pipeline Detail" href="https://ci.example.com/go/pipelines/mypipeline/2/defaultStage/1/pipeline" rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" type="text/html"/>
-
-            <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="stage" label="Stage" />
-            <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="completed" label="Completed" />
-            <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="cancelled" label="Cancelled" />
-        </entry>
-        <entry>
-            <title><![CDATA[mypipeline(1) stage defaultStage(1) Passed]]></title>
-            <updated>2015-07-10T11:57:22+05:30</updated>
-            <id>https://ci.example.com/go/pipelines/mypipeline/1/defaultStage/1</id>
-
-            <author>
-                <name><![CDATA[Pick E Reader <pick.e.reader@example.com>]]></name>
-            </author>
-
-            <link title="defaultStage Stage Detail" href="https://ci.example.com/go/api/stages/1.xml" rel="alternate" type="application/vnd.go+xml"/>
-            <link title="defaultStage Stage Detail" href="https://ci.example.com/go/pipelines/mypipeline/1/defaultStage/1" rel="alternate" type="text/html"/>
-            <link title="mypipeline Pipeline Detail" href="https://ci.example.com/go/api/pipelines/mypipeline/1.xml" rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" type="application/vnd.go+xml"/>
-            <link title="mypipeline Pipeline Detail" href="https://ci.example.com/go/pipelines/mypipeline/1/defaultStage/1/pipeline" rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" type="text/html"/>
-
-            <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="stage" label="Stage" />
-            <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="completed" label="Completed" />
-            <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="passed" label="Passed" />
-        </entry>
+    <link rel="alternate" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4684/defaultStage/1.xml" title="defaultStage Stage Detail" type="application/vnd.go+xml"/>
+    <link rel="alternate" href="https://ci.example.com/go/pipelines/mypipeline/4684/defaultStage/1" title="defaultStage Stage Detail" type="text/html"/>
+    <link rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4684.xml" title="mypipeline Pipeline Detail" type="application/vnd.go+xml"/>
+    <link rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" href="https://ci.example.com/go/pipelines/mypipeline/4684/defaultStage/1" title="mypipeline Pipeline Detail" type="text/html"/>
+    <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="stage" label="Stage"/>
+    <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="completed" label="Completed"/>
+    <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="passed" label="Passed"/>
+  </entry>
+  <entry>
+    <title><![CDATA[mypipeline(4683) stage build-server(1) Failed]]></title>
+    <updated>2020-01-11T13:46:02Z</updated>
+    <id>https://ci.example.com/go/pipelines/mypipeline/4683/build-server/1</id>
+    <author>
+      <name><![CDATA[Pick E Reader <pick.e.reader@example.com>]]></name>
+    </author>
+    <link rel="alternate" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/build-server/1.xml" title="build-server Stage Detail" type="application/vnd.go+xml"/>
+    <link rel="alternate" href="https://ci.example.com/go/pipelines/mypipeline/4683/build-server/1" title="build-server Stage Detail" type="text/html"/>
+    <link rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4683.xml" title="mypipeline Pipeline Detail" type="application/vnd.go+xml"/>
+    <link rel="http://www.thoughtworks-studios.com/ns/relations/go/pipeline" href="https://ci.example.com/go/pipelines/mypipeline/4683/build-server/1" title="mypipeline Pipeline Detail" type="text/html"/>
+    <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="stage" label="Stage"/>
+    <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="completed" label="Completed"/>
+    <category scheme="http://www.thoughtworks-studios.com/ns/categories/go" term="failed" label="Failed"/>
+  </entry>
 </feed>
 ```
 
 Gets feed of all stages for the specified pipeline with links to the pipeline and stage details.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/pipelines/:pipeline_name/stages.xml`
+`GET /go/api/feed/pipelines/:pipeline_name/stages.xml`
 
 <p class='http-request-return-description'>Returns</p>
 
