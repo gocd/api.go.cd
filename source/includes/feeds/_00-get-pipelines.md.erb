@@ -1,7 +1,7 @@
 ## Get all pipelines
 
 ```shell
-$ curl 'https://ci.example.com/go/api/pipelines.xml' \
+$ curl 'https://ci.example.com/go/api/feed/pipelines.xml' \
       -u 'username:password'
 ```
 
@@ -14,19 +14,21 @@ Content-Type: application/xml; charset=utf-8
 
 ```xml
 <pipelines>
- <link rel="self" href="https://ci.example.com/go/api/pipelines.xml"/>
-    <pipeline href="https://ci.example.com/go/api/pipelines/pipeline1/stages.xml" />
-    <pipeline href="https://ci.example.com/go/api/pipelines/pipeline2/stages.xml" />
+  <link rel="self" href="https://build.gocd.org/go/api/feed/pipelines.xml" />
+  <pipeline href="https://build.gocd.org/go/api/feed/pipelines/build-linux/stages.xml" />
+  <pipeline href="https://build.gocd.org/go/api/feed/pipelines/build-windows/stages.xml" />
+  <pipeline href="https://build.gocd.org/go/api/feed/pipelines/plugins/stages.xml" />
 </pipelines>
 ```
 
 Lists all pipelines.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/pipelines.xml`
+`GET /go/api/feed/pipelines.xml`
 
 <p class='http-request-return-description'>Returns</p>
 

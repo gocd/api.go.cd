@@ -1,0 +1,42 @@
+## Get material
+
+```shell
+$ curl 'https://ci.example.com/go/api/feed/materials/pipelines/4683/2724d1969830c35097dcfd76b712d0a63d1cd636c8c9793ee1c3922421841d4a.xml' \
+      -u 'username:password'
+```
+
+> The above command returns XML structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/xml; charset=utf-8
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<material materialUri="https://ci.example.com/go/api/feed/materials/mypipeline/4683/2724d1969830c35097dcfd76b712d0a63d1cd636c8c9793ee1c3922421841d4a.xml"
+          type="GitMaterial" url="https://git.gocd.io/git/gocd/gocd" branch="master" shallowClone="true">
+  <modifications>
+    <changeset>
+      <user><![CDATA[Pick E Reader <pick.e.reader@example.com>]]></user>
+      <checkinTime>2020-01-11T12:45:32Z</checkinTime>
+      <revision><![CDATA[6e6a8e2e174c708b1f3f4dd798b90c2cc5f1bb49]]></revision>
+      <message><![CDATA[Updated readme.md]]></message>
+      <file name="readme.md" action="modified"/>
+    </changeset>
+  </modifications>
+</material>
+```
+
+Gets XML representation of job.
+
+<%= updated_to(2,'20.1.0') %>
+<%= available_since('14.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/feed/materials/:pipeline_name/:pipeline_counter/:pipeline_unique_fingerprint.xml`
+
+<p class='http-request-return-description'>Returns</p>
+
+A xml representation of material.

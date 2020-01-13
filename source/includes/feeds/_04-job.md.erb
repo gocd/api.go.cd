@@ -1,7 +1,7 @@
 ## Get job
 
 ```shell
-$ curl 'https://ci.example.com/go/api/jobs/2.xml' \
+$ curl 'https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1/defaultJob.xml' \
       -u 'username:password'
 ```
 
@@ -13,42 +13,33 @@ Content-Type: application/xml; charset=utf-8
 ```
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
 <job name="defaultJob">
-  <link rel="self" href="https://ci.example.com/go/api/jobs/2.xml"/>
-  <id><![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:2:defaultStage:1:defaultJob]]></id>
-  <pipeline name="mypipeline" counter="2" label="2"/>
-  <stage name="defaultStage" counter="1" href="https://ci.example.com/go/api/stages/2.xml"/>
-  <result>Cancelled</result>
+  <link rel="self" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1/defaultJob.xml"/>
+  <id><![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:4683:defaultStage:1:defaultJob]]></id>
+  <pipeline name="mypipeline" counter="4683" label="4683"/>
+  <stage name="defaultStage" counter="1" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1.xml"/>
+  <result>Passed</result>
   <state>Completed</state>
-  <properties>
-    <property name="cruise_agent"><![CDATA[INpicke.local]]></property>
-    <property name="cruise_job_duration"><![CDATA[0]]></property>
-    <property name="cruise_job_id"><![CDATA[2]]></property>
-    <property name="cruise_job_result"><![CDATA[Cancelled]]></property>
-    <property name="cruise_pipeline_counter"><![CDATA[2]]></property>
-    <property name="cruise_pipeline_label"><![CDATA[2]]></property>
-    <property name="cruise_stage_counter"><![CDATA[1]]></property>
-    <property name="cruise_timestamp_01_scheduled"><![CDATA[2015-07-10T11:59:43+05:30]]></property>
-    <property name="cruise_timestamp_02_assigned"><![CDATA[2015-07-10T11:59:52+05:30]]></property>
-    <property name="cruise_timestamp_03_preparing"><![CDATA[2015-07-10T12:00:02+05:30]]></property>
-    <property name="cruise_timestamp_06_completed"><![CDATA[2015-07-10T12:00:04+05:30]]></property>
-  </properties>
-  <agent uuid="278fb0b6-d3b8-47e1-9443-67f26bfb5c15"/>
-  <artifacts baseUri="https://ci.example.com/go/files/mypipeline/2/defaultStage/1/defaultJob" pathFromArtifactRoot="pipelines/mypipeline/2/defaultStage/1/defaultJob"/>
+  <agent uuid="3787ca03-e8b1-4237-8e81-338b1e3eb9b7"/>
+  <!--Artifacts of type `file` will not be shown. See https://github.com/gocd/gocd/pull/2875-->
+  <artifacts baseUri="https://ci.example.com/go/files/mypipeline/4683/defaultStage/1/defaultJob" pathFromArtifactRoot="pipelines/mypipeline/4683/defaultStage/1/defaultJob"/>
+  <!--Resources are now intentionally left blank. See https://github.com/gocd/gocd/pull/2875-->
   <resources/>
-  <environmentvariables/>
+  <!--Environment variables are now intentionally left blank. See https://github.com/gocd/gocd/pull/2875-->
+  <environmentVariables/>
 </job>
 ```
 
 Gets XML representation of job.
 
+<%= updated_to(2,'20.1.0') %>
 <%= available_since('14.3.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-`GET /go/api/jobs/:job_id.xml`
-
+`GET /go/api/feed/pipelines/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.xml`
 
 <p class='http-request-return-description'>Returns</p>
 
-A job object.
+A xml representation of job run.
