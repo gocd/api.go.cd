@@ -6865,7 +6865,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <h2 id="get-all-pipelines">Get all pipelines</h2>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines.xml'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/feed/pipelines.xml'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span>
 </code></pre></div>
 
@@ -6876,13 +6876,18 @@ of failure or cancellation etc. The API requires user to have operate permission
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;pipelines&gt;</span>
- <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines.xml"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;pipeline</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/pipeline1/stages.xml"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;pipeline</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/pipeline2/stages.xml"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://build.gocd.org/go/api/feed/pipelines.xml"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;pipeline</span> <span class="na">href=</span><span class="s">"https://build.gocd.org/go/api/feed/pipelines/build-linux/stages.xml"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;pipeline</span> <span class="na">href=</span><span class="s">"https://build.gocd.org/go/api/feed/pipelines/build-windows/stages.xml"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;pipeline</span> <span class="na">href=</span><span class="s">"https://build.gocd.org/go/api/feed/pipelines/plugins/stages.xml"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/pipelines&gt;</span>
 </code></pre></div>
 
 <p>Lists all pipelines.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -6890,15 +6895,15 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/pipelines.xml</code></p>
+<p><code class="prettyprint">GET /go/api/feed/pipelines.xml</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
 <p>An array of pipelines.</p>
 
-<h2 id="get-feed-of-all-stages">Get feed of all stages</h2>
+<h2 id="get-feed-of-all-stages-in-a-pipeline">Get feed of all stages in a pipeline</h2>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/pipelines/mypipeline/stages.xml'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span>
 </code></pre></div>
 
@@ -6908,56 +6913,54 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;feed</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/2005/Atom"</span> <span class="na">xmlns:go=</span><span class="s">"http://www.thoughtworks-studios.com/ns/go"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[mypipeline]]&gt;</span><span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;id&gt;</span>https://ci.example.com/go/api/pipelines/mypipeline/stages.xml<span class="nt">&lt;/id&gt;</span>
+</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;feed</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/2005/Atom"</span> <span class="na">xmlns:go=</span><span class="s">"http://www.thoughtworks-studios.com/ns/go"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[mypipeline]]&gt;</span><span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;id&gt;</span>https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml<span class="nt">&lt;/id&gt;</span>
+  <span class="nt">&lt;author&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Go<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;/author&gt;</span>
+  <span class="nt">&lt;updated&gt;</span>2020-01-11T13:09:57Z<span class="nt">&lt;/updated&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"next"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/stages.xml?before=4672"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;entry&gt;</span>
+    <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[mypipeline(4684) stage defaultStage(1) Cancelled]]&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;updated&gt;</span>2020-01-11T13:09:57Z<span class="nt">&lt;/updated&gt;</span>
+    <span class="nt">&lt;id&gt;</span>https://ci.example.com/go/pipelines/mypipeline/4684/defaultStage/1<span class="nt">&lt;/id&gt;</span>
     <span class="nt">&lt;author&gt;</span>
-        <span class="nt">&lt;name&gt;</span>Go<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;name&gt;</span><span class="cp">&lt;![CDATA[Pick E Reader &lt;pick.e.reader@example.com&gt;]]&gt;</span><span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;/author&gt;</span>
-    <span class="nt">&lt;updated&gt;</span>2015-07-13T10:59:49+05:30<span class="nt">&lt;/updated&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/mypipeline/stages.xml"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"next"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/mypipeline/stages.xml?before=6"</span><span class="nt">/&gt;</span>
-
-        <span class="nt">&lt;entry&gt;</span>
-            <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[mypipeline(2) stage defaultStage(1) Cancelled]]&gt;</span><span class="nt">&lt;/title&gt;</span>
-            <span class="nt">&lt;updated&gt;</span>2015-07-10T12:00:04+05:30<span class="nt">&lt;/updated&gt;</span>
-            <span class="nt">&lt;id&gt;</span>https://ci.example.com/go/pipelines/mypipeline/2/defaultStage/1<span class="nt">&lt;/id&gt;</span>
-
-            <span class="nt">&lt;author&gt;</span>
-                <span class="nt">&lt;name&gt;</span><span class="cp">&lt;![CDATA[Pick E Reader &lt;pick.e.reader@example.com&gt;]]&gt;</span><span class="nt">&lt;/name&gt;</span>
-            <span class="nt">&lt;/author&gt;</span>
-
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"defaultStage Stage Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/stages/2.xml"</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"defaultStage Stage Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/2/defaultStage/1"</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/mypipeline/2.xml"</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/2/defaultStage/1/pipeline"</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
-
-            <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"stage"</span> <span class="na">label=</span><span class="s">"Stage"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"completed"</span> <span class="na">label=</span><span class="s">"Completed"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"cancelled"</span> <span class="na">label=</span><span class="s">"Cancelled"</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;/entry&gt;</span>
-        <span class="nt">&lt;entry&gt;</span>
-            <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[mypipeline(1) stage defaultStage(1) Passed]]&gt;</span><span class="nt">&lt;/title&gt;</span>
-            <span class="nt">&lt;updated&gt;</span>2015-07-10T11:57:22+05:30<span class="nt">&lt;/updated&gt;</span>
-            <span class="nt">&lt;id&gt;</span>https://ci.example.com/go/pipelines/mypipeline/1/defaultStage/1<span class="nt">&lt;/id&gt;</span>
-
-            <span class="nt">&lt;author&gt;</span>
-                <span class="nt">&lt;name&gt;</span><span class="cp">&lt;![CDATA[Pick E Reader &lt;pick.e.reader@example.com&gt;]]&gt;</span><span class="nt">&lt;/name&gt;</span>
-            <span class="nt">&lt;/author&gt;</span>
-
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"defaultStage Stage Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/stages/1.xml"</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"defaultStage Stage Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/1/defaultStage/1"</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/mypipeline/1.xml"</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;link</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/1/defaultStage/1/pipeline"</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
-
-            <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"stage"</span> <span class="na">label=</span><span class="s">"Stage"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"completed"</span> <span class="na">label=</span><span class="s">"Completed"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"passed"</span> <span class="na">label=</span><span class="s">"Passed"</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;/entry&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4684/defaultStage/1.xml"</span> <span class="na">title=</span><span class="s">"defaultStage Stage Detail"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/4684/defaultStage/1"</span> <span class="na">title=</span><span class="s">"defaultStage Stage Detail"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4684.xml"</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/4684/defaultStage/1"</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"stage"</span> <span class="na">label=</span><span class="s">"Stage"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"completed"</span> <span class="na">label=</span><span class="s">"Completed"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"passed"</span> <span class="na">label=</span><span class="s">"Passed"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/entry&gt;</span>
+  <span class="nt">&lt;entry&gt;</span>
+    <span class="nt">&lt;title&gt;</span><span class="cp">&lt;![CDATA[mypipeline(4683) stage build-server(1) Failed]]&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;updated&gt;</span>2020-01-11T13:46:02Z<span class="nt">&lt;/updated&gt;</span>
+    <span class="nt">&lt;id&gt;</span>https://ci.example.com/go/pipelines/mypipeline/4683/build-server/1<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;author&gt;</span>
+      <span class="nt">&lt;name&gt;</span><span class="cp">&lt;![CDATA[Pick E Reader &lt;pick.e.reader@example.com&gt;]]&gt;</span><span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;/author&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/build-server/1.xml"</span> <span class="na">title=</span><span class="s">"build-server Stage Detail"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/4683/build-server/1"</span> <span class="na">title=</span><span class="s">"build-server Stage Detail"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683.xml"</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">type=</span><span class="s">"application/vnd.go+xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"http://www.thoughtworks-studios.com/ns/relations/go/pipeline"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/pipelines/mypipeline/4683/build-server/1"</span> <span class="na">title=</span><span class="s">"mypipeline Pipeline Detail"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"stage"</span> <span class="na">label=</span><span class="s">"Stage"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"completed"</span> <span class="na">label=</span><span class="s">"Completed"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;category</span> <span class="na">scheme=</span><span class="s">"http://www.thoughtworks-studios.com/ns/categories/go"</span> <span class="na">term=</span><span class="s">"failed"</span> <span class="na">label=</span><span class="s">"Failed"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/entry&gt;</span>
 <span class="nt">&lt;/feed&gt;</span>
 </code></pre></div>
 
 <p>Gets feed of all stages for the specified pipeline with links to the pipeline and stage details.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -6965,7 +6968,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/stages.xml</code></p>
+<p><code class="prettyprint">GET /go/api/feed/pipelines/:pipeline_name/stages.xml</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -6983,25 +6986,31 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;pipeline</span> <span class="na">name=</span><span class="s">"mypipeline"</span> <span class="na">counter=</span><span class="s">"1"</span> <span class="na">label=</span><span class="s">"1"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/mypipeline/1.xml"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;id&gt;</span><span class="cp">&lt;![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:1]]&gt;</span><span class="nt">&lt;/id&gt;</span>
-  <span class="nt">&lt;scheduleTime&gt;</span>2015-07-10T11:55:18+05:30<span class="nt">&lt;/scheduleTime&gt;</span>
+</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;pipeline</span> <span class="na">name=</span><span class="s">"mypipeline"</span> <span class="na">counter=</span><span class="s">"4683"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683.xml"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;id&gt;</span><span class="cp">&lt;![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:4683]]&gt;</span><span class="nt">&lt;/id&gt;</span>
+  <span class="nt">&lt;scheduleTime&gt;</span>2020-01-11T13:02:39Z<span class="nt">&lt;/scheduleTime&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"insertedAfter"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/120064.xml"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;materials&gt;</span>
-    <span class="nt">&lt;material</span> <span class="na">materialUri=</span><span class="s">"https://ci.example.com/go/api/materials/405.xml"</span> <span class="na">type=</span><span class="s">"GitMaterial"</span> <span class="na">url=</span><span class="s">"URL: https://github.com/gocd/gocd"</span> <span class="na">branch=</span><span class="s">"master"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;modifications&gt;</span>
-        <span class="nt">&lt;changeset</span> <span class="na">changesetUri=</span><span class="s">"https://ci.example.com/go/api/materials/405/changeset/c194b49db102b705ebc13e604e490ae13ac92d96.xml"</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;user&gt;</span><span class="cp">&lt;![CDATA[Pick E Reader &lt;pick.e.reader@example.com&gt;]]&gt;</span><span class="nt">&lt;/user&gt;</span>
-          <span class="nt">&lt;checkinTime&gt;</span>2015-06-22T12:50:13+05:30<span class="nt">&lt;/checkinTime&gt;</span>
-          <span class="nt">&lt;revision&gt;</span><span class="cp">&lt;![CDATA[c194b49db102b705ebc13e604e490ae13ac92d96]]&gt;</span><span class="nt">&lt;/revision&gt;</span>
-          <span class="nt">&lt;message&gt;</span><span class="cp">&lt;![CDATA[Update README]]&gt;</span><span class="nt">&lt;/message&gt;</span>
-          <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">"README"</span> <span class="na">action=</span><span class="s">"modified"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/changeset&gt;</span>
-      <span class="nt">&lt;/modifications&gt;</span>
+    <span class="nt">&lt;material&gt;</span>
+      <span class="nt">&lt;material</span> <span class="na">materialUri=</span><span class="s">"https://ci.example.com/go/api/feed/materials/mypipeline/4683/2724d1969830c35097dcfd76b712d0a63d1cd636c8c9793ee1c3922421841d4a.xml"</span> <span class="na">type=</span><span class="s">"GitMaterial"</span> <span class="na">url=</span><span class="s">"https://git.gocd.io/git/gocd/gocd"</span> <span class="na">branch=</span><span class="s">"master"</span> <span class="na">shallowClone=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;modifications&gt;</span>
+          <span class="nt">&lt;changeset&gt;</span>
+            <span class="nt">&lt;user&gt;</span><span class="cp">&lt;![CDATA[Pick E Reader &lt;pick.e.reader@example.com&gt;]]&gt;</span><span class="nt">&lt;/user&gt;</span>
+            <span class="nt">&lt;checkinTime&gt;</span>2020-01-11T12:45:32Z<span class="nt">&lt;/checkinTime&gt;</span>
+            <span class="nt">&lt;revision&gt;</span><span class="cp">&lt;![CDATA[6e6a8e2e174c708b1f3f4dd798b90c2cc5f1bb49]]&gt;</span><span class="nt">&lt;/revision&gt;</span>
+            <span class="nt">&lt;message&gt;</span><span class="cp">&lt;![CDATA[Updated readme]]&gt;</span><span class="nt">&lt;/message&gt;</span>
+            <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">"server/src/main/webapp/WEB-INF/rails/package.json"</span> <span class="na">action=</span><span class="s">"modified"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">"server/src/main/webapp/WEB-INF/rails/yarn.lock"</span> <span class="na">action=</span><span class="s">"modified"</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;/changeset&gt;</span>
+        <span class="nt">&lt;/modifications&gt;</span>
+      <span class="nt">&lt;/material&gt;</span>
     <span class="nt">&lt;/material&gt;</span>
   <span class="nt">&lt;/materials&gt;</span>
   <span class="nt">&lt;stages&gt;</span>
-    <span class="nt">&lt;stage</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/stages/1.xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;stage</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/build-non-server/1.xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;stage</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/build-server/2.xml"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/stages&gt;</span>
   <span class="nt">&lt;approvedBy&gt;</span><span class="cp">&lt;![CDATA[changes]]&gt;</span><span class="nt">&lt;/approvedBy&gt;</span>
 <span class="nt">&lt;/pipeline&gt;</span>
@@ -7010,44 +7019,8 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Gets XML representation of pipeline.</p>
 
 <p class='available-since'>
-  Available since v14.3.0.
+  Updated to version v2 since v20.1.0.
 </p>
-
-<p class='http-request-heading'>HTTP Request</p>
-
-<p><code class="prettyprint">GET /go/api/pipelines/:pipeline_name/:pipeline_id.xml</code></p>
-
-<p class='http-request-return-description'>Returns</p>
-
-<p>A pipeline object.</p>
-
-<h2 id="get-stage">Get stage</h2>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/2.xml'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span>
-</code></pre></div>
-
-<blockquote>
-<p>The above command returns XML structured like this:</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;stage</span> <span class="na">name=</span><span class="s">"defaultStage"</span> <span class="na">counter=</span><span class="s">"1"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/stages/2.xml"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;id&gt;</span><span class="cp">&lt;![CDATA[urn:x-go.studios.thoughtworks.com:stage-id:mypipeline:2:defaultStage:1]]&gt;</span><span class="nt">&lt;/id&gt;</span>
-  <span class="nt">&lt;pipeline</span> <span class="na">name=</span><span class="s">"mypipeline"</span> <span class="na">counter=</span><span class="s">"2"</span> <span class="na">label=</span><span class="s">"2"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/pipelines/mypipeline/2.xml"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;updated&gt;</span>2015-07-10T12:00:04+05:30<span class="nt">&lt;/updated&gt;</span>
-  <span class="nt">&lt;result&gt;</span>Cancelled<span class="nt">&lt;/result&gt;</span>
-  <span class="nt">&lt;state&gt;</span>Completed<span class="nt">&lt;/state&gt;</span>
-  <span class="nt">&lt;approvedBy&gt;</span><span class="cp">&lt;![CDATA[admin]]&gt;</span><span class="nt">&lt;/approvedBy&gt;</span>
-  <span class="nt">&lt;jobs&gt;</span>
-    <span class="nt">&lt;job</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/jobs/2.xml"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/jobs&gt;</span>
-<span class="nt">&lt;/stage&gt;</span>
-</code></pre></div>
-
-<p>Gets XML representation of stage.</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -7055,19 +7028,15 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/stages/:stage_id.xml</code></p>
-
-<p><strong>Alternate APIs</strong></p>
-
-<p><code class="prettyprint">GET /go/pipelines/:pipeline:name/:pipeline_counter/:stage_name/:stage_counter.xml</code></p>
+<p><code class="prettyprint">GET  /go/api/pipelines:pipeline_name/:pipeline_counter.xml</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A stage object.</p>
+<p>A xml representation of pipeline run.</p>
 
-<h2 id="get-job">Get job</h2>
+<h2 id="get-stage">Get stage</h2>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/jobs/2.xml'</span> <span class="se">\</span>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1.xml'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span>
 </code></pre></div>
 
@@ -7077,46 +7046,132 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;job</span> <span class="na">name=</span><span class="s">"defaultJob"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/jobs/2.xml"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;id&gt;</span><span class="cp">&lt;![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:2:defaultStage:1:defaultJob]]&gt;</span><span class="nt">&lt;/id&gt;</span>
-  <span class="nt">&lt;pipeline</span> <span class="na">name=</span><span class="s">"mypipeline"</span> <span class="na">counter=</span><span class="s">"2"</span> <span class="na">label=</span><span class="s">"2"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;stage</span> <span class="na">name=</span><span class="s">"defaultStage"</span> <span class="na">counter=</span><span class="s">"1"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/stages/2.xml"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;result&gt;</span>Cancelled<span class="nt">&lt;/result&gt;</span>
+</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;stage</span> <span class="na">name=</span><span class="s">"defaultStage"</span> <span class="na">counter=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1.xml"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;id&gt;</span><span class="cp">&lt;![CDATA[urn:x-go.studios.thoughtworks.com:stage-id:mypipeline:4683:defaultStage:1]]&gt;</span><span class="nt">&lt;/id&gt;</span>
+  <span class="nt">&lt;pipeline</span> <span class="na">name=</span><span class="s">"defaultStage"</span> <span class="na">counter=</span><span class="s">"4683"</span> <span class="na">label=</span><span class="s">"4683"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683.xml"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;updated&gt;</span>2020-01-11T13:09:57Z<span class="nt">&lt;/updated&gt;</span>
+  <span class="nt">&lt;result&gt;</span>Passed<span class="nt">&lt;/result&gt;</span>
   <span class="nt">&lt;state&gt;</span>Completed<span class="nt">&lt;/state&gt;</span>
-  <span class="nt">&lt;properties&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_agent"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[INpicke.local]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_job_duration"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[0]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_job_id"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[2]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_job_result"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[Cancelled]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_pipeline_counter"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[2]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_pipeline_label"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[2]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_stage_counter"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[1]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_timestamp_01_scheduled"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[2015-07-10T11:59:43+05:30]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_timestamp_02_assigned"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[2015-07-10T11:59:52+05:30]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_timestamp_03_preparing"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[2015-07-10T12:00:02+05:30]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cruise_timestamp_06_completed"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[2015-07-10T12:00:04+05:30]]&gt;</span><span class="nt">&lt;/property&gt;</span>
-  <span class="nt">&lt;/properties&gt;</span>
-  <span class="nt">&lt;agent</span> <span class="na">uuid=</span><span class="s">"278fb0b6-d3b8-47e1-9443-67f26bfb5c15"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;artifacts</span> <span class="na">baseUri=</span><span class="s">"https://ci.example.com/go/files/mypipeline/2/defaultStage/1/defaultJob"</span> <span class="na">pathFromArtifactRoot=</span><span class="s">"pipelines/mypipeline/2/defaultStage/1/defaultJob"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;approvedBy&gt;</span><span class="cp">&lt;![CDATA[admin]]&gt;</span><span class="nt">&lt;/approvedBy&gt;</span>
+  <span class="nt">&lt;jobs&gt;</span>
+    <span class="nt">&lt;job</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1/defaultJob.xml"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/jobs&gt;</span>
+<span class="nt">&lt;/stage&gt;</span>
+
+</code></pre></div>
+
+<p>Gets XML representation of stage.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
+
+<p class='available-since'>
+  Available since v14.3.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/feed/pipelines/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter.xml</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A xml representation of stage run.</p>
+
+<h2 id="get-job">Get job</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1/defaultJob.xml'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns XML structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;job</span> <span class="na">name=</span><span class="s">"defaultJob"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1/defaultJob.xml"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;id&gt;</span><span class="cp">&lt;![CDATA[urn:x-go.studios.thoughtworks.com:job-id:mypipeline:4683:defaultStage:1:defaultJob]]&gt;</span><span class="nt">&lt;/id&gt;</span>
+  <span class="nt">&lt;pipeline</span> <span class="na">name=</span><span class="s">"mypipeline"</span> <span class="na">counter=</span><span class="s">"4683"</span> <span class="na">label=</span><span class="s">"4683"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;stage</span> <span class="na">name=</span><span class="s">"defaultStage"</span> <span class="na">counter=</span><span class="s">"1"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/4683/defaultStage/1.xml"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;result&gt;</span>Passed<span class="nt">&lt;/result&gt;</span>
+  <span class="nt">&lt;state&gt;</span>Completed<span class="nt">&lt;/state&gt;</span>
+  <span class="nt">&lt;agent</span> <span class="na">uuid=</span><span class="s">"3787ca03-e8b1-4237-8e81-338b1e3eb9b7"</span><span class="nt">/&gt;</span>
+  <span class="c">&lt;!--Artifacts of type `file` will not be shown. See https://github.com/gocd/gocd/pull/2875--&gt;</span>
+  <span class="nt">&lt;artifacts</span> <span class="na">baseUri=</span><span class="s">"https://ci.example.com/go/files/mypipeline/4683/defaultStage/1/defaultJob"</span> <span class="na">pathFromArtifactRoot=</span><span class="s">"pipelines/mypipeline/4683/defaultStage/1/defaultJob"</span><span class="nt">/&gt;</span>
+  <span class="c">&lt;!--Resources are now intentionally left blank. See https://github.com/gocd/gocd/pull/2875--&gt;</span>
   <span class="nt">&lt;resources/&gt;</span>
-  <span class="nt">&lt;environmentvariables/&gt;</span>
+  <span class="c">&lt;!--Environment variables are now intentionally left blank. See https://github.com/gocd/gocd/pull/2875--&gt;</span>
+  <span class="nt">&lt;environmentVariables/&gt;</span>
 <span class="nt">&lt;/job&gt;</span>
 </code></pre></div>
 
 <p>Gets XML representation of job.</p>
 
 <p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
+
+<p class='available-since'>
   Available since v14.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET /go/api/jobs/:job_id.xml</code></p>
+<p><code class="prettyprint">GET /go/api/feed/pipelines/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/:job_name.xml</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
-<p>A job object.</p>
+<p>A xml representation of job run.</p>
+
+<h2 id="get-material">Get material</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/feed/materials/pipelines/4683/2724d1969830c35097dcfd76b712d0a63d1cd636c8c9793ee1c3922421841d4a.xml'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns XML structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;material</span> <span class="na">materialUri=</span><span class="s">"https://ci.example.com/go/api/feed/materials/mypipeline/4683/2724d1969830c35097dcfd76b712d0a63d1cd636c8c9793ee1c3922421841d4a.xml"</span>
+          <span class="na">type=</span><span class="s">"GitMaterial"</span> <span class="na">url=</span><span class="s">"https://git.gocd.io/git/gocd/gocd"</span> <span class="na">branch=</span><span class="s">"master"</span> <span class="na">shallowClone=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modifications&gt;</span>
+    <span class="nt">&lt;changeset&gt;</span>
+      <span class="nt">&lt;user&gt;</span><span class="cp">&lt;![CDATA[Pick E Reader &lt;pick.e.reader@example.com&gt;]]&gt;</span><span class="nt">&lt;/user&gt;</span>
+      <span class="nt">&lt;checkinTime&gt;</span>2020-01-11T12:45:32Z<span class="nt">&lt;/checkinTime&gt;</span>
+      <span class="nt">&lt;revision&gt;</span><span class="cp">&lt;![CDATA[6e6a8e2e174c708b1f3f4dd798b90c2cc5f1bb49]]&gt;</span><span class="nt">&lt;/revision&gt;</span>
+      <span class="nt">&lt;message&gt;</span><span class="cp">&lt;![CDATA[Updated readme.md]]&gt;</span><span class="nt">&lt;/message&gt;</span>
+      <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">"readme.md"</span> <span class="na">action=</span><span class="s">"modified"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/changeset&gt;</span>
+  <span class="nt">&lt;/modifications&gt;</span>
+<span class="nt">&lt;/material&gt;</span>
+</code></pre></div>
+
+<p>Gets XML representation of job.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.1.0.
+</p>
+
+<p class='available-since'>
+  Available since v14.3.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/feed/materials/:pipeline_name/:pipeline_counter/:pipeline_unique_fingerprint.xml</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A xml representation of material.</p>
 
           <h1 id="dashboard">Dashboard</h1>
 
