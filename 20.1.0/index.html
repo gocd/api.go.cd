@@ -2975,7 +2975,7 @@ following message.</p>
 
           <h1 id="materials">Materials</h1>
 
-<p>The materials API allows users to query and notify materials in the GoCD configuration.</p>
+<p>The materials API allows users to query materials in the GoCD configuration.</p>
 
 <h2 id="the-material-object">The material object</h2>
 
@@ -3640,6 +3640,10 @@ following message.</p>
 
 <p>A list of modification objects.</p>
 
+          <h1 id="notify-materials">Notify Materials</h1>
+
+<p>The materials API allows users to notify materials in the GoCD configuration.</p>
+
 <h2 id="notify-svn-materials">Notify SVN materials</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'</span> <span class="se">\</span>
@@ -3729,7 +3733,7 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
     <span class="nt">-H</span> <span class="s1">'Confirm: true'</span> <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="o">{</span><span class="s2">"uuid"</span>: <span class="s2">"</span><span class="nv">$UUID</span><span class="s2">"</span><span class="o">}</span>
-</code></pre></div><h2 id="notify-git-materials">Notify git materials</h2>
+</code></pre></div><h2 id="notify-git-materials">Notify Git materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/git/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
@@ -3801,64 +3805,7 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/notify/git'
     <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
-</code></pre></div><p><a id="bitbucket-webhook"></a></p>
-
-<h3 id="hosting-your-repository-on-bitbucket">Hosting your repository on BitBucket?</h3>
-
-<p class='available-since'>
-  Available since v17.11.0.
-</p>
-
-<p>To notify GoCD of an push to BitBucket repository via a group or project webhook, configure BitBucket to use the webhooks api negating the need for basic authentication on each request.</p>
-
-<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
-
-<p><code class="prettyprint">https://{webhookSecret}:x@gocd.example.com:8154/go/api/webhooks/bitbucket/notify</code></p>
-
-<p>To secure the http endpoint, the webhook configuration on bitbucket must specify a <em>Basic Authentication User</em>, the value of the <em>Basic Authentication User</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
-
-<h5 id="returns">Returns</h5>
-
-<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
-<p><a id="github-webhook"></a></p>
-
-<h3 id="hosting-your-repository-on-github-or-github-enterprise">Hosting your repository on GitHub, or GitHub Enterprise?</h3>
-
-<p class='available-since'>
-  Available since v17.6.0.
-</p>
-
-<p>To notify GoCD of a push to a GitHub repository via a repository or organization webhook, configure GitHub to use the webhooks api negating the need for basic authentication on each request.</p>
-
-<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
-
-<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/github/notify</code></p>
-
-<p>To secure the http endpoint, the webhook configuration on GitHub must specify a <em>Secret</em>, the value of the <em>Secret</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
-
-<h5 id="returns">Returns</h5>
-
-<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
-<p><a id="gitlab-webhook"></a></p>
-
-<h3 id="hosting-your-repository-on-gitlab">Hosting your repository on GitLab?</h3>
-
-<p class='available-since'>
-  Available since v17.11.0.
-</p>
-
-<p>To notify GoCD of an push to GitLab repository via a group or project webhook, configure GitLab to use the webhooks api negating the need for basic authentication on each request.</p>
-
-<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
-
-<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify</code></p>
-
-<p>To secure the http endpoint, the webhook configuration on GitLab must specify a <em>Secret Token</em>, the value of the <em>Secret Token</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
-
-<h5 id="returns">Returns</h5>
-
-<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
-<h2 id="notify-mercurial-materials">Notify Mercurial materials</h2>
+</code></pre></div><h2 id="notify-mercurial-materials">Notify Mercurial materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/hg/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Accept: '</span> <span class="se">\</span>
@@ -3929,7 +3876,7 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
     -H 'Content-Type: application/json' \
     -X POST \
     -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
-</code></pre></div><h2 id="notify-other-scm-materials">Notify other scm materials</h2>
+</code></pre></div><h2 id="notify-other-scm-materials">Notify other SCM materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/scm/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
@@ -3986,6 +3933,70 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 <p class='http-request-return-description'>Returns</p>
 
 <p>A confirmation message.</p>
+
+          <h1 id="webhook">Webhook</h1>
+
+<p>The webhook API allows users to notify GoCD in case of a push in the relevant repository.</p>
+
+<p><a id="bitbucket-webhook"></a></p>
+
+<h2 id="hosting-on-bitbucket">Hosting on BitBucket</h2>
+
+<p class='available-since'>
+  Available since v17.11.0.
+</p>
+
+<p>To notify GoCD of an push to BitBucket repository via a group or project webhook, configure BitBucket to use the webhooks api negating the need for basic authentication on each request.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+
+<p><code class="prettyprint">https://{webhookSecret}:x@gocd.example.com:8154/go/api/webhooks/bitbucket/notify</code></p>
+
+<p>To secure the http endpoint, the webhook configuration on bitbucket must specify a <em>Basic Authentication User</em>, the value of the <em>Basic Authentication User</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+
+<h5 id="returns">Returns</h5>
+
+<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
+
+<p><a id="github-webhook"></a></p>
+
+<h2 id="hosting-on-github-or-github-enterprise">Hosting on GitHub, or GitHub Enterprise</h2>
+
+<p class='available-since'>
+  Available since v17.6.0.
+</p>
+
+<p>To notify GoCD of a push to a GitHub repository via a repository or organization webhook, configure GitHub to use the webhooks api negating the need for basic authentication on each request.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/github/notify</code></p>
+
+<p>To secure the http endpoint, the webhook configuration on GitHub must specify a <em>Secret</em>, the value of the <em>Secret</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+
+<h5 id="returns">Returns</h5>
+
+<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
+
+<p><a id="gitlab-webhook"></a></p>
+
+<h2 id="hosting-on-gitlab">Hosting on GitLab</h2>
+
+<p class='available-since'>
+  Available since v17.11.0.
+</p>
+
+<p>To notify GoCD of an push to GitLab repository via a group or project webhook, configure GitLab to use the webhooks api negating the need for basic authentication on each request.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify</code></p>
+
+<p>To secure the http endpoint, the webhook configuration on GitLab must specify a <em>Secret Token</em>, the value of the <em>Secret Token</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+
+<h5 id="returns">Returns</h5>
+
+<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
 
           <h1 id="mailserver-config">Mailserver Config</h1>
 
@@ -20227,6 +20238,7 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>Introduced version 2 of the <a href="#notification-filters">Notification Filter API</a>.</li>
+<li>Introduced version 2 of the <a href="#feeds">Feeds API</a>.</li>
 <li>Introduced version 1 of <a href="#pipeline-instances">Pipeline Instance APIs</a>.</li>
 <li>Introduced version 1 of <a href="#get-pipeline-status">Pipeline Status API</a>.</li>
 <li>Introduced version 2 of the <a href="#stages">Stage API</a>.</li>
@@ -20240,6 +20252,7 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>The Notification Filter API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for Mar 2020. <a href="#notification-filters">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Feeds API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for Mar 2020. <a href="#feeds">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 <li>The unversioned Pipeline Instance API has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for March 2020. <a href="#pipeline-instances">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 <li>The unversioned Pipeline Status API has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for March 2020. <a href="#get-pipeline-status">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Stage API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for March 2020. <a href="#stages">Version 2</a> of the API is available, and users are encouraged to use it.</li>
