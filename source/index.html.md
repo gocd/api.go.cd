@@ -19,7 +19,8 @@ includes:
   - 040-users
   - 042-current-user
   - 044-notification-filters
-  - 050-materials
+  - 045-materials
+  - 050-materials-webhook
   - 051-mailserver-config
   - 052-siteurls-config
   - 053-artifacts-config
