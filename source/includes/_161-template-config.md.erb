@@ -3,7 +3,7 @@
 The template config API allows users with administrator role to manage template config.
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v4</code> of the API using <code>Accept: <%= data.apis.versions.templates %></code>
+  <strong>Important:</strong> Please note that this API requires using <code><%= short_version(data.apis.versions.templates) %></code> of the API using <code>Accept: <%= data.apis.versions.templates %></code>
 </aside>
 
 <%= render_all_sub_topics('template_config') %>
