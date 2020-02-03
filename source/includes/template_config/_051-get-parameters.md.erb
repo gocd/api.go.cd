@@ -1,0 +1,45 @@
+## Get parameters for a template
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/templates/template_name/parameters' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.templates %>' 
+
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.templates %>; charset=utf-8
+```
+
+```json
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://go-server-url/go/api/admin/templates/template-name"
+    },
+    "doc" : {
+      "href" : "https://api.gocd.org/#template-config"
+    },
+    "find" : {
+      "href" : "http://go-server-url/go/api/admin/templates/:template_name"
+    }
+  },
+  "name" : "template-name",
+  "parameters" : [ "resources", "command" ]
+}
+```
+
+Returns a list of parameters which needs to be defined while using the same in a pipeline config
+
+<%= available_since('20.2.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/templates/:template_name/parameters`
+
+<p class='http-request-return-description'>Returns</p>
+
+A list of string.
