@@ -25,6 +25,14 @@ $ curl 'https://ci.example.com/go/api/admin/config_repos/repo-1' \
                "key": "pattern",
                "value": "*.myextension"
              }
+            ],
+            "rules": [
+              {
+                "directive": "allow",
+                "action": "refer",
+                "type": "environment",
+                "resource": "*"
+              }
             ]
           }'
 ```
@@ -67,6 +75,14 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
       "key": "pattern",
       "value": "*.myextension"
     }
+  ],
+  "rules": [
+    {
+      "directive": "allow",
+      "action": "refer",
+      "type": "environment",
+      "resource": "*"
+    }
   ]
 }
 
@@ -86,7 +102,7 @@ Update config repos for specified config repo id.
   conflict.
 </aside>
 
-<%= updated_to(2,'19.4.0') %>
+<%= updated_to(3,'20.2.0') %>
 <%= available_since('17.12.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
