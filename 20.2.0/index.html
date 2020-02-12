@@ -17336,6 +17336,98 @@ dependent on the plugin to be configured. Use the result of
 </tr>
 </tbody></table>
 
+<h2 id="the-config-repo-definition-object">The config repo definition object</h2>
+
+<p class='available-since'>
+  Available since v20.1.0.
+</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">environments</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-config-repo-environment-definition-object">environments</a> defined in config repository.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">groups</code></td>
+<td>Array</td>
+<td>The list of <a href="#config-repo-pipeline-group-definition-object">pipeline groups</a> defined in config repository.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-config-repo-environment-definition-object'></a></p>
+
+<h3 id="the-config-repo-environment-definition-object">The config repo environment definition object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of an environment.</td>
+</tr>
+</tbody></table>
+
+<p><a id='config-repo-pipeline-group-definition-object'></a></p>
+
+<h3 id="the-config-repo-pipeline-groups-definition-object">The config repo pipeline groups definition object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of a pipeline group.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">pipelines</code></td>
+<td>Array</td>
+<td>The list of <a href="#config-repo-pipeline-definition-object">pipeline information</a> defined in config repository.</td>
+</tr>
+</tbody></table>
+
+<p><a id='config-repo-pipeline-definition-object'></a></p>
+
+<h3 id="the-config-repo-pipeline-definition-object">The config repo pipeline definition object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>String</td>
+<td>The name of a pipeline.</td>
+</tr>
+</tbody></table>
+
 <p><a id='config-repo-material-object'></a></p>
 
 <h3 id="the-config-repository-material-object">The config repository material object</h3>
@@ -17697,7 +17789,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v2+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -17768,7 +17860,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo1'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -17777,7 +17869,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -17836,7 +17928,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>  curl <span class="s1">'http://ci.example.com/go/api/admin/config_repos'</span> <span class="se">\</span>
   <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type:application/json'</span> <span class="se">\</span>
   <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
     "id": "repo-2",
@@ -17865,7 +17957,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -17923,7 +18015,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo-1'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -17954,7 +18046,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -18024,7 +18116,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo-1'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -18033,7 +18125,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The config repo 'repo-1' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -18154,6 +18246,118 @@ dependent on the plugin to be configured. Use the result of
 <p class='http-request-return-description'>Returns</p>
 
 <p>A boolean indicating whether the content can be successfully merged and array of errors (if content isn&rsquo;t mergeable).</p>
+
+<h2 id="trigger-update-of-config-repository">Trigger update of config repository</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s2">"https://ci.example.com/go/api/admin/config_repos/config_repo_id/trigger_update"</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span><span class="se">\</span>
+      <span class="nt">-X</span> POST
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Triggers the update for config repository to get latest revisions.</p>
+
+<p class='available-since'>
+  Available since v20.1.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/admin/config_repos/:config_repo_id/trigger_update</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>one of -</p>
+
+<ul>
+<li>&ldquo;OK&rdquo; message indicating that update for config repository is scheduled.</li>
+<li>&ldquo;Update already in progress.&rdquo; message with status code <code class="prettyprint">409</code> indicating update is already in progress</li>
+</ul>
+
+<h2 id="status-of-config-repository-update">Status of config repository update</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s2">"https://ci.example.com/go/api/admin/config_repos/config_repo_id/status"</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"in_progress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Get the status of config repository update operation.</p>
+
+<p class='available-since'>
+  Available since v20.1.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/config_repos/:config_repo_id/status</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>Boolean which indicates that the update of config repository is in progress or not.</p>
+
+<h2 id="definitions-defined-in-config-repo">Definitions defined in config repo</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s2">"https://ci.example.com/go/api/admin/config_repos/config_repo_id/definitions"</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev"</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="nl">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config-repo-group"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up43"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+
+<p>Get the entities defined in config repository.</p>
+
+<p class='available-since'>
+  Available since v20.1.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/admin/config_repos/:config_repo_id/definitions</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p><a href="#the-config-repo-definition-object">The  config repository definition object</a></p>
 
           <h1 id="artifact-store">Artifact Store</h1>
 
