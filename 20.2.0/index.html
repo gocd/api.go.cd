@@ -17334,6 +17334,11 @@ dependent on the plugin to be configured. Use the result of
 <td>Object</td>
 <td>The list of <a href="#pluggable-scm-configuration">properties</a> (key-value pairs) to be provided for using the plugin.</td>
 </tr>
+<tr>
+<td><code class="prettyprint">rules</code></td>
+<td>Array</td>
+<td>The list of <a href="#the-config-repo-rule-object">rules</a>, which allows restricting the entities that the config repo can refer to. Referring to the GoCD entities is denied by default, an explicit rule should be added to allow a specific resource to allow the config repo to refer it. <strong>Since v20.2.0</strong>.</td>
+</tr>
 </tbody></table>
 
 <h2 id="the-config-repo-definition-object">The config repo definition object</h2>
@@ -17425,6 +17430,41 @@ dependent on the plugin to be configured. Use the result of
 <td><code class="prettyprint">name</code></td>
 <td>String</td>
 <td>The name of a pipeline.</td>
+</tr>
+</tbody></table>
+
+<p><a id='the-config-repo-rule-object'></a></p>
+
+<h3 id="the-config-repo-rule-object">The config repo rule object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">directive</code></td>
+<td>String</td>
+<td>The type of rule which can be either <code class="prettyprint">allow</code> or <code class="prettyprint">deny</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">action</code></td>
+<td>String</td>
+<td>The action that is being controlled via this rule. Only <code class="prettyprint">refer</code> is supported as of now.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of entity that the rule is applied on. Currently <code class="prettyprint">environment</code>, <code class="prettyprint">pipeline</code> and <code class="prettyprint">pipeline_group</code> are supported.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">resource</code></td>
+<td>String</td>
+<td>The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.</td>
 </tr>
 </tbody></table>
 
@@ -17797,7 +17837,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -17831,6 +17871,14 @@ dependent on the plugin to be configured. Use the result of
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nl">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"directive"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_group"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -17841,7 +17889,7 @@ dependent on the plugin to be configured. Use the result of
 <p>Lists all available config repos, these are config repositories that are present in the in <code class="prettyprint">cruise-config.xml</code>.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v19.4.0.
+  Updated to version v3 since v20.2.0.
 </p>
 
 <p class='available-since'>
@@ -17897,7 +17945,14 @@ dependent on the plugin to be configured. Use the result of
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"directive"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_group"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -17909,7 +17964,7 @@ dependent on the plugin to be configured. Use the result of
 </aside>
 
 <p class='available-since'>
-  Updated to version v2 since v19.4.0.
+  Updated to version v3 since v20.2.0.
 </p>
 
 <p class='available-since'>
@@ -17948,6 +18003,14 @@ dependent on the plugin to be configured. Use the result of
        "key": "pattern",
        "value": "*.myextension"
      }
+    ],
+    "rules": [
+      {
+        "directive": "allow",
+        "action": "refer",
+        "type": "pipeline_group",
+        "resource": "*"
+      }
     ]
   }'</span>
 </code></pre></div>
@@ -17987,6 +18050,14 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pattern"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*.myextension"</span><span class="w">
     </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"directive"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pipeline_group"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -17994,7 +18065,7 @@ dependent on the plugin to be configured. Use the result of
 <p>Create a config repo object.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v19.4.0.
+  Updated to version v3 since v20.2.0.
 </p>
 
 <p class='available-since'>
@@ -18037,6 +18108,14 @@ dependent on the plugin to be configured. Use the result of
                "key": "pattern",
                "value": "*.myextension"
              }
+            ],
+            "rules": [
+              {
+                "directive": "allow",
+                "action": "refer",
+                "type": "environment",
+                "resource": "*"
+              }
             ]
           }'</span>
 </code></pre></div>
@@ -18077,6 +18156,14 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pattern"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*.myextension"</span><span class="w">
     </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"directive"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refer"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"environment"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -18097,7 +18184,7 @@ dependent on the plugin to be configured. Use the result of
 </aside>
 
 <p class='available-since'>
-  Updated to version v2 since v19.4.0.
+  Updated to version v3 since v20.2.0.
 </p>
 
 <p class='available-since'>
@@ -18134,7 +18221,7 @@ dependent on the plugin to be configured. Use the result of
 <p>Deletes the config repo.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v19.4.0.
+  Updated to version v3 since v20.2.0.
 </p>
 
 <p class='available-since'>
@@ -18270,7 +18357,7 @@ dependent on the plugin to be configured. Use the result of
 <p>Triggers the update for config repository to get latest revisions.</p>
 
 <p class='available-since'>
-  Available since v20.1.0.
+  Available since v20.2.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -18307,7 +18394,7 @@ dependent on the plugin to be configured. Use the result of
 <p>Get the status of config repository update operation.</p>
 
 <p class='available-since'>
-  Available since v20.1.0.
+  Available since v20.2.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -18339,16 +18426,15 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config-repo-group"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up43"</span><span class="w">
-        </span><span class="p">}]</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 
 <p>Get the entities defined in config repository.</p>
 
 <p class='available-since'>
-  Available since v20.1.0.
+  Available since v20.2.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -20487,6 +20573,7 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>Introduced version 7 of the <a href="#template-config">Template Config API</a>.</li>
+<li>Introduced version 3 of the <a href="#config-repo">Config Repo API</a>.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -20495,6 +20582,7 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>The Template Config API version 6 has been deprecated in GoCD 20.2.0. This version will be removed in a release scheduled for May 2020. <a href="#template-config">Version 7</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Config Repo API version 2 has been deprecated in GoCD 20.2.0. This version will be removed in a release scheduled for May 2020. <a href="#config-repo">Version 3</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-20-1-0">Changes in 20.1.0</h2>
