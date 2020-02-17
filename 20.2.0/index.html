@@ -6897,10 +6897,6 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Lists all pipelines.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
-
-<p class='available-since'>
   Available since v14.3.0.
 </p>
 
@@ -6970,10 +6966,6 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Gets feed of all stages for the specified pipeline with links to the pipeline and stage details.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
-
-<p class='available-since'>
   Available since v14.3.0.
 </p>
 
@@ -7030,16 +7022,12 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Gets XML representation of pipeline.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
-
-<p class='available-since'>
   Available since v14.3.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
 
-<p><code class="prettyprint">GET  /go/api/pipelines:pipeline_name/:pipeline_counter.xml</code></p>
+<p><code class="prettyprint">GET  /go/api/pipelines/:pipeline_name/:pipeline_counter.xml</code></p>
 
 <p class='http-request-return-description'>Returns</p>
 
@@ -7074,10 +7062,6 @@ of failure or cancellation etc. The API requires user to have operate permission
 </code></pre></div>
 
 <p>Gets XML representation of stage.</p>
-
-<p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
 
 <p class='available-since'>
   Available since v14.3.0.
@@ -7124,10 +7108,6 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Gets XML representation of job.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
-
-<p class='available-since'>
   Available since v14.3.0.
 </p>
 
@@ -7169,11 +7149,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Gets XML representation of job.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
-
-<p class='available-since'>
-  Available since v14.3.0.
+  Available since v20.1.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
@@ -20591,7 +20567,7 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>Introduced version 2 of the <a href="#notification-filters">Notification Filter API</a>.</li>
-<li>Introduced version 2 of the <a href="#feeds">Feeds API</a>.</li>
+<li>Introduced newer version of the <a href="#feeds">Feeds API</a>.</li>
 <li>Introduced version 1 of <a href="#pipeline-instances">Pipeline Instance APIs</a>.</li>
 <li>Introduced version 1 of <a href="#get-pipeline-status">Pipeline Status API</a>.</li>
 <li>Introduced version 2 of the <a href="#stages">Stage API</a>.</li>
@@ -20605,7 +20581,7 @@ dependent on the plugin to be configured. Use the result of
 
 <ul>
 <li>The Notification Filter API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for Mar 2020. <a href="#notification-filters">Version 2</a> of the API is available, and users are encouraged to use it.</li>
-<li>The Feeds API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for Mar 2020. <a href="#feeds">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The unversioned Feeds API has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for Mar 2020. </li>
 <li>The unversioned Pipeline Instance API has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for March 2020. <a href="#pipeline-instances">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 <li>The unversioned Pipeline Status API has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for March 2020. <a href="#get-pipeline-status">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Stage API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for March 2020. <a href="#stages">Version 2</a> of the API is available, and users are encouraged to use it.</li>
