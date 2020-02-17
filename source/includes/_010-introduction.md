@@ -23,3 +23,43 @@ Beginning with GoCD version 19.8, it is possible to omit the version number by s
 </aside>
 
 If you specify an unsupported `Accept` header, GoCD will respond with a status code `404` error message `The url you are trying to reach appears to be incorrect`.
+
+## GoCD Deprecated APIs
+
+GoCD may deprecate APIs for any of the following reasons:
+
+- Use of the API is unsafe.
+- An improved alternative API is available.
+- Breaking changes to the API are expected in a future release(s).
+
+In order to convey the API deprecation information to the API consumers, GoCD adds following deprecation headers for a deprecated API:
+
+* `X-GoCD-API-Deprecated-In`:
+  This Response header denotes the GoCD Version when the API was deprecated.
+
+* `X-GoCD-API-Removal-In`:
+  This Response header denotes the GoCD Version when the API will be removed.
+  
+* `X-GoCD-API-Deprecation-Info`:
+  This Response header provides a link to the GoCD API deprecation documentation.
+
+* `Link`:
+  This Response header has following 3 parts:
+  * `Link`: The successor API link.
+  * `Accept Header`: The successor API's version [Accept Header](#api-versions).
+  * `rel`: The relation of the link with the deprecated API. This field has a fixed value `successor-version` denoting the specified link and the accept header is the successor of the deprecated API.
+
+* `Warning`:
+  This Response header has following 3 parts:
+  * `Code`: The warning code. This field has a fixed value 299. Know more about warn-code at [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning).
+  * `Agent`: The warning agent. This field represents the GoCD version adding the warning in the format `GoCD/<GoCD_Vesion>`
+  * `Message`: The warning message.
+
+
+### Revoking deprecations
+
+Occasionally, the deprecation of an API may be modified/reversed for some unavoidable reasons. In such situations, the subsequent GoCD releases will provide the updated deprecated headers with information relevant to the decision.
+Refer [changelog](#api-changelog) section for the list of deprecated APIs.  
+
+                                      
+
