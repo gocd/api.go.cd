@@ -21,6 +21,10 @@ module AvailableSinceHelper
       @api_version = api_version
       @version     = version
     end
+
+    def api_version_text
+      @api_version == nil ? "newer version" : "version v#{@api_version}"
+    end
   end
 
   def available_since(version, options = {}, &block)
