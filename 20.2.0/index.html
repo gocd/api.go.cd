@@ -20537,6 +20537,75 @@ dependent on the plugin to be configured. Use the result of
 
 <p>A message if the secret config is deleted or not.</p>
 
+          <h1 id="permissions">Permissions</h1>
+
+<p>The permissions API allows users to fetch the permissions for the GoCD entities.</p>
+
+<h2 id="permissions">Permissions</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/auth/permissions'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"environment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"DEV"</span><span class="p">,</span><span class="w"> </span><span class="s2">"UAT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"QA"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PROD"</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"administer"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"DEV"</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"config_repo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"dev-pipelines-repo"</span><span class="p">,</span><span class="w"> </span><span class="s2">"prod-pipelines-repo"</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"administer"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"dev-pipelines-repo"</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"cluster_profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"dev-cluster"</span><span class="p">,</span><span class="w"> </span><span class="s2">"prod-cluster"</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"administer"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"dev-cluster"</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"elastic_agent_profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"view"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"build-agent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"deploy-agent"</span><span class="w">  </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"administer"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"build-agent"</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>The API supports the following query params:</p>
+
+<table><thead>
+<tr>
+<th>Param Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>The type of the gocd entity. When type is specified, GoCD will return the permissions only for the requested type.</td>
+</tr>
+<tr>
+<td></td>
+<td>Possible values are <code class="prettyprint">environment</code>, <code class="prettyprint">config_repo</code>, <code class="prettyprint">cluster_profile</code>, <code class="prettyprint">elastic_agent_profile</code>.</td>
+</tr>
+</tbody></table>
+
+<p class='available-since'>
+  Available since v20.1.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/auth/permissions</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A map of entity and permissions.</p>
+
           <h1 id="errors">Errors</h1>
 
 <p>GoCD uses the following HTTP status codes to indicate errors.</p>
