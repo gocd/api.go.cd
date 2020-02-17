@@ -1,0 +1,54 @@
+## Permissions
+
+```shell
+$ curl 'http://ci.example.com/go/api/auth/permissions' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.permission %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "permissions": {
+    "environment": {
+      "view": [ "DEV", "UAT", "QA", "PROD" ],
+      "administer": [ "DEV" ]
+    },
+    "config_repo": {
+      "view": [ "dev-pipelines-repo", "prod-pipelines-repo" ],
+      "administer": [ "dev-pipelines-repo" ]
+    },
+    "cluster_profile": {
+      "view": [ "dev-cluster", "prod-cluster" ],
+      "administer": [ "dev-cluster" ]
+    },
+    "elastic_agent_profile": {
+      "view": [ "build-agent", "deploy-agent"  ],
+      "administer": [ "build-agent" ]
+    }
+  }
+}
+```
+
+The API supports the following query params:
+
+| Param Name  | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| `type`      | The type of the gocd entity. When type is specified, GoCD will return the permissions only for the requested type. |
+|             |  Possible values are `environment`, `config_repo`, `cluster_profile`, `elastic_agent_profile`. |
+
+<%= available_since('20.1.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/auth/permissions`
+
+<p class='http-request-return-description'>Returns</p>
+
+A map of entity and permissions.

@@ -60,6 +60,7 @@ includes:
   - 220-maintenance-mode
   - 230-cluster-profiles
   - 240-secret-configs
+  - 250-permissions
   - errors
   - 999-changelog
 
