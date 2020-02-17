@@ -160,6 +160,48 @@
 
 <p>If you specify an unsupported <code class="prettyprint">Accept</code> header, GoCD will respond with a status code <code class="prettyprint">404</code> error message <code class="prettyprint">The url you are trying to reach appears to be incorrect</code>.</p>
 
+<h2 id="gocd-deprecated-apis">GoCD Deprecated APIs</h2>
+
+<p>GoCD may deprecate APIs for any of the following reasons:</p>
+
+<ul>
+<li>Use of the API is unsafe.</li>
+<li>An improved alternative API is available.</li>
+<li>Breaking changes to the API are expected in a future release(s).</li>
+</ul>
+
+<p>In order to convey the API deprecation information to the API consumers, GoCD adds following deprecation headers for a deprecated API:</p>
+
+<ul>
+<li><p><code class="prettyprint">X-GoCD-API-Deprecated-In</code>:
+This Response header denotes the GoCD Version when the API was deprecated.</p></li>
+<li><p><code class="prettyprint">X-GoCD-API-Removal-In</code>:
+This Response header denotes the GoCD Version when the API will be removed.</p></li>
+<li><p><code class="prettyprint">X-GoCD-API-Deprecation-Info</code>:
+This Response header provides a link to the GoCD API deprecation documentation.</p></li>
+<li><p><code class="prettyprint">Link</code>:
+This Response header has following 3 parts:</p>
+
+<ul>
+<li><code class="prettyprint">Link</code>: The successor API link.</li>
+<li><code class="prettyprint">Accept Header</code>: The successor API&rsquo;s version <a href="#api-versions">Accept Header</a>.</li>
+<li><code class="prettyprint">rel</code>: The relation of the link with the deprecated API. This field has a fixed value <code class="prettyprint">successor-version</code> denoting the specified link and the accept header is the successor of the deprecated API.</li>
+</ul></li>
+<li><p><code class="prettyprint">Warning</code>:
+This Response header has following 3 parts:</p>
+
+<ul>
+<li><code class="prettyprint">Code</code>: The warning code. This field has a fixed value 299. Know more about warn-code at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning">MDN</a>.</li>
+<li><code class="prettyprint">Agent</code>: The warning agent. This field represents the GoCD version adding the warning in the format <code class="prettyprint">GoCD/&lt;GoCD_Vesion&gt;</code></li>
+<li><code class="prettyprint">Message</code>: The warning message.</li>
+</ul></li>
+</ul>
+
+<h3 id="revoking-deprecations">Revoking deprecations</h3>
+
+<p>Occasionally, the deprecation of an API may be modified/reversed for some unavoidable reasons. In such situations, the subsequent GoCD releases will provide the updated deprecated headers with information relevant to the decision.
+Refer <a href="#api-changelog">changelog</a> section for the list of deprecated APIs.  </p>
+
           <h1 id="authentication">Authentication</h1>
 
 <p>All APIs require you to authenticate yourself using your username and password. Starting with version 19.2.0 of GoCD, users may also use a bearer token to authenticate. If authentication fails, GoCD server may return status codes <code class="prettyprint">401</code>, <code class="prettyprint">403</code> or <code class="prettyprint">404</code>.</p>
