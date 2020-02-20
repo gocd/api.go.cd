@@ -10,11 +10,19 @@ end
 
 <%=
 describe_sub_object 'The changes object', since: '19.10.0', html_id: 'changes-object' do
- material 'Object', 'The [material config](#pipeline-config-material-object)'
+ material 'Object', 'The [material config](#the-change-material-object)'
  revision 'Array', 'The list of all the [material revisions](#material-revision-object) or [dependency revision](#dependency-revision-object) which were used in the pipeline instance'
 end
  %>
 
+ <%=
+describe_sub_object 'The change material object', since: '20.2.0', html_id: 'compare-material-object' do
+  type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs dependency package plugin)
+  display_type    'String',      'The display type for the given material.', since: '20.2.0'
+  description     'String',      'A brief description about the material.', since: '20.2.0'
+  attributes      'Object',      'The [attributes](#the-git-material-attributes) for each material type.'
+end
+%>
 
  <%=
 describe_sub_object 'The material revision object', since: '19.10.0', html_id: 'material-revision-object' do
