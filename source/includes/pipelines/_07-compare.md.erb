@@ -4,14 +4,14 @@
 
 $ curl 'http://ci.example.com/go/api/pipelines/pipeline1/compare/1/3' \
        -u 'username:password' \
-       -H 'Accept: <%= data.apis.versions.pipeline_operations %>'
+       -H 'Accept: <%= data.apis.versions.pipeline_comparison %>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+Content-Type: <%= data.apis.versions.pipeline_comparison %>; charset=utf-8
 ```
 
 ```json
@@ -31,6 +31,8 @@ Content-Type: application/json; charset=utf-8
   "changes" : [ {
     "material" : {
       "type" : "git",
+      "display_type": "Git",
+      "description": "URL: git@github.com:sample_repo/example.git, Branch: master"
       "attributes" : {
         "destination" : null,
         "filter" : null,
@@ -52,6 +54,8 @@ Content-Type: application/json; charset=utf-8
   },  {
     "material" : {
       "type" : "dependency",
+      "display_type": "Pipeline",
+      "description": "upstream",
       "attributes" : {
         "pipeline" : "upstream",
         "stage" : "upstream_stage",
@@ -70,6 +74,7 @@ Content-Type: application/json; charset=utf-8
 
 The compare pipeline API allows users to find the difference in the materials between the two instance.
 
+<%= updated_to(2,'20.2.0') %>
 <%= available_since('19.10.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
