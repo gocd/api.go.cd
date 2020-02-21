@@ -5795,7 +5795,7 @@ File logs/operations.log was appended successfully
     </span><span class="nl">"material"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"display_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream [ upstream_stage ]"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
@@ -20725,6 +20725,7 @@ dependent on the plugin to be configured. Use the result of
 <li>Introduced version 7 of the <a href="#template-config">Template Config API</a>.</li>
 <li>Introduced version 3 of the <a href="#config-repo">Config Repo API</a>.</li>
 <li>Introduced version 1 of the <a href="#permissions">Permissions API</a>.</li>
+<li>Introduced version 2 of the <a href="#compare-pipeline-instances">Pipeline Comparison API</a>.</li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -20739,6 +20740,7 @@ dependent on the plugin to be configured. Use the result of
 <ul>
 <li>The Template Config API version 6 has been deprecated in GoCD 20.2.0. This version will be removed in a release scheduled for May 2020. <a href="#template-config">Version 7</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Config Repo API version 2 has been deprecated in GoCD 20.2.0. This version will be removed in a release scheduled for May 2020. <a href="#config-repo">Version 3</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pipeline Comparison API version 1 has been deprecated in GoCD 20.2.0. This version will be removed in a release scheduled for May 2020. <a href="#compare-pipeline-instances">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-20-1-0">Changes in 20.1.0</h2>
