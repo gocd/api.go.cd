@@ -5746,7 +5746,7 @@ File logs/operations.log was appended successfully
 <div class="highlight"><pre class="highlight shell"><code>
 <span class="nv">$ </span>curl <span class="s1">'http://ci.example.com/go/api/pipelines/pipeline1/compare/1/3'</span> <span class="se">\</span>
        <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -5754,7 +5754,7 @@ File logs/operations.log was appended successfully
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -5771,6 +5771,8 @@ File logs/operations.log was appended successfully
   </span><span class="nl">"changes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"material"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"git"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"display_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: git@github.com:sample_repo/example.git, Branch: master"</span><span class="w">
       </span><span class="nl">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"destination"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"filter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -5792,6 +5794,8 @@ File logs/operations.log was appended successfully
   </span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="w">
     </span><span class="nl">"material"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dependency"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"display_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"attributes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"pipeline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"stage"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"upstream_stage"</span><span class="p">,</span><span class="w">
@@ -5809,6 +5813,10 @@ File logs/operations.log was appended successfully
 </span></code></pre></div>
 
 <p>The compare pipeline API allows users to find the difference in the materials between the two instance.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.2.0.
+</p>
 
 <p class='available-since'>
   Available since v19.10.0.
@@ -5878,12 +5886,47 @@ File logs/operations.log was appended successfully
 <tr>
 <td><code class="prettyprint">material</code></td>
 <td>Object</td>
-<td>The <a href="#pipeline-config-material-object">material config</a>.</td>
+<td>The <a href="#the-change-material-object">material config</a>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">revision</code></td>
 <td>Array</td>
 <td>The list of all the <a href="#material-revision-object">material revisions</a> or <a href="#dependency-revision-object">dependency revision</a> which were used in the pipeline instance.</td>
+</tr>
+</tbody></table>
+
+<p><p><a id='compare-material-object'></a></p></p>
+
+<h3 id="the-change-material-object">The change material object</h3>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">type</code></td>
+<td>String</td>
+<td>The type of a material. Can be one of <code class="prettyprint">git</code>, <code class="prettyprint">svn</code>, <code class="prettyprint">hg</code>, <code class="prettyprint">p4</code>, <code class="prettyprint">tfs</code>, <code class="prettyprint">dependency</code>, <code class="prettyprint">package</code>, <code class="prettyprint">plugin</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">display_type</code></td>
+<td>String</td>
+<td>The display type for the given material. <strong>Since v20.2.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">description</code></td>
+<td>String</td>
+<td>A brief description about the material. <strong>Since v20.2.0</strong>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">attributes</code></td>
+<td>Object</td>
+<td>The <a href="#the-git-material-attributes">attributes</a> for each material type.</td>
 </tr>
 </tbody></table>
 
