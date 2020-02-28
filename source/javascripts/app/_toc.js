@@ -35,7 +35,15 @@
 
     $(".page-wrapper").click(closeToc);
     $(".tocify-item").click(closeToc);
+
+    createSectionMarkers($('#toc'));
   };
+
+  function createSectionMarkers(tocDomElement) {
+    tocDomElement.find('a:contains("section_marker_placeholder:")').parents('.tocify-header').hide().before(function(idx) {
+      return '<div class="toc-section-title">' + (this.innerText.replace('section_marker_placeholder:', '')) + '</div>';
+    });
+  }
 
   // Hack to make already open sections to start opened,
   // instead of displaying an ugly animation
