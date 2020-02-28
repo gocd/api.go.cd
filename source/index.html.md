@@ -22,10 +22,10 @@ includes:
   - cluster-profiles
   - config-repos
   - config-repository
-  - configuration
   - default-job-timeout
   - elastic-agent-profiles
   - environment-config
+  - configuration
   - mailserver-config
   - materials
   - notification-filters
