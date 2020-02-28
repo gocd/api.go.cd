@@ -10,59 +10,68 @@ toc_footers:
   - <a href='https://docs.gocd.org'>GoCD User Documentation</a>
 
 includes:
-  - 010-introduction
-  - 020-authentication
-  - 025-server-health
-  - 030-agents
-  - 031-access-tokens
-  - 035-agent-health
-  - 040-users
-  - 042-current-user
-  - 044-notification-filters
-  - 045-materials
-  - 046-materials-notify
-  - 047-materials-webhook
-  - 051-mailserver-config
-  - 052-siteurls-config
-  - 053-artifacts-config
-  - 054-default-job-timeout
-  - 055-backup-config
-  - 060-backups
-  - 070-pipeline-groups
-  - 080-artifacts
-  - 090-pipelines
-  - 091-pipeline-instances
-  - 100-stages
-  - 110-jobs
-  - 130-configuration
-  - 135-config-repository
-  - 140-feeds
-  - 150-dashboard
-  - 155-encryption
-  - 160-pipeline-config
-  - 161-template-config
-  - 165-pipeline-group-config
-  - 170-version
-  - 171-environment-config
-  - 172-elastic-agent-profiles
-  - 180-plugin-info
-  - 181-plugin-settings
-  - 182-pluggable-scm
-  - 183-package-repository
-  - 185-package-config
-  - 186-authorization-configurations
-  - 187-roles
-  - 188-config-repos
-  - 189-artifact-store
-  - 190-server-health-messages
-  - 200-system-admins
-  - 210-data-sharing
-  - 220-maintenance-mode
-  - 230-cluster-profiles
-  - 240-secret-configs
-  - 250-permissions
+  - introduction
+  - authentication
+
+  - toc-section-separator-config
+
+  - artifact-store
+  - artifacts-config
+  - authorization-configurations
+  - backup-config
+  - cluster-profiles
+  - config-repos
+  - config-repository
+  - configuration
+  - default-job-timeout
+  - elastic-agent-profiles
+  - environment-config
+  - mailserver-config
+  - materials
+  - notification-filters
+  - package-config
+  - package-repository
+  - permissions
+  - pipeline-config
+  - pipeline-group-config
+  - pipeline-groups
+  - pluggable-scm
+  - plugin-settings
+  - roles
+  - secret-configs
+  - siteurls-config
+  - system-admins
+  - template-config
+
+  - toc-section-separator-runtime
+
+  - access-tokens
+  - agent-health
+  - agents
+  - artifacts
+  - backups
+  - current-user
+  - dashboard
+  - data-sharing
+  - encryption
+  - feeds
+  - jobs
+  - maintenance-mode
+  - materials-notify
+  - materials-webhook
+  - pipeline-instances
+  - pipelines
+  - plugin-info
+  - server-health
+  - server-health-messages
+  - stages
+  - users
+  - version
+
+  - toc-section-separator-other
+
   - errors
-  - 999-changelog
+  - changelog
 
 search: true
 current_api_version: application/vnd.go.cd.v1+json
