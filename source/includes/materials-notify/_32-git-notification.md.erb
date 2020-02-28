@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/admin/materials/git/notify' \
       -u 'username:password' \
       -H 'Accept: <%= data.apis.versions.materials %>' \
-      -H 'Content-Type: application/json'
+      -H 'Content-Type: application/json' \
       -X POST \
       -d {"repository_url": "git://git.example.com/git/funky-widgets.git"}
 ```
