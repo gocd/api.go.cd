@@ -18,9 +18,7 @@ end
  <%=
 describe_sub_object 'The change material object', since: '20.2.0', html_id: 'compare-material-object' do
   type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs dependency package plugin)
-  display_type    'String',      'The display type for the given material.', since: '20.2.0'
-  description     'String',      'A brief description about the material.', since: '20.2.0'
-  attributes      'Object',      'The [attributes](#the-git-material-attributes) for each material type.'
+  attributes      'Object',      'The [attributes](#the-compare-git-material-attributes) for each material type.'
 end
 %>
 
@@ -39,4 +37,216 @@ describe_sub_object 'The dependency revision object', since: '19.10.0', html_id:
  pipeline_counter 'Integer', 'The upstream pipeline counter which was used as material in the instance'
  completed_at     'String', 'The time at which the upstream pipeline completed'
 end
+%>
+
+<%
+  git_json = {
+      type:       'git',
+      attributes: {
+          url:                'https://github.com/gocd/api.go.cd',
+          username:           'bob',
+          encrypted_password: 'aSdiFgRRZ6A=',
+          branch:             'master',
+          auto_update:        true,
+          display_type:       'Git',
+          description:        'Git - URL: https://github.com/gocd/api.go.cd, Branch: master'
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare git material attributes', json: git_json, html_id: 'compare-git-material-attributes' do
+    url                 'String',  'The URL of the git repository.'
+    username            'String',  'The user account for the remote repository.', since: '19.4.0'
+    password            'String',  'The password for the specified user.', since: '19.4.0'
+    encrypted_password  'String',  'The encrypted password for the specified user.', since: '19.4.0'
+    branch              'String',  'The git branch to build.'
+    auto_update         'Boolean', 'Whether to poll for new changes or not.'
+    display_type        'String',  'The display type for the given material.', since: '20.2.0'
+    description         'String',  'A brief description about the material.', since: '20.2.0'
+  end
+%>
+
+<%
+  svn_json = {
+      type:       'svn',
+      attributes: {
+          url:                'svn://svn.example.com/myProject/trunk',
+          username:           'admin',
+          auto_update:        true,
+          encrypted_password: 'aSdiFgRRZ6A=',
+          check_externals:    true,
+          display_type:       'Subversion',
+          description:        'URL: svn://svn.example.com/myProject/trunk, Username: admin, CheckExternals: true'
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare svn material attributes', json: svn_json, html_id: 'compare-svn-material-attributes' do
+    url                 'String',  'The URL of the subversion repository.'
+    username            'String',  'The user account for the remote repository.'
+    password            'String',  'The password for the specified user.'
+    encrypted_password  'String',  'The encrypted password for the specified user.'
+    auto_update         'Boolean', 'Whether to poll for new changes or not.'
+    check_externals     'Boolean', 'Whether the changes o the externals will trigger the pipeline automatically or not.'
+    display_type        'String',  'The display type for the given material.', since: '20.2.0'
+    description         'String',  'A brief description about the material.', since: '20.2.0'
+  end
+%>
+
+<%
+  hg_json = {
+      type:       'hg',
+      attributes: {
+          url:                'http://hg.example.com/hg/api.go.cd',
+          username:           'bob',
+          encrypted_password: 'aSdiFgRRZ6A=',
+          branch:             'feature',
+          auto_update:        true,
+          display_type:       'Mercurial',
+          description:        'URL: http://hg.example.com/hg/api.go.cd'
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare mercurial material attributes', json: hg_json, html_id: 'compare-hg-material-attributes' do
+    url                 'String',  'The URL of the mercurial repository.'
+    username            'String',  'The user account for the remote repository.', since: '19.4.0'
+    password            'String',  'The password for the specified user.', since: '19.4.0'
+    encrypted_password  'String',  'The encrypted password for the specified user.', since: '19.4.0'
+    branch              'String',  'The mercurial branch to build.', since: '19.4.0'
+    auto_update         'Boolean', 'Whether to poll for new changes or not.'
+    display_type        'String',  'The display type for the given material.', since: '20.2.0'
+    description         'String',  'A brief description about the material.', since: '20.2.0'
+  end
+%>
+
+<%
+  p4_json = {
+      type:       'p4',
+      attributes: {
+          port:               'p4.example.com:8080',
+          use_tickets:        true,
+          view:               'sample_view',
+          auto_update:        true,
+          username:           'admin',
+          encrypted_password: 'aSdiFgRRZ6A=',
+          display_type:       'Perforce',
+          description:        'URL: p4.example.com:8080, View: sample_view, Username: admin'
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare perforce material attributes', json: p4_json, html_id: 'compare-p4-material-attributes' do
+    port                'String',  'Perforce server connection to use (`[transport:]host:port`).'
+    use_tickets         'Boolean', 'Whether to work with the Perforce tickets or not.'
+    view                'String',  'The Perforce view.'
+    auto_update         'Boolean', 'Whether to poll for new changes or not.'
+    username            'String',  'The username to be used.'
+    password            'String',  'The password for the specified user.'
+    encrypted_password  'String',  'The encrypted password for the specified user.'
+    display_type        'String',  'The display type for the given material.', since: '20.2.0'
+    description         'String',  'A brief description about the material.', since: '20.2.0'
+  end
+%>
+
+<%
+  tfs_json = {
+      type:       'tfs',
+      attributes: {
+          url:                'http://tfs.exampe.com:8000/tfs',
+          project_path:       '$/',
+          domain:             'corporate/domain',
+          username:           'admin',
+          encrypted_password: 'aSdiFgRRZ6A=',
+          display_type:       'Tfs',
+          description:        'URL: http://tfs.exampe.com:8000/tfs, Username: admin, Domain: corporate/domain, ProjectPath: $/'
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare tfs material attributes', json: tfs_json, html_id: 'compare-tfs-material-attributes' do
+    url                 'String',  'The URL for the Collection on the TFS Server.'
+    project_path        'String',  'The project path within the TFS collection.'
+    domain              'String',  'The domain name for TFS authentication credentials.'
+    auto_update         'Boolean', 'Whether to poll for new changes or not.'
+    username            'String',  'The username of the account to access the TFS collection'
+    password            'String',  'The password of the account to access the TFS collection.'
+    encrypted_password  'String',  'The encrypted password of the account to access the TFS collection.'
+    display_type        'String',  'The display type for the given material.', since: '20.2.0'
+    description         'String',  'A brief description about the material.', since: '20.2.0'
+  end
+%>
+
+<%
+  dep_json = {
+      type:       'dependency',
+      attributes: {
+          name:         'name',
+          pipeline:     "pipeline-name",
+          stage:        "stage-name",
+          auto_update:  true,
+          display_type: 'Pipeline',
+          description:  'pipeline-name [ stage-name ]'
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare dependency material attributes', json: dep_json, html_id: 'compare-dependency-material' do
+    name          'String', 'The name of the dependency material.'
+    pipeline      'String', 'The name of the upstream pipeline.'
+    stage         'String', 'The name of the stage of the upstream pipeline.'
+    auto_update   'Boolean', 'Whether the material should be updated on a successful run (Always true)'
+    display_type  'String',  'The display type for the given material.', since: '20.2.0'
+    description   'String',  'A brief description about the material.', since: '20.2.0'
+  end
+%>
+
+<%
+  pkg_json = {
+      type:       'package',
+      attributes: {
+          ref:          'e289f497-057b-46bc-bb69-8043454f5c1b',
+          display_type: 'Package',
+          description:  'Repository: [] - Package: []'
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare package material attributes', json: pkg_json, html_id: 'compare-package-material' do
+    ref           'String', 'The unique package repository id.'
+    display_type  'String',  'The display type for the given material.', since: '20.2.0'
+    description   'String',  'A brief description about the material.', since: '20.2.0'
+  end
+%>
+
+<%
+  plugin_json = {
+      type:       'plugin',
+      attributes: {
+          ref:          "scm-id",
+          filter:       {
+              ignore: ["**/*.html", "**/foobar/"]
+          },
+          destination:  'des-folder',
+          display_type: 'SCM',
+          description:  'k1:v1',
+      }
+  }
+%>
+
+<%=
+  describe_sub_object 'The compare plugin material attributes', json: plugin_json, html_id: 'compare-plugin-material' do
+    ref           'String', 'The unique id for the plugin material.'
+    filter        'Object', 'Contains the filter properties. E.g. files to ignore'
+    destination   'String', 'The folder name to checkout to'
+    display_type  'String',  'The display type for the given material.', since: '20.2.0'
+    description   'String',  'A brief description about the material.', since: '20.2.0'
+  end
 %>

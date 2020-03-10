@@ -31,8 +31,6 @@ Content-Type: <%= data.apis.versions.pipeline_comparison %>; charset=utf-8
   "changes" : [ {
     "material" : {
       "type" : "git",
-      "display_type": "Git",
-      "description": "URL: git@github.com:sample_repo/example.git, Branch: master"
       "attributes" : {
         "destination" : null,
         "filter" : null,
@@ -42,7 +40,9 @@ Content-Type: <%= data.apis.versions.pipeline_comparison %>; charset=utf-8
         "url" : "git@github.com:sample_repo/example.git",
         "branch" : "master",
         "submodule_folder" : null,
-        "shallow_clone" : false
+        "shallow_clone" : false ,
+        "display_type": "Git",
+        "description": "URL: git@github.com:sample_repo/example.git, Branch: master"
       }
     },
     "revision" : [ {
@@ -54,13 +54,13 @@ Content-Type: <%= data.apis.versions.pipeline_comparison %>; charset=utf-8
   },  {
     "material" : {
       "type" : "dependency",
-      "display_type": "Pipeline",
-      "description": "upstream [ upstream_stage ]",
       "attributes" : {
         "pipeline" : "upstream",
         "stage" : "upstream_stage",
         "name" : "upstream_material",
-        "auto_update" : true
+        "auto_update" : true ,
+        "display_type": "Pipeline",
+        "description": "upstream [ upstream_stage ]"
       }
     },
     "revision" : [ {
@@ -83,6 +83,6 @@ The compare pipeline API allows users to find the difference in the materials be
 
 <p class='http-request-return-description'>Returns</p>
 
-The [comparison result object](#comparison-result-object).
+The [comparison result object](#the-comparison-result-object).
 
 
