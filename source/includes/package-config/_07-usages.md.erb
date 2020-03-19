@@ -16,6 +16,17 @@ Content-Type: <%= data.apis.versions.package %>; charset=utf-8
 
 ```json
 {
+  "_links": {
+    "self": {
+      "href": "http://test.host/go/api/admin/packages/package-id/usages"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/#packages"
+    },
+    "find": {
+      "href": "http://test.host/go/api/admin/packages/:package_id/usages"
+    }
+  },
   "usages" : [
     {
       "group" : "grp1",
