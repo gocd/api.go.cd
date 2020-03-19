@@ -1,0 +1,53 @@
+## Usages of the package
+
+```shell
+$ curl 'https://ci.example.com/go/api/admin/packages/package-id/usages' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.package %>'
+```
+
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.package %>; charset=utf-8
+```
+
+```json
+{
+  "usages" : [
+    {
+      "group" : "grp1",
+      "pipeline" : "pipeline1"
+    }
+  ]
+}
+```
+
+Gets the list of pipelines and group which uses the said package as a material
+
+<%= updated_to(2,'20.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/package/:package_id/usages`
+
+<p class='http-request-return-description'>Returns</p>
+
+A list of the [usage object](#the-usage-object).
+
+
+<%
+json = {
+      pipeline: 'pipeline_name',
+      group: 'grp_name'
+}
+%>
+
+<%=
+describe_sub_object 'The usage object', json: json, html_id: 'package-config-usage' do
+  pipeline      'String', 'The name of the pipeline which uses the package as a material'
+  group         'String', 'The group which the pipeline belongs to.'
+end
+%>
