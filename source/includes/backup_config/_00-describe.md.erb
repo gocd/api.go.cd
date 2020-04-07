@@ -1,6 +1,6 @@
 <%=
 describe_object 'The Backup Config Object', since: '19.6.0' do
-  schedule            'String',     'The backup schedule. See the [quartz documentation](http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html) for syntax and examples.'
+  schedule            'String',     'The backup schedule. See the [quartz documentation](https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html) for syntax and examples.'
   post_backup_script  'String',     "The script that will be executed once the backup finishes. See the [gocd documentation](https://docs.gocd.org/#{GOCD_VERSION}/advanced_usage/cron_backup.html) for details."
   email_on_failure    'Boolean',    'If set to `true`, an email will be sent when backup fails.'
   email_on_success    'Boolean',    'If set to `true`, an email will be sent when backup completes successfully.'
