@@ -3,12 +3,19 @@
 ### Added
 
 - Introduced version 2 of the [Packages API](#packages).
+  - The [`Usages` API](#usages-of-the-package) was added in this version.
+  - All other Package API were just bumped up (version increased to 2) with no change to payload and response.
+- Introduced version 3 of the [SCM API](#pluggable-scms).
+  - The [`Usages` API](#usages-of-a-pluggable-scm-material) was added in this version.
+  - All other Pluggable SCM APIs were just bumped up (version increased to 3) with no change to payload and response.
 
 ### Removed
 
 
 ### Deprecations
 
+- <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.3.0', old_api_version: 1, new_api_version: 3, api_section: 'pluggable-scms', removal_date_and_year: 'July 2020'}) %>
+- <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.3.0', old_api_version: 2, new_api_version: 3, api_section: 'pluggable-scms', removal_date_and_year: 'July 2020'}) %>
 - <%= deprecated_api_message({api_name: 'Packages', deprecated_in_release: '20.3.0', old_api_version: 1, new_api_version: 2, api_section: 'packages', removal_date_and_year: 'July 2020'}) %>
 - <%= deprecated_api_message({api_name: 'Template Config', deprecated_in_release: '20.2.0', old_api_version: 6, new_api_version: 7, api_section: 'template-config', removal_date_and_year: 'June 2020'}) %>
 - <%= deprecated_api_message({api_name: 'Config Repo', deprecated_in_release: '20.2.0', old_api_version: 2, new_api_version: 3, api_section: 'config-repo', removal_date_and_year: 'June 2020'}) %>
