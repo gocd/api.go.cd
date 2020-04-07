@@ -1,0 +1,66 @@
+## Usages of a pluggable SCM material
+
+```shell
+$ curl -i 'https://ci.example.com/go/api/admin/scms/pluggable.scm.material.name/usages' \
+      -u 'username:password' \
+      -H 'Accept:<%= data.apis.versions.scm %>'
+```
+
+> The above command returns JSON structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: <%= data.apis.versions.scm %>;charset=utf-8
+```
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://test.host/go/api/admin/scms/pluggable.scm.material.name/usages"
+    },
+    "doc": {
+      "href": "https://api.gocd.org/current/#scms"
+    },
+    "find": {
+      "href": "http://test.host/go/api/admin/scms/:material_name/usages"
+    }
+  },
+  "usages": [
+    {
+      "group": "grp1",
+      "pipeline": "pipeline1"
+    },
+    {
+      "group": "grp2",
+      "pipeline": "pipeline2"
+    }
+  ]
+}
+```
+
+Gets the list of pipelines and groups which use the specified pluggable SCM as a material.
+
+<%= available_since('20.3.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/admin/scms/:material_name/usages`
+
+<p class='http-request-return-description'>Returns</p>
+
+A list of [usage object](#pluggable-scm-config-usage)s.
+
+<%
+json = {
+      pipeline: 'pipeline_name',
+      group: 'grp_name'
+}
+%>
+
+<%=
+describe_sub_object 'Pluggable SCM usage object', json: json, html_id: 'pluggable-scm-config-usage' do
+  group         'String', 'The group to which the pipeline belongs to.'
+  pipeline      'String', 'The name of the pipeline which uses the pluggable SCM as a material'
+end
+%>
