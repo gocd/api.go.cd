@@ -34,7 +34,6 @@ includes:
   - permissions
   - pipeline-config
   - pipeline-group-config
-  - pipeline-groups
   - pluggable-scm
   - plugin-settings
   - roles
