@@ -9573,61 +9573,6 @@ following message.</p>
 
 <p>A message confirmation if the pipeline group was deleted.</p>
 
-          <h1 id="pipeline-groups">Pipeline Groups</h1>
-
-<p>The pipeline groups allows users to list pipeline groups along with the pipelines, stages and materials for each pipeline.</p>
-
-<h2 id="config-listing">Config listing</h2>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/config/pipeline_groups'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span>
-</code></pre></div>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"pipelines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"stages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42_stage"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"up42"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"materials"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL: https://github.com/gocd/gocd, Branch: master"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2d05446cd52a998fe3afd840fc2c46b7c7e421051f0209c7f619c95bedc28b88"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Git"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${COUNT}"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-
-<p>This API is built primarily to support rendering of value stream mapping. As such the information rendered in the configuration is kept to a minimum.</p>
-
-<p class='available-since'>
-  Available since v14.3.0.
-</p>
-
-<p class='http-request-heading'>HTTP Request</p>
-
-<p><code class="prettyprint">GET /go/api/config/pipeline_groups</code></p>
-
-<p class='http-request-return-description'>Returns</p>
-
-<p>A list of pipeline groups, pipelines in each group, stages and materials in each pipeline.</p>
-
           <p><a name="scms"></a></p>
 
 <h1 id="pluggable-scms">Pluggable SCMs</h1>
@@ -21431,6 +21376,11 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <h3 id="removed">Removed</h3>
 
+<ul>
+<li>The unversioned Agent Job History API has been removed. <a href="#agent-job-run-history">Version 1</a> of the API is available, and users are encouraged to use it.</li>
+<li>The unversioned Pipeline Group Config Listing API has been removed.</li>
+</ul>
+
 <h3 id="deprecations">Deprecations</h3>
 
 <ul>
@@ -21446,8 +21396,6 @@ of failure or cancellation etc. The API requires user to have operate permission
 <li>The unversioned Pipeline Status API has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for April 2020. <a href="#get-pipeline-status">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Stage API version 1 has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for April 2020. <a href="#stages">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 <li>The unversioned Job History API has been deprecated in GoCD 20.1.0. This version will be removed in a release scheduled for April 2020. <a href="#get-job-history">Version 1</a> of the API is available, and users are encouraged to use it.</li>
-<li>The unversioned Pipeline Group Config Listing API has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for April 2020. </li>
-<li>The unversioned Agent Job History API has been deprecated in GoCD 19.12.0. This version will be removed in a release scheduled for April 2020. <a href="#agent-job-run-history">Version 1</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-20-2-0">Changes in 20.2.0</h2>
