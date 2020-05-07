@@ -1,0 +1,22 @@
+## Changes in 20.4.0
+
+### Added
+  -
+
+### Removed
+
+- <%= removed_api_message({api_name: 'Job History', new_api_version: 1, api_section: 'get-job-history'}) %>
+- <%= removed_api_message({api_name: 'Stage', old_api_version: 1, new_api_version: 2, api_section: 'stages'}) %>
+- <%= removed_api_message({api_name: 'Pipeline Status', new_api_version: 1, api_section: 'get-pipeline-status'}) %>
+- <%= removed_api_message({api_name: 'Pipeline Instance', new_api_version: 1, api_section: 'pipeline-instances'}) %>
+- <%= removed_api_message({api_name: 'Notification Filter', old_api_version: 1, new_api_version: 2, api_section: 'notification-filters'}) %>
+- The older Feeds API in rails has been removed, and is replaced by the re-written new Feeds API <%= link_to_versioned_api('feeds', "Feeds") %> without any changes to the contract.
+
+### Deprecations
+
+- <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.3.0', old_api_version: 1, new_api_version: 3, api_section: 'pluggable-scms', removal_in_release: '20.6.0'}) %>
+- <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.3.0', old_api_version: 2, new_api_version: 3, api_section: 'pluggable-scms', removal_in_release: '20.6.0'}) %>
+- <%= deprecated_api_message({api_name: 'Packages', deprecated_in_release: '20.3.0', old_api_version: 1, new_api_version: 2, api_section: 'packages', removal_in_release: '20.6.0'}) %>
+- <%= deprecated_api_message({api_name: 'Template Config', deprecated_in_release: '20.2.0', old_api_version: 6, new_api_version: 7, api_section: 'template-config', removal_in_release: '20.5.0'}) %>
+- <%= deprecated_api_message({api_name: 'Config Repo', deprecated_in_release: '20.2.0', old_api_version: 2, new_api_version: 3, api_section: 'config-repo', removal_in_release: '20.5.0'}) %>
+- <%= deprecated_api_message({api_name: 'Pipeline Comparison', deprecated_in_release: '20.2.0', old_api_version: 1, new_api_version: 2, api_section: 'compare-pipeline-instances', removal_in_release: '20.5.0'}) %>
