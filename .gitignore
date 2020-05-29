@@ -1,6 +1,6 @@
 *.gem
 *.rbc
-.bundle
+.bundle/ruby
 .config
 coverage
 InstalledFiles
