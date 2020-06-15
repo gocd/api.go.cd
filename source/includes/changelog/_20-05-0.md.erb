@@ -1,7 +1,10 @@
 ## Changes in 20.5.0
 
 ### Added
-  -
+- Introduced version 7 of the [Agents API](#agents).
+  - A new endpoint [`Kill running tasks` API](#kill-running-tasks) was added in this version.
+  - The GET [`Agents` API](#get-one-agent) and GET ['All Agents' API](#get-all-agents) has been enhanced to return the `agent_version` and `agent_bootstrapper_version`.
+  - All other Agents API were just bumped up (version increased to 7) with no change to payload and response.
 
 ### Removed
 
@@ -14,3 +17,4 @@
 - <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.3.0', old_api_version: 1, new_api_version: 3, api_section: 'pluggable-scms', removal_in_release: '20.6.0'}) %>
 - <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.3.0', old_api_version: 2, new_api_version: 3, api_section: 'pluggable-scms', removal_in_release: '20.6.0'}) %>
 - <%= deprecated_api_message({api_name: 'Packages', deprecated_in_release: '20.3.0', old_api_version: 1, new_api_version: 2, api_section: 'packages', removal_in_release: '20.6.0'}) %>
+- <%= deprecated_api_message({api_name: 'Agents', deprecated_in_release: '20.5.0', old_api_version: 6, new_api_version: 7, api_section: 'agents', removal_in_release: '20.8.0'}) %>
