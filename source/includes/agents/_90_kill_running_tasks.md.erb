@@ -1,0 +1,26 @@
+## Kill running tasks
+
+```shell
+$ curl 'https://ci.example.com/go/api/agents/adb9540a-b954-4571-9d9b-2f330739d4da/kill_running_tasks' \
+      -u 'username:password' \
+      -H 'Accept: <%= data.apis.versions.agent %>'
+      -H 'X-GoCD-Confirm: true' \
+      -X POST
+```
+
+> The above command would return a HTTP status 202 without a response body. 
+
+
+When a job is cancelled, the agent tries to safely terminate all the running tasks for the job.
+If a running tasks fails to terminate the agent gets into a **Building(Cancelled)** state. Use this API to
+force kill all running tasks on an agent stuck in **Building(Cancelled)**.
+
+<%= available_since('20.5.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`POST /go/api/agents/:uuid/kill_running_tasks`
+
+<p class='http-request-return-description'>Returns</p>
+
+No Content
