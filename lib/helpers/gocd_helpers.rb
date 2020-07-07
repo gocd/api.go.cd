@@ -35,8 +35,10 @@ module GoCDHelpers
       concat_content("The #{opts[:api_name]} API version #{opts[:old_api_version]} has been removed. ")
     end
 
-    concat_content(link_to_versioned_api(opts[:api_section], "Version #{opts[:new_api_version]}"))
-    concat_content(" of the API is available, and users are encouraged to use it.")
+    if opts[:new_api_version]
+      concat_content(link_to_versioned_api(opts[:api_section], "Version #{opts[:new_api_version]}"))
+      concat_content(" of the API is available, and users are encouraged to use it.")
+    end
   end
 
   def link_to_versioned_api(api_section, text = 'API')

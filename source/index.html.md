@@ -51,7 +51,6 @@ includes:
   - backups
   - current-user
   - dashboard
-  - data-sharing
   - encryption
   - feeds
   - jobs
