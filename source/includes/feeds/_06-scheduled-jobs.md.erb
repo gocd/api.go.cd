@@ -1,0 +1,43 @@
+## Scheduled jobs
+
+```shell
+$ curl 'https://ci.example.com/go/api/feed/jobs/scheduled.xml' \
+      -u 'username:password'
+```
+
+> The above command returns XML structured like this:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/xml; charset=utf-8
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<scheduledJobs>
+  <job name="job1" id="6">
+    <link rel="self" href="https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job1"/>
+    <link rel="self" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/5/defaultStage/1/job1.xml"/>
+    <link rel="alternate" href="https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job1" title="job1 Job Detail" type="text/html"/>
+    <buildLocator>mypipeline/5/defaultStage/1/job1</buildLocator>
+  </job>
+  <job name="job2" id="7">
+    <link rel="self" href="https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job2"/>
+    <link rel="self" href="https://ci.example.com/go/api/feed/pipelines/mypipeline/5/defaultStage/1/job2.xml"/>
+    <link rel="alternate" href="https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job2" title="job2 Job Detail" type="text/html"/>
+    <buildLocator>mypipeline/5/defaultStage/1/job2</buildLocator>
+  </job>
+</scheduledJobs>
+```
+
+Lists all the current job instances which are scheduled but not yet assigned to any agent.
+
+<%= available_since('20.6.0') %>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+`GET /go/api/feeds/jobs/scheduled.xml`
+
+<p class='http-request-return-description'>Returns</p>
+
+An array of scheduled job instances.
