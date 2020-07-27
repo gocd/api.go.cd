@@ -16306,6 +16306,49 @@ that can be used for polling the status of the backup.</p>
 
 <p>A xml representation of material.</p>
 
+<h2 id="scheduled-jobs">Scheduled jobs</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/feed/jobs/scheduled.xml'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns XML structured like this:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/xml; charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;scheduledJobs&gt;</span>
+  <span class="nt">&lt;job</span> <span class="na">name=</span><span class="s">"job1"</span> <span class="na">id=</span><span class="s">"6"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job1"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/5/defaultStage/1/job1.xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job1"</span> <span class="na">title=</span><span class="s">"job1 Job Detail"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;buildLocator&gt;</span>mypipeline/5/defaultStage/1/job1<span class="nt">&lt;/buildLocator&gt;</span>
+  <span class="nt">&lt;/job&gt;</span>
+  <span class="nt">&lt;job</span> <span class="na">name=</span><span class="s">"job2"</span> <span class="na">id=</span><span class="s">"7"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job2"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"self"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/api/feed/pipelines/mypipeline/5/defaultStage/1/job2.xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"alternate"</span> <span class="na">href=</span><span class="s">"https://ci.example.com/go/tab/build/detail/mypipeline/5/defaultStage/1/job2"</span> <span class="na">title=</span><span class="s">"job2 Job Detail"</span> <span class="na">type=</span><span class="s">"text/html"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;buildLocator&gt;</span>mypipeline/5/defaultStage/1/job2<span class="nt">&lt;/buildLocator&gt;</span>
+  <span class="nt">&lt;/job&gt;</span>
+<span class="nt">&lt;/scheduledJobs&gt;</span>
+</code></pre></div>
+
+<p>Lists all the current job instances which are scheduled but not yet assigned to any agent.</p>
+
+<p class='available-since'>
+  Available since v20.6.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">GET /go/api/feeds/jobs/scheduled.xml</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>An array of scheduled job instances.</p>
+
           <h1 id="jobs">Jobs</h1>
 
 <p>The jobs API allows users to view job information.</p>
@@ -21173,6 +21216,8 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <h3 id="added">Added</h3>
 
+<p>Introduced feeds API for <a href="#scheduled-jobs">Scheduled Jobs</a>.</p>
+
 <h3 id="removed">Removed</h3>
 
 <ul>
@@ -21187,6 +21232,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <ul>
 <li>The Agents API version 6 has been deprecated in GoCD release v20.5.0. This version will be removed in GoCD release v20.8.0. <a href="#agents">Version 7</a> of the API is available, and users are encouraged to use it.</li>
+<li>The <a href="#get-scheduled-jobs">Scheduled Jobs API</a> has beeen deprecated in GoCD release 20.6.0. This API will be removed in GoCD release v20.9.0. As a replacement, a new Feeds API for <a href="#scheduled-jobs">Scheduled Jobs</a> is introduced.</li>
 </ul>
 
 <h2 id="changes-in-20-5-0">Changes in 20.5.0</h2>
