@@ -2,7 +2,8 @@
 
 ### Added
 
-- No changes 
+- Introduced version 11 of the [Pipeline Config API](#pipeline-config).
+  - This version adds support for `invert_filter` for Plugin Materials to enable `AllowList`.
 
 ### Removed
 
@@ -11,3 +12,4 @@
 ### Deprecations
 
 - The [Scheduled Jobs API](#get-scheduled-jobs) has beeen deprecated in GoCD release 20.6.0. This API will be removed in GoCD release v20.9.0. As a replacement, a new Feeds API for [Scheduled Jobs](#scheduled-jobs) is introduced.
+- <%= deprecated_api_message({api_name: 'Pipeline Config', deprecated_in_release: '20.8.0', old_api_version: 10, new_api_version: 11, api_section: 'pipeline-config', removal_in_release: '20.11.0'}) %>
