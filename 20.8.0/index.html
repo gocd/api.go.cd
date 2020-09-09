@@ -1930,7 +1930,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 <tr>
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The type of a material. Can be one of <code class="prettyprint">git</code>, <code class="prettyprint">svn</code>, <code class="prettyprint">hg</code>, <code class="prettyprint">p4</code>, <code class="prettyprint">tfs</code>, <code class="prettyprint">scm</code>.</td>
+<td>The type of a material. Can be one of <code class="prettyprint">git</code>, <code class="prettyprint">svn</code>, <code class="prettyprint">hg</code>, <code class="prettyprint">p4</code>, <code class="prettyprint">tfs</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">attributes</code></td>
@@ -2240,34 +2240,6 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 <td><code class="prettyprint">encrypted_password</code></td>
 <td>String</td>
 <td>The encrypted password of the account to access the TFS collection.</td>
-</tr>
-</tbody></table>
-
-<p><a id='config-repo-package-material'></a></p>
-
-<h3 id="the-package-material-attributes">The package material attributes</h3>
-
-<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e289f497-057b-46bc-bb69-8043454f5c1b"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">ref</code></td>
-<td>String</td>
-<td>The unique package repository id.</td>
 </tr>
 </tbody></table>
 
@@ -6463,7 +6435,7 @@ following message.</p>
 <p>The pipeline config API allows users with administrator role to manage pipeline config.</p>
 
 <aside class="notice">
-  <strong>Important:</strong> Please note that this API requires using <code>v10</code> of the API using <code>Accept: application/vnd.go.cd.v10+json</code>
+  <strong>Important:</strong> Please note that this API requires using <code>v11</code> of the API using <code>Accept: application/vnd.go.cd.v11+json</code>
 </aside>
 
 <h2 id="the-pipeline-config-object">The pipeline config object</h2>
@@ -7249,7 +7221,7 @@ following message.</p>
 <tr>
 <td><code class="prettyprint">invert_filter</code></td>
 <td>Boolean</td>
-<td>Invert filter to enable whitelist. <strong>Since v16.7.0</strong>.</td>
+<td>Invert filter to enable whitelist. <strong>Updated in v20.8.0</strong>.</td>
 </tr>
 </tbody></table>
 
@@ -8227,7 +8199,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v11+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -8236,7 +8208,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v11+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e064ca0fe5d8a39602e19666454b8d77"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8372,7 +8344,7 @@ following message.</p>
 </aside>
 
 <p class='available-since'>
-  Updated to version v10 since v19.10.0.
+  Updated to version v11 since v20.08.0.
 </p>
 
 <p class='available-since'>
@@ -8391,7 +8363,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v11+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -8501,7 +8473,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v11+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8644,7 +8616,7 @@ following message.</p>
 </aside>
 
 <p class='available-since'>
-  Updated to version v10 since v19.10.0.
+  Updated to version v11 since v20.08.0.
 </p>
 
 <p class='available-since'>
@@ -8663,7 +8635,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v11+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-pause-pipeline: true'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-pause-cause: "to have more control over when to start the pipeline after reviewing it"'</span> <span class="se">\</span>
@@ -8772,7 +8744,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v11+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -8907,7 +8879,7 @@ following message.</p>
 </aside>
 
 <p class='available-since'>
-  Updated to version v10 since v19.10.0.
+  Updated to version v11 since v20.08.0.
 </p>
 
 <p class='available-since'>
@@ -8926,7 +8898,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v11+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 
 </code></pre></div>
@@ -8936,7 +8908,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v11+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pipeline 'my_pipeline' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -8949,7 +8921,7 @@ following message.</p>
 </aside>
 
 <p class='available-since'>
-  Updated to version v10 since v19.10.0.
+  Updated to version v11 since v20.08.0.
 </p>
 
 <p class='available-since'>
@@ -8968,7 +8940,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/pipelines/my_pipeline/extract_to_template'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v10+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v11+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
       <span class="nt">-d</span> <span class="s1">'{
@@ -8981,7 +8953,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v10+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v11+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"d4fe83677faaddcbf69c580ffb7409f7"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -21217,7 +21189,11 @@ of failure or cancellation etc. The API requires user to have operate permission
 <h3 id="added">Added</h3>
 
 <ul>
-<li>No changes </li>
+<li>Introduced version 11 of the <a href="#pipeline-config">Pipeline Config API</a>.
+
+<ul>
+<li>This version adds support for <code class="prettyprint">invert_filter</code> for Plugin Materials to enable <code class="prettyprint">AllowList</code>.</li>
+</ul></li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -21230,6 +21206,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <ul>
 <li>The <a href="#get-scheduled-jobs">Scheduled Jobs API</a> has beeen deprecated in GoCD release 20.6.0. This API will be removed in GoCD release v20.9.0. As a replacement, a new Feeds API for <a href="#scheduled-jobs">Scheduled Jobs</a> is introduced.</li>
+<li>The Pipeline Config API version 10 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#pipeline-config">Version 11</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-20-7-0">Changes in 20.7.0</h2>
