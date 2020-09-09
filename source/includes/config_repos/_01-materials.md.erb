@@ -1,7 +1,7 @@
 
 <%=
 describe_sub_object 'The config repository material object', html_id: 'config-repo-material-object' do
-  type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs scm)
+  type            'String',      'The type of a material.', one_of: %w(git svn hg p4 tfs)
   attributes      'Object',      'The [attributes](#config-repo-git-material-attributes) for each material type.'
 end
 %>
@@ -135,19 +135,3 @@ describe_sub_object 'The tfs material attributes', json: json, html_id: 'config-
   encrypted_password  'String',  'The encrypted password of the account to access the TFS collection.'
 end
 %>
-
-<%
-json = {
-  type: 'package',
-  attributes: {
-    ref: 'e289f497-057b-46bc-bb69-8043454f5c1b'
-  }
-}
-
-%>
-<%=
-describe_sub_object 'The package material attributes', json: json, html_id: 'config-repo-package-material' do
-  ref 'String', 'The unique package repository id.'
-end
-%>
-
