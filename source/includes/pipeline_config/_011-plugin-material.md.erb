@@ -17,6 +17,6 @@ describe_sub_object 'The plugin material attributes', json: json, html_id: 'pipe
   ref            'String', 'The unique scm plugin repository id.'
   destination    'String', 'The directory (relative to the pipeline directory) in which source code will be checked out.'
   filter         'Object', 'The [filter](#pipeline-config-filter-object) specifies files in changesets that should not trigger a pipeline automatically.'
-  invert_filter  'Boolean', 'Invert filter to enable whitelist', since: '16.7.0'
+  invert_filter  'Boolean', 'Invert filter to enable whitelist', updated_in: '20.8.0'
 end
 %>
