@@ -21,7 +21,7 @@ ETag: "32628084ef10b0c82a55f8f2f867d8d0"
       "href" : "https://ci.example.com/go/api/admin/secret_configs"
     },
     "doc" : {
-      "href" : "https://api.gocd.org/19.6.0/#secret-configs"
+      "href" : "https://api.gocd.org/#secret-configs"
     },
     "find" : {
       "href" : "https://ci.example.com/go/api/admin/secret_configs/:config_id"
@@ -34,7 +34,7 @@ ETag: "32628084ef10b0c82a55f8f2f867d8d0"
           "href" : "https://ci.example.com/go/api/admin/secret_configs/demo"
         },
         "doc" : {
-          "href" : "https://api.gocd.org/19.6.0/#secret-configs"
+          "href" : "https://api.gocd.org/#secret-configs"
         },
         "find" : {
           "href" : "https://ci.example.com/go/api/admin/secret_configs/:config_id"
@@ -60,6 +60,7 @@ ETag: "32628084ef10b0c82a55f8f2f867d8d0"
 
 Lists all available secret configurations.
 
+<%= updated_to(2,'20.8.0') %>
 <%= available_since('19.6.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
