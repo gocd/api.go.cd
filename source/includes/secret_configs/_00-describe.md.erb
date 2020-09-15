@@ -12,7 +12,7 @@ end
 describe_object 'The Rule object', since: '19.6.0'  do
   directive   'String','The type of rule which can be either `allow` or `deny`'
   action      'String','The action that is being controlled via this rule. Only `refer` is supported as of now.'
-  type        'String','The type of entity that the rule is applied on. Currently `environment` and `pipeline_group` are supported.'
+  type        'String','The type of entity that the rule is applied on.', one_of: %w(environment pipeline_group pluggable_scm package_repository)
   resource    'String','The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.'
 end
 %>
