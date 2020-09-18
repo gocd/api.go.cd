@@ -11335,7 +11335,7 @@ dependent on the plugin to be configured. Use the result of
 <tr>
 <td><code class="prettyprint">type</code></td>
 <td>String</td>
-<td>The type of entity that the rule is applied on. Currently <code class="prettyprint">environment</code> and <code class="prettyprint">pipeline_group</code> are supported.</td>
+<td>The type of entity that the rule is applied on. Can be one of <code class="prettyprint">environment</code>, <code class="prettyprint">pipeline_group</code>, <code class="prettyprint">pluggable_scm</code>, <code class="prettyprint">package_repository</code>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">resource</code></td>
@@ -11348,7 +11348,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -11356,7 +11356,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"32628084ef10b0c82a55f8f2f867d8d0"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -11364,7 +11364,7 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.6.0/#secret-configs"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#secret-configs"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
@@ -11377,7 +11377,7 @@ dependent on the plugin to be configured. Use the result of
           </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/demo"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.6.0/#secret-configs"</span><span class="w">
+          </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#secret-configs"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
@@ -11404,6 +11404,10 @@ dependent on the plugin to be configured. Use the result of
 <p>Lists all available secret configurations.</p>
 
 <p class='available-since'>
+  Updated to version v2 since v20.8.0.
+</p>
+
+<p class='available-since'>
   Available since v19.6.0.
 </p>
 
@@ -11419,7 +11423,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs/demo'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -11427,7 +11431,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"465f3520fa02e65a05844a5a27f83393"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -11435,7 +11439,7 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/demo"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.6.0/#secret-configs"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#secret-configs"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
@@ -11464,6 +11468,10 @@ dependent on the plugin to be configured. Use the result of
 </aside>
 
 <p class='available-since'>
+  Updated to version v2 since v20.8.0.
+</p>
+
+<p class='available-since'>
   Available since v19.6.0.
 </p>
 
@@ -11479,7 +11487,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
         "id" : "demo",
@@ -11505,7 +11513,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"f64e700e7d94e6bc36fc56539cfe993d"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -11513,7 +11521,7 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/secret-test"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.6.0/#secret-configs"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#secret-configs"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
@@ -11538,6 +11546,10 @@ dependent on the plugin to be configured. Use the result of
 <p>Creates a secret config.</p>
 
 <p class='available-since'>
+  Updated to version v2 since v20.8.0.
+</p>
+
+<p class='available-since'>
   Available since v19.6.0.
 </p>
 
@@ -11553,7 +11565,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs/secret-test'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "465f3520fa02e65a05844a5a27f83393"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -11583,7 +11595,7 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"3b55fd5294b16a55228de0f9eef98ecb"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -11591,7 +11603,7 @@ dependent on the plugin to be configured. Use the result of
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/secret-test"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/19.6.0/#secret-configs"</span><span class="w">
+      </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/#secret-configs"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"find"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/api/admin/secret_configs/:config_id"</span><span class="w">
@@ -11628,6 +11640,10 @@ dependent on the plugin to be configured. Use the result of
 </aside>
 
 <p class='available-since'>
+  Updated to version v2 since v20.8.0.
+</p>
+
+<p class='available-since'>
   Available since v19.6.0.
 </p>
 
@@ -11643,7 +11659,7 @@ dependent on the plugin to be configured. Use the result of
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/secret_configs/secret-test'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -11652,13 +11668,17 @@ dependent on the plugin to be configured. Use the result of
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v1+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Secret config with id 'secret-test' was deleted successfully!"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Deletes the config.</p>
+
+<p class='available-since'>
+  Updated to version v2 since v20.8.0.
+</p>
 
 <p class='available-since'>
   Available since v19.6.0.
@@ -21194,6 +21214,11 @@ of failure or cancellation etc. The API requires user to have operate permission
 <ul>
 <li>This version adds support for <code class="prettyprint">invert_filter</code> for Plugin Materials to enable <code class="prettyprint">AllowList</code>.</li>
 </ul></li>
+<li>Introduced version 2 of the <a href="#secret-configs">Secret Config API</a>.
+
+<ul>
+<li>This version adds support for <code class="prettyprint">package_repository</code> and <code class="prettyprint">pluggable_scm</code> as entity type for rules.</li>
+</ul></li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -21207,6 +21232,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 <ul>
 <li>The <a href="#get-scheduled-jobs">Scheduled Jobs API</a> has beeen deprecated in GoCD release 20.6.0. This API will be removed in GoCD release v20.9.0. As a replacement, a new Feeds API for <a href="#scheduled-jobs">Scheduled Jobs</a> is introduced.</li>
 <li>The Pipeline Config API version 10 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#pipeline-config">Version 11</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Secret Config API version 1 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#secret-configs">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-20-7-0">Changes in 20.7.0</h2>
