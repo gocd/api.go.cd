@@ -1778,7 +1778,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 <tr>
 <td><code class="prettyprint">configuration</code></td>
 <td>Object</td>
-<td>The list of <a href="#pluggable-scm-configuration">properties</a> (key-value pairs) to be provided for using the plugin.</td>
+<td>The list of <a href="#config-repo-configuration">properties</a> (key-value pairs) to be provided for using the plugin.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">rules</code></td>
@@ -1911,6 +1911,60 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 <td><code class="prettyprint">resource</code></td>
 <td>String</td>
 <td>The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.</td>
+</tr>
+</tbody></table>
+
+<p><a id='config-repo-configuration'></a></p>
+
+<h3 id="the-configuration-property-object">The configuration property object</h3>
+
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"encrypted_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1f3rrs9uhn63hd"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/sample/example.git"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_secure"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">key</code></td>
+<td>String</td>
+<td>The name of the property key.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">value</code></td>
+<td>String</td>
+<td>The value of the property. You MUST specify one of <code class="prettyprint">value</code> or <code class="prettyprint">encrypted_value</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">encrypted_value</code></td>
+<td>String</td>
+<td>The encrypted value of the property. You MUST specify one of <code class="prettyprint">value</code> or <code class="prettyprint">encrypted_value</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">is_secure</code></td>
+<td>Boolean</td>
+<td>Specify whether the given property is secure or not. If true and <code class="prettyprint">encrypted_value</code> is not specified, GoCD will store the value in encrypted format.</td>
 </tr>
 </tbody></table>
 
@@ -2247,7 +2301,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -2255,7 +2309,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2307,7 +2361,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 <p>Lists all available config repos, these are config repositories that are present in the in <code class="prettyprint">cruise-config.xml</code>.</p>
 
 <p class='available-since'>
-  Updated to version v3 since v20.2.0.
+  Updated to version v4 since v20.8.0.
 </p>
 
 <p class='available-since'>
@@ -2326,7 +2380,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo1'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -2335,7 +2389,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -2382,7 +2436,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </aside>
 
 <p class='available-since'>
-  Updated to version v3 since v20.2.0.
+  Updated to version v4 since v20.8.0.
 </p>
 
 <p class='available-since'>
@@ -2401,7 +2455,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>  curl <span class="s1">'http://ci.example.com/go/api/admin/config_repos'</span> <span class="se">\</span>
   <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type:application/json'</span> <span class="se">\</span>
   <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
     "id": "repo-2",
@@ -2438,7 +2492,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2483,7 +2537,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 <p>Create a config repo object.</p>
 
 <p class='available-since'>
-  Updated to version v3 since v20.2.0.
+  Updated to version v4 since v20.8.0.
 </p>
 
 <p class='available-since'>
@@ -2504,7 +2558,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo-1'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -2543,7 +2597,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2602,7 +2656,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </aside>
 
 <p class='available-since'>
-  Updated to version v3 since v20.2.0.
+  Updated to version v4 since v20.8.0.
 </p>
 
 <p class='available-since'>
@@ -2621,7 +2675,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/config_repos/repo-1'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -2630,7 +2684,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The config repo 'repo-1' was deleted successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2639,7 +2693,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 <p>Deletes the config repo.</p>
 
 <p class='available-since'>
-  Updated to version v3 since v20.2.0.
+  Updated to version v4 since v20.8.0.
 </p>
 
 <p class='available-since'>
@@ -2756,7 +2810,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s2">"https://ci.example.com/go/api/admin/config_repos/config_repo_id/trigger_update"</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span><span class="se">\</span>
       <span class="nt">-X</span> POST
 </code></pre></div>
@@ -2766,13 +2820,17 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Triggers the update for config repository to get latest revisions.</p>
+
+<p class='available-since'>
+  Updated to version v4 since v20.8.0.
+</p>
 
 <p class='available-since'>
   Available since v20.2.0.
@@ -2795,7 +2853,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s2">"https://ci.example.com/go/api/admin/config_repos/config_repo_id/status"</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -2803,13 +2861,17 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"in_progress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
 <p>Get the status of config repository update operation.</p>
+
+<p class='available-since'>
+  Updated to version v4 since v20.8.0.
+</p>
 
 <p class='available-since'>
   Available since v20.2.0.
@@ -2827,7 +2889,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s2">"https://ci.example.com/go/api/admin/config_repos/config_repo_id/definitions"</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -2835,7 +2897,7 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev"</span><span class="w">
@@ -2850,6 +2912,10 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 </span></code></pre></div>
 
 <p>Get the entities defined in config repository.</p>
+
+<p class='available-since'>
+  Updated to version v4 since v20.8.0.
+</p>
 
 <p class='available-since'>
   Available since v20.2.0.
@@ -19676,7 +19742,9 @@ of failure or cancellation etc. The API requires user to have operate permission
 <div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"supports_pipeline_export"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"supports_parse_content"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="nl">"supports_parse_content"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"supports_list_config_files"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"supports_user_defined_properties"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -19699,6 +19767,16 @@ of failure or cancellation etc. The API requires user to have operate permission
 <td><code class="prettyprint">supports_parse_content</code></td>
 <td>Boolean</td>
 <td>Indicates if plugin supports parse content.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">supports_list_config_files</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports listing of config files in the given repo.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">supports_user_defined_properties</code></td>
+<td>Boolean</td>
+<td>Indicates if plugin supports user defined configurations.</td>
 </tr>
 </tbody></table>
 
@@ -19829,7 +19907,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v7+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -19837,7 +19915,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v7+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"3924a894cf0e5bef02abe9de0df3bb84"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -19919,6 +19997,10 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Lists all available plugin info.</p>
 
 <p class='available-since'>
+  Updated to version v7 since v20.8.0.
+</p>
+
+<p class='available-since'>
   Available since v19.3.0.
 </p>
 
@@ -19934,7 +20016,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/plugin_info/my_plugin'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v6+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v7+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -19942,7 +20024,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v6+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v7+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"4167e3ec81fdac0fb29d854b36ceb981"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -20005,6 +20087,10 @@ of failure or cancellation etc. The API requires user to have operate permission
 </span></code></pre></div>
 
 <p>Gets plugin info for a specified plugin id.</p>
+
+<p class='available-since'>
+  Updated to version v7 since v20.8.0.
+</p>
 
 <p class='available-since'>
   Available since v19.3.0.
@@ -21219,6 +21305,16 @@ of failure or cancellation etc. The API requires user to have operate permission
 <ul>
 <li>This version adds support for <code class="prettyprint">package_repository</code> and <code class="prettyprint">pluggable_scm</code> as entity type for rules.</li>
 </ul></li>
+<li>Introduced version 7 of the <a href="#plugin-info">Plugin Info API</a>.
+
+<ul>
+<li>This version returns the updated capabilities for Config Repo plugins.</li>
+</ul></li>
+<li>Introduced version 4 of the <a href="#config-repo">Config Repo API</a>.
+
+<ul>
+<li>Config Repo plugins now allows user defined configurations. This version introduces <code class="prettyprint">is_secure</code> property for user defined configurations.</li>
+</ul></li>
 </ul>
 
 <h3 id="removed">Removed</h3>
@@ -21233,6 +21329,8 @@ of failure or cancellation etc. The API requires user to have operate permission
 <li>The <a href="#get-scheduled-jobs">Scheduled Jobs API</a> has beeen deprecated in GoCD release 20.6.0. This API will be removed in GoCD release v20.9.0. As a replacement, a new Feeds API for <a href="#scheduled-jobs">Scheduled Jobs</a> is introduced.</li>
 <li>The Pipeline Config API version 10 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#pipeline-config">Version 11</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Secret Config API version 1 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#secret-configs">Version 2</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Plugin Info API version 6 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#plugin-info">Version 7</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Config Repo API version 3 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#config-repo">Version 4</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-20-7-0">Changes in 20.7.0</h2>
