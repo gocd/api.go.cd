@@ -2,15 +2,19 @@
     config_repo_capabilities_json =  {
       capabilities: {
         supports_pipeline_export: true,
-        supports_parse_content: true
+        supports_parse_content: true,
+        supports_list_config_files: false,
+        supports_user_defined_properties: true
       }
 }
 %>
 
 <%=
 describe_sub_object 'The Config Repo Capabilities object', json: config_repo_capabilities_json, html_id: 'config-repo-capabilites-object' do
-  supports_pipeline_export 'Boolean', 'Indicates if plugin supports pipeline configuration export.'
-  supports_parse_content   'Boolean', 'Indicates if plugin supports parse content.'
+  supports_pipeline_export          'Boolean', 'Indicates if plugin supports pipeline configuration export.'
+  supports_parse_content            'Boolean', 'Indicates if plugin supports parse content.'
+  supports_list_config_files        'Boolean', 'Indicates if plugin supports listing of config files in the given repo.'
+  supports_user_defined_properties  'Boolean', 'Indicates if plugin supports defining information as key-value'
 end
 %>
 

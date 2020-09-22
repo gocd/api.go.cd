@@ -6,6 +6,8 @@
   - This version adds support for `invert_filter` for Plugin Materials to enable `AllowList`.
 - Introduced version 2 of the [Secret Config API](#secret-configs).
   - This version adds support for `package_repository` and `pluggable_scm` as entity type for rules.
+- Introduced version 7 of the [Plugin Info API](#plugin-info).
+  - This version returns the update config repo capabilities
 
 ### Removed
 
@@ -16,3 +18,4 @@
 - The [Scheduled Jobs API](#get-scheduled-jobs) has beeen deprecated in GoCD release 20.6.0. This API will be removed in GoCD release v20.9.0. As a replacement, a new Feeds API for [Scheduled Jobs](#scheduled-jobs) is introduced.
 - <%= deprecated_api_message({api_name: 'Pipeline Config', deprecated_in_release: '20.8.0', old_api_version: 10, new_api_version: 11, api_section: 'pipeline-config', removal_in_release: '20.11.0'}) %>
 - <%= deprecated_api_message({api_name: 'Secret Config', deprecated_in_release: '20.8.0', old_api_version: 1, new_api_version: 2, api_section: 'secret-configs', removal_in_release: '20.11.0'}) %>
+- <%= deprecated_api_message({api_name: 'Plugin Info', deprecated_in_release: '20.8.0', old_api_version: 6, new_api_version: 7, api_section: 'plugin-info', removal_in_release: '20.11.0'}) %>
