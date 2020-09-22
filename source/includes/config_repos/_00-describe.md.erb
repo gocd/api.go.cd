@@ -3,7 +3,7 @@ describe_object 'The config repo object', since: '17.12.0' do
   id                'String',   'Each config repo is associated with an unique id by which it can be referenced. Id is mandatory field for config repo.'
   plugin_id         'String',   'The name of the config repo plugin.'
   material          'Object',   'The [material](#config-repo-material-object) to be used by the config repo.'
-  configuration     'Object',   'The list of [properties](#pluggable-scm-configuration) (key-value pairs) to be provided for using the plugin'
+  configuration     'Object',   'The list of [properties](#config-repo-configuration) (key-value pairs) to be provided for using the plugin'
   rules             'Array',    'The list of [rules](#the-config-repo-rule-object), which allows restricting the entities that the config repo can refer to. Referring to the GoCD entities is denied by default, an explicit rule should be added to allow a specific resource to allow the config repo to refer it.', since: '20.2.0'
 end
 %>
@@ -40,5 +40,24 @@ describe_sub_object 'The config repo rule object', since: '20.2.0', html_id: 'th
   action      'String','The action that is being controlled via this rule. Only `refer` is supported as of now.'
   type        'String','The type of entity that the rule is applied on. Currently `environment`, `pipeline` and `pipeline_group` are supported.'
   resource    'String','The actual entity on which the rule is applied. Resource should be the name of the entity or a wildcard which matches one or more entities.'
+end
+%>
+
+<%
+json = {
+  configuration:   [
+    { key: 'username', value: 'admin' },
+    { key: 'password', encrypted_value: '1f3rrs9uhn63hd' },
+    { key: 'url', value: 'https://github.com/sample/example.git', is_secure: true }
+  ]
+}
+%>
+
+<%=
+describe_sub_object 'The configuration property object', json: json, html_id: 'config-repo-configuration' do
+  key             'String',  'The name of the property key'
+  value           'String',  'The value of the property. You MUST specify one of `value` or `encrypted_value`.'
+  encrypted_value 'String',  'The encrypted value of the property. You MUST specify one of `value` or `encrypted_value`.'
+  is_secure       'Boolean', 'Specify whether the given property is secure or not. If true and `encrypted_value` is not specified, GoCD will store the value in encrypted format'
 end
 %>
