@@ -61,6 +61,17 @@ ETag: "e89135b38ddbcd9380c83eb524647bdd"
     "version": "1"
   },
   "auto_update": true,
+  "origin" : {
+    "_links" : {
+        "self" : {
+          "href" : "https://ci.example.com/go/admin/config_xml"
+        },
+        "doc" : {
+          "href" : "https://api.gocd.org/current/#get-configuration"
+        }
+    },
+    "type" : "gocd"
+  },
   "configuration": [
     {
       "key": "url",
@@ -92,7 +103,7 @@ Update global scm configuration for specified scm name.
   conflict.
 </aside>
 
-<%= updated_to(3,'20.3.0') %>
+<%= updated_to(4,'20.9.0') %>
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

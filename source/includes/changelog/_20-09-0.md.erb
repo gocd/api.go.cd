@@ -2,7 +2,9 @@
 
 ### Added
 
--
+- Introduced version 4 of the [Pluggable SCM API](#pluggable-scms).
+  - This version adds readonly property `origin`. The value of origin will specify whether the SCM is present in a config-repo or is defined in GoCD.
+  - The update/delete calls will now return `422` in case the SCM is defined in a config repo.
 
 ### Removed
 
@@ -14,3 +16,4 @@
 - <%= deprecated_api_message({api_name: 'Secret Config', deprecated_in_release: '20.8.0', old_api_version: 1, new_api_version: 2, api_section: 'secret-configs', removal_in_release: '20.11.0'}) %>
 - <%= deprecated_api_message({api_name: 'Plugin Info', deprecated_in_release: '20.8.0', old_api_version: 6, new_api_version: 7, api_section: 'plugin-info', removal_in_release: '20.11.0'}) %>
 - <%= deprecated_api_message({api_name: 'Config Repo', deprecated_in_release: '20.8.0', old_api_version: 3, new_api_version: 4, api_section: 'config-repo', removal_in_release: '20.11.0'}) %>
+- <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.9.0', old_api_version: 3, new_api_version: 4, api_section: 'pluggable-scms', removal_in_release: '21.1.0'}) %>
