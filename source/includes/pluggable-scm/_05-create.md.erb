@@ -58,6 +58,17 @@ Content-Type: <%= data.apis.versions.scm %>; charset=utf-8
     "version": "1"
   },
   "auto_update": true,
+  "origin" : {
+     "_links" : {
+         "self" : {
+           "href" : "https://ci.example.com/go/admin/config_xml"
+         },
+         "doc" : {
+           "href" : "https://api.gocd.org/current/#get-configuration"
+         }
+     },
+     "type" : "gocd"
+   },
   "configuration": [
     {
       "key": "url",
@@ -78,7 +89,7 @@ Content-Type: <%= data.apis.versions.scm %>; charset=utf-8
 
 Create a global SCM object.
 
-<%= updated_to(3,'20.3.0') %>
+<%= updated_to(4,'20.9.0') %>
 <%= available_since('16.7.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
