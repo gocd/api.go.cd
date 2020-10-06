@@ -9530,7 +9530,7 @@ following message.</p>
 
 <h1 id="pluggable-scms">Pluggable SCMs</h1>
 
-<p>The pluggable SCM API <code>v3</code> allows users to view, create and update the SCM object.</p>
+<p>The pluggable SCM API <code>v4</code> allows users to view, create and update the SCM object.</p>
 
 <h2 id="the-global-scm-config-object">The global scm config object</h2>
 
@@ -9561,6 +9561,11 @@ following message.</p>
 <td><code class="prettyprint">auto_update</code></td>
 <td>Boolean</td>
 <td>Whether the material is set to poll for new changes.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">origin</code></td>
+<td>Object</td>
+<td>The <a href="#pipeline-config-origin-object">origin</a> of the pluggable SCM. Can be either <code class="prettyprint">gocd</code> origin for pluggable SCMs defined in cruise-config.xml or <code class="prettyprint">config_repo</code> origin for pluggable SCMs defined remotely in config repository. <strong>Since v20.9.0</strong>.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">plugin_metadata</code></td>
@@ -9659,7 +9664,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/scms'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -9667,7 +9672,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9696,7 +9701,24 @@ following message.</p>
         </span><span class="nl">"plugin_metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github.pr"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-configuration"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/sample/example.git"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -9706,7 +9728,7 @@ following message.</p>
 <p>Lists all available pluggable scm materials, these are materials that are present in the in <code class="prettyprint">cruise-config.xml</code>.</p>
 
 <p class='available-since'>
-  Updated to version v3 since v20.3.0.
+  Updated to version v4 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -9725,7 +9747,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/scms/pluggable.scm.material.name'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       <span class="nt">-i</span>
 </code></pre></div>
 
@@ -9734,7 +9756,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -9756,6 +9778,17 @@ following message.</p>
     </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-configuration"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
@@ -9780,7 +9813,7 @@ following message.</p>
 </aside>
 
 <p class='available-since'>
-  Updated to version v3 since v20.3.0.
+  Updated to version v4 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -9799,7 +9832,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>  curl <span class="s1">'http://ci.example.com/go/api/admin/scms'</span> <span class="se">\</span>
   <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type:application/json'</span> <span class="se">\</span>
   <span class="nt">-X</span> POST <span class="nt">-d</span> <span class="s1">'{
   "id": "scm-id",
@@ -9831,7 +9864,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9851,6 +9884,17 @@ following message.</p>
     </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-configuration"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
@@ -9872,7 +9916,7 @@ following message.</p>
 <p>Create a global SCM object.</p>
 
 <p class='available-since'>
-  Updated to version v3 since v20.3.0.
+  Updated to version v4 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -9891,7 +9935,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/scms/scmName'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'If-Match: "e064ca0fe5d8a39602e19666454b8d77"'</span> <span class="se">\</span>
       <span class="nt">-X</span> PUT <span class="se">\</span>
@@ -9926,7 +9970,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"e89135b38ddbcd9380c83eb524647bdd"</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -9947,6 +9991,17 @@ following message.</p>
     </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"auto_update"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"origin"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"_links"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"self"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ci.example.com/go/admin/config_xml"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"doc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.gocd.org/current/#get-configuration"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"gocd"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
@@ -9979,7 +10034,7 @@ following message.</p>
 </aside>
 
 <p class='available-since'>
-  Updated to version v3 since v20.3.0.
+  Updated to version v4 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -9998,7 +10053,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-i</span> <span class="s1">'https://ci.example.com/go/api/admin/scms/pluggable.scm.material.name'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> DELETE
 </code></pre></div>
 
@@ -10007,7 +10062,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json; charset=utf-8</span>
 <span class="na">ETag</span><span class="p">:</span> <span class="s">"05548388f7ef5042cd39f7fe42e85735"</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -10018,7 +10073,7 @@ following message.</p>
 <p>Delete the SCM object with the specified name.</p>
 
 <p class='available-since'>
-  Updated to version v3 since v20.3.0.
+  Updated to version v4 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -10037,7 +10092,7 @@ following message.</p>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="nt">-i</span> <span class="s1">'https://ci.example.com/go/api/admin/scms/pluggable.scm.material.name/usages'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v3+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept:application/vnd.go.cd.v4+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -10045,7 +10100,7 @@ following message.</p>
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v4+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -10072,6 +10127,10 @@ following message.</p>
 </span></code></pre></div>
 
 <p>Gets the list of pipelines and groups which use the specified pluggable SCM as a material.</p>
+
+<p class='available-since'>
+  Updated to version v4 since v20.9.0.
+</p>
 
 <p class='available-since'>
   Available since v20.3.0.
@@ -21294,7 +21353,14 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <h3 id="added">Added</h3>
 
-<p>-</p>
+<ul>
+<li>Introduced version 4 of the <a href="#pluggable-scms">Pluggable SCM API</a>.
+
+<ul>
+<li>This version adds readonly property <code class="prettyprint">origin</code>. The value of origin will specify whether the SCM is present in a config-repo or is defined in GoCD.</li>
+<li>The update/delete calls will now return <code class="prettyprint">422</code> in case the SCM is defined in a config repo.</li>
+</ul></li>
+</ul>
 
 <h3 id="removed">Removed</h3>
 
@@ -21309,6 +21375,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 <li>The Secret Config API version 1 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#secret-configs">Version 2</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Plugin Info API version 6 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#plugin-info">Version 7</a> of the API is available, and users are encouraged to use it.</li>
 <li>The Config Repo API version 3 has been deprecated in GoCD release v20.8.0. This version will be removed in GoCD release v20.11.0. <a href="#config-repo">Version 4</a> of the API is available, and users are encouraged to use it.</li>
+<li>The Pluggable SCM API version 3 has been deprecated in GoCD release v20.9.0. This version will be removed in GoCD release v21.1.0. <a href="#pluggable-scms">Version 4</a> of the API is available, and users are encouraged to use it.</li>
 </ul>
 
 <h2 id="changes-in-20-8-0">Changes in 20.8.0</h2>
