@@ -144,7 +144,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.0)
-    rouge (3.15.0)
+    rouge (3.24.0)
     sass (3.4.25)
     servolux (0.13.0)
     sprockets (3.7.2)
@@ -180,4 +180,4 @@ DEPENDENCIES
   parallel
   rake (~> 13.0.1)
   redcarpet (~> 3.5.0)
-  rouge (~> 3.15.0)
+  rouge (~> 3.24.0)
