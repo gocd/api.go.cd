@@ -17351,6 +17351,14 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>To secure the http endpoint, the webhook configuration on bitbucket must specify a <em>Basic Authentication User</em>, the value of the <em>Basic Authentication User</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
 
+<p class='available-since'> Updated in 20.9.0 </p>
+
+<p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pluggable SCMs</p>
+
+<p><code class="prettyprint">https://{webhookSecret}:x@gocd.example.com:8154/go/api/webhooks/bitbucket/notify?SCM_NAME=scm1&amp;SCM_NAME=scm2</code></p>
+
 <h5 id="returns">Returns</h5>
 
 <p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
@@ -17371,6 +17379,14 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>To secure the http endpoint, the webhook configuration on GitHub must specify a <em>Secret</em>, the value of the <em>Secret</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
 
+<p class='available-since'> Updated in 20.9.0 </p>
+
+<p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pluggable SCMs</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/github/notify?SCM_NAME=scm1&amp;SCM_NAME=scm2</code></p>
+
 <h5 id="returns">Returns</h5>
 
 <p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
@@ -17390,6 +17406,14 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 <p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify</code></p>
 
 <p>To secure the http endpoint, the webhook configuration on GitLab must specify a <em>Secret Token</em>, the value of the <em>Secret Token</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+
+<p class='available-since'> Updated in 20.9.0 </p>
+
+<p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
+
+<p><strong>Note:</strong> Polling must be turned off for the pluggable SCMs</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify?SCM_NAME=scm1&amp;SCM_NAME=scm2</code></p>
 
 <h5 id="returns">Returns</h5>
 
@@ -21350,6 +21374,12 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
 
 <h2 id="changes-in-20-9-0">Changes in 20.9.0</h2>
+
+<h3 id="updated">Updated</h3>
+
+<ul>
+<li>Updated <a href="#webhook">Webhook APIs</a> to add support for pluggable SCMs</li>
+</ul>
 
 <h3 id="added">Added</h3>
 
