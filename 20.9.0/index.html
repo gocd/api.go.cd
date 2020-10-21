@@ -17345,7 +17345,9 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>To notify GoCD of an push to BitBucket repository via a group or project webhook, configure BitBucket to use the webhooks api negating the need for basic authentication on each request.</p>
 
-<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+<aside class="notice">
+    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+</aside>
 
 <p><code class="prettyprint">https://{webhookSecret}:x@gocd.example.com:8154/go/api/webhooks/bitbucket/notify</code></p>
 
@@ -17354,8 +17356,6 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 <p class='available-since'> Updated in 20.9.0 </p>
 
 <p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
-
-<p><strong>Note:</strong> Polling must be turned off for the pluggable SCMs</p>
 
 <p><code class="prettyprint">https://{webhookSecret}:x@gocd.example.com:8154/go/api/webhooks/bitbucket/notify?SCM_NAME=scm1&amp;SCM_NAME=scm2</code></p>
 
@@ -17373,7 +17373,9 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>To notify GoCD of a push to a GitHub repository via a repository or organization webhook, configure GitHub to use the webhooks api negating the need for basic authentication on each request.</p>
 
-<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+<aside class="notice">
+    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+</aside>
 
 <p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/github/notify</code></p>
 
@@ -17382,8 +17384,6 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 <p class='available-since'> Updated in 20.9.0 </p>
 
 <p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
-
-<p><strong>Note:</strong> Polling must be turned off for the pluggable SCMs</p>
 
 <p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/github/notify?SCM_NAME=scm1&amp;SCM_NAME=scm2</code></p>
 
@@ -17401,7 +17401,9 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>To notify GoCD of an push to GitLab repository via a group or project webhook, configure GitLab to use the webhooks api negating the need for basic authentication on each request.</p>
 
-<p><strong>Note:</strong> Polling must be turned off for the pipeline associated with this material.</p>
+<aside class="notice">
+    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+</aside>
 
 <p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify</code></p>
 
@@ -17410,8 +17412,6 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 <p class='available-since'> Updated in 20.9.0 </p>
 
 <p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
-
-<p><strong>Note:</strong> Polling must be turned off for the pluggable SCMs</p>
 
 <p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify?SCM_NAME=scm1&amp;SCM_NAME=scm2</code></p>
 
