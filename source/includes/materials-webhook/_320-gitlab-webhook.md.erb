@@ -6,7 +6,9 @@
 
 To notify GoCD of an push to GitLab repository via a group or project webhook, configure GitLab to use the webhooks api negating the need for basic authentication on each request.
 
-**Note:** Polling must be turned off for the pipeline associated with this material.
+<aside class="notice">
+    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+</aside>
 
 `https://gocd.example.com:8154/go/api/webhooks/gitlab/notify`
 
@@ -15,8 +17,6 @@ To secure the http endpoint, the webhook configuration on GitLab must specify a 
 <p class='available-since'> Updated in 20.9.0 </p>
 
 Added support to trigger one or more pluggable SCMs via `SCM_NAME` query param.
-
-**Note:** Polling must be turned off for the pluggable SCMs
 
 `https://gocd.example.com:8154/go/api/webhooks/gitlab/notify?SCM_NAME=scm1&SCM_NAME=scm2`
 
