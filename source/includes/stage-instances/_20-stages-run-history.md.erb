@@ -3,14 +3,14 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/stages/mypipeline/defaultStage/history' \
       -u 'username:password' \
-      -H 'Accept: <%= data.apis.versions.stage_operations %>'
+      -H 'Accept: <%= data.apis.versions.stage_instances %>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.stage_operations %>; charset=utf-8
+Content-Type: <%= data.apis.versions.stage_instances %>; charset=utf-8
 ```
 
 ```json
@@ -94,7 +94,7 @@ The API supports the following query params:
 | `after`     | The cursor value for fetching the next set of records                       |
 | `before`    | The cursor value for fetching the previous set of records                   |
 
-<%= updated_to(2,'20.1.0') %>
+<%= updated_to(3,'20.9.0') %>
 <%= available_since('14.3.0') %>
 
 

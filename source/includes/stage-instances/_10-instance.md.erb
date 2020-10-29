@@ -3,14 +3,14 @@
 ```shell
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/1/myStages/1' \
   -u 'username:password' \
-  -H 'Accept: <%= data.apis.versions.stage_operations %>'
+  -H 'Accept: <%= data.apis.versions.stage_instances %>'
 ```
 
 > The above command returns the following response:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
+Content-Type: <%= data.apis.versions.stage_instances %>;charset=utf-8
 ```
 
 ```json
@@ -19,6 +19,8 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
   "counter": 1,
   "approval_type": "success",
   "approved_by": "changes",
+  "scheduled_at": 1578891141997,
+  "last_transitioned_time": 1436509642631,
   "result": "Unknown",
   "rerun_of_counter": null,
   "fetch_materials": true,
@@ -72,7 +74,7 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 
 Gets stage instance object.
 
-<%= updated_to(2,'20.1.0') %>
+<%= updated_to(3,'20.9.0') %>
 <%= available_since('19.1.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>

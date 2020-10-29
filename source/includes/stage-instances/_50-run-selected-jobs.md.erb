@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-selected-jobs' \
       -u 'username:password' \
       -H 'Content-Type: application/json' \
-      -H 'Accept: <%= data.apis.versions.stage_operations %>'
+      -H 'Accept: <%= data.apis.versions.stage_instances %>'
       -X POST \
       -d '{
             jobs: ["job1", "job2"]
@@ -15,7 +15,7 @@ $ curl 'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myS
 
 ```http
 HTTP/1.1 202 Accepted
-Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
+Content-Type: <%= data.apis.versions.stage_instances %>;charset=utf-8
 ```
 
 ```json
@@ -26,7 +26,7 @@ Content-Type: <%= data.apis.versions.stage_operations %>;charset=utf-8
 
 Runs specified jobs in a completed stage.
 
-<%= updated_to(2,'20.1.0') %>
+<%= updated_to(3,'20.9.0') %>
 <%= available_since('18.11.0') %>
 
 <p class='http-request-heading'>HTTP Request</p>
