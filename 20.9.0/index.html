@@ -20293,16 +20293,16 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <p>An array of <a href="#the-server-health-message-object">server health message objects</a>.</p>
 
-          <h1 id="stages">Stages</h1>
+          <h1 id="stage-instances">Stage Instances</h1>
 
-<p>The stages API allows users to view stage information and operate on it.</p>
+<p>The Stage Instances API allows users to view and operate on an instance of a stage.</p>
 
 <h2 id="cancel-stage">Cancel stage</h2>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/42/myStages/13/cancel'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST
 </code></pre></div>
 
@@ -20311,7 +20311,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Stage cancelled successfully."</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -20320,7 +20320,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Cancel an active stage of a specified stage.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
+  Updated to version v3 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -20339,7 +20339,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/1/myStages/1'</span> <span class="se">\</span>
   <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -20347,12 +20347,14 @@ of failure or cancellation etc. The API requires user to have operate permission
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json;charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default_stage"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"counter"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"approval_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"approved_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changes"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scheduled_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578891141997</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_transitioned_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509642631</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"rerun_of_counter"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"fetch_materials"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -20407,7 +20409,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p>Gets stage instance object.</p>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
+  Updated to version v3 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -20426,7 +20428,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/mypipeline/defaultStage/history'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
 </code></pre></div>
 
 <blockquote>
@@ -20434,7 +20436,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 </blockquote>
 
 <div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json; charset=utf-8</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json; charset=utf-8</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -20530,7 +20532,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 </tbody></table>
 
 <p class='available-since'>
-  Updated to version v2 since v20.1.0.
+  Updated to version v3 since v20.9.0.
 </p>
 
 <p class='available-since'>
@@ -20544,6 +20546,107 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p class='http-request-return-description'>Returns</p>
 
 <p>An array of stage instances.</p>
+
+<h2 id="run-failed-jobs">Run failed jobs</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-failed-jobs'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span> <span class="se">\</span>
+      <span class="nt">-X</span> POST
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json;charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Request to rerun jobs accepted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Runs failed jobs in a completed stage.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v20.9.0.
+</p>
+
+<p class='available-since'>
+  Available since v18.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/run-failed-jobs</code></p>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message confirmation if the request to rerun failed jobs was accepted.</p>
+
+<h2 id="run-selected-jobs">Run selected jobs</h2>
+
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-selected-jobs'</span> <span class="se">\</span>
+      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v3+json'</span>
+      <span class="nt">-X</span> POST <span class="se">\</span>
+      <span class="nt">-d</span> <span class="s1">'{
+            jobs: ["job1", "job2"]
+      }'</span>
+</code></pre></div>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+
+<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v3+json;charset=utf-8</span>
+</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Request to rerun jobs accepted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+
+<p>Runs specified jobs in a completed stage.</p>
+
+<p class='available-since'>
+  Updated to version v3 since v20.9.0.
+</p>
+
+<p class='available-since'>
+  Available since v18.11.0.
+</p>
+
+<p class='http-request-heading'>HTTP Request</p>
+
+<p><code class="prettyprint">POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/run-selected-jobs</code></p>
+
+<p>Following property must be specified:</p>
+
+<p class='attributes-table-follows'></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">jobs</code></td>
+<td>Array</td>
+<td>A list job names that needs to be triggered again. This attribute MUST be specified.</td>
+</tr>
+</tbody></table>
+
+<p class='http-request-return-description'>Returns</p>
+
+<p>A message confirmation if the request to rerun selected jobs was accepted.</p>
+
+          <h1 id="stages">Stages</h1>
+
+<p>The stages API allows users to operate on a stage.</p>
 
 <h2 id="run-stage">Run stage</h2>
 
@@ -20582,103 +20685,6 @@ of failure or cancellation etc. The API requires user to have operate permission
 <p class='http-request-return-description'>Returns</p>
 
 <p>A message confirmation if the request to schedule stage was accepted.</p>
-
-<h2 id="run-failed-jobs">Run failed jobs</h2>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-failed-jobs'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
-      <span class="nt">-X</span> POST
-</code></pre></div>
-
-<blockquote>
-<p>The above command returns the following response:</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Request to rerun jobs accepted"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p>Runs failed jobs in a completed stage.</p>
-
-<p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
-
-<p class='available-since'>
-  Available since v18.11.0.
-</p>
-
-<p class='http-request-heading'>HTTP Request</p>
-
-<p><code class="prettyprint">POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/run-failed-jobs</code></p>
-
-<p class='http-request-return-description'>Returns</p>
-
-<p>A message confirmation if the request to rerun failed jobs was accepted.</p>
-
-<h2 id="run-selected-jobs">Run selected jobs</h2>
-
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/stages/myPipeline/myPipelineRunCounter/myStage/myStageCounter/run-selected-jobs'</span> <span class="se">\</span>
-      <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span>
-      <span class="nt">-X</span> POST <span class="se">\</span>
-      <span class="nt">-d</span> <span class="s1">'{
-            jobs: ["job1", "job2"]
-      }'</span>
-</code></pre></div>
-
-<blockquote>
-<p>The above command returns the following response:</p>
-</blockquote>
-
-<div class="highlight"><pre class="highlight http"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.go.cd.v2+json;charset=utf-8</span>
-</code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Request to rerun jobs accepted"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-
-<p>Runs specified jobs in a completed stage.</p>
-
-<p class='available-since'>
-  Updated to version v2 since v20.1.0.
-</p>
-
-<p class='available-since'>
-  Available since v18.11.0.
-</p>
-
-<p class='http-request-heading'>HTTP Request</p>
-
-<p><code class="prettyprint">POST /go/api/stages/:pipeline_name/:pipeline_counter/:stage_name/:stage_counter/run-selected-jobs</code></p>
-
-<p>Following property must be specified:</p>
-
-<p class='attributes-table-follows'></p>
-
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">jobs</code></td>
-<td>Array</td>
-<td>A list job names that needs to be triggered again. This attribute MUST be specified.</td>
-</tr>
-</tbody></table>
-
-<p class='http-request-return-description'>Returns</p>
-
-<p>A message confirmation if the request to rerun selected jobs was accepted.</p>
 
           <h1 id="users">Users</h1>
 
@@ -21394,6 +21400,11 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <ul>
 <li>This version adds support for <code class="prettyprint">cluster_profile</code> as entity type for rules.</li>
+</ul></li>
+<li>Stages endpoints have been regrouped and split between <a href="#stages">Stages</a> and <a href="#stage-instances">Stage Instances</a>. Also, introduced version 3 of the Stage Instances API.
+
+<ul>
+<li>Version 3 of the Stage Instances API updates the <a href="#get-stage-instance">Get Stage Instance</a> API to return additional atrributes <code class="prettyprint">scheduled_at</code> and <code class="prettyprint">last_transitioned_time</code>.</li>
 </ul></li>
 </ul>
 
