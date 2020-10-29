@@ -62,6 +62,7 @@ includes:
   - plugin-info
   - server-health
   - server-health-messages
+  - stage-instances
   - stages
   - users
   - version
