@@ -1,0 +1,17 @@
+## Changes in 20.11.0
+
+### Added
+
+- No changes
+
+### Removed
+
+- <%= removed_api_message({api_name: 'Pipeline Config', old_api_version: 10, new_api_version: 11, api_section: 'pipeline-config'}) %>
+- <%= removed_api_message({api_name: 'Secret Config', old_api_version: 1, new_api_version: 3, api_section: 'secret-configs'}) %>
+- <%= removed_api_message({api_name: 'Plugin Info', old_api_version: 6, new_api_version: 7, api_section: 'plugin-info'}) %>
+- <%= removed_api_message({api_name: 'Config Repo', old_api_version: 3, new_api_version: 4, api_section: 'config-repo'}) %>
+
+### Deprecations
+
+- <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.9.0', old_api_version: 3, new_api_version: 4, api_section: 'pluggable-scms', removal_in_release: '21.1.0'}) %>
+- <%= deprecated_api_message({api_name: 'Secret Config', deprecated_in_release: '20.9.0', old_api_version: 2, new_api_version: 3, api_section: 'secret-configs', removal_in_release: '21.1.0'}) %>
