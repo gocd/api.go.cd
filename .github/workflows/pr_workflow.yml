@@ -1,4 +1,4 @@
-# This workflow will build a hugo project with bundle
+# This workflow will build a middleman project with bundle
 
 name: Testing For PRs
 

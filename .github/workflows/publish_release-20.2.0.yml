@@ -1,4 +1,4 @@
-# This workflow will build a hugo project with bundle
+# This workflow will build a middlemen project with bundle
 
 name: Build and Publish 20.2.0
 
@@ -9,6 +9,7 @@ on:
 
 env:
   GOCD_VERSION: '20.2.0'
+  RUN_EXTERNAL_CHECKS: true
 
 jobs:
   complete_build:
@@ -20,10 +21,8 @@ jobs:
         with:
           ruby-version: 2.7.2
           bundler-cache: true # would run bundle install
-      - name: Run complete build
-        run: bundle exec rake complete_build
-        env:
-          RUN_EXTERNAL_CHECKS: true
+      - name: Run the build
+        run: bundle exec rake static_checks:all
   push_to_gh_pages:
     needs: complete_build
     runs-on: ubuntu-latest
@@ -37,11 +36,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.2
-      - name: Publish to gh-pages
+      - name: Publish to gh pages
         run: |
-          git remote add upstream 'https://\${GITHUB_ACTOR}:\${GITHUB_PASSWORD}@github.com/gocd/docs.go.cd'
+          git remote add upstream 'https://\${GITHUB_ACTOR}:\${GITHUB_PASSWORD}@github.com/gocd/api.go.cd'
           bundle install
-          bundle exec rake publish
+          bundle exec rake publish --trace
         env:
           REMOTE_NAME: "origin" # might need to update to upstream
           ALLOW_DIRTY: true
@@ -61,6 +60,6 @@ jobs:
         with:
           ruby-version: 2.7.2
           bundler-cache: true # would run bundle install
-      - name: Upload to s3
+      - name: Upload to S3
         run: bundle exec rake upload_to_s3
 
