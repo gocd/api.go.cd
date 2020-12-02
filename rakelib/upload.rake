@@ -54,19 +54,22 @@ task :upload_to_s3 do
     local_files << Dir.glob("current/**/*", File::FNM_DOTMATCH).reject {|fn| File.directory?(fn) }
 
     need_to_be_created = local_files.flatten.select {|object_to_be_created| !objects_from_s3.include?(object_to_be_created);}
-    puts 'Files that need to be created on s3'
-    p need_to_be_created
-    puts "Creating..."
-    Parallel.map(need_to_be_created, in_threads: 5) do |file|
-      puts "Uploading new file #{file} to #{S3_BUCKET}/#{file}"
-      s3_client.put_object({acl: "public-read",
-                            body: File.read(file),
-                            bucket: S3_BUCKET,
-                            cache_control: "max-age=600",
-                            content_type: MIME::Types.type_for(file).first.content_type,
-                            content_md5: Digest::MD5.file(file).base64digest,
-                            key: file
-                           })
+
+    unless need_to_be_created.empty?
+      puts 'Files that need to be created on s3'
+      p need_to_be_created
+      puts "Creating..."
+      Parallel.map(need_to_be_created, in_threads: 5) do |file|
+        puts "Uploading new file #{file} to #{S3_BUCKET}/#{file}"
+        s3_client.put_object({acl:           "public-read",
+                              body:          File.read(file),
+                              bucket:        S3_BUCKET,
+                              cache_control: "max-age=600",
+                              content_type:  MIME::Types.type_for(file).first.content_type,
+                              content_md5:   Digest::MD5.file(file).base64digest,
+                              key:           file
+                             })
+      end
     end
 
     unless need_to_be_changed.empty?
