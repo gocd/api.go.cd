@@ -18,9 +18,15 @@ task :upload_to_s3 do
   end
 
   s3_client = Aws::S3::Client.new(region: 'us-east-1')
-  objects = s3_client.list_objects(bucket: S3_BUCKET)
+  last_key = nil
+  objects = []
+  begin
+    new_objects = s3_client.list_objects(bucket: S3_BUCKET, marker: last_key)
+    objects += new_objects.contents
+    last_key = objects.last.key
+  end while !new_objects.contents.empty?
   objects_from_s3 = {}
-  objects.contents.each do |object|
+  objects.each do |object|
     objects_from_s3[object.key] = object.etag
   end
 
@@ -63,24 +69,29 @@ task :upload_to_s3 do
                            })
     end
 
-    puts "Syncing changed files..."
-    Parallel.map(need_to_be_changed, in_threads: 5) do |file|
-      puts "Uploading changed file #{file} to #{S3_BUCKET}/#{file}"
-      s3_client.put_object({acl: "public-read",
-                            body: File.read(file),
-                            bucket: S3_BUCKET,
-                            cache_control: "max-age=600",
-                            content_type: MIME::Types.type_for(file).first.content_type,
-                            content_md5: Digest::MD5.file(file).base64digest,
-                            key: file
-                           })
-
+    unless need_to_be_changed.empty?
+      puts 'Files that need to be updated on s3'
+      p need_to_be_changed
+      puts "Syncing changed files..."
+      Parallel.map(need_to_be_changed, in_threads: 5) do |file|
+        puts "Uploading changed file #{file} to #{S3_BUCKET}/#{file}"
+        s3_client.put_object({acl:           "public-read",
+                              body:          File.read(file),
+                              bucket:        S3_BUCKET,
+                              cache_control: "max-age=600",
+                              content_type:  MIME::Types.type_for(file).first.content_type,
+                              content_md5:   Digest::MD5.file(file).base64digest,
+                              key:           file
+                             })
+      end
     end
 
     unless need_to_be_deleted.empty?
-      puts "Deleting files that don't exist locally..."
-      objects_to_be_deleted_for_display = need_to_be_deleted.map { |object_to_be_deleted| object_to_be_deleted[:key] }
-      puts objects_to_be_deleted_for_display
+      puts 'Files that need to be deleted on s3'
+      p need_to_be_deleted
+      puts "Deleting files..."
+      objects_to_be_deleted = need_to_be_deleted.map { |object_to_be_deleted| object_to_be_deleted[:key] }
+      puts objects_to_be_deleted
       s3_client.delete_objects({bucket: S3_BUCKET,
                                 delete: {
                                     objects: need_to_be_deleted
