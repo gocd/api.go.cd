@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - master
+      # Push events to branches matching refs/heads/release-*
+      - 'release-*'
 
 env:
   RUN_EXTERNAL_CHECKS: true
