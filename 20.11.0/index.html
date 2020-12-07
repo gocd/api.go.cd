@@ -17047,7 +17047,7 @@ that can be used for polling the status of the backup.</p>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
-      <span class="nt">-d</span> <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"http://svn.example.com/test-repo"</span><span class="o">}</span>
+      <span class="nt">-d</span> <span class="s1">'{"repository_url": "http://svn.example.com/test-repo"}'</span>
 </code></pre></div>
 
 <blockquote>
@@ -17117,7 +17117,7 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'
     <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"http://svn.example.com/test-repo"</span><span class="o">}</span>
+    <span class="nt">-d</span> <span class="s1">'{"repository_url": "http://svn.example.com/test-repo"}'</span>
 
 <span class="c"># -- or using UUID --</span>
 
@@ -17125,18 +17125,18 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'
 <span class="nv">REV</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
 <span class="nv">UUID</span><span class="o">=</span><span class="si">$(</span>svnlook uuid <span class="nv">$1</span><span class="si">)</span>
 
-curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span> <span class="se">\</span>
+curl <span class="s1">'https://ci.example.com/go/api/material/svn/notify'</span> <span class="se">\</span>
     <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s1">'Confirm: true'</span> <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="o">{</span><span class="s2">"uuid"</span>: <span class="s2">"</span><span class="nv">$UUID</span><span class="s2">"</span><span class="o">}</span>
+    <span class="nt">-d</span> <span class="s1">'{"uuid": "$UUID"}'</span>
 </code></pre></div><h2 id="notify-git-materials">Notify Git materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/git/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
-      <span class="nt">-d</span> <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"git://git.example.com/git/funky-widgets.git"</span><span class="o">}</span>
+      <span class="nt">-d</span> <span class="s1">'{"repository_url": "git://git.example.com/git/funky-widgets.git"}'</span>
 </code></pre></div>
 
 <blockquote>
@@ -17196,19 +17196,19 @@ curl <span class="s1">'https://ci.example.com/go/api/material/notify/svn'</span>
 
 <div class="highlight"><pre class="highlight shell"><code><span class="c">#!/bin/sh</span>
 
-curl <span class="s1">'https://ci.example.com/go/api/admin/materials/notify/git'</span> <span class="se">\</span>
+curl <span class="s1">'https://ci.example.com/go/api/admin/materials/git/notify'</span> <span class="se">\</span>
     <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
     <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s2">"repository_url=git://git.example.com/git/funky-widgets.git"</span>
+    <span class="nt">-d</span> <span class="s1">'{"repository_url": "git://git.example.com/git/funky-widgets.git"}'</span>
 </code></pre></div><h2 id="notify-mercurial-materials">Notify Mercurial materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/hg/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Accept: '</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json %&gt;'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
-      <span class="nt">-d</span> <span class="o">{</span><span class="s2">"repository_url"</span>: <span class="s2">"ssh://hg.example.com/hg/repos/funky-widgets"</span><span class="o">}</span>
+      <span class="nt">-d</span> <span class="s1">'{"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}'</span>
 </code></pre></div>
 
 <blockquote>
@@ -17272,14 +17272,14 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
     -H 'Accept: application/vnd.go.cd.v2+json' \
     -H 'Content-Type: application/json' \
     -X POST \
-    -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
+    -d '{"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}'
 </code></pre></div><h2 id="notify-other-scm-materials">Notify other SCM materials</h2>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/materials/scm/notify'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v2+json'</span> <span class="se">\</span>
       <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
-      <span class="nt">-d</span> <span class="o">{</span><span class="s2">"scm_name"</span>: <span class="s2">"material_name"</span><span class="o">}</span>
+      <span class="nt">-d</span> <span class="s1">'{"scm_name": "material_name"}'</span>
 </code></pre></div>
 
 <blockquote>
