@@ -6,7 +6,7 @@ $ curl 'https://ci.example.com/go/api/admin/materials/hg/notify' \
       -H 'Accept: <% data.apis.versions.materials %>' \
       -H 'Content-Type: application/json %>' \
       -X POST \
-      -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
+      -d '{"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}'
 ```
 
 > The above command returns the following response:
@@ -54,5 +54,5 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
     -H 'Accept: <%= data.apis.versions.materials %>' \
     -H 'Content-Type: application/json' \
     -X POST \
-    -d {"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}
+    -d '{"repository_url": "ssh://hg.example.com/hg/repos/funky-widgets"}'
 ```

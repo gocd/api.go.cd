@@ -6,7 +6,7 @@ $ curl 'https://ci.example.com/go/api/admin/materials/scm/notify' \
       -H 'Accept: <%= data.apis.versions.materials %>' \
       -H 'Content-Type: application/json' \
       -X POST \
-      -d {"scm_name": "material_name"}
+      -d '{"scm_name": "material_name"}'
 ```
 
 > The above command returns the following response:

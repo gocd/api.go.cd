@@ -6,7 +6,7 @@ $ curl 'https://ci.example.com/go/api/admin/materials/git/notify' \
       -H 'Accept: <%= data.apis.versions.materials %>' \
       -H 'Content-Type: application/json' \
       -X POST \
-      -d {"repository_url": "git://git.example.com/git/funky-widgets.git"}
+      -d '{"repository_url": "git://git.example.com/git/funky-widgets.git"}'
 ```
 
 > The above command returns the following response:
@@ -50,10 +50,10 @@ The post commit hook is located at `/path/to/repository.git/hooks/post-receive`.
 ```bash
 #!/bin/sh
 
-curl 'https://ci.example.com/go/api/admin/materials/notify/git' \
+curl 'https://ci.example.com/go/api/admin/materials/git/notify' \
     -u 'username:password' \
     -H 'Accept: <%= data.apis.versions.materials %>' \
     -H 'Content-Type: application/json' \
     -X POST \
-    -d "repository_url=git://git.example.com/git/funky-widgets.git"
+    -d '{"repository_url": "git://git.example.com/git/funky-widgets.git"}'
 ```
