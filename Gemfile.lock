@@ -45,7 +45,7 @@ GEM
     eventmachine (1.2.7)
     execjs (2.7.0)
     fast_blank (1.0.0)
-    fastimage (2.2.3)
+    fastimage (2.2.4)
     ffi (1.15.1)
     haml (5.2.1)
       temple (>= 0.8.0)
