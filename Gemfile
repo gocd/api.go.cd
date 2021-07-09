@@ -6,7 +6,7 @@ gem 'html-proofer'
 gem 'middleman', '~> 4.1.0'
 gem 'middleman-gh-pages', '~> 0.4.1'
 gem 'middleman-syntax', '~> 3.2.0'
-gem 'middleman-autoprefixer', '~> 2.10.1'
+gem 'middleman-autoprefixer', '~> 3.0.0'
 gem "middleman-sprockets", "~> 4.1.1"
 gem 'rouge', '~> 3.26.0'
 gem 'redcarpet', '~> 3.5.1'
