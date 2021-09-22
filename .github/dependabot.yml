@@ -6,69 +6,8 @@ updates:
     interval: weekly
     day: friday
   open-pull-requests-limit: 99
-  target-branch: master
-  allow:
-  - dependency-type: direct
-  - dependency-type: indirect
-  ignore:
-  - dependency-name: aws-partitions
-    versions:
-    - ">= 1.198.a, < 1.199"
-  - dependency-name: aws-partitions
-    versions:
-    - 1.421.0
-    - 1.422.0
-    - 1.423.0
-    - 1.424.0
-    - 1.425.0
-    - 1.426.0
-    - 1.427.0
-    - 1.429.0
-    - 1.431.0
-    - 1.432.0
-    - 1.434.0
-    - 1.435.0
-    - 1.440.0
-    - 1.443.0
-    - 1.445.0
-  - dependency-name: html-proofer
-    versions:
-    - 3.18.6
-    - 3.19.0
-  - dependency-name: aws-sdk-s3
-    versions:
-    - 1.87.0
-    - 1.88.0
-    - 1.88.1
-    - 1.88.2
-    - 1.89.0
-    - 1.90.0
-    - 1.92.0
-    - 1.93.0
-  - dependency-name: aws-sdk-kms
-    versions:
-    - 1.41.0
-    - 1.42.0
-    - 1.43.0
-  - dependency-name: aws-sdk-core
-    versions:
-    - 3.111.2
-    - 3.112.0
-    - 3.112.1
-  - dependency-name: aws-eventstream
-    versions:
-    - 1.1.0
-    - 1.1.1
-  - dependency-name: mime-types-data
-    versions:
-    - 3.2021.0212
-  - dependency-name: fastimage
-    versions:
-    - 2.2.1
-    - 2.2.2
-  - dependency-name: minitest
-    versions:
-    - 5.14.3
-  - dependency-name: aws-sigv4
-    versions:
-    - 1.2.2
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: friday
