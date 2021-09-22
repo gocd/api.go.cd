@@ -8,7 +8,7 @@ gem 'middleman-gh-pages', '~> 0.4.1'
 gem 'middleman-syntax', '~> 3.2.0'
 gem 'middleman-autoprefixer', '~> 2.10.1'
 gem "middleman-sprockets", "~> 4.1.1"
-gem 'rouge', '~> 3.26.0'
+gem 'rouge', '~> 3.26.1'
 gem 'redcarpet', '~> 3.5.1'
 
 gem "middleman-livereload", "~> 3.4.0"
