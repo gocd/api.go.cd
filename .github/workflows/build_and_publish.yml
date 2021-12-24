@@ -20,7 +20,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: 2.7
           bundler-cache: true # would run bundle install
       - name: Run the build
         run: bundle exec rake static_checks:all
@@ -36,7 +36,8 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: 2.7
+          bundler-cache: true # would run bundle install
       - name: Set up user in git config
         run: |
           git config --global user.name "github-actions"
@@ -44,7 +45,6 @@ jobs:
       - name: Set up upstream and publish to gh pages
         run: |
           git remote add upstream 'https://github-actions:${GITHUB_PASSWORD}@github.com/gocd/api.go.cd'
-          bundle install
           bundle exec rake publish --trace
         env:
           REMOTE_NAME: "upstream"
@@ -63,7 +63,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: 2.7
           bundler-cache: true # would run bundle install
       - name: Upload to S3
         run: bundle exec rake upload_to_s3
