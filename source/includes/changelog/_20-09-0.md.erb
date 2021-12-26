@@ -12,7 +12,7 @@
 - Introduced version 3 of the [Secret Config API](#secret-configs).
   - This version adds support for `cluster_profile` as entity type for rules.
 - Stages endpoints have been regrouped and split between [Stages](#stages) and [Stage Instances](#stage-instances). Also, introduced version 3 of the Stage Instances API.
-  - Version 3 of the Stage Instances API updates the [Get Stage Instance](#get-stage-instance) API to return additional atrributes `scheduled_at` and `last_transitioned_time`.
+  - Version 3 of the Stage Instances API updates the [Get Stage Instance](#get-stage-instance) API to return additional attributes `scheduled_at` and `last_transitioned_time`.
 
 ### Removed
 
@@ -26,3 +26,4 @@
 - <%= deprecated_api_message({api_name: 'Config Repo', deprecated_in_release: '20.8.0', old_api_version: 3, new_api_version: 4, api_section: 'config-repo', removal_in_release: '20.11.0'}) %>
 - <%= deprecated_api_message({api_name: 'Pluggable SCM', deprecated_in_release: '20.9.0', old_api_version: 3, new_api_version: 4, api_section: 'pluggable-scms', removal_in_release: '21.1.0'}) %>
 - <%= deprecated_api_message({api_name: 'Secret Config', deprecated_in_release: '20.9.0', old_api_version: 2, new_api_version: 3, api_section: 'secret-configs', removal_in_release: '21.1.0'}) %>
+- <%= deprecated_api_message({api_name: 'Stage Instances', deprecated_in_release: '20.9.0', old_api_version: 2, new_api_version: 3, api_section: 'stage-instances', removal_in_release: '21.1.0'}) %>
