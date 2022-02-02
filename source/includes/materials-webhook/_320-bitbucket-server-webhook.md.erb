@@ -1,0 +1,23 @@
+<a id="bitbucket-server-webhook"></a>
+
+## Hosting on BitBucket Server
+
+<%= partial 'includes/shared/material_notify_header' %>
+
+<%= available_since('19.3.0') %>
+
+To notify GoCD of an push to a self-Hosted BitBucket Server repository via a group or project webhook, configure BitBucket to use the webhook API negating the need for basic authentication on each request.
+
+`https://gocd.example.com:8154/go/api/webhooks/hosted_bitbucket/notify`
+
+To secure the http endpoint, the [webhook configuration on BitBucket Server](https://confluence.atlassian.com/bitbucketserver/manage-webhooks-938025878.html#Managewebhooks-Securingyourwebhook) must specify a _Secret_, the value of the _Secret_ should be the same as the value of the `webhookSecret` attribute on the `<server/>` element in the file `cruise-config.xml`. Do not specify any basic authentication credentials in the webhook URL.
+
+<p class='available-since'> Updated in v20.9.0 </p>
+
+Added support to trigger one or more pluggable SCMs via `SCM_NAME` query param.
+
+`https://gocd.example.com:8154/go/api/webhooks/hosted_bitbucket/notify?SCM_NAME=scm1&SCM_NAME=scm2`
+
+##### Returns
+
+A text confirmation, with the http status `202 Accepted`.

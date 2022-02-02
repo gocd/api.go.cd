@@ -1,5 +1,5 @@
-APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.
+API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.
 
 <aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
 </aside>
