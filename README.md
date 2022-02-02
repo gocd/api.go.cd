@@ -7,25 +7,25 @@ Checkout the live documentation at https://api.gocd.org
 ### Configure and install middleman
 
 ```
-$ bundle install --path .bundle --binstubs
+$ bundle install
 ```
 
 ### Run the API documentation locally on http://localhost:4567
 
 ```
-$ bundle exec ./bin/middleman server
+$ bundle exec middleman serve
 ```
 
 ### Generating the static website
 
 ```
-$ ./bin/rake build
+$ bundle exec rake build
 ```
 
 ### Publish the website to Github Pages
 
 ```
-$ ./bin/rake publish
+$ bundle exec rake publish
 ```
 
 ### Releasing a new version of the API
