@@ -17024,10 +17024,10 @@ that can be used for polling the status of the backup.</p>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
-<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
 </aside>
 
 <p class='available-since'>
@@ -17113,10 +17113,10 @@ curl <span class="s1">'https://ci.example.com/go/api/material/svn/notify'</span>
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
-<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
 </aside>
 
 <p class='available-since'>
@@ -17185,10 +17185,10 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/git/notify'
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
-<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
 </aside>
 
 <p class='available-since'>
@@ -17256,10 +17256,10 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 </code></pre></div><div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The material is now scheduled for an update. Please check relevant pipeline(s) for status."</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
-<p>APIs that notify GoCD Server when a commit has been made in Version Control and GoCD needs to trigger relevant pipelines.</p>
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
 
 <aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
 </aside>
 
 <p class='available-since'>
@@ -17300,23 +17300,55 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p>The webhook API allows users to notify GoCD in case of a push in the relevant repository.</p>
 
-<p><a id="bitbucket-webhook"></a></p>
+<p><a id="bitbucket-server-webhook"></a></p>
 
-<h2 id="hosting-on-bitbucket">Hosting on BitBucket</h2>
+<h2 id="hosting-on-bitbucket-server">Hosting on BitBucket Server</h2>
+
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
+
+<aside class="notice">
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
+</aside>
+
+<p class='available-since'>
+  Available since v19.3.0.
+</p>
+
+<p>To notify GoCD of an push to a self-Hosted BitBucket Server repository via a group or project webhook, configure BitBucket to use the webhook API negating the need for basic authentication on each request.</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/hosted_bitbucket/notify</code></p>
+
+<p>To secure the http endpoint, the <a href="https://confluence.atlassian.com/bitbucketserver/manage-webhooks-938025878.html#Managewebhooks-Securingyourwebhook">webhook configuration on BitBucket Server</a> must specify a <em>Secret</em>, the value of the <em>Secret</em> should be the same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+
+<p class='available-since'> Updated in v20.9.0 </p>
+
+<p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
+
+<p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/hosted_bitbucket/notify?SCM_NAME=scm1&amp;SCM_NAME=scm2</code></p>
+
+<h5 id="returns">Returns</h5>
+
+<p>A text confirmation, with the http status <code class="prettyprint">202 Accepted</code>.</p>
+
+<p><a id="bitbucket-cloud-webhook"></a></p>
+
+<h2 id="hosting-on-bitbucket-cloud">Hosting on BitBucket Cloud</h2>
+
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
+
+<aside class="notice">
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
+</aside>
 
 <p class='available-since'>
   Available since v17.11.0.
 </p>
 
-<p>To notify GoCD of an push to BitBucket repository via a group or project webhook, configure BitBucket to use the webhooks api negating the need for basic authentication on each request.</p>
-
-<aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
-</aside>
+<p>To notify GoCD of an push to a BitBucket Cloud repository via a group or project webhook, configure BitBucket to use the webhook API negating the need for basic authentication on each request.</p>
 
 <p><code class="prettyprint">https://{webhookSecret}:x@gocd.example.com:8154/go/api/webhooks/bitbucket/notify</code></p>
 
-<p>To secure the http endpoint, the webhook configuration on bitbucket must specify a <em>Basic Authentication User</em>, the value of the <em>Basic Authentication User</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
+<p>To secure the http endpoint, the webhook configuration on BitBucket must specify a <em>Basic Authentication User</em>, the value of the <em>Basic Authentication User</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
 
 <p class='available-since'> Updated in 20.9.0 </p>
 
@@ -17330,23 +17362,25 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <p><a id="github-webhook"></a></p>
 
-<h2 id="hosting-on-github-or-github-enterprise">Hosting on GitHub, or GitHub Enterprise</h2>
+<h2 id="hosting-on-github-or-github-enterprise">Hosting on GitHub or GitHub Enterprise</h2>
+
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
+
+<aside class="notice">
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
+</aside>
 
 <p class='available-since'>
   Available since v17.6.0.
 </p>
 
-<p>To notify GoCD of a push to a GitHub repository via a repository or organization webhook, configure GitHub to use the webhooks api negating the need for basic authentication on each request.</p>
-
-<aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
-</aside>
+<p>To notify GoCD of a push to a GitHub repository via a repository or organization webhook, configure GitHub to use the webhook API negating the need for basic authentication on each request.</p>
 
 <p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/github/notify</code></p>
 
 <p>To secure the http endpoint, the webhook configuration on GitHub must specify a <em>Secret</em>, the value of the <em>Secret</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
 
-<p class='available-since'> Updated in 20.9.0 </p>
+<p class='available-since'> Updated in v20.9.0 </p>
 
 <p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
 
@@ -17360,21 +17394,23 @@ changegroup = curl -sSL 'https://ci.example.com/go/api/admin/materials/hg/notify
 
 <h2 id="hosting-on-gitlab">Hosting on GitLab</h2>
 
+<p>API that notifies GoCD Server when a commit/push has been made in version control and GoCD needs to trigger relevant pipelines.</p>
+
+<aside class="notice">
+    When using this feature, configure materials to <strong>Fetch updates to this repository only on webhook or manual trigger</strong> or disable <code>auto_update</code>/<code>autoUpdate</code> in cruise configuration, configuration repositories or via API for the relevant material.
+</aside>
+
 <p class='available-since'>
   Available since v17.11.0.
 </p>
 
-<p>To notify GoCD of an push to GitLab repository via a group or project webhook, configure GitLab to use the webhooks api negating the need for basic authentication on each request.</p>
-
-<aside class="notice">
-    When using this feature, uncheck <strong>Poll for new changes</strong> or set <code>autoUpdate</code> flag in cruise configuration to <code>false</code> for the relevant material.
-</aside>
+<p>To notify GoCD of an push to a GitLab repository via a group or project webhook, configure GitLab to use the webhook API negating the need for basic authentication on each request.</p>
 
 <p><code class="prettyprint">https://gocd.example.com:8154/go/api/webhooks/gitlab/notify</code></p>
 
 <p>To secure the http endpoint, the webhook configuration on GitLab must specify a <em>Secret Token</em>, the value of the <em>Secret Token</em> should be same as the value of the <code class="prettyprint">webhookSecret</code> attribute on the <code class="prettyprint">&lt;server/&gt;</code> element in the file <code class="prettyprint">cruise-config.xml</code>. Do not specify any basic authentication credentials in the webhook URL.</p>
 
-<p class='available-since'> Updated in 20.9.0 </p>
+<p class='available-since'> Updated in v20.9.0 </p>
 
 <p>Added support to trigger one or more pluggable SCMs via <code class="prettyprint">SCM_NAME</code> query param.</p>
 
