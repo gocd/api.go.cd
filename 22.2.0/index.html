@@ -16498,7 +16498,32 @@ that can be used for polling the status of the backup.</p>
   </span><span class="nl">"pipeline_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stage_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"myStages"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stage_counter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"job_state_transitions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"job_state_transitions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578891141997</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Assigned"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509524491</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Preparing"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509534639</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Building"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509542522</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completing"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509642582</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state_change_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1436509642631</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 
@@ -16515,6 +16540,8 @@ that can be used for polling the status of the backup.</p>
 <p class='http-request-return-description'>Returns</p>
 
 <p>A job instance object.</p>
+
+<p>Responses include <code class="prettyprint">job_state_transitions</code> since <code class="prettyprint">v22.2.0</code>.</p>
 
 <h2 id="get-job-history">Get job history</h2>
 
@@ -16543,7 +16570,6 @@ that can be used for polling the status of the backup.</p>
       </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scheduled"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"job_state_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job1"</span><span class="p">,</span><span class="w">
@@ -16557,7 +16583,6 @@ that can be used for polling the status of the backup.</p>
       </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_counter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"stage_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"defaultStage"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"job_state_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -16588,11 +16613,11 @@ that can be used for polling the status of the backup.</p>
 </tbody></table>
 
 <p class='available-since'>
-  Updated to version v1 since v20.1.0.
+  Available since v14.3.0.
 </p>
 
 <p class='available-since'>
-  Available since v14.3.0.
+  Updated to version v1 since v20.1.0.
 </p>
 
 <p class='http-request-heading'>HTTP Request</p>
