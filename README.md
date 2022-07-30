@@ -54,7 +54,7 @@ A lot of useful information like links to user documentation, design documentati
 
 ```plain
 Copyright 2008-2013 Concur Technologies, Inc.
-Copyright 2021 ThoughtWorks, Inc.
+Copyright 2022 Thoughtworks, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
