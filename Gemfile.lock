@@ -52,7 +52,7 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     hashie (3.6.0)
-    html-proofer (4.3.0)
+    html-proofer (4.3.2)
       addressable (~> 2.3)
       mercenary (~> 0.3)
       nokogiri (~> 1.13)
