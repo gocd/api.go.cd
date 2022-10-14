@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.6.1)
+    activesupport (6.1.7)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -12,8 +12,8 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.610.0)
-    aws-sdk-core (3.131.3)
+    aws-partitions (1.645.0)
+    aws-sdk-core (3.160.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -25,7 +25,7 @@ GEM
       aws-sdk-core (~> 3, >= 3.127.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
-    aws-sigv4 (1.5.1)
+    aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     backports (3.23.0)
     coffee-script (2.4.1)
@@ -52,7 +52,7 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     hashie (3.6.0)
-    html-proofer (4.4.1)
+    html-proofer (4.4.3)
       addressable (~> 2.3)
       mercenary (~> 0.3)
       nokogiri (~> 1.13)
@@ -124,7 +124,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     mini_portile2 (2.8.0)
-    minitest (5.16.2)
+    minitest (5.16.3)
     nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -144,7 +144,7 @@ GEM
       rack
     rainbow (3.1.1)
     rake (13.0.6)
-    rb-fsevent (0.11.1)
+    rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
@@ -174,7 +174,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     webrick (1.7.0)
     yell (2.2.2)
-    zeitwerk (2.6.0)
+    zeitwerk (2.6.1)
 
 PLATFORMS
   ruby
