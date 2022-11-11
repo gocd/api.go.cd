@@ -17,5 +17,5 @@ gem "middleman-livereload", "~> 3.4.0"
 gem 'rake', '~> 13.0.6'
 gem 'aws-sdk-s3'
 gem 'parallel'
-gem 'listen', '3.0.8'
+gem 'listen', '3.7.1'
 gem 'mime-types'
