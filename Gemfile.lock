@@ -66,7 +66,7 @@ GEM
     jmespath (1.6.2)
     kramdown (2.4.0)
       rexml
-    listen (3.7.1)
+    listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     memoist (0.16.2)
@@ -182,7 +182,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3
   html-proofer
-  listen (= 3.7.1)
+  listen (= 3.8.0)
   middleman (~> 4.4)
   middleman-autoprefixer (~> 3.0)
   middleman-gh-pages (~> 0.4.1)
