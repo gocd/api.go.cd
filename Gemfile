@@ -10,7 +10,7 @@ gem "middleman-syntax", "~> 3.3.0"
 gem "middleman-autoprefixer", "~> 3.0"
 gem "middleman-sprockets", "~> 4.1.1"
 gem 'rouge', '~> 3.30.0'
-gem 'redcarpet', '~> 3.5.1'
+gem 'redcarpet', '~> 3.6.0'
 gem "sass", "~> 3.7"
 
 gem "middleman-livereload", "~> 3.4.0"
