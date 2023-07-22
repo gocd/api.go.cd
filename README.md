@@ -28,14 +28,6 @@ $ bundle exec rake build
 $ bundle exec rake publish
 ```
 
-### Releasing a new version of the API
-
-Assuming current stable is `16.3.0`, you are about to release `16.4.0` and the next version is going to be `16.5.0`, you would execute —
-
-```bash
-rake bump_version CURRENT_VERSION=16.3.0 VERSION_TO_RELEASE=16.4.0  NEXT_VERSION=16.5.0 REMOTE_NAME=upstream
-```
-
 ## Need help?
 
 * Just submit a issue to the [github repository](https://github.com/gocd/api.go.cd) if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes.
