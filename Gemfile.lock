@@ -142,8 +142,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.5-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     padrino-helpers (0.15.3)
@@ -204,7 +202,6 @@ GEM
 PLATFORMS
   arm64-darwin
   ruby
-  x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
@@ -225,7 +222,7 @@ DEPENDENCIES
   sass (~> 3.7)
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.0p0
 
 BUNDLED WITH
-   2.4.13
+   2.5.3
