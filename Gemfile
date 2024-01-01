@@ -9,6 +9,7 @@ gem 'sassc', github: 'sass/sassc-ruby', ref: 'refs/pull/233/head'
 gem 'sassc-embedded'
 gem "middleman-gh-pages", "~> 0.4.1"
 gem "middleman-syntax", "~> 3.3.0"
+gem "haml", "< 6.0" # Middleman syntax needs support https://github.com/middleman/middleman-syntax/issues/80
 gem "middleman-autoprefixer", "~> 3.0"
 gem "middleman-sprockets", "~> 4.1.1"
 gem 'rouge', '~> 3.30.0'
