@@ -5,6 +5,8 @@ gem 'html-proofer'
 
 # Middleman
 gem "middleman", "~> 4.4"
+gem 'sassc', github: 'sass/sassc-ruby', ref: 'refs/pull/233/head'
+gem 'sassc-embedded'
 gem "middleman-gh-pages", "~> 0.4.1"
 gem "middleman-syntax", "~> 3.3.0"
 gem "middleman-autoprefixer", "~> 3.0"
