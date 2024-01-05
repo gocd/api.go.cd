@@ -68,8 +68,9 @@ GEM
     google-protobuf (3.25.1-arm64-darwin)
     google-protobuf (3.25.1-x86_64-darwin)
     google-protobuf (3.25.1-x86_64-linux)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    haml (6.3.0)
+      temple (>= 0.8.2)
+      thor
       tilt
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
@@ -229,7 +230,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk-s3
-  haml (< 6.0)
+  haml (< 7.0)
   html-proofer
   listen (= 3.8.0)
   middleman (~> 4.5)
