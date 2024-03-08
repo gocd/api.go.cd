@@ -17,10 +17,10 @@ GEM
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     afm (0.2.2)
-    async (2.8.2)
+    async (2.9.0)
       console (~> 1.10)
       fiber-annotation
-      io-event (~> 1.1)
+      io-event (~> 1.5, >= 1.5.1)
       timers (~> 4.1)
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
