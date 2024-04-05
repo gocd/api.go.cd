@@ -17,7 +17,7 @@ gem 'redcarpet', '~> 3.6.0'
 gem "sass", "~> 3.7"
 
 gem "middleman-livereload", "~> 3.4.0"
-gem 'rake', '~> 13.1.0'
+gem 'rake', '~> 13.2.1'
 gem 'aws-sdk-s3'
 gem 'parallel'
 gem 'listen', '3.9.0'
