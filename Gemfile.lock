@@ -47,9 +47,9 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.2.3)
-    console (1.24.0)
+    console (1.25.1)
       fiber-annotation
-      fiber-local
+      fiber-local (~> 1.1)
       json
     contracts (0.16.1)
     dotenv (3.1.0)
@@ -65,7 +65,9 @@ GEM
     fastimage (2.3.1)
     ffi (1.16.3)
     fiber-annotation (0.2.0)
-    fiber-local (1.0.0)
+    fiber-local (1.1.0)
+      fiber-storage
+    fiber-storage (0.1.0)
     google-protobuf (4.26.1)
       rake (>= 13)
     google-protobuf (4.26.1-arm64-darwin)
