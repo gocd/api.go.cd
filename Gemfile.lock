@@ -41,7 +41,7 @@ GEM
     aws-sigv4 (1.8.0)
       aws-eventstream (~> 1, >= 1.0.2)
     backports (3.25.0)
-    bigdecimal (3.1.7)
+    bigdecimal (3.1.8)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
