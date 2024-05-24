@@ -67,7 +67,7 @@ GEM
     fiber-annotation (0.2.0)
     fiber-local (1.1.0)
       fiber-storage
-    fiber-storage (0.1.0)
+    fiber-storage (0.1.1)
     google-protobuf (4.26.1)
       rake (>= 13)
     google-protobuf (4.26.1-arm64-darwin)
