@@ -228,7 +228,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     webrick (1.8.2)
     yell (2.2.2)
-    zeitwerk (2.7.0)
+    zeitwerk (2.7.1)
 
 PLATFORMS
   arm64-darwin
