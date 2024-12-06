@@ -99,7 +99,7 @@ GEM
       concurrent-ruby (~> 1.0)
     io-event (1.7.4)
     jmespath (1.6.2)
-    json (2.8.2)
+    json (2.9.0)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     listen (3.9.0)
