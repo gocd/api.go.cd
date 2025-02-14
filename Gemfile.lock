@@ -99,7 +99,7 @@ GEM
     http_parser.rb (0.8.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    io-event (1.8.4)
+    io-event (1.9.0)
     jmespath (1.6.2)
     json (2.10.1)
     kramdown (2.5.1)
