@@ -26,7 +26,10 @@ set :fonts_dir, 'fonts'
 activate :syntax
 
 # Activate the sprocket pipeline
-activate :sprockets
+activate :sprockets do |config|
+  # No idea why this is needed or helps fix sass imports, but it did... https://github.com/middleman/middleman-sprockets/issues/127#issuecomment-736958140
+  config.supported_output_extensions = ['.js']
+end
 
 # Livereload in dev mode
 activate :livereload
