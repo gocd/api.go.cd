@@ -171,10 +171,10 @@ GEM
     middleman-syntax (3.4.0)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
-    mime-types (3.6.1)
+    mime-types (3.6.2)
       logger
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2025.0318)
+    mime-types-data (3.2025.0325)
     mini_portile2 (2.8.8)
     minitest (5.25.5)
     nokogiri (1.18.5)
