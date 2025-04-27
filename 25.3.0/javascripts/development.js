@@ -1,0 +1,1 @@
+$(function(){var n=$("a").map(function(n,t){return $(t).attr("href")}).toArray();(n=n.filter(function(n){return n.match(/^#/)&&"#"!==n})).filter(function(n,t,r){return t==r.indexOf(n)}).forEach(function(n){0===$(n).length&&console.log("Internal link with anchor "+n+" was not found!")})});
