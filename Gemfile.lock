@@ -225,8 +225,9 @@ GEM
       sass-embedded (~> 1.80)
     securerandom (0.4.1)
     servolux (0.13.0)
-    sprockets (4.2.1)
+    sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
+      logger
       rack (>= 2.2.4, < 4)
     temple (0.10.3)
     thor (1.2.2)
