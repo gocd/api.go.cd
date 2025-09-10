@@ -3,7 +3,7 @@
 ```shell
 $ curl 'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination' \
       -u 'username:password' \
-      -H 'Confirm: true' \
+      -H 'X-GoCD-Confirm: true' \
       -X POST \
       -F 'zipfile=@target/dist/zip-of-files.zip'
 ```
