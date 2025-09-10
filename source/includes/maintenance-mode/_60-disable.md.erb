@@ -4,7 +4,7 @@
 $ curl 'https://ci.example.com/go/api/admin/maintenance_mode/disable' \
 -X POST \
 -u 'username:password' \
--H 'X-GoCD-Confirm:true' \
+-H 'X-GoCD-Confirm: true' \
 -H 'Accept: <%= data.apis.versions.maintenance_mode %>'
 ```
 
