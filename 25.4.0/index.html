@@ -15054,7 +15054,7 @@ force kill all running tasks on an agent stuck in <strong>Building(Cancelled)</s
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/pkg/foobar-widgets-1.2.3.jar'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Confirm:true'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
       <span class="nt">-F</span> <span class="s1">'file=@target/dist/foobar-widgets-1.2.3.jar'</span>
 </code></pre></div>
@@ -15105,7 +15105,7 @@ File pkg/foobar-widgets-1.2.3.jar was created successfully
 
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/files/PipelineName/541/StageName/1/JobName/path/in/destination'</span> <span class="se">\</span>
       <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-      <span class="nt">-H</span> <span class="s1">'Confirm: true'</span> <span class="se">\</span>
+      <span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
       <span class="nt">-X</span> POST <span class="se">\</span>
       <span class="nt">-F</span> <span class="s1">'zipfile=@target/dist/zip-of-files.zip'</span>
 </code></pre></div>
@@ -16889,7 +16889,7 @@ that can be used for polling the status of the backup.</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/maintenance_mode/enable'</span> <span class="se">\</span>
 <span class="nt">-X</span> POST <span class="se">\</span>
 <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm:true'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre></div>
 
@@ -16921,7 +16921,7 @@ that can be used for polling the status of the backup.</p>
 <div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>curl <span class="s1">'https://ci.example.com/go/api/admin/maintenance_mode/disable'</span> <span class="se">\</span>
 <span class="nt">-X</span> POST <span class="se">\</span>
 <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm:true'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'X-GoCD-Confirm: true'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Accept: application/vnd.go.cd.v1+json'</span>
 </code></pre></div>
 
@@ -17093,7 +17093,6 @@ curl <span class="s1">'https://ci.example.com/go/api/admin/materials/svn/notify'
 
 curl <span class="s1">'https://ci.example.com/go/api/material/svn/notify'</span> <span class="se">\</span>
     <span class="nt">-u</span> <span class="s1">'username:password'</span> <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s1">'Confirm: true'</span> <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-d</span> <span class="s1">'{"uuid": "$UUID"}'</span>
 </code></pre></div><h2 id="notify-git-materials">Notify Git materials</h2>
