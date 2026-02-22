@@ -277,7 +277,7 @@ DEPENDENCIES
   sassc-embedded
 
 RUBY VERSION
-  ruby 4.0.1p0
+  ruby 3.4.8
 
 BUNDLED WITH
   4.0.6
