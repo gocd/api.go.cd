@@ -4167,14 +4167,6 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
 
 <p><code class="prettyprint">GET /go/api/admin/config.xml</code></p>
 
-<p><strong>Other convenience APIs</strong></p>
-
-<p><code class="prettyprint">GET /go/api/admin/config/current.xml</code></p>
-
-<p>or</p>
-
-<p><code class="prettyprint">GET /go/api/admin/config/:md5.xml</code></p>
-
 <p class='http-request-return-description'>Returns</p>
 
 <p>The contents of the configuration file.</p>
@@ -21378,6 +21370,26 @@ of failure or cancellation etc. The API requires user to have operate permission
 
 <p>The changelog is maintained starting from version 19.2.0 of GoCD. For changes from previous versions, see the release notes at <a href="https://gocd.org/releases">https://gocd.org/releases</a>.</p>
 
+<h2 id="changes-in-26-1-0">Changes in 26.1.0</h2>
+
+<h3 id="added">Added</h3>
+
+<ul>
+<li>No additions in this release</li>
+</ul>
+
+<h3 id="removed">Removed</h3>
+
+<ul>
+<li>The unversioned GoCD-level Configuration (historical) API has been removed. </li>
+</ul>
+
+<h3 id="deprecations">Deprecations</h3>
+
+<ul>
+<li>No deprecations in this release</li>
+</ul>
+
 <h2 id="changes-in-25-4-0">Changes in 25.4.0</h2>
 
 <h3 id="added">Added</h3>
@@ -21395,7 +21407,7 @@ of failure or cancellation etc. The API requires user to have operate permission
 <h3 id="deprecations">Deprecations</h3>
 
 <ul>
-<li>The Feeds API version 1 has been deprecated in GoCD release v25.4.0. This version will be removed in GoCD release v26.1.0. </li>
+<li>The Feeds API version 1 has been deprecated in GoCD release v25.4.0. This version will be removed in GoCD release v26.2.0. </li>
 </ul>
 
 <h2 id="changes-in-25-3-0">Changes in 25.3.0</h2>
