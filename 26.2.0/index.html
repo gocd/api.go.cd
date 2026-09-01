@@ -47,6 +47,16 @@
   background-color: #272822;
   font-weight: bold;
 }
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .ges {
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
 .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
   color: #ae81ff;
 }
@@ -2736,14 +2746,14 @@ Refer <a href="#api-changelog">changelog</a> section for the list of deprecated 
     <span class="na">materials</span><span class="pi">:</span>
       <span class="na">git</span><span class="pi">:</span>
         <span class="na">git</span><span class="pi">:</span> <span class="s">foo</span>
-        <span class="na">shallow_clone</span><span class="pi">:</span> <span class="no">false</span>
-        <span class="na">auto_update</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">shallow_clone</span><span class="pi">:</span> <span class="kc">false</span>
+        <span class="na">auto_update</span><span class="pi">:</span> <span class="kc">true</span>
         <span class="na">branch</span><span class="pi">:</span> <span class="s">master</span>
     <span class="na">stages</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">defaultStage</span><span class="pi">:</span>
-        <span class="na">fetch_materials</span><span class="pi">:</span> <span class="no">true</span>
-        <span class="na">keep_artifacts</span><span class="pi">:</span> <span class="no">false</span>
-        <span class="na">clean_workspace</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">fetch_materials</span><span class="pi">:</span> <span class="kc">true</span>
+        <span class="na">keep_artifacts</span><span class="pi">:</span> <span class="kc">false</span>
+        <span class="na">clean_workspace</span><span class="pi">:</span> <span class="kc">false</span>
         <span class="na">approval</span><span class="pi">:</span>
           <span class="na">type</span><span class="pi">:</span> <span class="s">success</span>
         <span class="na">jobs</span><span class="pi">:</span>
